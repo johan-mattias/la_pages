@@ -1,0 +1,930 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Error Escape Curves</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Condensed:wght@500;600&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap">
+<style>
+/* Layout: one 1120px frame; prose held to ~68ch, figures use the full frame; a quiet section index under the masthead */
+:root {
+  --bg: #f3f4f1;
+  --surface: #fcfcfb;
+  --ink: #131514;
+  --ink-2: #474b48;
+  --ink-3: #6f736e;
+  --grid: #e2e3dd;
+  --rule: #cdd0c8;
+  --accent: #1c5cab;
+  --syn: #2a78d6;
+  --rt: #eb6834;
+  --gray-1: #8f928c;
+  --gray-2: #b9bbb5;
+  --code-bg: #e9ebe6;
+  --seq-0: #eceee9; --seq-1: #cde2fb; --seq-2: #9ec5f4; --seq-3: #6da7ec; --seq-4: #3987e5; --seq-5: #256abf; --seq-6: #184f95;
+  --div-n3: #1c5cab; --div-n2: #5598e7; --div-n1: #b7d3f6; --div-0: #ecebe7; --div-p1: #f6c4c0; --div-p2: #e8807d; --div-p3: #c23634;
+  --tc-dn3: #ffffff; --tc-dn2: #ffffff; --tc-dn1: #131514; --tc-d0: #131514; --tc-dp1: #131514; --tc-dp2: #131514; --tc-dp3: #ffffff;
+  --f-display: "IBM Plex Sans Condensed", "Arial Narrow", system-ui, sans-serif;
+  --f-body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #101211; --surface: #1a1a19; --ink: #f1f2ee; --ink-2: #c5c7bf; --ink-3: #9a9d96; --grid: #2b2d2a; --rule: #3b3e3a;
+    --accent: #7fb1ee; --syn: #3987e5; --rt: #d95926; --gray-1: #7d807a; --gray-2: #50534e; --code-bg: #232522;
+    --seq-0: #232522; --seq-1: #13355f; --seq-2: #184f95; --seq-3: #256abf; --seq-4: #3987e5; --seq-5: #86b6ef; --seq-6: #cde2fb;
+    --div-n3: #5598e7; --div-n2: #2f6cb8; --div-n1: #1d3a5f; --div-0: #383835; --div-p1: #5e2b2a; --div-p2: #b54644; --div-p3: #e66767;
+    --tc-dn3: #101211; --tc-dn2: #ffffff; --tc-dn1: #f1f2ee; --tc-d0: #f1f2ee; --tc-dp1: #f1f2ee; --tc-dp2: #ffffff; --tc-dp3: #101211;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #101211; --surface: #1a1a19; --ink: #f1f2ee; --ink-2: #c5c7bf; --ink-3: #9a9d96; --grid: #2b2d2a; --rule: #3b3e3a;
+  --accent: #7fb1ee; --syn: #3987e5; --rt: #d95926; --gray-1: #7d807a; --gray-2: #50534e; --code-bg: #232522;
+  --seq-0: #232522; --seq-1: #13355f; --seq-2: #184f95; --seq-3: #256abf; --seq-4: #3987e5; --seq-5: #86b6ef; --seq-6: #cde2fb;
+  --div-n3: #5598e7; --div-n2: #2f6cb8; --div-n1: #1d3a5f; --div-0: #383835; --div-p1: #5e2b2a; --div-p2: #b54644; --div-p3: #e66767;
+  --tc-dn3: #101211; --tc-dn2: #ffffff; --tc-dn1: #f1f2ee; --tc-d0: #f1f2ee; --tc-dp1: #f1f2ee; --tc-dp2: #ffffff; --tc-dp3: #101211;
+  color-scheme: dark;
+}
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { background: var(--bg); color: var(--ink); font-family: var(--f-body); font-size: 16px; line-height: 1.55; margin: 0; }
+.frame { max-width: 1120px; margin: 0 auto; padding-inline: 20px; }
+a { color: var(--accent); text-underline-offset: 2px; }
+a:focus-visible, button:focus-visible, [tabindex]:focus-visible, summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+h1, h2, h3 { text-wrap: balance; margin: 0; }
+h1 { font-family: var(--f-display); font-weight: 600; font-size: clamp(2rem, 4.2vw, 2.9rem); line-height: 1.08; letter-spacing: -0.01em; }
+h2 { font-family: var(--f-display); font-weight: 600; font-size: 1.75rem; line-height: 1.15; }
+h3 { font-size: 1.02rem; font-weight: 600; line-height: 1.35; }
+p { margin: 0; }
+.prose { max-width: 68ch; display: grid; gap: 0.85rem; }
+.prose ul { margin: 0; padding-left: 1.2rem; display: grid; gap: 0.45rem; }
+.eyebrow { font-family: var(--f-mono); font-size: 0.75rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-3); }
+.small { font-size: 0.875rem; color: var(--ink-2); }
+code, .mono { font-family: var(--f-mono); font-size: 0.86em; }
+code { background: var(--code-bg); padding: 0.08em 0.35em; border-radius: 3px; overflow-wrap: anywhere; }
+strong { font-weight: 600; }
+.num { font-variant-numeric: tabular-nums; }
+
+/* masthead */
+.masthead { padding-block: 44px 28px; display: grid; gap: 18px; }
+.lede { font-size: 1.15rem; line-height: 1.5; color: var(--ink-2); max-width: 64ch; }
+.facts { display: flex; flex-wrap: wrap; gap: 0; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); margin-top: 6px; }
+.fact { flex: 1 1 150px; padding: 12px 16px 12px 0; display: grid; gap: 2px; min-width: 0; }
+.fact + .fact { padding-left: 16px; border-left: 1px solid var(--grid); }
+.fact b { font-family: var(--f-display); font-weight: 600; font-size: 1.55rem; line-height: 1.1; }
+.fact span { font-size: 0.8rem; color: var(--ink-2); line-height: 1.3; }
+nav.index { display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 0.875rem; padding-block: 10px 0; }
+nav.index a { color: var(--ink-2); text-decoration: none; border-bottom: 1px solid transparent; }
+nav.index a:hover { color: var(--accent); border-bottom-color: var(--accent); }
+
+/* sections */
+section > *, .two > *, .fig-row > * { min-width: 0; }
+section { padding-block: 40px 8px; border-top: 1px solid var(--rule); display: grid; gap: 22px; scroll-margin-top: 12px; }
+.sec-head { display: grid; gap: 8px; }
+.findings { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; counter-reset: f; }
+.findings li { display: grid; grid-template-columns: 2.2rem 1fr; gap: 0 12px; padding: 14px 0; border-bottom: 1px solid var(--grid); }
+.findings li::before { counter-increment: f; content: counter(f); font-family: var(--f-display); font-weight: 600; font-size: 1.4rem; color: var(--accent); line-height: 1.2; }
+.findings h3 { margin-bottom: 3px; }
+.findings p { color: var(--ink-2); max-width: 78ch; }
+.callout { border-left: 3px solid var(--accent); padding: 10px 0 10px 16px; max-width: 72ch; color: var(--ink-2); }
+
+/* figures */
+figure { margin: 0; background: var(--surface); border: 1px solid var(--grid); border-radius: 6px; padding: 18px 18px 14px; display: grid; gap: 10px; min-width: 0; }
+figcaption { display: grid; gap: 3px; }
+figcaption .t { font-weight: 600; font-size: 0.98rem; }
+figcaption .s { font-size: 0.85rem; color: var(--ink-2); max-width: 90ch; }
+.fig-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 18px; }
+.chart { width: 100%; height: auto; display: block; overflow: visible; font-family: var(--f-body); }
+.chart text { fill: var(--ink-2); font-size: 12px; }
+.chart .tick { fill: var(--ink-3); font-size: 11.5px; font-variant-numeric: tabular-nums; }
+.chart .axis-title { fill: var(--ink-3); font-size: 11.5px; }
+.chart .end-label { fill: var(--ink); font-size: 12px; font-weight: 500; }
+.chart .val { fill: var(--ink-2); font-size: 11.5px; font-variant-numeric: tabular-nums; }
+.chart .panel-title { fill: var(--ink); font-size: 13px; font-weight: 600; }
+.chart .grid { stroke: var(--grid); stroke-width: 1; }
+.chart .base { stroke: var(--rule); stroke-width: 1; }
+.chart .zero { stroke: var(--ink-3); stroke-width: 1; }
+.chart .crosshair { stroke: var(--ink-3); stroke-width: 1; }
+.chart .line { fill: none; stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; }
+.chart .ln-syn { stroke: var(--syn); } .chart .ln-rt { stroke: var(--rt); } .chart .ln-ink { stroke: var(--ink); } .chart .ln-g1 { stroke: var(--gray-1); } .chart .ln-g2 { stroke: var(--gray-2); }
+.chart .dot { stroke: var(--surface); stroke-width: 2; }
+.chart .f-syn { fill: var(--syn); } .chart .f-rt { fill: var(--rt); } .chart .f-ink { fill: var(--ink); } .chart .f-g1 { fill: var(--gray-1); } .chart .f-g2 { fill: var(--gray-2); } .chart .f-acc { fill: var(--accent); }
+.chart .band-syn { fill: var(--syn); opacity: 0.12; } .chart .band-rt { fill: var(--rt); opacity: 0.12; }
+.chart .ci { stroke-width: 2; stroke-linecap: round; }
+.chart .ci.syn { stroke: var(--syn); } .chart .ci.rt { stroke: var(--rt); }
+.chart .hit { fill: transparent; cursor: default; }
+.chart .hit:focus { outline: none; }
+.chart .row-hover { fill: var(--ink); opacity: 0; }
+.chart g.row:hover .row-hover, .chart g.row:focus .row-hover { opacity: 0.05; }
+.chart .q0 { fill: var(--seq-0); } .chart .q1 { fill: var(--seq-1); } .chart .q2 { fill: var(--seq-2); } .chart .q3 { fill: var(--seq-3); }
+.chart .q4 { fill: var(--seq-4); } .chart .q5 { fill: var(--seq-5); } .chart .q6 { fill: var(--seq-6); }
+.chart .cell:hover, .chart .cell:focus { stroke: var(--ink); stroke-width: 1.5; outline: none; }
+.chart .dn3 { fill: var(--div-n3); } .chart .dn2 { fill: var(--div-n2); } .chart .dn1 { fill: var(--div-n1); } .chart .d0 { fill: var(--div-0); }
+.chart .dp1 { fill: var(--div-p1); } .chart .dp2 { fill: var(--div-p2); } .chart .dp3 { fill: var(--div-p3); }
+.chart text.tc-dn3 { fill: var(--tc-dn3); } .chart text.tc-dn2 { fill: var(--tc-dn2); } .chart text.tc-dn1 { fill: var(--tc-dn1); } .chart text.tc-d0 { fill: var(--tc-d0); }
+.chart text.tc-dp1 { fill: var(--tc-dp1); } .chart text.tc-dp2 { fill: var(--tc-dp2); } .chart text.tc-dp3 { fill: var(--tc-dp3); }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: 0.82rem; color: var(--ink-2); align-items: center; }
+.legend .k { display: inline-flex; align-items: center; gap: 6px; }
+.legend .ln { width: 16px; height: 2px; border-radius: 1px; display: inline-block; }
+.legend .sw { width: 12px; height: 12px; border-radius: 2px; display: inline-block; }
+.legend .dt { width: 9px; height: 9px; border-radius: 50%; display: inline-block; }
+.bg-syn { background: var(--syn); } .bg-rt { background: var(--rt); } .bg-ink { background: var(--ink); } .bg-g1 { background: var(--gray-1); } .bg-g2 { background: var(--gray-2); }
+.bg-q0 { background: var(--seq-0); border: 1px solid var(--grid); } .bg-q1 { background: var(--seq-1); } .bg-q2 { background: var(--seq-2); } .bg-q3 { background: var(--seq-3); } .bg-q4 { background: var(--seq-4); } .bg-q5 { background: var(--seq-5); } .bg-q6 { background: var(--seq-6); }
+.bg-dn3 { background: var(--div-n3); } .bg-dn2 { background: var(--div-n2); } .bg-dn1 { background: var(--div-n1); } .bg-d0 { background: var(--div-0); } .bg-dp1 { background: var(--div-p1); } .bg-dp2 { background: var(--div-p2); } .bg-dp3 { background: var(--div-p3); }
+.toggle { display: inline-flex; border: 1px solid var(--rule); border-radius: 6px; overflow: hidden; width: fit-content; }
+.toggle button { font: inherit; font-size: 0.82rem; padding: 5px 12px; border: 0; background: transparent; color: var(--ink-2); cursor: pointer; }
+.toggle button + button { border-left: 1px solid var(--rule); }
+.toggle button[aria-pressed="true"] { background: var(--ink); color: var(--bg); }
+.sm-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px 22px; }
+.sm-5 { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 14px 16px; }
+@media (max-width: 860px) { .sm-5 { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); } }
+details.tv { font-size: 0.85rem; }
+details.tv summary { cursor: pointer; color: var(--ink-2); width: fit-content; }
+details.tv[open] summary { margin-bottom: 8px; }
+
+/* tables */
+.tbl-wrap { overflow-x: auto; max-width: 100%; }
+table { border-collapse: collapse; font-size: 0.86rem; width: 100%; }
+th, td { text-align: left; padding: 6px 10px 6px 0; border-bottom: 1px solid var(--grid); vertical-align: top; }
+th { font-weight: 600; color: var(--ink-2); font-size: 0.78rem; border-bottom: 1px solid var(--rule); }
+td.r, th.r { text-align: right; font-variant-numeric: tabular-nums; }
+td.mono { font-family: var(--f-mono); font-size: 0.8rem; color: var(--ink-2); }
+tr.fam td { padding-top: 12px; font-weight: 600; color: var(--ink); border-bottom: 1px solid var(--rule); }
+.sig { font-weight: 600; color: var(--ink); }
+.ns { color: var(--ink-3); }
+.pill { display: inline-block; font-size: 0.72rem; padding: 1px 7px; border-radius: 99px; border: 1px solid var(--rule); color: var(--ink-2); white-space: nowrap; }
+.pill.syn { border-color: var(--syn); } .pill.rt { border-color: var(--rt); }
+
+/* behaviourist mapping */
+.map { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 0; border-top: 1px solid var(--rule); }
+.map > div { padding: 14px 18px 16px 0; display: grid; gap: 6px; align-content: start; border-bottom: 1px solid var(--grid); }
+.map .verdict { font-family: var(--f-mono); font-size: 0.74rem; letter-spacing: 0.04em; text-transform: uppercase; }
+.map .verdict.yes { color: var(--accent); } .map .verdict.part { color: var(--ink-2); } .map .verdict.no { color: var(--ink-3); }
+.map p { font-size: 0.9rem; color: var(--ink-2); }
+.loop { max-width: 760px; }
+
+/* episodes */
+.episode { font-family: var(--f-mono); font-size: 0.8rem; display: grid; gap: 4px; background: var(--code-bg); border-radius: 6px; padding: 12px 14px; overflow-x: auto; }
+.episode .step { display: grid; grid-template-columns: 2.6rem 1fr; gap: 8px; }
+.episode .step span:last-child { overflow-wrap: anywhere; }
+.episode .n { color: var(--ink-3); }
+.episode .ok { color: var(--accent); }
+.stack { display: grid; gap: 18px; }
+.two { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 18px; align-items: start; }
+
+#tip { position: fixed; z-index: 10; pointer-events: none; background: var(--surface); color: var(--ink); border: 1px solid var(--rule); border-radius: 6px; padding: 8px 10px; font-size: 0.8rem; line-height: 1.35; box-shadow: 0 4px 16px rgba(0,0,0,0.12); max-width: 300px; display: grid; gap: 3px; }
+#tip .tt { font-weight: 600; margin-bottom: 2px; }
+#tip .tr { display: grid; grid-template-columns: auto auto 1fr; gap: 7px; align-items: center; }
+#tip .tr .lk { width: 12px; height: 2px; display: inline-block; }
+#tip .tr strong { font-variant-numeric: tabular-nums; }
+#tip .tr span:last-child { color: var(--ink-2); }
+footer { padding-block: 36px 60px; border-top: 1px solid var(--rule); color: var(--ink-3); font-size: 0.82rem; }
+@media (max-width: 560px) {
+  .fact + .fact { padding-left: 0; border-left: 0; }
+  .fact { flex-basis: 45%; }
+  figure { padding: 12px 10px; }
+  h2 { font-size: 1.5rem; }
+}
+@media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; } }
+</style>
+
+<div class="frame">
+  <header class="masthead">
+    <div class="eyebrow">CMU CS Academy · CS1 · two cohorts, five classes · exploratory analysis of error logs</div>
+    <h1>Do students learn to solve errors faster?</h1>
+    <p class="lede">Programming errors never go away in this course. About one run in five ends in an error, in every unit. What changes is how quickly students get rid of them, and only for some kinds of error. When the message names the fix, students get faster with every encounter. When it does not, or when the error is about meaning rather than form, they do not.</p>
+    <div class="facts" id="facts"></div>
+    <nav class="index" aria-label="Sections">
+      <a href="#findings">Findings</a><a href="#framing">Behaviourist reading</a><a href="#frequency">Errors across units</a>
+      <a href="#escape">Escape latency</a><a href="#students">Individual students</a><a href="#colon">Colon → indentation</a>
+      <a href="#mole">Whack-a-mole</a><a href="#classes">Classes</a><a href="#clusters">Clusters</a><a href="#methods">Methods</a>
+    </nav>
+  </header>
+
+  <section id="findings">
+    <div class="sec-head"><div class="eyebrow">Summary</div><h2>Findings</h2></div>
+    <ol class="findings" id="findings-list"></ol>
+  </section>
+
+  <section id="framing">
+    <div class="sec-head"><div class="eyebrow">Framing</div><h2>A behaviourist reading of the run–error loop</h2></div>
+    <div class="prose">
+      <p>Each run of the code is a response, and the interpreter answers immediately. Seen through operant conditioning, the error message can do two different jobs. As an aversive consequence of running flawed code it is <strong>positive punishment</strong>: if it works that way, students should produce fewer errors over time (avoidance). Its <em>removal</em> is the consequence of the corrective edit, so the fix is strengthened by <strong>negative reinforcement</strong>: if that works, the time to escape the message should shrink with repeated trials. That is Thorndike's puzzle-box curve, with the error message as the box.</p>
+      <p>The logs only contain observable behaviour (runs, messages, edits and timestamps), which suits this framing. The measures below are built so that each prediction can fail.</p>
+    </div>
+    <figure class="loop">
+      <figcaption><span class="t">The run–error loop as an escape trial</span><span class="s">One “spell” is timed from the error message to the first later run that no longer shows it.</span></figcaption>
+      <svg class="chart" viewBox="0 0 760 150" role="img" aria-label="Diagram: run code, error message, edit, run again, error gone or replaced">
+        <defs><marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="f-g1"></path></marker></defs>
+        <g>
+          <rect x="6" y="40" width="120" height="44" rx="6" class="q0"></rect><text x="66" y="66" text-anchor="middle" class="end-label">Run code</text>
+          <rect x="176" y="40" width="160" height="44" rx="6" class="q1"></rect><text x="256" y="58" text-anchor="middle" class="end-label">Error message</text><text x="256" y="75" text-anchor="middle" class="tick">aversive stimulus · S<tspan baseline-shift="super" font-size="8">D</tspan></text>
+          <rect x="386" y="40" width="130" height="44" rx="6" class="q0"></rect><text x="451" y="58" text-anchor="middle" class="end-label">Edit, run again</text><text x="451" y="75" text-anchor="middle" class="tick">escape response</text>
+          <rect x="566" y="6" width="188" height="40" rx="6" class="q2"></rect><text x="660" y="24" text-anchor="middle" class="end-label">Clean run</text><text x="660" y="39" text-anchor="middle" class="tick">solved · 59% of spells</text>
+          <rect x="566" y="78" width="188" height="40" rx="6" class="q1"></rect><text x="660" y="96" text-anchor="middle" class="end-label">A different error</text><text x="660" y="111" text-anchor="middle" class="tick">replaced · 37% (a “mole”)</text>
+          <line x1="126" y1="62" x2="172" y2="62" class="base" marker-end="url(#arr)"></line>
+          <line x1="336" y1="62" x2="382" y2="62" class="base" marker-end="url(#arr)"></line>
+          <line x1="516" y1="56" x2="562" y2="30" class="base" marker-end="url(#arr)"></line>
+          <line x1="516" y1="68" x2="562" y2="96" class="base" marker-end="url(#arr)"></line>
+          <path d="M 656 120 C 640 146, 300 150, 258 88" fill="none" class="base" marker-end="url(#arr)"></path>
+          <text x="440" y="143" text-anchor="middle" class="tick">the new message starts the next trial</text>
+          <path d="M 451 40 C 445 10, 270 8, 262 36" fill="none" class="base" marker-end="url(#arr)"></path>
+          <text x="352" y="14" text-anchor="middle" class="tick">same error again (in 20% of spells)</text>
+        </g>
+      </svg>
+    </figure>
+    <div class="map" id="map"></div>
+  </section>
+
+  <section id="frequency">
+    <div class="sec-head"><div class="eyebrow">Avoidance test</div><h2>Errors do not become rarer across the course</h2></div>
+    <div class="prose">
+      <p>If error messages worked as punishment, the share of runs that end in an error would fall over the year. It does not. Syntax errors peak with conditionals (units 3–5). Runtime errors then take over with loops, strings and lists. The total stays close to one run in five. Within a unit there is a small decline as students practise the new construct: syntax errors fall from 8.9% to 7.1% of runs between the first and last fifth of a student's work in the unit, and 74% of students show the drop.</p>
+    </div>
+    <div class="fig-row">
+      <figure id="fig-units">
+        <figcaption><span class="t">Share of runs that end in an error, by unit</span><span class="s" id="fig-units-sub">All code pages: scaffolded exercises, creative tasks, lesson notes and the sandbox.</span></figcaption>
+        <div class="toggle" role="group" aria-label="Pages included"><button type="button" id="tg-all" aria-pressed="true">All pages</button><button type="button" id="tg-ex" aria-pressed="false">Scaffolded exercises only</button></div>
+        <div class="legend"><span class="k"><span class="ln bg-syn"></span>Syntax errors</span><span class="k"><span class="ln bg-rt"></span>Runtime errors</span></div>
+        <div id="ch-units"></div>
+      </figure>
+      <figure>
+        <figcaption><span class="t">Practice within a unit</span><span class="s">Share of runs with an error in each fifth of a student's runs within the same unit, pooled over units.</span></figcaption>
+        <div class="legend"><span class="k"><span class="ln bg-syn"></span>Syntax errors</span><span class="k"><span class="ln bg-rt"></span>Runtime errors</span></div>
+        <div id="ch-within"></div>
+      </figure>
+    </div>
+    <figure>
+      <figcaption><span class="t">Which errors belong to which concept</span><span class="s">Errors per 1,000 runs, by error type and unit. The block-structure errors arrive with functions and conditionals (units 2–5). Index errors arrive with lists (10–11). NameError is everywhere.</span></figcaption>
+      <div class="legend" id="heat-legend"></div>
+      <div class="tbl-wrap"><div id="ch-heat" style="min-width:640px"></div></div>
+      <details class="tv"><summary>Show as table</summary><div class="tbl-wrap" id="tbl-heat"></div></details>
+    </figure>
+  </section>
+
+  <section id="escape">
+    <div class="sec-head"><div class="eyebrow">Escape test</div><h2>Students escape some errors faster with practice, not others</h2></div>
+    <div class="prose">
+      <p>For every student and error type, encounters are numbered in order (k = 1, 2, 3 …). The plot shows how the time to get rid of the error changes each time k doubles, comparing each student only with themselves. Negative values mean faster escapes. The pattern sorts by how the error is fixed, not by how common it is. Syntax errors whose message points at a single local repair get faster: a missing indented block, an unclosed bracket, <code>=</code> for <code>==</code>, a missing colon or comma. The unspecific <code>invalid syntax</code> does not. Errors about meaning (NameError, AttributeError, type errors) get slightly slower as programs grow, and are flat once unit and page type are held constant.</p>
+    </div>
+    <figure>
+      <figcaption><span class="t">Change in fix time per doubling of encounters</span><span class="s">Within-student estimates with 95% confidence intervals (student fixed effects, errors clustered by student). Fresh errors only: errors raised by the student's own run of code they had edited.</span></figcaption>
+      <div class="toggle" role="group" aria-label="Estimate"><button type="button" id="tg-raw" aria-pressed="true">Within student</button><button type="button" id="tg-adj" aria-pressed="false">Also holding unit and page type</button></div>
+      <div class="legend"><span class="k"><span class="dt bg-syn"></span>Syntax error</span><span class="k"><span class="dt bg-rt"></span>Runtime error</span></div>
+      <div class="tbl-wrap"><div id="ch-forest" style="min-width:600px"></div></div>
+      <details class="tv"><summary>Show as table</summary><div class="tbl-wrap" id="tbl-forest"></div></details>
+    </figure>
+    <figure>
+      <figcaption><span class="t">Escape curves: median fix time by encounter number</span><span class="s">Line = median seconds from the error to the run where it is gone; band = middle 50% of fixes. Log scale. Bins with fewer than 20 fixes are hidden. These medians pool students. Students who meet an error often are also faster at it, so a pooled curve can fall even when each student slows down (NameError). The percentages are the within-student slopes.</span></figcaption>
+      <div class="sm-grid" id="sm-curves"></div>
+    </figure>
+    <div class="two">
+      <figure>
+        <figcaption><span class="t">Across days, and after a break</span><span class="s">First encounter of each error type per student and day. The first column shows the change per doubling of days with that error. The second shows the effect of the time since it was last met, per doubling of days.</span></figcaption>
+        <div class="tbl-wrap" id="tbl-fod"></div>
+      </figure>
+      <div class="prose">
+        <h3>Retention, and some spontaneous recovery</h3>
+        <p>The speed-up is not just warming up within a lesson. On the first missing colon, indentation, bracket or <code>==</code> error of the day, students are still faster the more days they have met that error. After a longer gap they are slower again: for the missing colon, 4.5% slower per doubling of days since it was last met, and similarly for commas and brackets. This is the forgetting and spontaneous recovery a conditioning account expects.</p>
+        <h3>A clearer message helps, but does not train</h3>
+        <p id="hint-text"></p>
+        <h3>One-shot fixes</h3>
+        <p id="oneshot-text"></p>
+      </div>
+    </div>
+  </section>
+
+  <section id="students">
+    <div class="sec-head"><div class="eyebrow">Individual differences</div><h2>Most students speed up on syntax errors; few do on runtime errors</h2></div>
+    <div class="prose"><p id="students-text"></p></div>
+    <figure>
+      <figcaption><span class="t">Each student's learning slope</span><span class="s">Change in fix time per doubling of encounters, error type held constant, estimated separately for syntax and runtime errors and shrunk toward the group mean (individual slopes are noisy). One dot per student. Left of zero = getting faster.</span></figcaption>
+      <div class="legend"><span class="k"><span class="dt bg-syn"></span>Syntax errors</span><span class="k"><span class="dt bg-rt"></span>Runtime errors</span><span class="k"><span class="ln bg-ink"></span>Group mean</span></div>
+      <div id="ch-strip"></div>
+    </figure>
+  </section>
+
+  <section id="colon">
+    <div class="sec-head"><div class="eyebrow">A response chain</div><h2>Missing colon, then indentation</h2></div>
+    <div class="prose">
+      <p>The pattern you see in class is clear in the logs. When a student types <code>if x &gt; 5</code> without the colon, the editor does not auto-indent the next line. Once the colon is added, the body is still flush left, and the next run reports <code>expected an indented block after 'if' statement</code>. The figure compares how often an indentation error follows on the same page within a time window. It is very asymmetric: an indentation error rarely comes <em>before</em> a colon error.</p>
+    </div>
+    <div class="fig-row">
+      <figure>
+        <figcaption><span class="t">Indentation error within the window that follows …</span><span class="s">Share of error events followed by an indentation error (expected block, unexpected indent, unindent mismatch) on the same page.</span></figcaption>
+        <div class="legend"><span class="k"><span class="ln bg-syn"></span>a missing colon</span><span class="k"><span class="ln bg-g1"></span>other syntax errors</span><span class="k"><span class="ln bg-g2"></span>runtime errors</span><span class="k"><span class="ln bg-ink"></span>reverse: indentation, then colon</span></div>
+        <div id="ch-window"></div>
+      </figure>
+      <figure>
+        <figcaption><span class="t">The chain fades over the course but does not disappear</span><span class="s">Share of missing-colon errors whose fix turns directly into <span class="mono">expected an indented block</span>, by unit (units with at least 40 colon errors).</span></figcaption>
+        <div id="ch-chain-unit"></div>
+      </figure>
+    </div>
+    <div class="two">
+      <figure>
+        <figcaption><span class="t">By the student's own experience with the colon error</span><span class="s">Same share, by how many missing-colon errors the student had met before.</span></figcaption>
+        <div id="ch-chain-k"></div>
+      </figure>
+      <div class="prose" id="colon-text"></div>
+    </div>
+  </section>
+
+  <section id="mole">
+    <div class="sec-head"><div class="eyebrow">Trial and error</div><h2>Whack-a-mole debugging does not decline</h2></div>
+    <div class="prose"><p id="mole-intro"></p></div>
+    <div class="fig-row">
+      <figure>
+        <figcaption><span class="t">Different errors met before a clean run</span><span class="s">Share of debugging episodes (first error → clean run on the same page).</span></figcaption>
+        <div id="ch-mole-dist"></div>
+      </figure>
+      <figure>
+        <figcaption><span class="t">Time to a clean run</span><span class="s">Median seconds per episode, by the number of different errors met on the way.</span></figcaption>
+        <div id="ch-mole-time"></div>
+      </figure>
+    </div>
+    <div class="fig-row">
+      <figure>
+        <figcaption><span class="t">Episodes with three or more different errors, by unit</span><span class="s">Rises with conceptual load (loops, strings, lists).</span></figcaption>
+        <div class="legend"><span class="k"><span class="ln bg-ink"></span>3 or more errors</span><span class="k"><span class="ln bg-g1"></span>2 or more errors</span></div>
+        <div id="ch-mole-unit"></div>
+      </figure>
+      <figure>
+        <figcaption><span class="t">… and by the student's debugging experience</span><span class="s">Same share by how many episodes the student had already been through. Flat: experience does not reduce whack-a-mole.</span></figcaption>
+        <div id="ch-mole-exp"></div>
+      </figure>
+    </div>
+    <div class="two">
+      <figure>
+        <figcaption><span class="t">What a fix turns into</span><span class="s">Most common pairs when fixing one error produced a different message on the next run.</span></figcaption>
+        <div class="tbl-wrap" id="tbl-pairs"></div>
+      </figure>
+      <div class="prose" id="mole-examples"></div>
+    </div>
+  </section>
+
+  <section id="classes">
+    <div class="sec-head"><div class="eyebrow">Cohorts and classes</div><h2>The same pattern in every class</h2></div>
+    <div class="prose"><p id="classes-text"></p></div>
+    <figure>
+      <figcaption><span class="t">Class profiles</span><span class="s">Fix times are medians of fresh errors; slopes are within-student changes in fix time per doubling of encounters (error type held constant).</span></figcaption>
+      <div class="tbl-wrap" id="tbl-classes"></div>
+    </figure>
+    <figure>
+      <figcaption><span class="t">Escape learning by class</span><span class="s">Change in fix time per doubling of encounters, 95% confidence intervals.</span></figcaption>
+      <div class="legend"><span class="k"><span class="dt bg-syn"></span>Syntax errors</span><span class="k"><span class="dt bg-rt"></span>Runtime errors</span></div>
+      <div class="tbl-wrap"><div id="ch-class-forest" style="min-width:520px"></div></div>
+    </figure>
+    <figure>
+      <figcaption><span class="t">Share of runs ending in an error, by unit and class</span><span class="s">All code pages.</span></figcaption>
+      <div class="legend"><span class="k"><span class="ln bg-syn"></span>Syntax errors</span><span class="k"><span class="ln bg-rt"></span>Runtime errors</span></div>
+      <div class="sm-5" id="sm-classes"></div>
+    </figure>
+    <details class="tv"><summary>Per-class slopes for the most common error types</summary><div class="tbl-wrap" id="tbl-class-cat"></div></details>
+  </section>
+
+  <section id="clusters">
+    <div class="sec-head"><div class="eyebrow">Exploratory clustering</div><h2>Five error-solving profiles, on a continuum</h2></div>
+    <div class="prose" id="clusters-text"></div>
+    <figure>
+      <figcaption><span class="t">Cluster profiles</span><span class="s">Mean standardised difference (z) from the average student on the five clustering features. Each feature is measured relative to what is typical for the same error type or unit.</span></figcaption>
+      <div class="legend" id="div-legend"></div>
+      <div class="tbl-wrap"><div id="ch-profile" style="min-width:560px"></div></div>
+    </figure>
+    <div class="stack">
+      <figure>
+        <figcaption><span class="t">What the profiles look like in plain numbers</span><span class="s">Medians per cluster. Error rate and number of runs were not used for clustering.</span></figcaption>
+        <div class="tbl-wrap" id="tbl-clusters"></div>
+      </figure>
+      <figure>
+        <figcaption><span class="t">Classes and clusters</span><span class="s">Number of students.</span></figcaption>
+        <div class="tbl-wrap" id="tbl-class-cluster"></div>
+      </figure>
+    </div>
+  </section>
+
+  <section id="methods">
+    <div class="sec-head"><div class="eyebrow">Methods</div><h2>How the measures were built</h2></div>
+    <div class="prose" id="methods-text"></div>
+    <figure>
+      <figcaption><span class="t">Error taxonomy</span><span class="s">25 types in 10 families, classified from the message text. The example is the most common message of each type.</span></figcaption>
+      <div class="tbl-wrap" id="tbl-tax"></div>
+    </figure>
+    <figure>
+      <figcaption><span class="t">Robustness of the escape slopes</span><span class="s">Within-student change in fix time per doubling of encounters (%) under alternative selections. Bold = p &lt; .05.</span></figcaption>
+      <div class="tbl-wrap" id="tbl-sens"></div>
+    </figure>
+    <div class="prose" id="limits-text"></div>
+  </section>
+  <footer>Analysis scripts: <span class="mono">errors_build.py → errors_episodes.py → errors_analysis.py → errors_clusters.py → errors_report_data.py</span>, saved in the project under <span class="mono">claude/errors/</span>.</footer>
+</div>
+<div id="tip" role="tooltip" hidden></div>
+
+<script>
+const D = {"overview":{"students":159,"students_by_group":{"te22a":27,"te22b":32,"te22c":33,"te23b":35,"te23c":32},"attempts":835585,"runs":817948,"unlogged":4081,"submits":13556,"load_errors":5852,"errors":164917,"syntax_errors":71243,"runtime_errors":93674,"env_messages_excluded":2235,"err_share":0.19,"syn_share":0.081,"rt_share":0.108,"spells":111890,"fresh_spells":102021,"episodes":71175,"fresh_episodes":62572,"spell_end":{"solved":0.588,"replaced":0.374,"censored_silence":0.019,"censored_left":0.012,"censored_end":0.007},"latency_q":{"0.1":5.0,"0.25":7.7,"0.5":15.1,"0.75":38.5,"0.9":100.0},"one_shot":0.796,"ctx_attempts":{"creative":362923,"exercise":356463,"notes":63328,"sandbox":50208,"example":2663},"ctx_err":{"creative":0.161,"example":0.041,"exercise":0.242,"notes":0.068,"sandbox":0.189},"dates":{"TE22":["2023-08-21","2024-06-14"],"TE23":["2024-08-20","2025-06-16"]}},"categories":[{"cat":"colon","label":"Missing colon","family":"Block structure","eclass":"syntax","errors":8738,"per1000":9.84,"spells":5511,"students":157,"med_latency":7.8,"q75_latency":22.2,"one_shot":0.823,"replaced":0.471,"censored":0.03,"hint":0.0,"example":"SyntaxError: expected ':'"},{"cat":"indent_block","label":"Expected an indented block","family":"Block structure","eclass":"syntax","errors":12448,"per1000":13.89,"spells":6132,"students":157,"med_latency":17.9,"q75_latency":50.3,"one_shot":0.747,"replaced":0.385,"censored":0.054,"hint":0.0,"example":"SyntaxError: expected an indented block after function definition on line 12"},{"cat":"indent_unexpected","label":"Unexpected indent","family":"Block structure","eclass":"syntax","errors":6094,"per1000":7.18,"spells":2579,"students":157,"med_latency":13.7,"q75_latency":31.7,"one_shot":0.671,"replaced":0.38,"censored":0.035,"hint":0.0,"example":"SyntaxError: unexpected indent"},{"cat":"indent_mismatch","label":"Unindent does not match","family":"Block structure","eclass":"syntax","errors":4289,"per1000":5.03,"spells":1538,"students":149,"med_latency":18.6,"q75_latency":48.8,"one_shot":0.574,"replaced":0.382,"censored":0.059,"hint":0.0,"example":"SyntaxError: unindent does not match any outer indentation level"},{"cat":"else_orphan","label":"else/elif without matching if","family":"Block structure","eclass":"syntax","errors":1387,"per1000":1.63,"spells":786,"students":141,"med_latency":15.4,"q75_latency":34.7,"one_shot":0.714,"replaced":0.538,"censored":0.023,"hint":0.0,"example":"SyntaxError: invalid syntax (else after assign)"},{"cat":"bracket","label":"Unclosed or unmatched bracket","family":"Delimiters","eclass":"syntax","errors":5770,"per1000":6.76,"spells":3790,"students":157,"med_latency":9.1,"q75_latency":18.9,"one_shot":0.797,"replaced":0.359,"censored":0.012,"hint":0.0,"example":"SyntaxError: '(' was never closed"},{"cat":"comma","label":"Missing comma","family":"Delimiters","eclass":"syntax","errors":8400,"per1000":9.68,"spells":5262,"students":159,"med_latency":9.7,"q75_latency":21.0,"one_shot":0.784,"replaced":0.316,"censored":0.02,"hint":1.0,"example":"SyntaxError: invalid syntax. Perhaps you forgot a comma?"},{"cat":"string","label":"Unterminated string","family":"Delimiters","eclass":"syntax","errors":573,"per1000":0.65,"spells":366,"students":121,"med_latency":9.3,"q75_latency":20.8,"one_shot":0.823,"replaced":0.317,"censored":0.044,"hint":0.0,"example":"SyntaxError: unterminated string literal (detected at line 5)"},{"cat":"eq_assign","label":"'=' where '==' was meant","family":"Assignment & arguments","eclass":"syntax","errors":3121,"per1000":3.66,"spells":2201,"students":155,"med_latency":10.3,"q75_latency":21.4,"one_shot":0.813,"replaced":0.452,"censored":0.03,"hint":1.0,"example":"SyntaxError: invalid syntax. Maybe you meant '==' or ':=' instead of '='?"},{"cat":"assign_target","label":"Invalid assignment target","family":"Assignment & arguments","eclass":"syntax","errors":5758,"per1000":6.75,"spells":2874,"students":156,"med_latency":17.5,"q75_latency":45.8,"one_shot":0.693,"replaced":0.426,"censored":0.047,"hint":0.123,"example":"SyntaxError: cannot assign to attribute"},{"cat":"kwarg_order","label":"Keyword-argument order","family":"Assignment & arguments","eclass":"syntax","errors":2156,"per1000":2.27,"spells":1091,"students":154,"med_latency":22.6,"q75_latency":51.8,"one_shot":0.703,"replaced":0.465,"censored":0.044,"hint":0.0,"example":"SyntaxError: positional argument follows keyword argument"},{"cat":"literal_char","label":"Invalid character or number","family":"Characters & literals","eclass":"syntax","errors":1812,"per1000":2.12,"spells":1138,"students":154,"med_latency":8.8,"q75_latency":20.1,"one_shot":0.781,"replaced":0.323,"censored":0.025,"hint":0.001,"example":"SyntaxError: invalid decimal literal"},{"cat":"invalid_syntax","label":"Unspecific 'invalid syntax'","family":"Unspecific syntax","eclass":"syntax","errors":10038,"per1000":11.37,"spells":5448,"students":159,"med_latency":14.7,"q75_latency":42.8,"one_shot":0.756,"replaced":0.373,"censored":0.049,"hint":0.0,"example":"SyntaxError: invalid syntax"},{"cat":"syntax_other","label":"Other syntax error","family":"Unspecific syntax","eclass":"syntax","errors":659,"per1000":0.77,"spells":453,"students":131,"med_latency":12.3,"q75_latency":26.7,"one_shot":0.813,"replaced":0.486,"censored":0.044,"hint":0.132,"example":"SyntaxError: missing function parameters"},{"cat":"name","label":"NameError (undefined name)","family":"Names & scope","eclass":"runtime","errors":30986,"per1000":35.91,"spells":22090,"students":158,"med_latency":13.3,"q75_latency":29.7,"one_shot":0.852,"replaced":0.377,"censored":0.029,"hint":0.464,"example":"NameError: name 'mouseX' is not defined"},{"cat":"unbound_local","label":"UnboundLocalError","family":"Names & scope","eclass":"runtime","errors":3068,"per1000":3.63,"spells":1929,"students":150,"med_latency":28.4,"q75_latency":72.8,"one_shot":0.758,"replaced":0.398,"censored":0.049,"hint":0.001,"example":"UnboundLocalError: cannot access local variable 'color' where it is not associated with a value"},{"cat":"attribute","label":"AttributeError","family":"Names & scope","eclass":"runtime","errors":14321,"per1000":16.86,"spells":10170,"students":157,"med_latency":21.1,"q75_latency":54.9,"one_shot":0.814,"replaced":0.406,"censored":0.049,"hint":0.447,"example":"AttributeError: 'int' object has no attribute 'hitsShape'"},{"cat":"type_value","label":"Type or value error","family":"Types, values & indexing","eclass":"runtime","errors":8120,"per1000":9.54,"spells":5234,"students":156,"med_latency":25.7,"q75_latency":67.7,"one_shot":0.769,"replaced":0.383,"censored":0.06,"hint":0.0,"example":"TypeError: unsupported operand type(s) for +: 'str' and 'int'"},{"cat":"index","label":"IndexError","family":"Types, values & indexing","eclass":"runtime","errors":2901,"per1000":3.4,"spells":1406,"students":121,"med_latency":29.6,"q75_latency":79.5,"one_shot":0.659,"replaced":0.246,"censored":0.051,"hint":0.0,"example":"IndexError: list index out of range"},{"cat":"func_args","label":"Wrong arguments to a function","family":"Function calls","eclass":"runtime","errors":3822,"per1000":4.48,"spells":2434,"students":155,"med_latency":19.0,"q75_latency":41.1,"one_shot":0.823,"replaced":0.42,"censored":0.035,"hint":0.0,"example":"TypeError: drawStars() takes 0 positional arguments but 2 were given"},{"cat":"cmu_args","label":"Shape arguments (count/keyword)","family":"Graphics library","eclass":"runtime","errors":9913,"per1000":11.15,"spells":6759,"students":159,"med_latency":17.3,"q75_latency":37.6,"one_shot":0.829,"replaced":0.293,"censored":0.032,"hint":0.0,"example":"Exception: Arg Count Error: Circle() takes 3 arguments (centerX,centerY,radius), not 2"},{"cat":"cmu_value","label":"Shape property value","family":"Graphics library","eclass":"runtime","errors":16205,"per1000":18.98,"spells":10497,"students":159,"med_latency":16.3,"q75_latency":38.8,"one_shot":0.819,"replaced":0.328,"censored":0.032,"hint":0.0,"example":"Exception: TypeError: Rect.width should be positive-number (but 0 is of type int)"},{"cat":"cmu_other","label":"Other graphics-library error","family":"Graphics library","eclass":"runtime","errors":2307,"per1000":2.67,"spells":1293,"students":145,"med_latency":26.2,"q75_latency":70.2,"one_shot":0.791,"replaced":0.337,"censored":0.088,"hint":0.0,"example":"Exception: Group.opacity has no value because the group has no children"},{"cat":"runaway","label":"Too many shapes / recursion","family":"Graphics library","eclass":"runtime","errors":1858,"per1000":1.93,"spells":938,"students":137,"med_latency":24.3,"q75_latency":71.4,"one_shot":0.768,"replaced":0.238,"censored":0.108,"hint":0.0,"example":"Exception: Too many shapes: Your code created more than 2000 shapes. If you would like to increase this limit even though it may cause your "},{"cat":"runtime_other","label":"Other runtime error","family":"Other runtime","eclass":"runtime","errors":173,"per1000":0.21,"spells":102,"students":39,"med_latency":13.3,"q75_latency":99.2,"one_shot":0.75,"replaced":0.52,"censored":0.098,"hint":0.0,"example":"ModuleNotFoundError: No module named 'random.randrage'; 'random' is not a package"}],"units":[{"unit":1,"attempts":99171,"students":159,"err":0.162,"syn":0.07,"rt":0.092,"med_lat_syn":12.1,"med_lat_rt":14.8,"wam":0.091,"multi":0.261},{"unit":2,"attempts":80553,"students":157,"err":0.201,"syn":0.093,"rt":0.107,"med_lat_syn":14.7,"med_lat_rt":15.7,"wam":0.098,"multi":0.274},{"unit":3,"attempts":52349,"students":157,"err":0.236,"syn":0.125,"rt":0.111,"med_lat_syn":13.3,"med_lat_rt":16.9,"wam":0.122,"multi":0.328},{"unit":4,"attempts":87736,"students":156,"err":0.205,"syn":0.108,"rt":0.097,"med_lat_syn":12.4,"med_lat_rt":15.7,"wam":0.114,"multi":0.305},{"unit":5,"attempts":30984,"students":155,"err":0.222,"syn":0.133,"rt":0.09,"med_lat_syn":14.5,"med_lat_rt":14.5,"wam":0.114,"multi":0.311},{"unit":6,"attempts":146145,"students":157,"err":0.155,"syn":0.074,"rt":0.082,"med_lat_syn":10.9,"med_lat_rt":15.7,"wam":0.102,"multi":0.28},{"unit":7,"attempts":55301,"students":155,"err":0.207,"syn":0.075,"rt":0.133,"med_lat_syn":11.4,"med_lat_rt":17.7,"wam":0.129,"multi":0.324},{"unit":8,"attempts":45498,"students":154,"err":0.203,"syn":0.07,"rt":0.133,"med_lat_syn":12.4,"med_lat_rt":17.0,"wam":0.133,"multi":0.332},{"unit":9,"attempts":37871,"students":149,"err":0.213,"syn":0.074,"rt":0.14,"med_lat_syn":11.4,"med_lat_rt":21.6,"wam":0.142,"multi":0.345},{"unit":10,"attempts":109981,"students":153,"err":0.198,"syn":0.067,"rt":0.13,"med_lat_syn":11.8,"med_lat_rt":19.3,"wam":0.143,"multi":0.333},{"unit":11,"attempts":6435,"students":108,"err":0.201,"syn":0.056,"rt":0.146,"med_lat_syn":14.8,"med_lat_rt":24.7,"wam":0.168,"multi":0.38},{"unit":12,"attempts":83536,"students":145,"err":0.173,"syn":0.056,"rt":0.117,"med_lat_syn":11.0,"med_lat_rt":19.6,"wam":0.112,"multi":0.291}],"units_ex":[{"unit":1,"err":0.229,"syn":0.1,"rt":0.128,"attempts":54907},{"unit":2,"err":0.246,"syn":0.115,"rt":0.132,"attempts":41154},{"unit":3,"err":0.261,"syn":0.142,"rt":0.119,"attempts":42594},{"unit":4,"err":0.27,"syn":0.153,"rt":0.118,"attempts":38249},{"unit":5,"err":0.249,"syn":0.152,"rt":0.097,"attempts":25976},{"unit":6,"err":0.194,"syn":0.103,"rt":0.091,"attempts":34337},{"unit":7,"err":0.25,"syn":0.092,"rt":0.158,"attempts":34036},{"unit":8,"err":0.226,"syn":0.079,"rt":0.147,"attempts":38380},{"unit":9,"err":0.232,"syn":0.089,"rt":0.142,"attempts":28506},{"unit":10,"err":0.285,"syn":0.096,"rt":0.19,"attempts":14520},{"unit":11,"err":0.258,"syn":0.075,"rt":0.183,"attempts":3804}],"cat_unit":{"units":[1,2,3,4,5,6,7,8,9,10,11,12],"cats":["colon","indent_block","indent_unexpected","indent_mismatch","else_orphan","bracket","comma","string","eq_assign","assign_target","kwarg_order","literal_char","invalid_syntax","syntax_other","name","unbound_local","attribute","type_value","index","func_args","cmu_args","cmu_value","cmu_other","runaway","runtime_other"],"per1000":[[0.31,5.08,26.13,18.49,21.2,9.14,10.09,10.86,6.94,7.93,8.86,6.6],[1.15,21.59,25.25,22.24,33.11,10.58,15.66,12.44,10.17,11.95,9.79,8.55],[3.3,14.02,7.87,6.51,4.55,6.08,5.62,6.77,18.22,7.05,2.8,5.09],[0.3,6.33,12.26,7.72,14.43,3.2,5.17,6.26,8.42,3.07,3.57,2.12],[0.01,0.92,3.27,3.61,6.33,1.29,1.81,0.97,1.0,1.05,0.47,1.42],[15.83,6.7,2.67,4.42,5.81,6.76,5.1,4.51,4.83,6.68,3.73,4.96],[22.23,9.98,5.29,7.27,6.49,12.6,4.59,5.34,5.62,7.23,2.64,7.11],[1.38,0.6,0.34,0.65,1.03,0.44,0.49,0.29,1.21,0.47,0.78,0.56],[0.62,1.45,8.16,6.38,6.26,3.65,3.98,3.21,2.59,3.91,5.59,2.87],[4.59,4.01,11.6,12.07,13.62,6.91,8.3,5.87,5.68,4.27,4.66,3.83],[11.14,2.62,0.48,0.7,0.81,1.5,0.56,2.02,0.37,0.67,0.0,0.5],[4.09,2.45,1.55,2.31,2.58,1.98,1.52,1.8,1.0,1.32,0.47,1.93],[5.09,17.49,20.73,15.09,17.01,9.07,11.16,9.06,7.13,10.67,12.43,9.25],[0.07,0.77,0.44,0.96,0.52,0.7,0.81,0.44,0.82,1.18,0.47,1.42],[25.08,42.07,42.39,39.13,35.18,27.66,38.41,46.68,32.56,41.65,27.66,37.16],[0.23,0.42,1.55,1.52,1.23,1.81,10.89,9.56,6.71,5.96,2.64,5.93],[0.45,7.91,12.34,18.28,14.85,15.64,20.65,18.31,23.71,27.81,43.98,26.28],[0.97,3.02,7.14,7.92,4.32,4.34,9.67,12.37,34.25,18.12,30.15,14.51],[0.14,0.57,0.34,0.36,1.07,1.86,2.21,0.13,9.4,9.61,14.76,9.49],[4.27,6.74,11.73,4.06,3.16,2.7,3.92,2.44,2.56,4.28,4.51,4.62],[30.73,21.39,5.1,6.34,10.07,7.15,11.54,11.08,3.51,5.82,4.35,5.03],[30.43,22.22,29.55,17.45,16.75,15.86,27.05,27.12,15.29,10.34,15.07,7.12],[0.28,3.02,1.57,1.68,0.87,3.18,5.35,4.37,4.01,2.43,0.16,3.85],[0.15,0.3,0.4,0.33,2.39,1.25,3.13,2.37,7.58,4.0,3.26,2.9],[0.03,0.04,0.0,0.08,0.0,0.25,0.07,0.02,0.18,0.61,0.0,0.5]]},"within":{"q":[1,2,3,4,5],"syn":[0.089,0.086,0.083,0.077,0.071],"rt":[0.12,0.109,0.103,0.108,0.102],"test":{"syn":{"median_diff":-0.017,"share_lower":0.736,"p":0.0,"n":159},"rt":{"median_diff":-0.013,"share_lower":0.616,"p":4e-05,"n":159}}},"monthly":{"TE22":[{"month":"2023-08","syn":0.07,"rt":0.096,"attempts":29892},{"month":"2023-09","syn":0.075,"rt":0.092,"attempts":80949},{"month":"2023-10","syn":0.103,"rt":0.099,"attempts":69548},{"month":"2023-11","syn":0.089,"rt":0.091,"attempts":64235},{"month":"2023-12","syn":0.071,"rt":0.081,"attempts":63407},{"month":"2024-01","syn":0.074,"rt":0.14,"attempts":34520},{"month":"2024-02","syn":0.063,"rt":0.134,"attempts":38834},{"month":"2024-03","syn":0.068,"rt":0.13,"attempts":37525},{"month":"2024-04","syn":0.061,"rt":0.13,"attempts":47453},{"month":"2024-05","syn":0.056,"rt":0.121,"attempts":63416},{"month":"2024-06","syn":0.063,"rt":0.109,"attempts":8479}],"TE23":[{"month":"2024-08","syn":0.089,"rt":0.119,"attempts":24641},{"month":"2024-09","syn":0.105,"rt":0.104,"attempts":46675},{"month":"2024-10","syn":0.126,"rt":0.113,"attempts":42678},{"month":"2024-11","syn":0.12,"rt":0.099,"attempts":32034},{"month":"2024-12","syn":0.073,"rt":0.08,"attempts":41231},{"month":"2025-01","syn":0.078,"rt":0.126,"attempts":27167},{"month":"2025-02","syn":0.087,"rt":0.136,"attempts":17824},{"month":"2025-03","syn":0.076,"rt":0.12,"attempts":22821},{"month":"2025-04","syn":0.074,"rt":0.119,"attempts":19714},{"month":"2025-05","syn":0.073,"rt":0.123,"attempts":22259}]},"learning":[{"cat":"colon","label":"Missing colon","family":"Block structure","eclass":"syntax","n":5345,"students":157,"k_max":241,"k_median":23.0,"pct":-4.8,"lo":-7.4,"hi":-2.1,"p":0.00062,"adj_pct":-14.4,"adj_lo":-19.6,"adj_hi":-8.8,"adj_p":0.0,"mixed_pct":-7.3,"mixed_lo":-9.9,"mixed_hi":-4.7,"mixed_p":0.0,"one_base":0.823,"one_pp":3.2,"one_lo":2.0,"one_hi":4.3,"one_p":0.0,"bins":[{"k":"1","n":126,"med":16.1,"q1":9.0,"q3":56.8},{"k":"2","n":130,"med":13.2,"q1":6.3,"q3":31.3},{"k":"3–4","n":266,"med":9.7,"q1":6.0,"q3":31.5},{"k":"5–8","n":521,"med":10.0,"q1":5.4,"q3":31.4},{"k":"9–16","n":987,"med":8.0,"q1":5.2,"q3":24.2},{"k":"17–32","n":1444,"med":7.9,"q1":5.0,"q3":24.5},{"k":"33+","n":1871,"med":6.4,"q1":4.4,"q3":15.1}]},{"cat":"indent_block","label":"Expected an indented block","family":"Block structure","eclass":"syntax","n":5798,"students":157,"k_max":134,"k_median":26.0,"pct":-10.2,"lo":-13.1,"hi":-7.2,"p":0.0,"adj_pct":-9.1,"adj_lo":-15.4,"adj_hi":-2.4,"adj_p":0.00895,"mixed_pct":-11.2,"mixed_lo":-13.9,"mixed_hi":-8.3,"mixed_p":0.0,"one_base":0.747,"one_pp":4.2,"one_lo":3.2,"one_hi":5.3,"one_p":0.0,"bins":[{"k":"1","n":88,"med":44.9,"q1":12.6,"q3":123.2},{"k":"2","n":97,"med":29.8,"q1":11.1,"q3":72.6},{"k":"3–4","n":234,"med":26.2,"q1":11.8,"q3":70.3},{"k":"5–8","n":489,"med":21.5,"q1":10.0,"q3":66.8},{"k":"9–16","n":987,"med":18.3,"q1":8.5,"q3":52.8},{"k":"17–32","n":1668,"med":20.1,"q1":9.0,"q3":51.6},{"k":"33+","n":2235,"med":14.2,"q1":7.2,"q3":38.5}]},{"cat":"indent_unexpected","label":"Unexpected indent","family":"Block structure","eclass":"syntax","n":2488,"students":157,"k_max":86,"k_median":11.0,"pct":-4.3,"lo":-8.5,"hi":0.2,"p":0.06097,"adj_pct":-8.4,"adj_lo":-17.2,"adj_hi":1.3,"adj_p":0.08756,"mixed_pct":-3.2,"mixed_lo":-7.2,"mixed_hi":0.9,"mixed_p":0.12748,"one_base":0.671,"one_pp":2.3,"one_lo":0.5,"one_hi":4.1,"one_p":0.01222,"bins":[{"k":"1","n":134,"med":16.3,"q1":7.8,"q3":32.7},{"k":"2","n":140,"med":14.1,"q1":7.4,"q3":38.4},{"k":"3–4","n":273,"med":14.6,"q1":8.1,"q3":30.8},{"k":"5–8","n":454,"med":15.4,"q1":7.4,"q3":34.6},{"k":"9–16","n":687,"med":14.2,"q1":7.4,"q3":32.2},{"k":"17–32","n":577,"med":13.0,"q1":6.9,"q3":31.1},{"k":"33+","n":223,"med":10.8,"q1":5.9,"q3":26.2}]},{"cat":"indent_mismatch","label":"Unindent does not match","family":"Block structure","eclass":"syntax","n":1447,"students":149,"k_max":55,"k_median":7.0,"pct":-3.3,"lo":-8.1,"hi":1.7,"p":0.19548,"adj_pct":-7.5,"adj_lo":-17.5,"adj_hi":3.7,"adj_p":0.18275,"mixed_pct":-4.4,"mixed_lo":-8.8,"mixed_hi":0.2,"mixed_p":0.0629,"one_base":0.574,"one_pp":3.6,"one_lo":1.3,"one_hi":5.8,"one_p":0.00182,"bins":[{"k":"1","n":139,"med":16.8,"q1":9.0,"q3":48.1},{"k":"2","n":118,"med":23.2,"q1":10.4,"q3":59.1},{"k":"3–4","n":211,"med":20.8,"q1":10.3,"q3":50.7},{"k":"5–8","n":333,"med":19.8,"q1":10.3,"q3":50.5},{"k":"9–16","n":370,"med":17.8,"q1":8.8,"q3":42.5},{"k":"17–32","n":201,"med":16.5,"q1":7.2,"q3":45.4},{"k":"33+","n":75,"med":16.5,"q1":10.0,"q3":37.5}]},{"cat":"bracket","label":"Unclosed or unmatched bracket","family":"Delimiters","eclass":"syntax","n":3745,"students":157,"k_max":141,"k_median":15.0,"pct":-7.3,"lo":-9.6,"hi":-5.1,"p":0.0,"adj_pct":-15.7,"adj_lo":-20.8,"adj_hi":-10.4,"adj_p":0.0,"mixed_pct":-8.1,"mixed_lo":-10.5,"mixed_hi":-5.6,"mixed_p":0.0,"one_base":0.797,"one_pp":3.0,"one_lo":1.8,"one_hi":4.1,"one_p":0.0,"bins":[{"k":"1","n":126,"med":13.6,"q1":8.0,"q3":35.8},{"k":"2","n":139,"med":11.8,"q1":7.6,"q3":27.7},{"k":"3–4","n":277,"med":10.8,"q1":6.7,"q3":21.6},{"k":"5–8","n":563,"med":10.3,"q1":6.3,"q3":22.1},{"k":"9–16","n":917,"med":9.6,"q1":5.9,"q3":20.0},{"k":"17–32","n":928,"med":7.9,"q1":5.3,"q3":16.2},{"k":"33+","n":795,"med":7.4,"q1":4.6,"q3":13.9}]},{"cat":"comma","label":"Missing comma","family":"Delimiters","eclass":"syntax","n":5158,"students":159,"k_max":131,"k_median":20.0,"pct":-4.1,"lo":-7.2,"hi":-1.0,"p":0.01085,"adj_pct":-12.6,"adj_lo":-18.6,"adj_hi":-6.2,"adj_p":0.00019,"mixed_pct":-4.7,"mixed_lo":-7.5,"mixed_hi":-1.8,"mixed_p":0.00171,"one_base":0.784,"one_pp":2.3,"one_lo":1.2,"one_hi":3.3,"one_p":3e-05,"bins":[{"k":"1","n":27,"med":13.6,"q1":8.6,"q3":28.8},{"k":"2","n":118,"med":14.4,"q1":9.2,"q3":24.8},{"k":"3–4","n":276,"med":12.0,"q1":7.3,"q3":22.0},{"k":"5–8","n":567,"med":11.6,"q1":7.3,"q3":27.1},{"k":"9–16","n":1122,"med":9.8,"q1":5.9,"q3":21.1},{"k":"17–32","n":1610,"med":9.3,"q1":5.7,"q3":21.3},{"k":"33+","n":1438,"med":8.2,"q1":5.0,"q3":18.4}]},{"cat":"eq_assign","label":"'=' where '==' was meant","family":"Assignment & arguments","eclass":"syntax","n":2136,"students":154,"k_max":64,"k_median":9.0,"pct":-5.3,"lo":-9.0,"hi":-1.4,"p":0.00817,"adj_pct":-6.2,"adj_lo":-13.4,"adj_hi":1.4,"adj_p":0.10903,"mixed_pct":-6.8,"mixed_lo":-10.1,"mixed_hi":-3.3,"mixed_p":0.00015,"one_base":0.813,"one_pp":2.0,"one_lo":0.4,"one_hi":3.6,"one_p":0.01402,"bins":[{"k":"1","n":136,"med":13.4,"q1":8.1,"q3":32.6},{"k":"2","n":141,"med":11.8,"q1":7.2,"q3":28.5},{"k":"3–4","n":284,"med":12.4,"q1":7.4,"q3":24.4},{"k":"5–8","n":481,"med":10.3,"q1":7.0,"q3":21.6},{"k":"9–16","n":603,"med":9.8,"q1":6.6,"q3":21.6},{"k":"17–32","n":412,"med":8.8,"q1":5.9,"q3":16.8},{"k":"33+","n":79,"med":9.4,"q1":5.6,"q3":14.3}]},{"cat":"assign_target","label":"Invalid assignment target","family":"Assignment & arguments","eclass":"syntax","n":2740,"students":156,"k_max":85,"k_median":13.0,"pct":-2.8,"lo":-6.2,"hi":0.7,"p":0.11241,"adj_pct":-9.6,"adj_lo":-18.0,"adj_hi":-0.3,"adj_p":0.04351,"mixed_pct":-2.6,"mixed_lo":-6.6,"mixed_hi":1.6,"mixed_p":0.21609,"one_base":0.693,"one_pp":1.9,"one_lo":0.2,"one_hi":3.6,"one_p":0.03037,"bins":[{"k":"1","n":129,"med":19.9,"q1":10.9,"q3":46.5},{"k":"2","n":121,"med":16.6,"q1":9.7,"q3":42.5},{"k":"3–4","n":251,"med":20.9,"q1":9.8,"q3":44.9},{"k":"5–8","n":464,"med":19.0,"q1":9.6,"q3":50.4},{"k":"9–16","n":711,"med":17.4,"q1":8.6,"q3":48.0},{"k":"17–32","n":711,"med":15.4,"q1":8.4,"q3":42.5},{"k":"33+","n":353,"med":17.3,"q1":9.4,"q3":41.6}]},{"cat":"kwarg_order","label":"Keyword-argument order","family":"Assignment & arguments","eclass":"syntax","n":1043,"students":153,"k_max":42,"k_median":6.0,"pct":-7.4,"lo":-16.8,"hi":3.0,"p":0.15676,"adj_pct":-15.2,"adj_lo":-26.1,"adj_hi":-2.6,"adj_p":0.01947,"mixed_pct":-4.5,"mixed_lo":-12.4,"mixed_hi":4.2,"mixed_p":0.29892,"one_base":0.703,"one_pp":3.9,"one_lo":-0.4,"one_hi":8.3,"one_p":0.07771,"bins":[{"k":"2","n":122,"med":21.8,"q1":12.7,"q3":52.9},{"k":"3–4","n":251,"med":23.5,"q1":12.4,"q3":52.5},{"k":"5–8","n":342,"med":21.7,"q1":10.9,"q3":45.1},{"k":"9–16","n":229,"med":21.8,"q1":10.8,"q3":50.1},{"k":"17–32","n":83,"med":30.1,"q1":15.4,"q3":76.3}]},{"cat":"literal_char","label":"Invalid character or number","family":"Characters & literals","eclass":"syntax","n":1110,"students":153,"k_max":29,"k_median":5.0,"pct":-3.6,"lo":-10.9,"hi":4.2,"p":0.34977,"adj_pct":-2.6,"adj_lo":-15.2,"adj_hi":11.9,"adj_p":0.70938,"mixed_pct":-3.9,"mixed_lo":-9.9,"mixed_hi":2.6,"mixed_p":0.2352,"one_base":0.781,"one_pp":1.5,"one_lo":-1.6,"one_hi":4.5,"one_p":0.3458,"bins":[{"k":"1","n":136,"med":10.0,"q1":5.7,"q3":21.4},{"k":"2","n":130,"med":9.1,"q1":6.1,"q3":17.7},{"k":"3–4","n":234,"med":9.9,"q1":6.4,"q3":20.9},{"k":"5–8","n":317,"med":8.2,"q1":4.9,"q3":19.9},{"k":"9–16","n":259,"med":7.6,"q1":4.7,"q3":18.4},{"k":"17–32","n":34,"med":8.5,"q1":4.2,"q3":20.2}]},{"cat":"invalid_syntax","label":"Unspecific 'invalid syntax'","family":"Unspecific syntax","eclass":"syntax","n":5182,"students":159,"k_max":162,"k_median":23.0,"pct":1.5,"lo":-1.8,"hi":4.9,"p":0.39006,"adj_pct":1.3,"adj_lo":-5.5,"adj_hi":8.6,"adj_p":0.7228,"mixed_pct":0.6,"mixed_lo":-2.4,"mixed_hi":3.8,"mixed_p":0.68195,"one_base":0.756,"one_pp":0.5,"one_lo":-0.6,"one_hi":1.6,"one_p":0.3478,"bins":[{"k":"1","n":95,"med":9.9,"q1":6.4,"q3":24.5},{"k":"2","n":96,"med":13.6,"q1":7.5,"q3":34.4},{"k":"3–4","n":213,"med":13.0,"q1":6.8,"q3":35.9},{"k":"5–8","n":471,"med":17.8,"q1":7.7,"q3":48.5},{"k":"9–16","n":979,"med":15.9,"q1":7.5,"q3":42.3},{"k":"17–32","n":1666,"med":14.9,"q1":7.0,"q3":45.3},{"k":"33+","n":1662,"med":13.7,"q1":6.7,"q3":42.7}]},{"cat":"else_orphan","label":"else/elif without matching if","family":"Block structure","eclass":"syntax","n":768,"students":141,"k_max":36,"k_median":4.0,"pct":3.6,"lo":-7.4,"hi":15.9,"p":0.53617,"adj_pct":-0.8,"adj_lo":-15.8,"adj_hi":16.9,"adj_p":0.92406,"mixed_pct":0.7,"mixed_lo":-6.4,"mixed_hi":8.3,"mixed_p":0.85462,"one_base":0.714,"one_pp":1.1,"one_lo":-3.2,"one_hi":5.4,"one_p":0.62754,"bins":[{"k":"1","n":130,"med":16.2,"q1":9.3,"q3":31.6},{"k":"2","n":115,"med":16.0,"q1":8.7,"q3":30.9},{"k":"3–4","n":161,"med":14.9,"q1":9.4,"q3":30.9},{"k":"5–8","n":197,"med":16.3,"q1":7.8,"q3":39.2},{"k":"9–16","n":123,"med":14.4,"q1":7.4,"q3":31.8},{"k":"17–32","n":38,"med":14.1,"q1":6.8,"q3":53.4}]},{"cat":"name","label":"NameError (undefined name)","family":"Names & scope","eclass":"runtime","n":21445,"students":158,"k_max":386,"k_median":80.0,"pct":6.9,"lo":5.3,"hi":8.6,"p":0.0,"adj_pct":-2.7,"adj_lo":-6.4,"adj_hi":1.1,"adj_p":0.15943,"mixed_pct":6.6,"mixed_lo":5.0,"mixed_hi":8.2,"mixed_p":0.0,"one_base":0.852,"one_pp":0.2,"one_lo":-0.3,"one_hi":0.7,"one_p":0.39595,"bins":[{"k":"1","n":22,"med":19.5,"q1":9.7,"q3":33.5},{"k":"2","n":106,"med":13.2,"q1":9.3,"q3":23.0},{"k":"3–4","n":258,"med":11.8,"q1":7.9,"q3":23.3},{"k":"5–8","n":553,"med":11.6,"q1":7.7,"q3":20.2},{"k":"9–16","n":1108,"med":11.3,"q1":7.6,"q3":23.4},{"k":"17–32","n":2242,"med":12.4,"q1":7.7,"q3":26.2},{"k":"33+","n":17156,"med":13.7,"q1":7.8,"q3":31.2}]},{"cat":"attribute","label":"AttributeError","family":"Names & scope","eclass":"runtime","n":9675,"students":157,"k_max":255,"k_median":41.0,"pct":3.9,"lo":1.2,"hi":6.7,"p":0.00404,"adj_pct":-0.9,"adj_lo":-5.6,"adj_hi":4.1,"adj_p":0.71865,"mixed_pct":3.7,"mixed_lo":1.4,"mixed_hi":6.1,"mixed_p":0.00181,"one_base":0.814,"one_pp":-0.8,"one_lo":-1.5,"one_hi":-0.0,"one_p":0.04168,"bins":[{"k":"1","n":140,"med":21.8,"q1":10.6,"q3":43.0},{"k":"2","n":145,"med":18.7,"q1":10.2,"q3":41.1},{"k":"3–4","n":271,"med":18.5,"q1":10.1,"q3":43.1},{"k":"5–8","n":560,"med":20.9,"q1":10.2,"q3":56.1},{"k":"9–16","n":1076,"med":20.1,"q1":10.0,"q3":54.1},{"k":"17–32","n":1840,"med":19.7,"q1":9.7,"q3":49.9},{"k":"33+","n":5643,"med":22.1,"q1":9.8,"q3":58.3}]},{"cat":"unbound_local","label":"UnboundLocalError","family":"Names & scope","eclass":"runtime","n":1834,"students":147,"k_max":52,"k_median":9.0,"pct":2.1,"lo":-2.9,"hi":7.3,"p":0.4152,"adj_pct":-3.1,"adj_lo":-11.0,"adj_hi":5.5,"adj_p":0.46534,"mixed_pct":-1.9,"mixed_lo":-6.4,"mixed_hi":2.9,"mixed_p":0.4319,"one_base":0.758,"one_pp":0.2,"one_lo":-1.6,"one_hi":2.0,"one_p":0.83517,"bins":[{"k":"1","n":137,"med":29.5,"q1":15.9,"q3":81.7},{"k":"2","n":129,"med":29.5,"q1":16.6,"q3":84.9},{"k":"3–4","n":233,"med":27.6,"q1":14.7,"q3":90.7},{"k":"5–8","n":401,"med":31.8,"q1":14.0,"q3":76.5},{"k":"9–16","n":479,"med":23.7,"q1":11.6,"q3":62.8},{"k":"17–32","n":369,"med":31.0,"q1":15.8,"q3":70.6},{"k":"33+","n":86,"med":30.8,"q1":15.4,"q3":59.2}]},{"cat":"type_value","label":"Type or value error","family":"Types, values & indexing","eclass":"runtime","n":4921,"students":156,"k_max":177,"k_median":25.0,"pct":4.8,"lo":0.4,"hi":9.4,"p":0.03332,"adj_pct":-3.4,"adj_lo":-10.6,"adj_hi":4.5,"adj_p":0.39107,"mixed_pct":3.9,"mixed_lo":0.2,"mixed_hi":7.6,"mixed_p":0.03706,"one_base":0.769,"one_pp":-0.1,"one_lo":-1.1,"one_hi":1.0,"one_p":0.89848,"bins":[{"k":"1","n":132,"med":27.0,"q1":12.1,"q3":48.1},{"k":"2","n":135,"med":21.4,"q1":10.8,"q3":48.7},{"k":"3–4","n":256,"med":21.5,"q1":11.0,"q3":53.4},{"k":"5–8","n":460,"med":25.0,"q1":11.6,"q3":66.8},{"k":"9–16","n":781,"med":28.3,"q1":11.8,"q3":76.1},{"k":"17–32","n":1286,"med":27.8,"q1":12.1,"q3":73.7},{"k":"33+","n":1871,"med":24.6,"q1":9.8,"q3":67.0}]},{"cat":"index","label":"IndexError","family":"Types, values & indexing","eclass":"runtime","n":1334,"students":121,"k_max":59,"k_median":11.0,"pct":9.4,"lo":-0.3,"hi":19.9,"p":0.05771,"adj_pct":17.1,"adj_lo":3.0,"adj_hi":33.1,"adj_p":0.01597,"mixed_pct":2.8,"mixed_lo":-4.1,"mixed_hi":10.2,"mixed_p":0.43306,"one_base":0.659,"one_pp":-0.0,"one_lo":-3.2,"one_hi":3.2,"one_p":0.97761,"bins":[{"k":"1","n":70,"med":29.0,"q1":12.9,"q3":64.6},{"k":"2","n":66,"med":29.8,"q1":12.2,"q3":67.6},{"k":"3–4","n":137,"med":33.4,"q1":12.3,"q3":88.1},{"k":"5–8","n":265,"med":27.8,"q1":9.3,"q3":80.2},{"k":"9–16","n":346,"med":24.1,"q1":7.4,"q3":65.4},{"k":"17–32","n":301,"med":31.3,"q1":9.8,"q3":88.0},{"k":"33+","n":149,"med":42.5,"q1":12.8,"q3":105.5}]},{"cat":"func_args","label":"Wrong arguments to a function","family":"Function calls","eclass":"runtime","n":2350,"students":155,"k_max":63,"k_median":12.0,"pct":-0.5,"lo":-4.6,"hi":3.8,"p":0.8231,"adj_pct":-5.4,"adj_lo":-12.2,"adj_hi":1.9,"adj_p":0.14489,"mixed_pct":-1.7,"mixed_lo":-5.3,"mixed_hi":2.1,"mixed_p":0.37935,"one_base":0.823,"one_pp":1.0,"one_lo":-0.6,"one_hi":2.6,"one_p":0.22229,"bins":[{"k":"1","n":89,"med":19.4,"q1":12.9,"q3":33.1},{"k":"2","n":80,"med":22.4,"q1":13.4,"q3":44.4},{"k":"3–4","n":186,"med":21.0,"q1":12.9,"q3":44.6},{"k":"5–8","n":435,"med":17.2,"q1":10.3,"q3":34.1},{"k":"9–16","n":681,"med":20.1,"q1":10.5,"q3":50.6},{"k":"17–32","n":621,"med":18.4,"q1":9.4,"q3":38.4},{"k":"33+","n":258,"med":15.7,"q1":8.4,"q3":38.5}]},{"cat":"cmu_args","label":"Shape arguments (count/keyword)","family":"Graphics library","eclass":"runtime","n":6541,"students":159,"k_max":166,"k_median":27.0,"pct":-2.8,"lo":-5.2,"hi":-0.3,"p":0.02736,"adj_pct":-5.9,"adj_lo":-9.7,"adj_hi":-2.0,"adj_p":0.0036,"mixed_pct":-3.1,"mixed_lo":-5.3,"mixed_hi":-0.9,"mixed_p":0.0059,"one_base":0.829,"one_pp":3.8,"one_lo":2.8,"one_hi":4.8,"one_p":0.0,"bins":[{"k":"1","n":24,"med":16.4,"q1":10.2,"q3":40.5},{"k":"2","n":89,"med":19.6,"q1":12.7,"q3":40.6},{"k":"3–4","n":245,"med":20.9,"q1":13.2,"q3":41.8},{"k":"5–8","n":507,"med":19.4,"q1":11.0,"q3":38.6},{"k":"9–16","n":1106,"med":18.6,"q1":10.0,"q3":38.8},{"k":"17–32","n":1958,"med":16.6,"q1":9.4,"q3":37.0},{"k":"33+","n":2612,"med":16.5,"q1":9.0,"q3":37.1}]},{"cat":"cmu_value","label":"Shape property value","family":"Graphics library","eclass":"runtime","n":10163,"students":159,"k_max":214,"k_median":42.0,"pct":2.1,"lo":-0.1,"hi":4.2,"p":0.05928,"adj_pct":-4.5,"adj_lo":-8.1,"adj_hi":-0.8,"adj_p":0.01718,"mixed_pct":1.4,"mixed_lo":-0.7,"mixed_hi":3.5,"mixed_p":0.18619,"one_base":0.819,"one_pp":0.4,"one_lo":-0.4,"one_hi":1.2,"one_p":0.32723,"bins":[{"k":"1","n":139,"med":20.4,"q1":12.4,"q3":39.4},{"k":"2","n":128,"med":21.0,"q1":10.5,"q3":39.0},{"k":"3–4","n":249,"med":18.6,"q1":10.3,"q3":32.5},{"k":"5–8","n":506,"med":15.9,"q1":9.1,"q3":32.3},{"k":"9–16","n":981,"med":14.7,"q1":8.2,"q3":31.4},{"k":"17–32","n":1979,"med":15.5,"q1":8.0,"q3":35.9},{"k":"33+","n":6181,"med":16.6,"q1":7.6,"q3":42.8}]},{"cat":"cmu_other","label":"Other graphics-library error","family":"Graphics library","eclass":"runtime","n":1179,"students":143,"k_max":46,"k_median":7.0,"pct":1.1,"lo":-8.0,"hi":11.0,"p":0.82519,"adj_pct":-9.0,"adj_lo":-24.2,"adj_hi":9.2,"adj_p":0.31117,"mixed_pct":0.3,"mixed_lo":-7.0,"mixed_hi":8.3,"mixed_p":0.92864,"one_base":0.791,"one_pp":1.4,"one_lo":-2.5,"one_hi":5.3,"one_p":0.49116,"bins":[{"k":"1","n":30,"med":22.4,"q1":14.6,"q3":61.1},{"k":"2","n":85,"med":26.5,"q1":12.6,"q3":60.2},{"k":"3–4","n":207,"med":20.8,"q1":11.5,"q3":77.1},{"k":"5–8","n":342,"med":30.8,"q1":13.5,"q3":86.1},{"k":"9–16","n":356,"med":25.1,"q1":11.4,"q3":71.4},{"k":"17–32","n":143,"med":28.3,"q1":10.3,"q3":62.4}]},{"cat":"runaway","label":"Too many shapes / recursion","family":"Graphics library","eclass":"runtime","n":837,"students":136,"k_max":66,"k_median":7.0,"pct":-6.3,"lo":-15.2,"hi":3.6,"p":0.20579,"adj_pct":-14.3,"adj_lo":-27.0,"adj_hi":0.6,"adj_p":0.05873,"mixed_pct":-2.0,"mixed_lo":-12.9,"mixed_hi":10.2,"mixed_p":0.7344,"one_base":0.768,"one_pp":-2.9,"one_lo":-5.7,"one_hi":-0.1,"one_p":0.04381,"bins":[{"k":"1","n":62,"med":27.1,"q1":11.1,"q3":49.9},{"k":"2","n":75,"med":28.2,"q1":9.8,"q3":52.5},{"k":"3–4","n":144,"med":24.6,"q1":9.6,"q3":90.8},{"k":"5–8","n":196,"med":26.7,"q1":10.8,"q3":88.7},{"k":"9–16","n":194,"med":29.6,"q1":10.8,"q3":98.8},{"k":"17–32","n":109,"med":14.2,"q1":5.5,"q3":33.9},{"k":"33+","n":57,"med":17.8,"q1":3.9,"q3":53.2}]}],"curves":[{"cat":"colon","label":"Missing colon","family":"Block structure","eclass":"syntax","n":5345,"students":157,"k_max":241,"k_median":23.0,"pct":-4.8,"lo":-7.4,"hi":-2.1,"p":0.00062,"adj_pct":-14.4,"adj_lo":-19.6,"adj_hi":-8.8,"adj_p":0.0,"mixed_pct":-7.3,"mixed_lo":-9.9,"mixed_hi":-4.7,"mixed_p":0.0,"one_base":0.823,"one_pp":3.2,"one_lo":2.0,"one_hi":4.3,"one_p":0.0,"bins":[{"k":"1","n":126,"med":16.1,"q1":9.0,"q3":56.8},{"k":"2","n":130,"med":13.2,"q1":6.3,"q3":31.3},{"k":"3–4","n":266,"med":9.7,"q1":6.0,"q3":31.5},{"k":"5–8","n":521,"med":10.0,"q1":5.4,"q3":31.4},{"k":"9–16","n":987,"med":8.0,"q1":5.2,"q3":24.2},{"k":"17–32","n":1444,"med":7.9,"q1":5.0,"q3":24.5},{"k":"33+","n":1871,"med":6.4,"q1":4.4,"q3":15.1}]},{"cat":"indent_block","label":"Expected an indented block","family":"Block structure","eclass":"syntax","n":5798,"students":157,"k_max":134,"k_median":26.0,"pct":-10.2,"lo":-13.1,"hi":-7.2,"p":0.0,"adj_pct":-9.1,"adj_lo":-15.4,"adj_hi":-2.4,"adj_p":0.00895,"mixed_pct":-11.2,"mixed_lo":-13.9,"mixed_hi":-8.3,"mixed_p":0.0,"one_base":0.747,"one_pp":4.2,"one_lo":3.2,"one_hi":5.3,"one_p":0.0,"bins":[{"k":"1","n":88,"med":44.9,"q1":12.6,"q3":123.2},{"k":"2","n":97,"med":29.8,"q1":11.1,"q3":72.6},{"k":"3–4","n":234,"med":26.2,"q1":11.8,"q3":70.3},{"k":"5–8","n":489,"med":21.5,"q1":10.0,"q3":66.8},{"k":"9–16","n":987,"med":18.3,"q1":8.5,"q3":52.8},{"k":"17–32","n":1668,"med":20.1,"q1":9.0,"q3":51.6},{"k":"33+","n":2235,"med":14.2,"q1":7.2,"q3":38.5}]},{"cat":"bracket","label":"Unclosed or unmatched bracket","family":"Delimiters","eclass":"syntax","n":3745,"students":157,"k_max":141,"k_median":15.0,"pct":-7.3,"lo":-9.6,"hi":-5.1,"p":0.0,"adj_pct":-15.7,"adj_lo":-20.8,"adj_hi":-10.4,"adj_p":0.0,"mixed_pct":-8.1,"mixed_lo":-10.5,"mixed_hi":-5.6,"mixed_p":0.0,"one_base":0.797,"one_pp":3.0,"one_lo":1.8,"one_hi":4.1,"one_p":0.0,"bins":[{"k":"1","n":126,"med":13.6,"q1":8.0,"q3":35.8},{"k":"2","n":139,"med":11.8,"q1":7.6,"q3":27.7},{"k":"3–4","n":277,"med":10.8,"q1":6.7,"q3":21.6},{"k":"5–8","n":563,"med":10.3,"q1":6.3,"q3":22.1},{"k":"9–16","n":917,"med":9.6,"q1":5.9,"q3":20.0},{"k":"17–32","n":928,"med":7.9,"q1":5.3,"q3":16.2},{"k":"33+","n":795,"med":7.4,"q1":4.6,"q3":13.9}]},{"cat":"comma","label":"Missing comma","family":"Delimiters","eclass":"syntax","n":5158,"students":159,"k_max":131,"k_median":20.0,"pct":-4.1,"lo":-7.2,"hi":-1.0,"p":0.01085,"adj_pct":-12.6,"adj_lo":-18.6,"adj_hi":-6.2,"adj_p":0.00019,"mixed_pct":-4.7,"mixed_lo":-7.5,"mixed_hi":-1.8,"mixed_p":0.00171,"one_base":0.784,"one_pp":2.3,"one_lo":1.2,"one_hi":3.3,"one_p":3e-05,"bins":[{"k":"1","n":27,"med":13.6,"q1":8.6,"q3":28.8},{"k":"2","n":118,"med":14.4,"q1":9.2,"q3":24.8},{"k":"3–4","n":276,"med":12.0,"q1":7.3,"q3":22.0},{"k":"5–8","n":567,"med":11.6,"q1":7.3,"q3":27.1},{"k":"9–16","n":1122,"med":9.8,"q1":5.9,"q3":21.1},{"k":"17–32","n":1610,"med":9.3,"q1":5.7,"q3":21.3},{"k":"33+","n":1438,"med":8.2,"q1":5.0,"q3":18.4}]},{"cat":"eq_assign","label":"'=' where '==' was meant","family":"Assignment & arguments","eclass":"syntax","n":2136,"students":154,"k_max":64,"k_median":9.0,"pct":-5.3,"lo":-9.0,"hi":-1.4,"p":0.00817,"adj_pct":-6.2,"adj_lo":-13.4,"adj_hi":1.4,"adj_p":0.10903,"mixed_pct":-6.8,"mixed_lo":-10.1,"mixed_hi":-3.3,"mixed_p":0.00015,"one_base":0.813,"one_pp":2.0,"one_lo":0.4,"one_hi":3.6,"one_p":0.01402,"bins":[{"k":"1","n":136,"med":13.4,"q1":8.1,"q3":32.6},{"k":"2","n":141,"med":11.8,"q1":7.2,"q3":28.5},{"k":"3–4","n":284,"med":12.4,"q1":7.4,"q3":24.4},{"k":"5–8","n":481,"med":10.3,"q1":7.0,"q3":21.6},{"k":"9–16","n":603,"med":9.8,"q1":6.6,"q3":21.6},{"k":"17–32","n":412,"med":8.8,"q1":5.9,"q3":16.8},{"k":"33+","n":79,"med":9.4,"q1":5.6,"q3":14.3}]},{"cat":"invalid_syntax","label":"Unspecific 'invalid syntax'","family":"Unspecific syntax","eclass":"syntax","n":5182,"students":159,"k_max":162,"k_median":23.0,"pct":1.5,"lo":-1.8,"hi":4.9,"p":0.39006,"adj_pct":1.3,"adj_lo":-5.5,"adj_hi":8.6,"adj_p":0.7228,"mixed_pct":0.6,"mixed_lo":-2.4,"mixed_hi":3.8,"mixed_p":0.68195,"one_base":0.756,"one_pp":0.5,"one_lo":-0.6,"one_hi":1.6,"one_p":0.3478,"bins":[{"k":"1","n":95,"med":9.9,"q1":6.4,"q3":24.5},{"k":"2","n":96,"med":13.6,"q1":7.5,"q3":34.4},{"k":"3–4","n":213,"med":13.0,"q1":6.8,"q3":35.9},{"k":"5–8","n":471,"med":17.8,"q1":7.7,"q3":48.5},{"k":"9–16","n":979,"med":15.9,"q1":7.5,"q3":42.3},{"k":"17–32","n":1666,"med":14.9,"q1":7.0,"q3":45.3},{"k":"33+","n":1662,"med":13.7,"q1":6.7,"q3":42.7}]},{"cat":"name","label":"NameError (undefined name)","family":"Names & scope","eclass":"runtime","n":21445,"students":158,"k_max":386,"k_median":80.0,"pct":6.9,"lo":5.3,"hi":8.6,"p":0.0,"adj_pct":-2.7,"adj_lo":-6.4,"adj_hi":1.1,"adj_p":0.15943,"mixed_pct":6.6,"mixed_lo":5.0,"mixed_hi":8.2,"mixed_p":0.0,"one_base":0.852,"one_pp":0.2,"one_lo":-0.3,"one_hi":0.7,"one_p":0.39595,"bins":[{"k":"1","n":22,"med":19.5,"q1":9.7,"q3":33.5},{"k":"2","n":106,"med":13.2,"q1":9.3,"q3":23.0},{"k":"3–4","n":258,"med":11.8,"q1":7.9,"q3":23.3},{"k":"5–8","n":553,"med":11.6,"q1":7.7,"q3":20.2},{"k":"9–16","n":1108,"med":11.3,"q1":7.6,"q3":23.4},{"k":"17–32","n":2242,"med":12.4,"q1":7.7,"q3":26.2},{"k":"33+","n":17156,"med":13.7,"q1":7.8,"q3":31.2}]},{"cat":"attribute","label":"AttributeError","family":"Names & scope","eclass":"runtime","n":9675,"students":157,"k_max":255,"k_median":41.0,"pct":3.9,"lo":1.2,"hi":6.7,"p":0.00404,"adj_pct":-0.9,"adj_lo":-5.6,"adj_hi":4.1,"adj_p":0.71865,"mixed_pct":3.7,"mixed_lo":1.4,"mixed_hi":6.1,"mixed_p":0.00181,"one_base":0.814,"one_pp":-0.8,"one_lo":-1.5,"one_hi":-0.0,"one_p":0.04168,"bins":[{"k":"1","n":140,"med":21.8,"q1":10.6,"q3":43.0},{"k":"2","n":145,"med":18.7,"q1":10.2,"q3":41.1},{"k":"3–4","n":271,"med":18.5,"q1":10.1,"q3":43.1},{"k":"5–8","n":560,"med":20.9,"q1":10.2,"q3":56.1},{"k":"9–16","n":1076,"med":20.1,"q1":10.0,"q3":54.1},{"k":"17–32","n":1840,"med":19.7,"q1":9.7,"q3":49.9},{"k":"33+","n":5643,"med":22.1,"q1":9.8,"q3":58.3}]},{"cat":"type_value","label":"Type or value error","family":"Types, values & indexing","eclass":"runtime","n":4921,"students":156,"k_max":177,"k_median":25.0,"pct":4.8,"lo":0.4,"hi":9.4,"p":0.03332,"adj_pct":-3.4,"adj_lo":-10.6,"adj_hi":4.5,"adj_p":0.39107,"mixed_pct":3.9,"mixed_lo":0.2,"mixed_hi":7.6,"mixed_p":0.03706,"one_base":0.769,"one_pp":-0.1,"one_lo":-1.1,"one_hi":1.0,"one_p":0.89848,"bins":[{"k":"1","n":132,"med":27.0,"q1":12.1,"q3":48.1},{"k":"2","n":135,"med":21.4,"q1":10.8,"q3":48.7},{"k":"3–4","n":256,"med":21.5,"q1":11.0,"q3":53.4},{"k":"5–8","n":460,"med":25.0,"q1":11.6,"q3":66.8},{"k":"9–16","n":781,"med":28.3,"q1":11.8,"q3":76.1},{"k":"17–32","n":1286,"med":27.8,"q1":12.1,"q3":73.7},{"k":"33+","n":1871,"med":24.6,"q1":9.8,"q3":67.0}]}],"sensitivity":[{"cat":"colon","label":"Missing colon","main":-4.8,"main_p":0.0006,"under5min":-5.3,"under5min_p":0.0001,"exercises":-2.5,"exercises_p":0.1587,"TE22":-4.0,"TE22_p":0.0166,"TE23":-6.3,"TE23_p":0.0124},{"cat":"indent_block","label":"Expected an indented block","main":-10.2,"main_p":0.0,"under5min":-10.9,"under5min_p":0.0,"exercises":-8.8,"exercises_p":0.0,"TE22":-9.3,"TE22_p":0.0,"TE23":-11.8,"TE23_p":0.0},{"cat":"indent_unexpected","label":"Unexpected indent","main":-4.3,"main_p":0.061,"under5min":-4.4,"under5min_p":0.0255,"exercises":-5.9,"exercises_p":0.0466,"TE22":-4.0,"TE22_p":0.1383,"TE23":-4.5,"TE23_p":0.2359},{"cat":"indent_mismatch","label":"Unindent does not match","main":-3.3,"main_p":0.1955,"under5min":-4.0,"under5min_p":0.0813,"exercises":1.1,"exercises_p":0.733,"TE22":-1.8,"TE22_p":0.5961,"TE23":-4.7,"TE23_p":0.2099},{"cat":"bracket","label":"Unclosed or unmatched bracket","main":-7.3,"main_p":0.0,"under5min":-8.3,"under5min_p":0.0,"exercises":-8.0,"exercises_p":0.0,"TE22":-6.5,"TE22_p":0.0,"TE23":-8.6,"TE23_p":0.0},{"cat":"comma","label":"Missing comma","main":-4.1,"main_p":0.0108,"under5min":-5.5,"under5min_p":0.0002,"exercises":-0.2,"exercises_p":0.9274,"TE22":-2.4,"TE22_p":0.1715,"TE23":-6.9,"TE23_p":0.0245},{"cat":"eq_assign","label":"'=' where '==' was meant","main":-5.3,"main_p":0.0082,"under5min":-5.5,"under5min_p":0.0047,"exercises":-5.5,"exercises_p":0.0338,"TE22":-2.1,"TE22_p":0.4184,"TE23":-10.7,"TE23_p":0.0004},{"cat":"assign_target","label":"Invalid assignment target","main":-2.8,"main_p":0.1124,"under5min":-3.9,"under5min_p":0.0226,"exercises":-2.8,"exercises_p":0.2577,"TE22":-3.7,"TE22_p":0.0365,"TE23":0.3,"TE23_p":0.9599},{"cat":"kwarg_order","label":"Keyword-argument order","main":-7.4,"main_p":0.1568,"under5min":-8.9,"under5min_p":0.0619,"exercises":-10.6,"exercises_p":0.0801,"TE22":-2.5,"TE22_p":0.6899,"TE23":-11.3,"TE23_p":0.1401},{"cat":"literal_char","label":"Invalid character or number","main":-3.6,"main_p":0.3498,"under5min":-3.3,"under5min_p":0.3275,"exercises":-8.0,"exercises_p":0.1258,"TE22":-5.1,"TE22_p":0.3424,"TE23":-1.8,"TE23_p":0.7449},{"cat":"invalid_syntax","label":"Unspecific 'invalid syntax'","main":1.5,"main_p":0.3901,"under5min":-0.1,"under5min_p":0.9651,"exercises":1.8,"exercises_p":0.3865,"TE22":3.1,"TE22_p":0.1424,"TE23":-1.4,"TE23_p":0.608},{"cat":"else_orphan","label":"else/elif without matching if","main":3.6,"main_p":0.5362,"under5min":4.7,"under5min_p":0.3701,"exercises":6.8,"exercises_p":0.3883,"TE22":8.4,"TE22_p":0.2984,"TE23":-1.3,"TE23_p":0.873},{"cat":"name","label":"NameError (undefined name)","main":6.9,"main_p":0.0,"under5min":5.4,"under5min_p":0.0,"exercises":4.5,"exercises_p":0.0,"TE22":6.9,"TE22_p":0.0,"TE23":6.9,"TE23_p":0.0},{"cat":"attribute","label":"AttributeError","main":3.9,"main_p":0.004,"under5min":1.9,"under5min_p":0.1037,"exercises":4.9,"exercises_p":0.0008,"TE22":1.4,"TE22_p":0.3439,"TE23":10.3,"TE23_p":0.0},{"cat":"unbound_local","label":"UnboundLocalError","main":2.1,"main_p":0.4152,"under5min":0.8,"under5min_p":0.7289,"exercises":-6.0,"exercises_p":0.1664,"TE22":5.5,"TE22_p":0.0699,"TE23":-5.3,"TE23_p":0.1994},{"cat":"type_value","label":"Type or value error","main":4.8,"main_p":0.0333,"under5min":2.3,"under5min_p":0.2767,"exercises":4.4,"exercises_p":0.0989,"TE22":5.0,"TE22_p":0.0676,"TE23":4.2,"TE23_p":0.2686},{"cat":"index","label":"IndexError","main":9.4,"main_p":0.0577,"under5min":7.5,"under5min_p":0.1049,"exercises":8.1,"exercises_p":0.526,"TE22":8.7,"TE22_p":0.0927,"TE23":12.5,"TE23_p":0.3901},{"cat":"func_args","label":"Wrong arguments to a function","main":-0.5,"main_p":0.8231,"under5min":-1.8,"under5min_p":0.384,"exercises":-3.6,"exercises_p":0.254,"TE22":-0.8,"TE22_p":0.7236,"TE23":0.5,"TE23_p":0.921},{"cat":"cmu_args","label":"Shape arguments (count/keyword)","main":-2.8,"main_p":0.0274,"under5min":-4.2,"under5min_p":0.0004,"exercises":1.8,"exercises_p":0.2192,"TE22":-2.8,"TE22_p":0.0805,"TE23":-2.8,"TE23_p":0.1798},{"cat":"cmu_value","label":"Shape property value","main":2.1,"main_p":0.0593,"under5min":0.5,"under5min_p":0.6372,"exercises":3.3,"exercises_p":0.0089,"TE22":3.1,"TE22_p":0.0234,"TE23":0.4,"TE23_p":0.8063},{"cat":"cmu_other","label":"Other graphics-library error","main":1.1,"main_p":0.8252,"under5min":-2.4,"under5min_p":0.5869,"exercises":6.5,"exercises_p":0.3185,"TE22":-2.8,"TE22_p":0.6275,"TE23":10.0,"TE23_p":0.1546},{"cat":"runaway","label":"Too many shapes / recursion","main":-6.3,"main_p":0.2058,"under5min":-6.5,"under5min_p":0.175,"exercises":1.4,"exercises_p":0.9286,"TE22":-11.9,"TE22_p":0.0155,"TE23":14.7,"TE23_p":0.2594}],"fod":[{"cat":"colon","label":"Missing colon","n":2929,"pct":-6.7,"lo":-10.3,"hi":-3.1,"p":0.00039,"gap_pct":4.5,"gap_lo":0.8,"gap_hi":8.4,"gap_p":0.0155,"med":{"1":18.5,"2":10.9,"3–4":9.9,"5–8":8.5,"9–16":8.7,"17+":6.7}},{"cat":"indent_block","label":"Expected an indented block","n":3194,"pct":-11.4,"lo":-14.8,"hi":-7.9,"p":0.0,"gap_pct":2.6,"gap_lo":-0.9,"gap_hi":6.2,"gap_p":0.15115,"med":{"1":38.9,"2":27.0,"3–4":23.8,"5–8":23.7,"9–16":18.5,"17+":14.5}},{"cat":"indent_unexpected","label":"Unexpected indent","n":1691,"pct":-4.6,"lo":-9.5,"hi":0.5,"p":0.07572,"gap_pct":-1.5,"gap_lo":-5.0,"gap_hi":2.2,"gap_p":0.43089,"med":{"1":16.7,"2":16.1,"3–4":13.9,"5–8":14.3,"9–16":13.3,"17+":11.0}},{"cat":"indent_mismatch","label":"Unindent does not match","n":1037,"pct":-1.7,"lo":-7.9,"hi":4.9,"p":0.60306,"gap_pct":0.1,"gap_lo":-5.4,"gap_hi":6.0,"gap_p":0.96206,"med":{"1":18.5,"2":23.3,"3–4":20.6,"5–8":17.7,"9–16":16.3,"17+":16.5}},{"cat":"bracket","label":"Unclosed or unmatched bracket","n":2183,"pct":-8.6,"lo":-12.3,"hi":-4.8,"p":2e-05,"gap_pct":3.6,"gap_lo":0.2,"gap_hi":7.1,"gap_p":0.03586,"med":{"1":14.6,"2":11.8,"3–4":10.4,"5–8":10.6,"9–16":8.6,"17+":8.5}},{"cat":"comma","label":"Missing comma","n":2707,"pct":-0.6,"lo":-4.1,"hi":2.9,"p":0.71886,"gap_pct":5.2,"gap_lo":2.1,"gap_hi":8.3,"gap_p":0.00072,"med":{"1":14.7,"2":12.8,"3–4":10.7,"5–8":11.2,"9–16":11.1,"17+":10.5}},{"cat":"eq_assign","label":"'=' where '==' was meant","n":1516,"pct":-6.6,"lo":-10.9,"hi":-2.0,"p":0.00544,"gap_pct":1.5,"gap_lo":-2.0,"gap_hi":5.1,"gap_p":0.4104,"med":{"1":13.7,"2":11.8,"3–4":10.3,"5–8":10.4,"9–16":9.0,"17+":8.9}},{"cat":"assign_target","label":"Invalid assignment target","n":1782,"pct":-1.9,"lo":-6.7,"hi":3.2,"p":0.46768,"gap_pct":-2.2,"gap_lo":-6.4,"gap_hi":2.1,"gap_p":0.30651,"med":{"1":20.2,"2":17.6,"3–4":20.6,"5–8":18.3,"9–16":15.1,"17+":17.3}},{"cat":"kwarg_order","label":"Keyword-argument order","n":673,"pct":0.3,"lo":-10.9,"hi":12.9,"p":0.96244,"gap_pct":2.8,"gap_lo":-4.1,"gap_hi":10.1,"gap_p":0.43965,"med":{"1":22.3,"2":24.2,"3–4":19.0,"5–8":25.9,"9–16":21.1}},{"cat":"literal_char","label":"Invalid character or number","n":885,"pct":-6.5,"lo":-14.3,"hi":2.0,"p":0.13112,"gap_pct":2.0,"gap_lo":-2.7,"gap_hi":6.9,"gap_p":0.40809,"med":{"1":10.8,"2":9.4,"3–4":8.4,"5–8":7.6,"9–16":8.9,"17+":23.0}},{"cat":"invalid_syntax","label":"Unspecific 'invalid syntax'","n":3256,"pct":0.8,"lo":-2.9,"hi":4.7,"p":0.6615,"gap_pct":0.9,"gap_lo":-2.7,"gap_hi":4.6,"gap_p":0.63008,"med":{"1":12.8,"2":13.5,"3–4":16.9,"5–8":16.5,"9–16":15.2,"17+":13.7}},{"cat":"else_orphan","label":"else/elif without matching if","n":501,"pct":7.0,"lo":-6.7,"hi":22.7,"p":0.33275,"gap_pct":2.2,"gap_lo":-7.6,"gap_hi":12.9,"gap_p":0.67496,"med":{"1":15.5,"2":16.0,"3–4":13.3,"5–8":17.0,"9–16":14.9}},{"cat":"name","label":"NameError (undefined name)","n":6600,"pct":6.0,"lo":4.0,"hi":8.1,"p":0.0,"gap_pct":-1.7,"gap_lo":-4.0,"gap_hi":0.7,"gap_p":0.1592,"med":{"1":12.6,"2":10.9,"3–4":11.1,"5–8":12.4,"9–16":13.2,"17+":13.0}},{"cat":"attribute","label":"AttributeError","n":3643,"pct":7.2,"lo":3.7,"hi":10.8,"p":3e-05,"gap_pct":-0.1,"gap_lo":-3.7,"gap_hi":3.6,"gap_p":0.94048,"med":{"1":22.2,"2":22.9,"3–4":19.8,"5–8":19.3,"9–16":20.7,"17+":22.7}},{"cat":"unbound_local","label":"UnboundLocalError","n":1029,"pct":1.9,"lo":-5.4,"hi":9.8,"p":0.6234,"gap_pct":1.6,"gap_lo":-4.0,"gap_hi":7.5,"gap_p":0.588,"med":{"1":31.0,"2":27.7,"3–4":25.9,"5–8":26.9,"9–16":30.4,"17+":28.7}},{"cat":"type_value","label":"Type or value error","n":2145,"pct":4.1,"lo":-0.8,"hi":9.4,"p":0.10303,"gap_pct":-2.4,"gap_lo":-6.1,"gap_hi":1.4,"gap_p":0.20573,"med":{"1":26.6,"2":21.8,"3–4":23.2,"5–8":27.4,"9–16":28.5,"17+":27.3}},{"cat":"index","label":"IndexError","n":538,"pct":2.8,"lo":-12.7,"hi":21.0,"p":0.74136,"gap_pct":-2.9,"gap_lo":-12.6,"gap_hi":7.8,"gap_p":0.57885,"med":{"1":29.6,"2":33.3,"3–4":30.9,"5–8":29.3,"9–16":36.4,"17+":26.5}},{"cat":"func_args","label":"Wrong arguments to a function","n":1374,"pct":2.1,"lo":-3.7,"hi":8.2,"p":0.48565,"gap_pct":3.5,"gap_lo":-0.8,"gap_hi":8.0,"gap_p":0.1143,"med":{"1":21.6,"2":18.9,"3–4":19.6,"5–8":18.8,"9–16":17.4,"17+":19.6}},{"cat":"cmu_args","label":"Shape arguments (count/keyword)","n":3105,"pct":-1.5,"lo":-4.4,"hi":1.4,"p":0.30596,"gap_pct":1.9,"gap_lo":-0.8,"gap_hi":4.7,"gap_p":0.1708,"med":{"1":20.0,"2":20.1,"3–4":17.5,"5–8":17.8,"9–16":17.5,"17+":16.0}},{"cat":"cmu_value","label":"Shape property value","n":3785,"pct":3.4,"lo":0.5,"hi":6.3,"p":0.0205,"gap_pct":1.4,"gap_lo":-1.4,"gap_hi":4.2,"gap_p":0.34125,"med":{"1":19.9,"2":19.4,"3–4":16.2,"5–8":14.7,"9–16":17.9,"17+":18.2}},{"cat":"cmu_other","label":"Other graphics-library error","n":756,"pct":5.0,"lo":-6.2,"hi":17.5,"p":0.39522,"gap_pct":-5.1,"gap_lo":-11.8,"gap_hi":2.1,"gap_p":0.15856,"med":{"1":23.5,"2":21.2,"3–4":26.8,"5–8":29.8,"9–16":19.1,"17+":19.8}},{"cat":"runaway","label":"Too many shapes / recursion","n":446,"pct":5.1,"lo":-13.0,"hi":26.9,"p":0.60681,"gap_pct":7.4,"gap_lo":-5.8,"gap_hi":22.5,"gap_p":0.28435,"med":{"1":24.2,"2":24.6,"3–4":29.2,"5–8":25.8,"9–16":19.2}}],"name_hint":{"0":{"n":11361,"med":17.1,"pct":8.6,"lo":6.2,"hi":10.9,"p":0.0},"1":{"n":10084,"med":10.8,"pct":4.5,"lo":2.8,"hi":6.2,"p":0.0}},"pooled":{"all":{"syntax":{"pct":-5.4,"lo":-6.5,"hi":-4.2,"p":0.0,"n":36960,"med":12.1},"runtime":{"pct":3.0,"lo":1.8,"hi":4.2,"p":0.0,"n":60279,"med":17.0}},"te22a":{"syntax":{"pct":-5.6,"lo":-10.0,"hi":-0.9,"p":0.02115,"n":4882,"med":12.7},"runtime":{"pct":1.9,"lo":-1.6,"hi":5.5,"p":0.29868,"n":9171,"med":17.4}},"te22b":{"syntax":{"pct":-3.8,"lo":-5.9,"hi":-1.6,"p":0.00074,"n":9227,"med":11.8},"runtime":{"pct":2.8,"lo":-0.3,"hi":5.9,"p":0.07293,"n":15238,"med":16.8}},"te22c":{"syntax":{"pct":-4.2,"lo":-6.1,"hi":-2.2,"p":6e-05,"n":8986,"med":10.8},"runtime":{"pct":2.5,"lo":0.7,"hi":4.3,"p":0.00592,"n":15191,"med":16.4}},"te23b":{"syntax":{"pct":-7.6,"lo":-9.8,"hi":-5.3,"p":0.0,"n":8437,"med":13.3},"runtime":{"pct":3.1,"lo":1.4,"hi":4.9,"p":0.00045,"n":12802,"med":17.5}},"te23c":{"syntax":{"pct":-6.5,"lo":-9.4,"hi":-3.4,"p":5e-05,"n":5428,"med":13.3},"runtime":{"pct":6.3,"lo":3.5,"hi":9.2,"p":1e-05,"n":7877,"med":17.5}}},"class_cat":{"te22a":{"colon":{"pct":-10.4,"lo":-16.9,"hi":-3.4,"n":666,"med":8.9},"indent_block":{"pct":-13.6,"lo":-20.6,"hi":-6.0,"n":791,"med":17.6},"bracket":{"pct":-2.6,"lo":-9.2,"hi":4.4,"n":398,"med":10.7},"comma":{"pct":-5.2,"lo":-11.7,"hi":1.8,"n":709,"med":10.6},"eq_assign":{"pct":-0.3,"lo":-11.1,"hi":11.9,"n":399,"med":10.6},"invalid_syntax":{"pct":-1.8,"lo":-10.2,"hi":7.4,"n":801,"med":14.6},"name":{"pct":2.7,"lo":-3.2,"hi":9.0,"n":2948,"med":12.7},"attribute":{"pct":2.6,"lo":-1.2,"hi":6.5,"n":1653,"med":21.2},"cmu_value":{"pct":7.2,"lo":1.1,"hi":13.7,"n":1532,"med":16.2},"cmu_args":{"pct":-4.2,"lo":-10.5,"hi":2.7,"n":912,"med":15.9},"type_value":{"pct":3.8,"lo":-6.1,"hi":14.7,"n":856,"med":27.1}},"te22b":{"colon":{"pct":-3.8,"lo":-8.4,"hi":1.1,"n":1202,"med":7.7},"indent_block":{"pct":-11.2,"lo":-17.5,"hi":-4.5,"n":1485,"med":18.1},"bracket":{"pct":-6.8,"lo":-10.5,"hi":-3.1,"n":991,"med":9.1},"comma":{"pct":-1.2,"lo":-6.3,"hi":4.3,"n":1367,"med":9.0},"eq_assign":{"pct":-1.2,"lo":-7.8,"hi":5.9,"n":497,"med":9.2},"invalid_syntax":{"pct":5.2,"lo":-1.5,"hi":12.3,"n":1331,"med":13.4},"name":{"pct":7.5,"lo":3.3,"hi":11.8,"n":5259,"med":13.1},"attribute":{"pct":2.5,"lo":-4.3,"hi":9.9,"n":2320,"med":22.4},"cmu_value":{"pct":0.7,"lo":-3.7,"hi":5.3,"n":2590,"med":15.9},"cmu_args":{"pct":-0.3,"lo":-5.1,"hi":4.8,"n":1688,"med":16.5},"type_value":{"pct":8.6,"lo":-1.8,"hi":20.0,"n":1411,"med":23.0}},"te22c":{"colon":{"pct":-1.7,"lo":-6.5,"hi":3.2,"n":1609,"med":6.4},"indent_block":{"pct":-4.5,"lo":-9.1,"hi":0.3,"n":1434,"med":15.0},"bracket":{"pct":-7.6,"lo":-12.8,"hi":-2.0,"n":899,"med":8.3},"comma":{"pct":-2.3,"lo":-7.8,"hi":3.6,"n":1170,"med":8.8},"eq_assign":{"pct":-4.7,"lo":-12.7,"hi":4.0,"n":462,"med":10.3},"invalid_syntax":{"pct":3.7,"lo":-2.7,"hi":10.4,"n":1179,"med":15.2},"name":{"pct":8.6,"lo":6.7,"hi":10.5,"n":5408,"med":12.5},"attribute":{"pct":-0.1,"lo":-3.8,"hi":3.8,"n":2805,"med":19.0},"cmu_value":{"pct":3.4,"lo":-0.0,"hi":6.8,"n":2145,"med":16.4},"cmu_args":{"pct":-5.2,"lo":-10.0,"hi":-0.0,"n":1384,"med":15.8},"type_value":{"pct":1.9,"lo":-4.4,"hi":8.5,"n":1323,"med":26.2}},"te23b":{"colon":{"pct":-5.5,"lo":-11.8,"hi":1.3,"n":1011,"med":9.1},"indent_block":{"pct":-11.2,"lo":-17.7,"hi":-4.2,"n":1273,"med":19.7},"bracket":{"pct":-9.0,"lo":-12.5,"hi":-5.3,"n":971,"med":8.9},"comma":{"pct":-6.5,"lo":-13.4,"hi":1.0,"n":1177,"med":9.8},"eq_assign":{"pct":-7.5,"lo":-15.4,"hi":1.0,"n":442,"med":10.8},"invalid_syntax":{"pct":-4.9,"lo":-11.0,"hi":1.6,"n":1123,"med":15.7},"name":{"pct":6.0,"lo":3.2,"hi":8.9,"n":4849,"med":14.5},"attribute":{"pct":6.4,"lo":0.6,"hi":12.5,"n":1720,"med":22.3},"cmu_value":{"pct":-1.2,"lo":-5.9,"hi":3.9,"n":2419,"med":16.3},"cmu_args":{"pct":-5.5,"lo":-9.8,"hi":-1.1,"n":1721,"med":19.9},"type_value":{"pct":10.2,"lo":1.5,"hi":19.8,"n":773,"med":26.9}},"te23c":{"colon":{"pct":-7.3,"lo":-14.1,"hi":0.0,"n":857,"med":8.8},"indent_block":{"pct":-12.9,"lo":-19.0,"hi":-6.2,"n":815,"med":19.8},"bracket":{"pct":-7.7,"lo":-15.9,"hi":1.4,"n":486,"med":9.9},"comma":{"pct":-7.9,"lo":-16.9,"hi":2.1,"n":735,"med":11.8},"eq_assign":{"pct":-15.2,"lo":-21.2,"hi":-8.7,"n":336,"med":11.4},"invalid_syntax":{"pct":4.9,"lo":-3.3,"hi":13.9,"n":748,"med":15.2},"name":{"pct":8.8,"lo":5.1,"hi":12.5,"n":2981,"med":13.6},"attribute":{"pct":16.8,"lo":9.0,"hi":25.2,"n":1177,"med":22.3},"cmu_value":{"pct":3.3,"lo":-1.6,"hi":8.4,"n":1477,"med":16.8},"cmu_args":{"pct":5.0,"lo":-1.3,"hi":11.7,"n":836,"med":18.9},"type_value":{"pct":-3.7,"lo":-14.1,"hi":8.0,"n":558,"med":27.1}}},"chain":{"window":[{"W":30,"Missing colon":0.12,"Other syntax errors":0.033,"Runtime errors":0.007,"Indentation then colon":0.009},{"W":60,"Missing colon":0.149,"Other syntax errors":0.048,"Runtime errors":0.016,"Indentation then colon":0.018},{"W":120,"Missing colon":0.183,"Other syntax errors":0.069,"Runtime errors":0.033,"Indentation then colon":0.031},{"W":300,"Missing colon":0.241,"Other syntax errors":0.109,"Runtime errors":0.068,"Indentation then colon":0.065},{"W":600,"Missing colon":0.293,"Other syntax errors":0.148,"Runtime errors":0.105,"Indentation then colon":0.1}],"n_colon_events":8738,"to_block_by_cat":[{"cat":"colon","label":"Missing colon","to_block":0.151,"to_ind":0.163,"n":5511},{"cat":"indent_block","label":"Expected an indented block","to_block":0.064,"to_ind":0.095,"n":6132},{"cat":"indent_mismatch","label":"Unindent does not match","to_block":0.062,"to_ind":0.128,"n":1538},{"cat":"else_orphan","label":"else/elif without matching if","to_block":0.06,"to_ind":0.195,"n":786},{"cat":"syntax_other","label":"Other syntax error","to_block":0.044,"to_ind":0.066,"n":453},{"cat":"eq_assign","label":"'=' where '==' was meant","to_block":0.038,"to_ind":0.048,"n":2201},{"cat":"assign_target","label":"Invalid assignment target","to_block":0.03,"to_ind":0.049,"n":2874},{"cat":"invalid_syntax","label":"Unspecific 'invalid syntax'","to_block":0.028,"to_ind":0.045,"n":5448},{"cat":"literal_char","label":"Invalid character or number","to_block":0.027,"to_ind":0.035,"n":1138},{"cat":"indent_unexpected","label":"Unexpected indent","to_block":0.027,"to_ind":0.062,"n":2579}],"colon_end":{"solved":0.499,"replaced":0.471,"censored_silence":0.014,"censored_left":0.009,"censored_end":0.007},"colon_next":[{"cat":"indent_block","label":"Expected an indented block","share":0.32},{"cat":"name","label":"NameError (undefined name)","share":0.201},{"cat":"attribute","label":"AttributeError","share":0.088},{"cat":"invalid_syntax","label":"Unspecific 'invalid syntax'","share":0.07},{"cat":"type_value","label":"Type or value error","share":0.047},{"cat":"cmu_value","label":"Shape property value","share":0.039},{"cat":"eq_assign","label":"'=' where '==' was meant","share":0.03},{"cat":"assign_target","label":"Invalid assignment target","share":0.029}],"by_unit":[{"unit":2,"n":210,"p":0.252},{"unit":3,"n":838,"p":0.189},{"unit":4,"n":1103,"p":0.142},{"unit":5,"n":417,"p":0.137},{"unit":6,"n":876,"p":0.148},{"unit":7,"n":381,"p":0.176},{"unit":8,"n":298,"p":0.188},{"unit":9,"n":191,"p":0.136},{"unit":10,"n":663,"p":0.121},{"unit":11,"n":43,"p":0.093},{"unit":12,"n":466,"p":0.071}],"by_k":[{"k":"1","n":136,"p":0.235},{"k":"2","n":132,"p":0.205},{"k":"3–4","n":278,"p":0.158},{"k":"5–8","n":539,"p":0.174},{"k":"9–16","n":1016,"p":0.166},{"k":"17–32","n":1502,"p":0.152},{"k":"33+","n":1908,"p":0.123}],"by_group":[{"group":"te22a","n":684,"p":0.152,"students":27},{"group":"te22b","n":1233,"p":0.157,"students":32},{"group":"te22c","n":1643,"p":0.127,"students":32},{"group":"te23b","n":1061,"p":0.166,"students":34},{"group":"te23c","n":890,"p":0.167,"students":32}],"k_within":{"pp":-1.8,"lo":-2.6,"hi":-0.9,"p":9e-05},"k_within_adj":{"pp":-0.6,"lo":-2.2,"hi":1.0,"p":0.44243},"k_or":{"OR":0.875,"lo":0.83,"hi":0.922,"p":1e-06},"stmt_after_colon":{"if":0.603,"def":0.182,"for":0.122,"elif":0.041,"else":0.039,"while":0.012},"stmt_all_block":{"if":0.485,"def":0.303,"for":0.109,"else":0.051,"elif":0.041,"while":0.009},"episode_latency":{"colon only":{"n":3278,"med":13.9},"with indentation step":{"n":593,"med":50.8}},"student_halves":{"n":146,"first":0.168,"second":0.151,"p":0.20635}},"wam":{"n_msgs_dist":{"1":0.697,"2":0.187,"3":0.066,"4":0.027,"5":0.011,"6":0.011},"latency_by_n":{"1":12.2,"2":45.3,"3":97.1,"4":160.5,"5":220.4,"6":365.2},"share":{"multi":0.303,"wam":0.116,"wam_cat":0.074},"by_unit":[{"unit":1,"n":6666,"multi":0.261,"wam":0.091,"wam_cat":0.053},{"unit":2,"n":5772,"multi":0.274,"wam":0.098,"wam_cat":0.056},{"unit":3,"n":4412,"multi":0.328,"wam":0.122,"wam_cat":0.078},{"unit":4,"n":7467,"multi":0.305,"wam":0.114,"wam_cat":0.076},{"unit":5,"n":2695,"multi":0.311,"wam":0.114,"wam_cat":0.075},{"unit":6,"n":10015,"multi":0.28,"wam":0.102,"wam_cat":0.069},{"unit":7,"n":4241,"multi":0.324,"wam":0.129,"wam_cat":0.081},{"unit":8,"n":3056,"multi":0.332,"wam":0.133,"wam_cat":0.082},{"unit":9,"n":2595,"multi":0.345,"wam":0.142,"wam_cat":0.089},{"unit":10,"n":8574,"multi":0.333,"wam":0.143,"wam_cat":0.097},{"unit":11,"n":458,"multi":0.38,"wam":0.168,"wam_cat":0.107},{"unit":12,"n":6619,"multi":0.291,"wam":0.112,"wam_cat":0.071}],"by_group":[{"group":"te22a","n":9475,"multi":0.287,"wam":0.104,"wam_cat":0.061},{"group":"te22b","n":15723,"multi":0.305,"wam":0.116,"wam_cat":0.076},{"group":"te22c","n":15701,"multi":0.298,"wam":0.113,"wam_cat":0.073},{"group":"te23b","n":13319,"multi":0.307,"wam":0.124,"wam_cat":0.08},{"group":"te23c","n":8354,"multi":0.318,"wam":0.121,"wam_cat":0.08}],"by_experience":[{"k":"1–25","n":2773,"multi":0.292,"wam":0.106},{"k":"26–50","n":3174,"multi":0.25,"wam":0.091},{"k":"51–100","n":6506,"multi":0.29,"wam":0.102},{"k":"101–200","n":13180,"multi":0.306,"wam":0.114},{"k":"201–400","n":20325,"multi":0.307,"wam":0.119},{"k":"401–800","n":14704,"multi":0.313,"wam":0.127},{"k":"800+","n":1910,"multi":0.298,"wam":0.113}],"within":{"pp":0.9,"lo":0.7,"hi":1.1,"p":0.0},"within_adj":{"pp":-0.3,"lo":-0.9,"hi":0.3,"p":0.34911},"model":{"OR_per_doubling":0.99,"lo":0.941,"hi":1.041,"p":0.68796,"OR_per_unit":1.035,"p_unit":0.00035},"by_first_cat":[{"cat":"else_orphan","label":"else/elif without matching if","n":427,"wam":0.19},{"cat":"colon","label":"Missing colon","n":4119,"wam":0.168},{"cat":"kwarg_order","label":"Keyword-argument order","n":662,"wam":0.15},{"cat":"assign_target","label":"Invalid assignment target","n":1869,"wam":0.145},{"cat":"func_args","label":"Wrong arguments to a function","n":1282,"wam":0.141},{"cat":"attribute","label":"AttributeError","n":5285,"wam":0.14},{"cat":"eq_assign","label":"'=' where '==' was meant","n":1524,"wam":0.14},{"cat":"unbound_local","label":"UnboundLocalError","n":1077,"wam":0.132},{"cat":"indent_block","label":"Expected an indented block","n":3638,"wam":0.125},{"cat":"indent_unexpected","label":"Unexpected indent","n":1778,"wam":0.124},{"cat":"type_value","label":"Type or value error","n":2815,"wam":0.118},{"cat":"name","label":"NameError (undefined name)","n":12478,"wam":0.114},{"cat":"indent_mismatch","label":"Unindent does not match","n":1010,"wam":0.113},{"cat":"cmu_other","label":"Other graphics-library error","n":713,"wam":0.112},{"cat":"invalid_syntax","label":"Unspecific 'invalid syntax'","n":3903,"wam":0.111},{"cat":"bracket","label":"Unclosed or unmatched bracket","n":2518,"wam":0.106},{"cat":"comma","label":"Missing comma","n":4119,"wam":0.091},{"cat":"cmu_value","label":"Shape property value","n":6163,"wam":0.086},{"cat":"literal_char","label":"Invalid character or number","n":871,"wam":0.082},{"cat":"cmu_args","label":"Shape arguments (count/keyword)","n":4104,"wam":0.079},{"cat":"index","label":"IndexError","n":976,"wam":0.073},{"cat":"runaway","label":"Too many shapes / recursion","n":666,"wam":0.068}],"family_transitions":{"families":["Block structure","Delimiters","Assignment & arguments","Characters & literals","Unspecific syntax","Names & scope","Types, values & indexing","Function calls","Graphics library","Other runtime"],"p":[[0.354,0.05,0.056,0.005,0.06,0.331,0.043,0.019,0.081,0.001],[0.105,0.115,0.104,0.011,0.059,0.279,0.053,0.04,0.232,0.002],[0.209,0.108,0.136,0.006,0.066,0.279,0.037,0.019,0.139,0.001],[0.177,0.136,0.073,0.016,0.073,0.283,0.06,0.005,0.177,0.0],[0.255,0.083,0.078,0.01,0.032,0.325,0.066,0.026,0.119,0.004],[0.059,0.029,0.023,0.004,0.032,0.577,0.081,0.033,0.161,0.001],[0.074,0.069,0.04,0.003,0.047,0.334,0.332,0.021,0.079,0.0],[0.041,0.143,0.039,0.004,0.039,0.414,0.053,0.156,0.11,0.0],[0.049,0.084,0.05,0.012,0.034,0.209,0.025,0.012,0.525,0.0],[0.019,0.038,0.019,0.0,0.151,0.472,0.0,0.0,0.019,0.283]],"n":[6945,3138,2726,368,2252,13236,2350,1023,6078,53]},"top_pairs":[{"src":"NameError (undefined name)","dst":"NameError (undefined name)","n":3309,"same":true},{"src":"Shape property value","dst":"Shape property value","n":1820,"same":true},{"src":"AttributeError","dst":"AttributeError","n":1622,"same":true},{"src":"NameError (undefined name)","dst":"AttributeError","n":1164,"same":false},{"src":"AttributeError","dst":"NameError (undefined name)","n":882,"same":false},{"src":"Missing colon","dst":"Expected an indented block","n":830,"same":false},{"src":"Shape arguments (count/keyword)","dst":"Shape arguments (count/keyword)","n":752,"same":true},{"src":"NameError (undefined name)","dst":"Shape property value","n":705,"same":false},{"src":"NameError (undefined name)","dst":"Shape arguments (count/keyword)","n":649,"same":false},{"src":"Type or value error","dst":"Type or value error","n":631,"same":true},{"src":"Expected an indented block","dst":"NameError (undefined name)","n":602,"same":false},{"src":"Missing colon","dst":"NameError (undefined name)","n":522,"same":false},{"src":"NameError (undefined name)","dst":"Type or value error","n":502,"same":false},{"src":"Shape property value","dst":"NameError (undefined name)","n":454,"same":false},{"src":"Unspecific 'invalid syntax'","dst":"NameError (undefined name)","n":430,"same":false},{"src":"Expected an indented block","dst":"Expected an indented block","n":393,"same":true},{"src":"NameError (undefined name)","dst":"Wrong arguments to a function","n":359,"same":false},{"src":"Missing comma","dst":"NameError (undefined name)","n":358,"same":false},{"src":"Type or value error","dst":"NameError (undefined name)","n":332,"same":false},{"src":"Wrong arguments to a function","dst":"NameError (undefined name)","n":326,"same":false}],"replaced_within":{"pp":0.9,"lo":0.6,"hi":1.3,"p":0.0},"replaced_k":{"OR":1.034,"lo":1.016,"hi":1.053,"p":0.00029},"examples":[{"unit":10,"latency":18.0,"steps":["SyntaxError: expected ':'","SyntaxError: expected an indented block after 'if' statement on line 85"]},{"unit":6,"latency":248.0,"steps":["TypeError: 'Group' object is not callable","SyntaxError: invalid syntax (unmatched ')')","TypeError: 'Rect' object is not callable","AttributeError: 'Shape' object has no attribute 'health'. Did you mean: '__eq__'?","Exception: TypeError: Rect.width should be positive-number (but 0.0 is of type float)"]}]},"classes":[{"group":"te22a","cohort":"TE22","students":27,"attempts_per_student":4397.0,"err":0.189,"syn":0.072,"rt":0.117,"err_student_iqr":[0.165,0.224],"med_lat_syn":12.7,"med_lat_rt":17.4,"one_shot":0.805,"replaced":0.347,"censored":0.042,"wam":0.104,"colon_to_block":0.152},{"group":"te22b","cohort":"TE22","students":32,"attempts_per_student":6582.0,"err":0.188,"syn":0.08,"rt":0.108,"err_student_iqr":[0.158,0.225],"med_lat_syn":11.8,"med_lat_rt":16.8,"one_shot":0.808,"replaced":0.378,"censored":0.04,"wam":0.116,"colon_to_block":0.157},{"group":"te22c","cohort":"TE22","students":33,"attempts_per_student":5633.0,"err":0.172,"syn":0.07,"rt":0.102,"err_student_iqr":[0.15,0.2],"med_lat_syn":10.8,"med_lat_rt":16.4,"one_shot":0.819,"replaced":0.363,"censored":0.029,"wam":0.113,"colon_to_block":0.127},{"group":"te23b","cohort":"TE23","students":35,"attempts_per_student":3684.0,"err":0.209,"syn":0.097,"rt":0.112,"err_student_iqr":[0.192,0.253],"med_lat_syn":13.2,"med_lat_rt":17.5,"one_shot":0.763,"replaced":0.391,"censored":0.042,"wam":0.124,"colon_to_block":0.166},{"group":"te23c","cohort":"TE23","students":32,"attempts_per_student":3372.0,"err":0.196,"syn":0.088,"rt":0.108,"err_student_iqr":[0.18,0.238],"med_lat_syn":13.3,"med_lat_rt":17.4,"one_shot":0.776,"replaced":0.389,"censored":0.043,"wam":0.121,"colon_to_block":0.167}],"unit_by_group":{"te22a":[{"unit":1,"err":0.186,"syn":0.073,"rt":0.113,"attempts":7785},{"unit":2,"err":0.168,"syn":0.071,"rt":0.097,"attempts":16412},{"unit":3,"err":0.204,"syn":0.095,"rt":0.109,"attempts":9735},{"unit":4,"err":0.215,"syn":0.107,"rt":0.108,"attempts":7495},{"unit":5,"err":0.185,"syn":0.096,"rt":0.089,"attempts":5683},{"unit":6,"err":0.177,"syn":0.074,"rt":0.103,"attempts":19427},{"unit":7,"err":0.183,"syn":0.063,"rt":0.121,"attempts":20287},{"unit":8,"err":0.238,"syn":0.056,"rt":0.182,"attempts":5993},{"unit":9,"err":0.204,"syn":0.069,"rt":0.135,"attempts":3587},{"unit":10,"err":0.234,"syn":0.054,"rt":0.18,"attempts":1319},{"unit":11,"err":0.162,"syn":0.02,"rt":0.142,"attempts":303},{"unit":12,"err":0.188,"syn":0.058,"rt":0.13,"attempts":20613}],"te22b":[{"unit":1,"err":0.13,"syn":0.059,"rt":0.071,"attempts":32232},{"unit":2,"err":0.227,"syn":0.093,"rt":0.134,"attempts":13267},{"unit":3,"err":0.241,"syn":0.126,"rt":0.115,"attempts":12426},{"unit":4,"err":0.205,"syn":0.103,"rt":0.102,"attempts":29587},{"unit":5,"err":0.23,"syn":0.133,"rt":0.097,"attempts":6675},{"unit":6,"err":0.153,"syn":0.073,"rt":0.08,"attempts":36450},{"unit":7,"err":0.24,"syn":0.093,"rt":0.147,"attempts":7367},{"unit":8,"err":0.206,"syn":0.072,"rt":0.134,"attempts":9137},{"unit":9,"err":0.214,"syn":0.076,"rt":0.138,"attempts":8911},{"unit":10,"err":0.213,"syn":0.071,"rt":0.143,"attempts":31375},{"unit":11,"err":0.208,"syn":0.061,"rt":0.148,"attempts":1800},{"unit":12,"err":0.164,"syn":0.051,"rt":0.113,"attempts":18088}],"te22c":[{"unit":1,"err":0.117,"syn":0.046,"rt":0.071,"attempts":23616},{"unit":2,"err":0.198,"syn":0.082,"rt":0.116,"attempts":9394},{"unit":3,"err":0.245,"syn":0.142,"rt":0.103,"attempts":8642},{"unit":4,"err":0.18,"syn":0.097,"rt":0.084,"attempts":29188},{"unit":5,"err":0.201,"syn":0.117,"rt":0.084,"attempts":7541},{"unit":6,"err":0.144,"syn":0.067,"rt":0.077,"attempts":38147},{"unit":7,"err":0.212,"syn":0.073,"rt":0.139,"attempts":9580},{"unit":8,"err":0.184,"syn":0.061,"rt":0.123,"attempts":10500},{"unit":9,"err":0.213,"syn":0.067,"rt":0.146,"attempts":8891},{"unit":10,"err":0.189,"syn":0.06,"rt":0.129,"attempts":37064},{"unit":11,"err":0.233,"syn":0.046,"rt":0.188,"attempts":1882},{"unit":12,"err":0.152,"syn":0.048,"rt":0.104,"attempts":27834}],"te23b":[{"unit":1,"err":0.217,"syn":0.095,"rt":0.122,"attempts":24566},{"unit":2,"err":0.21,"syn":0.112,"rt":0.098,"attempts":27083},{"unit":3,"err":0.239,"syn":0.119,"rt":0.119,"attempts":12202},{"unit":4,"err":0.236,"syn":0.138,"rt":0.099,"attempts":12155},{"unit":5,"err":0.243,"syn":0.167,"rt":0.076,"attempts":6706},{"unit":6,"err":0.167,"syn":0.083,"rt":0.084,"attempts":30883},{"unit":7,"err":0.222,"syn":0.084,"rt":0.138,"attempts":10645},{"unit":8,"err":0.208,"syn":0.087,"rt":0.122,"attempts":11766},{"unit":9,"err":0.232,"syn":0.081,"rt":0.151,"attempts":8924},{"unit":10,"err":0.206,"syn":0.079,"rt":0.127,"attempts":24139},{"unit":11,"err":0.177,"syn":0.07,"rt":0.107,"attempts":1290},{"unit":12,"err":0.198,"syn":0.068,"rt":0.13,"attempts":11013}],"te23c":[{"unit":1,"err":0.215,"syn":0.096,"rt":0.119,"attempts":10972},{"unit":2,"err":0.199,"syn":0.092,"rt":0.107,"attempts":14397},{"unit":3,"err":0.254,"syn":0.146,"rt":0.108,"attempts":9344},{"unit":4,"err":0.236,"syn":0.121,"rt":0.114,"attempts":9311},{"unit":5,"err":0.262,"syn":0.153,"rt":0.109,"attempts":4379},{"unit":6,"err":0.143,"syn":0.074,"rt":0.069,"attempts":21238},{"unit":7,"err":0.211,"syn":0.077,"rt":0.134,"attempts":7422},{"unit":8,"err":0.189,"syn":0.062,"rt":0.126,"attempts":8102},{"unit":9,"err":0.196,"syn":0.073,"rt":0.123,"attempts":7558},{"unit":10,"err":0.172,"syn":0.061,"rt":0.111,"attempts":16084},{"unit":11,"err":0.176,"syn":0.058,"rt":0.118,"attempts":1160},{"unit":12,"err":0.201,"syn":0.079,"rt":0.123,"attempts":5988}]},"clusters":{"k":5,"n":156,"names":{"1":"Fluent fixers","2":"Fast improvers","3":"Whack-a-mole debuggers","4":"Slower fixers","5":"Often stuck"},"sizes":{"1":50,"2":43,"3":8,"4":41,"5":14},"profile_z":{"1":{"speed":-0.8,"one_shot":0.49,"learning":0.69,"mole":-0.4,"gave_up":-0.6},"2":{"speed":-0.21,"one_shot":0.31,"learning":-1.05,"mole":-0.23,"gave_up":-0.41},"3":{"speed":0.04,"one_shot":-0.76,"learning":-0.16,"mole":2.65,"gave_up":-0.28},"4":{"speed":0.71,"one_shot":-0.03,"learning":0.35,"mole":0.07,"gave_up":0.6},"5":{"speed":1.41,"one_shot":-2.18,"learning":-0.16,"mole":0.4,"gave_up":1.79}},"profile_raw":{"1":{"speed":-0.053,"one_shot":0.0315,"learning":-3.1067,"mole":-0.0155,"gave_up":0.027,"replaced":-0.0339,"learning_runtime":4.852,"med_latency":13.2967,"med_latency_syn":10.7022,"med_latency_rt":14.652,"one_shot_raw":0.8288,"mole_raw":0.1013,"err_rate":0.1735,"attempts":6235.0},"2":{"speed":-0.0076,"one_shot":0.0143,"learning":-7.1721,"mole":-0.002,"gave_up":0.0302,"replaced":-0.0133,"learning_runtime":3.9642,"med_latency":14.705,"med_latency_syn":11.573,"med_latency_rt":16.9575,"one_shot_raw":0.813,"mole_raw":0.1137,"err_rate":0.1983,"attempts":5110.0},"3":{"speed":0.0192,"one_shot":-0.0655,"learning":-4.8153,"mole":0.1083,"gave_up":0.0303,"replaced":0.1324,"learning_runtime":3.37,"med_latency":15.3105,"med_latency_syn":13.6378,"med_latency_rt":16.642,"one_shot_raw":0.7293,"mole_raw":0.2149,"err_rate":0.2753,"attempts":2520.0},"4":{"speed":0.0808,"one_shot":-0.0103,"learning":-3.8526,"mole":0.0098,"gave_up":0.0524,"replaced":0.0205,"learning_runtime":4.4388,"med_latency":17.72,"med_latency_syn":15.5775,"med_latency_rt":20.389,"one_shot_raw":0.7899,"mole_raw":0.1234,"err_rate":0.1963,"attempts":3853.0},"5":{"speed":0.1415,"one_shot":-0.1496,"learning":-5.7632,"mole":0.0152,"gave_up":0.0707,"replaced":0.0632,"learning_runtime":4.4718,"med_latency":21.7965,"med_latency_syn":21.5328,"med_latency_rt":22.0515,"one_shot_raw":0.637,"mole_raw":0.1314,"err_rate":0.2815,"attempts":3237.5}},"by_group":{"te22a":{"1":9,"2":9,"3":0,"4":7,"5":1},"te22b":{"1":12,"2":7,"3":1,"4":10,"5":1},"te22c":{"1":18,"2":7,"3":0,"4":6,"5":1},"te23b":{"1":4,"2":10,"3":5,"4":9,"5":7},"te23c":{"1":7,"2":10,"3":2,"4":9,"5":4}},"selection":[{"k":2,"silhouette":0.262,"stability_ari":0.709,"ward_agreement_ari":0.312,"inertia":575.9,"gmm_bic":2146.3},{"k":3,"silhouette":0.183,"stability_ari":0.439,"ward_agreement_ari":0.254,"inertia":494.9,"gmm_bic":2165.1},{"k":4,"silhouette":0.181,"stability_ari":0.465,"ward_agreement_ari":0.435,"inertia":433.2,"gmm_bic":2153.1},{"k":5,"silhouette":0.202,"stability_ari":0.631,"ward_agreement_ari":0.596,"inertia":379.1,"gmm_bic":2215.0},{"k":6,"silhouette":0.184,"stability_ari":0.628,"ward_agreement_ari":0.654,"inertia":348.7,"gmm_bic":2203.8}],"kruskal":{"err_rate":0.0,"attempts":0.0,"replaced":0.0},"group_p":0.01073,"cohort_p":0.00013,"slopes":{"syntax":{"n":156,"mean_pct":-4.86,"sd_true_pct":5.01,"reliability":0.34,"share_faster":0.846,"shrunk":[-15.07,-14.74,-10.81,-10.54,-10.16,-9.66,-9.29,-9.22,-9.0,-8.88,-8.78,-8.6,-8.56,-8.37,-8.34,-8.28,-8.09,-8.08,-8.06,-7.97,-7.92,-7.86,-7.67,-7.52,-7.33,-7.29,-7.28,-7.17,-7.12,-7.1,-7.04,-7.02,-6.97,-6.97,-6.86,-6.75,-6.74,-6.73,-6.73,-6.72,-6.67,-6.47,-6.44,-6.37,-6.35,-6.34,-6.33,-6.3,-6.28,-6.26,-6.02,-5.89,-5.86,-5.73,-5.7,-5.67,-5.64,-5.58,-5.57,-5.56,-5.51,-5.45,-5.4,-5.36,-5.31,-5.3,-5.3,-5.19,-5.19,-5.1,-5.01,-5.0,-5.0,-4.96,-4.95,-4.87,-4.84,-4.82,-4.77,-4.69,-4.64,-4.56,-4.54,-4.53,-4.52,-4.51,-4.46,-4.31,-4.28,-4.25,-4.22,-4.16,-4.12,-4.06,-4.03,-3.93,-3.92,-3.89,-3.89,-3.85,-3.77,-3.7,-3.58,-3.47,-3.41,-3.38,-3.37,-3.37,-3.35,-3.28,-3.25,-3.19,-3.14,-3.05,-3.02,-2.98,-2.97,-2.94,-2.9,-2.87,-2.86,-2.81,-2.8,-2.8,-2.76,-2.75,-2.72,-2.66,-2.58,-2.43,-2.42,-2.24,-2.13,-2.12,-2.11,-2.06,-2.02,-1.92,-1.86,-1.57,-1.5,-1.45,-1.3,-1.07,-0.9,-0.87,-0.84,-0.66,-0.13,0.18,0.22,1.26,1.35,1.49,1.96,4.14]},"runtime":{"n":157,"mean_pct":4.25,"sd_true_pct":3.87,"reliability":0.37,"share_faster":0.137,"shrunk":[-4.54,-1.63,-1.4,-1.05,-0.78,-0.7,-0.54,-0.38,0.26,0.38,0.72,0.82,0.95,1.11,1.35,1.56,1.65,1.66,1.68,1.76,1.81,2.0,2.04,2.05,2.21,2.26,2.26,2.35,2.35,2.37,2.41,2.42,2.42,2.44,2.44,2.52,2.52,2.61,2.67,2.71,2.75,2.77,2.79,2.81,2.81,2.87,2.88,2.88,2.91,2.96,3.04,3.14,3.2,3.28,3.35,3.42,3.43,3.55,3.57,3.59,3.61,3.62,3.7,3.81,3.82,3.85,3.86,3.91,3.92,3.93,3.96,3.96,4.12,4.14,4.21,4.23,4.24,4.32,4.35,4.35,4.37,4.37,4.38,4.39,4.41,4.44,4.49,4.54,4.65,4.66,4.67,4.67,4.74,4.79,4.83,4.83,4.87,4.88,4.89,4.91,4.91,4.93,4.99,5.01,5.02,5.11,5.3,5.3,5.34,5.67,5.76,5.76,5.79,5.8,5.86,5.98,6.02,6.09,6.1,6.21,6.38,6.38,6.4,6.48,6.5,6.5,6.57,6.65,6.74,6.75,6.84,6.95,7.09,7.11,7.13,7.13,7.21,7.3,7.39,7.4,7.51,7.59,7.71,7.8,7.89,8.04,8.05,8.09,8.1,8.11,8.16,8.25,8.29,8.59,8.84,8.85,8.92]}},"gmm_bic_k1":2264.0,"pca_var":[0.416,0.202],"class_eta2":{"err_rate":0.105,"med_latency":0.036,"speed":0.054,"one_shot":0.164,"mole":0.106,"gave_up":0.053,"learning":0.044}}};
+const NS = 'http://www.w3.org/2000/svg';
+const CAT = Object.fromEntries(D.categories.map(c => [c.cat, c]));
+const $ = s => document.querySelector(s);
+function el(tag, attrs, parent) {
+  const e = document.createElementNS(NS, tag);
+  for (const [k, v] of Object.entries(attrs || {})) {
+    if (v === undefined || v === null) continue;
+    if (k === 'text') e.textContent = v; else if (k === 'cls') e.setAttribute('class', v); else e.setAttribute(k, v);
+  }
+  if (parent) parent.appendChild(e);
+  return e;
+}
+function h(tag, attrs, parent) {
+  const e = document.createElement(tag);
+  for (const [k, v] of Object.entries(attrs || {})) {
+    if (v === undefined || v === null) continue;
+    if (k === 'text') e.textContent = v; else if (k === 'cls') e.className = v; else e.setAttribute(k, v);
+  }
+  if (parent) parent.appendChild(e);
+  return e;
+}
+const P = (v, d = 0) => v == null ? '–' : (100 * v).toFixed(d) + '%';
+const S = (v, d = 1) => v == null ? '–' : (v > 0 ? '+' : v < 0 ? '−' : '') + Math.abs(v).toFixed(d);
+const N = v => Math.round(v).toLocaleString('en-US');
+const sec = v => v == null ? '–' : (v >= 90 ? (v / 60).toFixed(1) + ' min' : Math.round(v) + ' s');
+
+/* ---------- tooltip */
+const tip = $('#tip');
+function tipShow(title, rows, x, y) {
+  tip.replaceChildren();
+  if (title) h('div', { cls: 'tt', text: title }, tip);
+  for (const r of rows) {
+    const line = h('div', { cls: 'tr' }, tip);
+    const k = h('span', { cls: 'lk' + (r.key ? ' ' + r.key : '') }, line);
+    if (!r.key) k.style.width = '0';
+    h('strong', { text: r.value }, line);
+    h('span', { text: r.label || '' }, line);
+  }
+  tip.hidden = false;
+  const b = tip.getBoundingClientRect();
+  let left = x + 14, top = y + 14;
+  if (left + b.width > window.innerWidth - 8) left = x - b.width - 14;
+  if (top + b.height > window.innerHeight - 8) top = y - b.height - 14;
+  tip.style.left = Math.max(8, left) + 'px'; tip.style.top = Math.max(8, top) + 'px';
+}
+function tipHide() { tip.hidden = true; }
+function bindTip(node, fn) {
+  node.setAttribute('tabindex', '0');
+  node.addEventListener('pointermove', e => { const t = fn(); tipShow(t[0], t[1], e.clientX, e.clientY); });
+  node.addEventListener('pointerleave', tipHide);
+  node.addEventListener('focus', () => { const r = node.getBoundingClientRect(); const t = fn(); tipShow(t[0], t[1], r.left + r.width / 2, r.top); });
+  node.addEventListener('blur', tipHide);
+}
+
+/* ---------- generic line chart (ordinal x) with crosshair */
+function lineChart(host, o) {
+  host.replaceChildren();
+  const W = o.w || 480, H = o.h || 250, m = Object.assign({ t: 14, r: 92, b: 40, l: 44 }, o.m || {});
+  const svg = el('svg', { viewBox: `0 0 ${W} ${H}`, cls: 'chart', role: 'img', 'aria-label': o.aria || '', style: `max-width:${W}px` }, host);
+  const iw = W - m.l - m.r, ih = H - m.t - m.b, n = o.x.length;
+  const xs = i => m.l + (n === 1 ? iw / 2 : i * iw / (n - 1));
+  const ys = v => m.t + ih - (v - (o.yMin || 0)) / (o.yMax - (o.yMin || 0)) * ih;
+  for (const t of o.yTicks) {
+    el('line', { x1: m.l, x2: m.l + iw, y1: ys(t), y2: ys(t), cls: t === 0 ? 'base' : 'grid' }, svg);
+    el('text', { x: m.l - 8, y: ys(t), cls: 'tick', 'text-anchor': 'end', 'dominant-baseline': 'middle', text: o.yFmt(t) }, svg);
+  }
+  o.x.forEach((lab, i) => { if (!o.xEvery || i % o.xEvery === 0 || i === n - 1) el('text', { x: xs(i), y: m.t + ih + 18, cls: 'tick', 'text-anchor': 'middle', text: lab }, svg); });
+  if (o.xTitle) el('text', { x: m.l + iw / 2, y: H - 3, cls: 'axis-title', 'text-anchor': 'middle', text: o.xTitle }, svg);
+  const ends = [];
+  for (const s of o.series) {
+    let d = '', pen = false;
+    s.values.forEach((v, i) => { if (v == null) { pen = false; return; } d += (pen ? 'L' : 'M') + xs(i).toFixed(1) + ',' + ys(v).toFixed(1); pen = true; });
+    el('path', { d, cls: 'line ' + s.ln }, svg);
+    const idx = s.values.map((v, i) => v == null ? -1 : i).filter(i => i >= 0);
+    const li = idx[idx.length - 1];
+    if (o.dots) idx.forEach(i => el('circle', { cx: xs(i), cy: ys(s.values[i]), r: 3.2, cls: 'dot ' + s.f }, svg));
+    el('circle', { cx: xs(li), cy: ys(s.values[li]), r: 4, cls: 'dot ' + s.f }, svg);
+    if (o.endLabels !== false) ends.push({ y: ys(s.values[li]), x: xs(li) + 9, text: (s.endText ? s.endText(s.values[li]) : o.yFmt(s.values[li])) + (s.short ? ' ' + s.short : '') });
+  }
+  ends.sort((a, b) => a.y - b.y);
+  for (let i = 1; i < ends.length; i++) if (ends[i].y - ends[i - 1].y < 14) ends[i].y = ends[i - 1].y + 14;
+  ends.forEach(e => el('text', { x: e.x, y: e.y, cls: 'end-label', 'dominant-baseline': 'middle', text: e.text }, svg));
+  const cross = el('line', { y1: m.t, y2: m.t + ih, cls: 'crosshair', visibility: 'hidden' }, svg);
+  const hit = el('rect', { x: m.l - 12, y: m.t, width: iw + 24, height: ih, cls: 'hit', tabindex: 0, 'aria-label': 'Chart values; use arrow keys' }, svg);
+  let cur = n - 1;
+  const show = (i, cx, cy) => {
+    cur = i; cross.setAttribute('x1', xs(i)); cross.setAttribute('x2', xs(i)); cross.setAttribute('visibility', 'visible');
+    const rows = o.series.map(s => ({ key: s.key, value: s.values[i] == null ? '–' : o.yFmt(s.values[i], true), label: s.name }));
+    if (o.tipExtra) rows.push(...o.tipExtra(i));
+    tipShow((o.tipTitle ? o.tipTitle(i) : o.x[i]), rows, cx, cy);
+  };
+  const near = ev => { const pt = svg.createSVGPoint(); pt.x = ev.clientX; pt.y = ev.clientY; const p = pt.matrixTransform(svg.getScreenCTM().inverse()); return Math.max(0, Math.min(n - 1, Math.round((p.x - m.l) / (iw / Math.max(1, n - 1))))); };
+  hit.addEventListener('pointermove', ev => show(near(ev), ev.clientX, ev.clientY));
+  hit.addEventListener('pointerleave', () => { cross.setAttribute('visibility', 'hidden'); tipHide(); });
+  hit.addEventListener('focus', () => { const r = svg.getBoundingClientRect(); show(cur, r.left + r.width / 2, r.top + 20); });
+  hit.addEventListener('blur', () => { cross.setAttribute('visibility', 'hidden'); tipHide(); });
+  hit.addEventListener('keydown', ev => { if (ev.key === 'ArrowRight' || ev.key === 'ArrowLeft') { ev.preventDefault(); const r = svg.getBoundingClientRect(); show(Math.max(0, Math.min(n - 1, cur + (ev.key === 'ArrowRight' ? 1 : -1))), r.left + r.width / 2, r.top + 20); } });
+  return svg;
+}
+
+/* ---------- column chart (single series) */
+function columnChart(host, o) {
+  host.replaceChildren();
+  const W = o.w || 480, H = o.h || 230, m = Object.assign({ t: 22, r: 10, b: 40, l: 44 }, o.m || {});
+  const svg = el('svg', { viewBox: `0 0 ${W} ${H}`, cls: 'chart', role: 'img', 'aria-label': o.aria || '', style: `max-width:${W}px` }, host);
+  const iw = W - m.l - m.r, ih = H - m.t - m.b, n = o.x.length, band = iw / n, bw = Math.min(24, band * 0.6);
+  const ys = v => m.t + ih - v / o.yMax * ih;
+  for (const t of o.yTicks) {
+    el('line', { x1: m.l, x2: m.l + iw, y1: ys(t), y2: ys(t), cls: t === 0 ? 'base' : 'grid' }, svg);
+    el('text', { x: m.l - 8, y: ys(t), cls: 'tick', 'text-anchor': 'end', 'dominant-baseline': 'middle', text: o.yFmt(t) }, svg);
+  }
+  o.x.forEach((lab, i) => {
+    const cx = m.l + band * (i + 0.5), v = o.values[i], y = ys(v), x = cx - bw / 2, r = Math.min(4, (ys(0) - y) / 2);
+    const g = el('g', { cls: 'row' }, svg);
+    el('path', { d: `M${x},${ys(0)} L${x},${y + r} Q${x},${y} ${x + r},${y} L${x + bw - r},${y} Q${x + bw},${y} ${x + bw},${y + r} L${x + bw},${ys(0)} Z`, cls: o.f || 'f-syn' }, g);
+    el('text', { x: cx, y: y - 6, cls: 'val', 'text-anchor': 'middle', text: o.valFmt(v) }, g);
+    el('text', { x: cx, y: m.t + ih + 18, cls: 'tick', 'text-anchor': 'middle', text: lab }, svg);
+    const hr = el('rect', { x: cx - band / 2, y: m.t, width: band, height: ih, cls: 'hit' }, g);
+    if (o.tip) bindTip(hr, () => o.tip(i));
+  });
+  if (o.xTitle) el('text', { x: m.l + iw / 2, y: H - 3, cls: 'axis-title', 'text-anchor': 'middle', text: o.xTitle }, svg);
+  return svg;
+}
+
+/* ---------- table helper */
+function table(host, cols, rows, opts = {}) {
+  host.replaceChildren();
+  const t = h('table', {}, host), th = h('thead', {}, t), tr = h('tr', {}, th);
+  cols.forEach(c => h('th', { cls: c.r ? 'r' : '', text: c.h, scope: 'col' }, tr));
+  const tb = h('tbody', {}, t);
+  rows.forEach(r => {
+    if (r.__group) { const g = h('tr', { cls: 'fam' }, tb); h('td', { colspan: cols.length, text: r.__group }, g); return; }
+    const row = h('tr', {}, tb);
+    cols.forEach(c => {
+      const td = h('td', { cls: [c.r ? 'r' : '', c.mono ? 'mono' : ''].join(' ').trim() }, row);
+      const v = c.v(r);
+      if (v instanceof Node) td.appendChild(v); else td.textContent = v;
+      if (c.cls) { const k = c.cls(r); if (k) td.classList.add(k); }
+    });
+  });
+  return t;
+}
+
+/* ================================================================ content */
+const O = D.overview;
+// facts strip
+[[N(O.students), 'students in 5 classes, two cohorts'], [(O.attempts / 1000).toFixed(0) + 'K', 'code runs (attempts)'],
+ [(O.errors / 1000).toFixed(0) + 'K', 'errors: ' + (O.syntax_errors / 1000).toFixed(0) + 'K syntax, ' + (O.runtime_errors / 1000).toFixed(0) + 'K runtime'],
+ [P(O.err_share), 'of runs end in an error'], [sec(O.latency_q['0.5']), 'median time to fix an error'],
+ [P(O.one_shot), 'of errors gone at the next run']].forEach(([b, s]) => { const f = h('div', { cls: 'fact' }, $('#facts')); h('b', { text: b }, f); h('span', { text: s }, f); });
+
+const L = Object.fromEntries(D.learning.map(r => [r.cat, r]));
+const FOD = Object.fromEntries(D.fod.map(r => [r.cat, r]));
+const C = D.chain, W = D.wam, CL = D.clusters;
+const pctTxt = r => `${S(r.pct)}% [${S(r.lo)}, ${S(r.hi)}]`;
+
+// findings
+const findings = [
+  ['Errors are not avoided.', `${P(O.err_share)} of all runs end in an error, and the share stays between ${P(Math.min(...D.units.map(u => u.err)))} and ${P(Math.max(...D.units.map(u => u.err)))} in every unit. Syntax errors peak with conditionals (units 3–5) and runtime errors grow with loops and lists. Within a unit, syntax errors fall slightly with practice (${P(D.within.syn[0], 1)} → ${P(D.within.syn[4], 1)} of runs). The punishment/avoidance prediction holds only locally.`],
+  ['Escape gets faster, for errors with a specific local fix.', `Each doubling of encounters cuts fix time by ${Math.abs(L.indent_block.pct)}% for a missing indented block, ${Math.abs(L.bracket.pct)}% for brackets, ${Math.abs(L.eq_assign.pct)}% for <code>=</code>/<code>==</code>, ${Math.abs(L.colon.pct)}% for the missing colon and ${Math.abs(L.comma.pct)}% for commas. The median colon fix falls from ${sec(L.colon.bins[0].med)} at the first encounter to ${sec(L.colon.bins[L.colon.bins.length - 1].med)} after 33+. The unspecific <code>invalid syntax</code> does not improve (${S(L.invalid_syntax.pct)}%).`],
+  ['Errors about meaning do not get faster.', `NameError (${S(L.name.pct)}%), AttributeError (${S(L.attribute.pct)}%) and type/value errors (${S(L.type_value.pct)}%) get slightly slower as programs grow, and are flat once unit and page type are held constant. A hint in the message (“Did you mean …”) makes a NameError quicker to fix (${sec(D.name_hint['1'].med)} vs ${sec(D.name_hint['0'].med)}) but does not make students faster over time.`],
+  ['The learning is retained, with some forgetting.', `The speed-up holds for the first such error of each day (colon ${S(FOD.colon.pct)}%, indentation ${S(FOD.indent_block.pct)}% per doubling of days). After a longer gap, fixes are slower again (colon ${S(FOD.colon.gap_pct)}% per doubling of days since last met).`],
+  ['Missing colon → indentation is a real chain.', `${P(C.window[0]['Missing colon'], 0)} of missing-colon errors are followed by an indentation error within 30 seconds, against ${P(C.window[0]['Other syntax errors'], 1)} after other syntax errors. The reverse order occurs in ${P(C.window[0]['Indentation then colon'], 1)}. The chain fades from ${P(C.by_unit[0].p)} of colon errors in unit 2 to ${P(C.by_unit[C.by_unit.length - 1].p)} in unit 12, but it never disappears. When it happens, the colon episode takes ${sec(C.episode_latency['with indentation step'].med)} instead of ${sec(C.episode_latency['colon only'].med)}.`],
+  ['Whack-a-mole persists.', `${P(W.share.multi)} of debugging episodes pass through two or more different errors, and ${P(W.share.wam)} through three or more. That share does not fall with experience (${S(W.within_adj.pp)} percentage points per doubling of episodes, holding unit) and rises with harder units. Each extra error adds about a minute.`],
+  ['Classes look alike; students differ.', `All five classes show the same split: syntax escapes speed up (${D.classes.map(c => S(D.pooled[c.group].syntax.pct) + '%').join(', ')}) and runtime escapes do not. An estimated ${P(CL.slopes.syntax.share_faster)} of students speed up on syntax errors, against ${P(CL.slopes.runtime.share_faster)} on runtime errors. Clustering finds five overlapping profiles. The two cohorts differ (TE23 has more students in the “often stuck” and “whack-a-mole” profiles).`],
+];
+findings.forEach(([t, p]) => { const li = h('li', {}, $('#findings-list')); const d = h('div', {}, li); h('h3', { text: t }, d); const pp = h('p', {}, d); pp.innerHTML = p; });
+
+// behaviourist map
+const MAP = [
+  ['Positive punishment → avoidance', 'no', 'Not supported across the course', `Error share per run does not fall between units (${P(D.units[0].err)} in unit 1, ${P(D.units[9].err)} in unit 10). Errors move from syntax to runtime as new constructs arrive.`],
+  ['Avoidance within a new construct', 'part', 'Small effect', `Within a unit, syntax errors fall from ${P(D.within.syn[0], 1)} to ${P(D.within.syn[4], 1)} of runs; ${P(D.within.test.syn.share_lower)} of students show the drop.`],
+  ['Negative reinforcement → faster escape', 'yes', 'Supported for specific syntax errors', `Power-law escape curves: fix time ∝ k<sup>−α</sup> with α ≈ ${(-Math.log2(1 + L.indent_block.pct / 100)).toFixed(2)} for indentation blocks, ${(-Math.log2(1 + L.bracket.pct / 100)).toFixed(2)} for brackets, ${(-Math.log2(1 + L.colon.pct / 100)).toFixed(2)} for the colon.`],
+  ['Stimulus control (the message as S<sup>D</sup>)', 'yes', 'Message specificity matters', `Messages that name the repair are fast (colon ${sec(CAT.colon.med_latency)}) and learnable. The unspecific <code>invalid syntax</code> (${sec(CAT.invalid_syntax.med_latency)}) shows no learning.`],
+  ['Retention and spontaneous recovery', 'yes', 'Supported', `Gains hold on the first error of the day; fixes slow down after longer gaps (colon ${S(FOD.colon.gap_pct)}%, comma ${S(FOD.comma.gap_pct)}% per doubling of days since last met).`],
+  ['Response chains and trial-and-error', 'yes', 'Chains and variability persist', `Colon → indentation is ${(C.window[0]['Missing colon'] / C.window[0]['Other syntax errors']).toFixed(1)}× more likely than baseline within 30 s. ${P(W.share.wam)} of episodes pass through 3+ different errors, unchanged with experience.`],
+];
+MAP.forEach(([title, v, verdict, text]) => { const d = h('div', {}, $('#map')); const t = h('h3', {}, d); t.innerHTML = title; h('div', { cls: 'verdict ' + v, text: verdict }, d); const p = h('p', {}, d); p.innerHTML = text; });
+
+/* ---------- units chart */
+function drawUnits(which) {
+  const U = which === 'ex' ? D.units_ex : D.units;
+  lineChart($('#ch-units'), {
+    x: U.map(u => String(u.unit)), xTitle: 'Unit', yMax: 0.2, yTicks: [0, 0.05, 0.1, 0.15, 0.2], yFmt: (v, t) => P(v, t ? 1 : 0), dots: true,
+    series: [{ name: 'Syntax errors', values: U.map(u => u.syn), ln: 'ln-syn', f: 'f-syn', key: 'bg-syn', short: 'syntax' },
+             { name: 'Runtime errors', values: U.map(u => u.rt), ln: 'ln-rt', f: 'f-rt', key: 'bg-rt', short: 'runtime' }],
+    tipTitle: i => `Unit ${U[i].unit}`, tipExtra: i => [{ value: P(U[i].err, 1), label: 'any error' }, { value: N(U[i].attempts), label: 'runs' }],
+    aria: 'Line chart of the share of runs ending in syntax and runtime errors across units 1 to 12', m: { r: 100 }
+  });
+  $('#fig-units-sub').textContent = which === 'ex' ? 'Scaffolded (autograded) exercises only, the most comparable task type across units. Unit 12 has none.' : 'All code pages: scaffolded exercises, creative tasks, lesson notes and the sandbox.';
+}
+drawUnits('all');
+[['#tg-all', 'all'], ['#tg-ex', 'ex']].forEach(([id, w]) => $(id).addEventListener('click', () => { $('#tg-all').setAttribute('aria-pressed', w === 'all'); $('#tg-ex').setAttribute('aria-pressed', w === 'ex'); drawUnits(w); }));
+
+lineChart($('#ch-within'), {
+  x: ['1st', '2nd', '3rd', '4th', '5th'], xTitle: 'Fifth of the student\'s runs within the unit', yMax: 0.15, yTicks: [0, 0.05, 0.1, 0.15], yFmt: (v, t) => P(v, t ? 1 : 0), dots: true,
+  series: [{ name: 'Syntax errors', values: D.within.syn, ln: 'ln-syn', f: 'f-syn', key: 'bg-syn', short: 'syntax' },
+           { name: 'Runtime errors', values: D.within.rt, ln: 'ln-rt', f: 'f-rt', key: 'bg-rt', short: 'runtime' }],
+  aria: 'Line chart of error shares across fifths of practice within a unit', m: { r: 100 }
+});
+
+/* ---------- heatmap */
+(function () {
+  const host = $('#ch-heat'), cu = D.cat_unit, units = cu.units;
+  const TH = [1, 2, 4, 8, 16, 32], LAB = ['< 1', '1–2', '2–4', '4–8', '8–16', '16–32', '≥ 32'];
+  const q = v => { let i = 0; while (i < TH.length && v >= TH[i]) i++; return i; };
+  const leg = $('#heat-legend'); h('span', { text: 'Errors per 1,000 runs' }, leg);
+  LAB.forEach((l, i) => { const k = h('span', { cls: 'k' }, leg); h('span', { cls: 'sw bg-q' + i }, k); h('span', { text: l }, k); });
+  const fams = []; cu.cats.forEach((c, i) => { const f = CAT[c].family; if (!fams.length || fams[fams.length - 1].f !== f) fams.push({ f, rows: [] }); fams[fams.length - 1].rows.push(i); });
+  const lw = 250, cw = 62, rh = 22, gh = 24, top = 26;
+  const H = top + fams.length * gh + cu.cats.length * rh + 6, Wd = lw + units.length * cw + 4;
+  const svg = el('svg', { viewBox: `0 0 ${Wd} ${H}`, cls: 'chart', role: 'img', 'aria-label': 'Heatmap of errors per 1,000 runs by error type and unit', style: `max-width:${Wd}px` }, host);
+  units.forEach((u, j) => el('text', { x: lw + j * cw + cw / 2, y: 14, cls: 'tick', 'text-anchor': 'middle', text: 'U' + u }, svg));
+  let y = top;
+  fams.forEach(fg => {
+    el('text', { x: 0, y: y + 15, cls: 'panel-title', text: fg.f }, svg); y += gh;
+    fg.rows.forEach(i => {
+      const c = cu.cats[i];
+      el('text', { x: 12, y: y + rh / 2 + 1, cls: 'tick', 'dominant-baseline': 'middle', text: CAT[c].label }, svg);
+      cu.per1000[i].forEach((v, j) => {
+        const r = el('rect', { x: lw + j * cw + 1, y: y + 1, width: cw - 2, height: rh - 2, rx: 2, cls: 'cell q' + q(v) }, svg);
+        bindTip(r, () => [`${CAT[c].label} · unit ${units[j]}`, [{ value: v.toFixed(1), label: 'per 1,000 runs' }]]);
+      });
+      y += rh;
+    });
+  });
+  // table view
+  const rows = []; fams.forEach(fg => { rows.push({ __group: fg.f }); fg.rows.forEach(i => rows.push({ label: CAT[cu.cats[i]].label, v: cu.per1000[i] })); });
+  table($('#tbl-heat'), [{ h: 'Error type', v: r => r.label }, ...units.map((u, j) => ({ h: 'U' + u, r: 1, v: r => r.v[j].toFixed(1) }))], rows);
+})();
+
+/* ---------- forest plot */
+function forest(host, rows, o) {
+  host.replaceChildren();
+  const lw = 240, vw = 170, W = 1000, rh = 25, top = 26, H = top + rows.length * rh + 30, x0 = lw, x1 = W - vw;
+  const xs = v => x0 + (Math.max(o.min, Math.min(o.max, v)) - o.min) / (o.max - o.min) * (x1 - x0);
+  const svg = el('svg', { viewBox: `0 0 ${W} ${H}`, cls: 'chart', role: 'img', 'aria-label': o.aria, style: `max-width:${W}px` }, host);
+  o.ticks.forEach(t => { el('line', { x1: xs(t), x2: xs(t), y1: top - 6, y2: top + rows.length * rh, cls: t === 0 ? 'zero' : 'grid' }, svg); el('text', { x: xs(t), y: top + rows.length * rh + 16, cls: 'tick', 'text-anchor': 'middle', text: (t > 0 ? '+' : t < 0 ? '−' : '') + Math.abs(t) + '%' }, svg); });
+  el('text', { x: xs(o.min) + 2, y: 12, cls: 'axis-title', text: '← faster with practice' }, svg);
+  el('text', { x: xs(o.max) - 2, y: 12, cls: 'axis-title', 'text-anchor': 'end', text: 'slower →' }, svg);
+  el('text', { x: W, y: 12, cls: 'axis-title', 'text-anchor': 'end', text: o.valHead || 'per doubling [95% CI]' }, svg);
+  rows.forEach((r, i) => {
+    const y = top + i * rh + rh / 2, g = el('g', { cls: 'row' }, svg);
+    el('rect', { x: 0, y: y - rh / 2, width: W, height: rh, cls: 'row-hover' }, g);
+    el('text', { x: lw - 12, y, cls: 'tick', 'text-anchor': 'end', 'dominant-baseline': 'middle', text: r.label }, g);
+    el('line', { x1: xs(r.lo), x2: xs(r.hi), y1: y, y2: y, cls: 'ci ' + r.k }, g);
+    el('circle', { cx: xs(r.est), cy: y, r: 5, cls: 'dot ' + (r.k === 'syn' ? 'f-syn' : 'f-rt') }, g);
+    const sig = r.lo > 0 || r.hi < 0;
+    el('text', { x: W, y, cls: 'val', 'text-anchor': 'end', 'dominant-baseline': 'middle', 'font-weight': sig ? 600 : 400, text: `${S(r.est)}%  [${S(r.lo)}, ${S(r.hi)}]` }, g);
+    if (r.tip) bindTip(g, () => r.tip);
+  });
+}
+function drawForest(adj) {
+  const rows = D.learning.map(r => ({
+    label: r.label, k: r.eclass === 'syntax' ? 'syn' : 'rt', est: adj ? r.adj_pct : r.pct, lo: adj ? r.adj_lo : r.lo, hi: adj ? r.adj_hi : r.hi,
+    tip: [r.label, [{ value: `${S(r.pct)}%`, label: 'within student' }, { value: `${S(r.adj_pct)}%`, label: 'also holding unit & page type' }, { value: `${S(r.mixed_pct)}%`, label: 'mixed model (random slopes)' },
+      { value: N(r.n), label: 'fixes' }, { value: String(r.students), label: 'students' }, { value: String(r.k_median), label: 'median encounter number' }]]
+  })).sort((a, b) => a.est - b.est);
+  forest($('#ch-forest'), rows, { min: -30, max: 30, ticks: [-30, -20, -10, 0, 10, 20, 30], aria: 'Forest plot of the change in fix time per doubling of encounters by error type' });
+}
+drawForest(false);
+[['#tg-raw', false], ['#tg-adj', true]].forEach(([id, a]) => $(id).addEventListener('click', () => { $('#tg-raw').setAttribute('aria-pressed', !a); $('#tg-adj').setAttribute('aria-pressed', a); drawForest(a); }));
+table($('#tbl-forest'), [
+  { h: 'Error type', v: r => r.label }, { h: 'Fixes', r: 1, v: r => N(r.n) }, { h: 'Students', r: 1, v: r => r.students },
+  { h: 'Within student', r: 1, v: r => pctTxt(r), cls: r => (r.p < 0.05 ? 'sig' : 'ns') },
+  { h: 'Holding unit & page', r: 1, v: r => `${S(r.adj_pct)}% [${S(r.adj_lo)}, ${S(r.adj_hi)}]`, cls: r => (r.adj_p < 0.05 ? 'sig' : 'ns') },
+  { h: 'Mixed model', r: 1, v: r => `${S(r.mixed_pct)}%` },
+  { h: 'Fixed at next run', r: 1, v: r => P(r.one_base) }, { h: 'Change (pp per doubling)', r: 1, v: r => `${S(r.one_pp)} [${S(r.one_lo)}, ${S(r.one_hi)}]`, cls: r => (r.one_p < 0.05 ? 'sig' : 'ns') }
+], [...D.learning].sort((a, b) => a.pct - b.pct));
+
+/* ---------- small multiples: escape curves (log y) */
+(function () {
+  const host = $('#sm-curves');
+  const order = ['indent_block', 'bracket', 'colon', 'eq_assign', 'comma', 'invalid_syntax', 'name', 'attribute', 'type_value'];
+  const KL = ['1', '2', '3–4', '5–8', '9–16', '17–32', '33+'];
+  const lo = Math.log2(4), hi = Math.log2(128);
+  order.forEach(c => {
+    const r = D.curves.find(x => x.cat === c); if (!r) return;
+    const box = h('div', {}, host);
+    const Wd = 320, H = 210, m = { t: 46, r: 16, b: 30, l: 36 }, iw = Wd - m.l - m.r, ih = H - m.t - m.b;
+    const svg = el('svg', { viewBox: `0 0 ${Wd} ${H}`, cls: 'chart', role: 'img', 'aria-label': `Median fix time by encounter for ${r.label}`, style: `max-width:${Wd}px` }, box);
+    const xs = i => m.l + i * iw / (KL.length - 1), ys = v => m.t + ih - (Math.log2(Math.max(4, Math.min(128, v))) - lo) / (hi - lo) * ih;
+    const syn = r.eclass === 'syntax';
+    el('text', { x: 0, y: 13, cls: 'panel-title', text: r.label }, svg);
+    el('text', { x: 0, y: 27, cls: 'tick', text: `${S(r.pct)}% per doubling` + ((r.p < 0.05) ? '' : ' (n.s.)') }, svg);
+    [4, 8, 16, 32, 64, 128].forEach(t => { el('line', { x1: m.l, x2: m.l + iw, y1: ys(t), y2: ys(t), cls: 'grid' }, svg); el('text', { x: m.l - 6, y: ys(t), cls: 'tick', 'text-anchor': 'end', 'dominant-baseline': 'middle', text: t }, svg); });
+    KL.forEach((k, i) => { if (i % 2 === 0 || i === KL.length - 1) el('text', { x: xs(i), y: m.t + ih + 16, cls: 'tick', 'text-anchor': 'middle', text: k }, svg); });
+    const pts = r.bins.map(b => ({ i: KL.indexOf(b.k), ...b })).filter(b => b.i >= 0);
+    const clipId = 'clip-' + c; const cp = el('clipPath', { id: clipId }, svg); el('rect', { x: m.l, y: m.t, width: iw, height: ih }, cp);
+    const band = pts.map(p => `${xs(p.i)},${ys(p.q3)}`).join(' L') + ' L' + [...pts].reverse().map(p => `${xs(p.i)},${ys(p.q1)}`).join(' L');
+    el('path', { d: 'M' + band + ' Z', cls: syn ? 'band-syn' : 'band-rt', 'clip-path': `url(#${clipId})` }, svg);
+    el('path', { d: 'M' + pts.map(p => `${xs(p.i)},${ys(p.med)}`).join(' L'), cls: 'line ' + (syn ? 'ln-syn' : 'ln-rt') }, svg);
+    pts.forEach(p => { const d = el('circle', { cx: xs(p.i), cy: ys(p.med), r: 4, cls: 'dot ' + (syn ? 'f-syn' : 'f-rt') }, svg); bindTip(d, () => [`${r.label} · encounter ${p.k}`, [{ value: sec(p.med), label: 'median fix time' }, { value: `${sec(p.q1)}–${sec(p.q3)}`, label: 'middle 50%' }, { value: N(p.n), label: 'fixes' }]]); });
+    const f = pts[0], l = pts[pts.length - 1];
+    el('text', { x: xs(f.i) + 6, y: ys(f.med) - 9, cls: 'val', text: Math.round(f.med) + ' s' }, svg);
+    el('text', { x: xs(l.i) - 2, y: ys(l.med) - 9, cls: 'val', 'text-anchor': 'end', text: Math.round(l.med) + ' s' }, svg);
+  });
+  const cap = h('div', { cls: 'small' }, host.parentElement); cap.textContent = 'x axis: encounter number k (this student\'s k-th error of this type). y axis: seconds, log scale.';
+})();
+
+/* ---------- first-of-day table + hint text */
+table($('#tbl-fod'), [
+  { h: 'Error type', v: r => r.label },
+  { h: 'Days with the error', r: 1, v: r => `${S(r.pct)}%`, cls: r => (r.p < 0.05 ? 'sig' : 'ns') },
+  { h: 'Time since last met', r: 1, v: r => `${S(r.gap_pct)}%`, cls: r => (r.gap_p < 0.05 ? 'sig' : 'ns') },
+  { h: 'n', r: 1, v: r => N(r.n) }
+], D.fod.filter(r => ['colon', 'indent_block', 'indent_unexpected', 'bracket', 'comma', 'eq_assign', 'invalid_syntax', 'name', 'attribute', 'type_value', 'cmu_value', 'cmu_args'].includes(r.cat)));
+$('#hint-text').innerHTML = `About half of NameErrors carry a hint (<code>Did you mean: 'Rect'?</code>). With the hint the median fix takes ${sec(D.name_hint['1'].med)}, against ${sec(D.name_hint['0'].med)} without. Neither version gets faster with practice (${S(D.name_hint['1'].pct)}% and ${S(D.name_hint['0'].pct)}% per doubling). A clearer discriminative stimulus speeds the escape but does not by itself produce a learning curve.`;
+$('#oneshot-text').innerHTML = `The same split shows in errors that are gone at the very next run. For the colon this share is ${P(L.colon.one_base)} and rises by ${Math.abs(L.colon.one_pp).toFixed(1)} percentage points per doubling of encounters; for a missing indented block it is ${P(L.indent_block.one_base)} and rises by ${Math.abs(L.indent_block.one_pp).toFixed(1)}. For NameError (${S(L.name.one_pp)}) and AttributeError (${S(L.attribute.one_pp)}) it does not rise.`;
+
+/* ---------- individual slopes strip */
+(function () {
+  const host = $('#ch-strip'), sl = CL.slopes;
+  const Wd = 1000, H = 210, m = { l: 140, r: 24, t: 16, b: 36 }, iw = Wd - m.l - m.r;
+  const min = -20, max = 15, xs = v => m.l + (Math.max(min, Math.min(max, v)) - min) / (max - min) * iw;
+  const svg = el('svg', { viewBox: `0 0 ${Wd} ${H}`, cls: 'chart', role: 'img', 'aria-label': 'Strip plot of each student\'s learning slope for syntax and runtime errors', style: `max-width:${Wd}px` }, host);
+  [-20, -15, -10, -5, 0, 5, 10, 15].forEach(t => { el('line', { x1: xs(t), x2: xs(t), y1: m.t, y2: H - m.b, cls: t === 0 ? 'zero' : 'grid' }, svg); el('text', { x: xs(t), y: H - m.b + 16, cls: 'tick', 'text-anchor': 'middle', text: (t > 0 ? '+' : t < 0 ? '−' : '') + Math.abs(t) + '%' }, svg); });
+  el('text', { x: m.l + iw / 2, y: H - 2, cls: 'axis-title', 'text-anchor': 'middle', text: 'Change in fix time per doubling of encounters' }, svg);
+  [['syntax', 'Syntax errors', 'f-syn', 58], ['runtime', 'Runtime errors', 'f-rt', 128]].forEach(([k, lab, f, cy]) => {
+    el('text', { x: 0, y: cy - 6, cls: 'end-label', text: lab }, svg);
+    el('text', { x: 0, y: cy + 10, cls: 'tick', text: `${P(sl[k].share_faster)} speed up` }, svg);
+    sl[k].shrunk.forEach((v, i) => { const jy = cy + (((i * 0.6180339887) % 1) - 0.5) * 40; el('circle', { cx: xs(v), cy: jy, r: 4, cls: 'dot ' + f, opacity: 0.75 }, svg); });
+    el('line', { x1: xs(sl[k].mean_pct), x2: xs(sl[k].mean_pct), y1: cy - 26, y2: cy + 26, cls: 'line ln-ink' }, svg);
+  });
+  $('#students-text').innerHTML = `The class-level curves average over students. Estimated one by one, the syntax-error slopes centre on ${S(sl.syntax.mean_pct)}% per doubling, with a spread (SD of the underlying slopes) of ${sl.syntax.sd_true_pct.toFixed(1)}%. That puts about ${P(sl.syntax.share_faster)} of students on a downward escape curve. For runtime errors the centre is ${S(sl.runtime.mean_pct)}% and only about ${P(sl.runtime.share_faster)} get faster. So yes, some students learn to solve some errors quickly. The errors where this happens are the syntax errors with a stereotyped repair, and almost every student shows it there. Individual slopes are noisy (reliability about ${sl.syntax.reliability.toFixed(2)}), so the ranking of single students should not be over-read.`;
+})();
+
+/* ---------- colon chain */
+(function () {
+  const w = C.window;
+  lineChart($('#ch-window'), {
+    x: ['30 s', '1 min', '2 min', '5 min', '10 min'], xTitle: 'Window after the first error', yMax: 0.3, yTicks: [0, 0.1, 0.2, 0.3], yFmt: (v, t) => P(v, t ? 1 : 0), dots: true,
+    series: [
+      { name: 'after a missing colon', values: w.map(r => r['Missing colon']), ln: 'ln-syn', f: 'f-syn', key: 'bg-syn', short: 'colon' },
+      { name: 'after other syntax errors', values: w.map(r => r['Other syntax errors']), ln: 'ln-g1', f: 'f-g1', key: 'bg-g1', short: 'other syntax' },
+      { name: 'after runtime errors', values: w.map(r => r['Runtime errors']), ln: 'ln-g2', f: 'f-g2', key: 'bg-g2', short: 'runtime' },
+      { name: 'colon error after an indentation error', values: w.map(r => r['Indentation then colon']), ln: 'ln-ink', f: 'f-ink', key: 'bg-ink', short: 'reverse' }],
+    aria: 'Line chart: probability of an indentation error within time windows after different errors', m: { r: 118 }
+  });
+  const bu = C.by_unit;
+  columnChart($('#ch-chain-unit'), { x: bu.map(r => 'U' + r.unit), values: bu.map(r => r.p), yMax: 0.3, yTicks: [0, 0.1, 0.2, 0.3], yFmt: v => P(v), valFmt: v => P(v), f: 'f-syn',
+    tip: i => [`Unit ${bu[i].unit}`, [{ value: P(bu[i].p, 1), label: 'turn into an indentation-block error' }, { value: N(bu[i].n), label: 'missing-colon errors' }]], aria: 'Column chart of the colon-to-indentation share by unit' });
+  const bk = C.by_k;
+  columnChart($('#ch-chain-k'), { x: bk.map(r => r.k), values: bk.map(r => r.p), yMax: 0.3, yTicks: [0, 0.1, 0.2, 0.3], yFmt: v => P(v), valFmt: v => P(v), f: 'f-syn', xTitle: 'Missing-colon encounter number',
+    tip: i => [`Encounter ${bk[i].k}`, [{ value: P(bk[i].p, 1), label: 'turn into an indentation-block error' }, { value: N(bk[i].n), label: 'missing-colon errors' }]], aria: 'Column chart of the colon-to-indentation share by encounter number' });
+  const st = C.stmt_after_colon, base = C.stmt_all_block;
+  const host = $('#colon-text');
+  const p1 = h('p', {}, host); p1.innerHTML = `Counting each missing-colon error once (${N(D.categories.find(c => c.cat === 'colon').spells)} spells from ${N(C.n_colon_events)} error events), half are fixed straight to a clean run (${P(C.colon_end.solved)}). In ${P(C.colon_end.replaced)} of cases the fix reveals a different error, and the most common of these is <code>expected an indented block</code> (${P(C.colon_next[0].share)} of the replacements). When it does, the statement is an <code>if</code> in ${P(st.if)} of cases (against ${P(base.if)} of all such errors), a function definition in ${P(st.def)} (${P(base.def)}) and a <code>for</code> loop in ${P(st.for)} (${P(base.for)}). Conditionals are where students write the colon line by hand.`;
+  const p2 = h('p', {}, host); p2.innerHTML = `Within students, the chain becomes ${Math.abs(C.k_within.pp).toFixed(1)} percentage points less likely per doubling of colon encounters. Held to the same unit, the decline is ${Math.abs(C.k_within_adj.pp).toFixed(1)} points and not significant. The fading travels with the course rather than with practice on the colon itself. Behaviourally it is a chain in which the response that removes the first aversive message produces the stimulus for the next.`;
+  const ex = W.examples[0];
+  if (ex) { h('h3', { text: 'Example from the logs' }, host); const e = h('div', { cls: 'episode' }, host); ex.steps.forEach((s, i) => { const r = h('div', { cls: 'step' }, e); h('span', { cls: 'n', text: 'run ' + (i + 1) }, r); h('span', { text: s }, r); }); const r = h('div', { cls: 'step' }, e); h('span', { cls: 'n', text: 'run ' + (ex.steps.length + 1) }, r); h('span', { cls: 'ok', text: `clean run · ${Math.round(ex.latency)} s after the first error · unit ${ex.unit}` }, r); }
+})();
+
+/* ---------- whack-a-mole */
+(function () {
+  const dist = W.n_msgs_dist, keys = ['1', '2', '3', '4', '5', '6'], labs = ['1', '2', '3', '4', '5', '6+'];
+  $('#mole-intro').innerHTML = `A debugging episode runs from the first error on a page to the next clean run there. In ${P(1 - W.share.multi)} of episodes the student meets one error and removes it. In the rest the fix uncovers or creates another error: ${P(W.share.multi)} meet two or more different messages and ${P(W.share.wam)} three or more (${P(W.share.wam_cat)} three or more different <em>types</em>). Each additional error adds about a minute. This is the trial-and-error picture: responses vary until one is reinforced by a clean run. It does not fade. The within-student change per doubling of experience is ${S(W.within_adj.pp)} percentage points once unit is held constant, while each later unit raises the odds by ${((W.model.OR_per_unit - 1) * 100).toFixed(1)}%.`;
+  columnChart($('#ch-mole-dist'), { x: labs, values: keys.map(k => dist[k]), yMax: 0.8, yTicks: [0, 0.2, 0.4, 0.6, 0.8], yFmt: v => P(v), valFmt: v => P(v, v < 0.1 ? 1 : 0), f: 'f-g1', xTitle: 'Different error messages in the episode',
+    tip: i => [`${labs[i]} different errors`, [{ value: P(dist[keys[i]], 1), label: 'of episodes' }]], aria: 'Column chart of episodes by number of different errors' });
+  const lt = W.latency_by_n;
+  columnChart($('#ch-mole-time'), { x: labs, values: keys.map(k => lt[k] / 60), yMax: 7, yTicks: [0, 2, 4, 6], yFmt: v => v + ' min', valFmt: v => v < 1.5 ? Math.round(v * 60) + ' s' : v.toFixed(1) + ' min', f: 'f-g1', xTitle: 'Different error messages in the episode',
+    tip: i => [`${labs[i]} different errors`, [{ value: sec(lt[keys[i]]), label: 'median time to a clean run' }]], aria: 'Column chart of time to a clean run by number of different errors' });
+  const bu = W.by_unit;
+  lineChart($('#ch-mole-unit'), { x: bu.map(r => String(r.unit)), xTitle: 'Unit', yMax: 0.4, yTicks: [0, 0.1, 0.2, 0.3, 0.4], yFmt: (v, t) => P(v, t ? 1 : 0), dots: true,
+    series: [{ name: '3 or more different errors', values: bu.map(r => r.wam), ln: 'ln-ink', f: 'f-ink', key: 'bg-ink', short: '3+' }, { name: '2 or more', values: bu.map(r => r.multi), ln: 'ln-g1', f: 'f-g1', key: 'bg-g1', short: '2+' }],
+    tipTitle: i => `Unit ${bu[i].unit}`, tipExtra: i => [{ value: N(bu[i].n), label: 'episodes' }], aria: 'Line chart of whack-a-mole episodes by unit', m: { r: 70 } });
+  const be = W.by_experience;
+  lineChart($('#ch-mole-exp'), { x: be.map(r => r.k), xTitle: 'Episodes the student had already been through', yMax: 0.4, yTicks: [0, 0.1, 0.2, 0.3, 0.4], yFmt: (v, t) => P(v, t ? 1 : 0), dots: true,
+    series: [{ name: '3 or more different errors', values: be.map(r => r.wam), ln: 'ln-ink', f: 'f-ink', key: 'bg-ink', short: '3+' }, { name: '2 or more', values: be.map(r => r.multi), ln: 'ln-g1', f: 'f-g1', key: 'bg-g1', short: '2+' }],
+    tipExtra: i => [{ value: N(be[i].n), label: 'episodes' }], aria: 'Line chart of whack-a-mole episodes by experience', m: { r: 70 } });
+  table($('#tbl-pairs'), [{ h: 'Error', v: r => r.src }, { h: 'Fix led to', v: r => r.dst }, { h: 'Times', r: 1, v: r => N(r.n) }], W.top_pairs.slice(0, 12));
+  const host = $('#mole-examples');
+  h('h3', { text: 'Where whack-a-mole starts' }, host);
+  const p = h('p', {}, host); const top = W.by_first_cat.slice(0, 4);
+  p.innerHTML = `Episodes that start with a structural syntax error go furthest: ${top.map(r => `${r.label.replace(/'/g, '’')} ${P(r.wam)}`).join(', ')} reach three or more different errors. Many replacements stay within a type (one NameError fixed, the next name undefined), which is what fixing a program line by line looks like. Others cross types, NameError ↔ AttributeError being the most common.`;
+  const ex = W.examples[1];
+  if (ex) { h('h3', { text: 'Example from the logs' }, host); const e = h('div', { cls: 'episode' }, host); ex.steps.forEach((s, i) => { const r = h('div', { cls: 'step' }, e); h('span', { cls: 'n', text: 'run ' + (i + 1) }, r); h('span', { text: s }, r); }); const r = h('div', { cls: 'step' }, e); h('span', { cls: 'n', text: 'run ' + (ex.steps.length + 1) }, r); h('span', { cls: 'ok', text: `clean run · ${sec(ex.latency)} after the first error · unit ${ex.unit}` }, r); }
+})();
+
+/* ---------- classes */
+(function () {
+  const cls = D.classes, pooled = D.pooled;
+  const te22 = cls.filter(c => c.cohort === 'TE22'), te23 = cls.filter(c => c.cohort === 'TE23'), eta = CL.class_eta2;
+  const etaMin = Math.min(...Object.values(eta)), etaMax = Math.max(...Object.values(eta));
+  $('#classes-text').innerHTML = `Every class shows the same split between syntax and runtime escapes, and the colon chain and whack-a-mole rates are within a few points of each other. The TE23 classes made more syntax errors per run (${te23.map(c => P(c.syn, 1)).join(' and ')} against ${P(Math.min(...te22.map(c => c.syn)), 1)}–${P(Math.max(...te22.map(c => c.syn)), 1)} in TE22), had fewer runs per student, and took slightly longer to fix errors. Their syntax escape curves are among the steepest, so they caught up rather than stalled. Differences between classes are small next to differences between students within a class. On the student-level measures used for clustering, class membership accounts for ${P(etaMin)}–${P(etaMax)} of the variation between students.`;
+  table($('#tbl-classes'), [
+    { h: 'Class', v: r => r.group }, { h: 'Students', r: 1, v: r => r.students }, { h: 'Runs per student', r: 1, v: r => N(r.attempts_per_student) },
+    { h: 'Runs with error', r: 1, v: r => P(r.err, 1) }, { h: 'syntax', r: 1, v: r => P(r.syn, 1) }, { h: 'runtime', r: 1, v: r => P(r.rt, 1) },
+    { h: 'Median fix, syntax', r: 1, v: r => sec(r.med_lat_syn) }, { h: 'Median fix, runtime', r: 1, v: r => sec(r.med_lat_rt) },
+    { h: 'Fixed at next run', r: 1, v: r => P(r.one_shot) }, { h: '3+ error episodes', r: 1, v: r => P(r.wam, 1) }, { h: 'Colon → indentation', r: 1, v: r => P(r.colon_to_block, 1) },
+    { h: 'Syntax slope', r: 1, v: r => S(pooled[r.group].syntax.pct) + '%' }, { h: 'Runtime slope', r: 1, v: r => S(pooled[r.group].runtime.pct) + '%' }
+  ], cls);
+  // class forest: two markers per class
+  const host = $('#ch-class-forest'); host.replaceChildren();
+  const rowsC = [['All students', 'all'], ...cls.map(c => [c.group + ' (' + c.cohort + ')', c.group])];
+  const lw = 170, Wd = 1000, rh = 34, top = 24, H = top + rowsC.length * rh + 28, x0 = lw, x1 = Wd - 20, min = -12, max = 12;
+  const xs = v => x0 + (Math.max(min, Math.min(max, v)) - min) / (max - min) * (x1 - x0);
+  const svg = el('svg', { viewBox: `0 0 ${Wd} ${H}`, cls: 'chart', role: 'img', 'aria-label': 'Escape slopes by class', style: `max-width:${Wd}px` }, host);
+  [-12, -8, -4, 0, 4, 8, 12].forEach(t => { el('line', { x1: xs(t), x2: xs(t), y1: top - 4, y2: top + rowsC.length * rh, cls: t === 0 ? 'zero' : 'grid' }, svg); el('text', { x: xs(t), y: top + rowsC.length * rh + 16, cls: 'tick', 'text-anchor': 'middle', text: (t > 0 ? '+' : t < 0 ? '−' : '') + Math.abs(t) + '%' }, svg); });
+  el('text', { x: xs(min) + 2, y: 12, cls: 'axis-title', text: '← faster with practice' }, svg);
+  el('text', { x: xs(max) - 2, y: 12, cls: 'axis-title', 'text-anchor': 'end', text: 'slower →' }, svg);
+  rowsC.forEach(([lab, key], i) => {
+    const y = top + i * rh + rh / 2, g = el('g', { cls: 'row' }, svg);
+    el('rect', { x: 0, y: y - rh / 2, width: Wd, height: rh, cls: 'row-hover' }, g);
+    el('text', { x: lw - 12, y, cls: i === 0 ? 'end-label' : 'tick', 'text-anchor': 'end', 'dominant-baseline': 'middle', text: lab }, g);
+    [['syntax', -6, 'syn', 'f-syn'], ['runtime', 6, 'rt', 'f-rt']].forEach(([ec, dy, k, f]) => {
+      const r = pooled[key][ec];
+      el('line', { x1: xs(r.lo), x2: xs(r.hi), y1: y + dy, y2: y + dy, cls: 'ci ' + k }, g);
+      el('circle', { cx: xs(r.pct), cy: y + dy, r: 4.5, cls: 'dot ' + f }, g);
+    });
+    bindTip(g, () => [lab, ['syntax', 'runtime'].map(ec => ({ key: ec === 'syntax' ? 'bg-syn' : 'bg-rt', value: `${S(pooled[key][ec].pct)}% [${S(pooled[key][ec].lo)}, ${S(pooled[key][ec].hi)}]`, label: ec }))]);
+  });
+  // small multiples per class
+  const sm = $('#sm-classes');
+  cls.forEach(c => {
+    const box = h('div', {}, sm); h('div', { cls: 'small', text: `${c.group} · ${c.students} students` }, box);
+    const U = D.unit_by_group[c.group];
+    const d = h('div', {}, box);
+    lineChart(d, { x: U.map(u => String(u.unit)), xEvery: 3, yMax: 0.2, yTicks: [0, 0.1, 0.2], yFmt: (v, t) => P(v, t ? 1 : 0), w: 210, h: 150, m: { t: 10, r: 34, b: 26, l: 34 }, endLabels: true,
+      series: [{ name: 'Syntax', values: U.map(u => u.syn), ln: 'ln-syn', f: 'f-syn', key: 'bg-syn' }, { name: 'Runtime', values: U.map(u => u.rt), ln: 'ln-rt', f: 'f-rt', key: 'bg-rt' }],
+      tipTitle: i => `${c.group} · unit ${U[i].unit}`, tipExtra: i => [{ value: N(U[i].attempts), label: 'runs' }], aria: `Error shares by unit for ${c.group}` });
+  });
+  // per-class category slopes
+  const cats = ['colon', 'indent_block', 'bracket', 'comma', 'eq_assign', 'invalid_syntax', 'name', 'attribute', 'cmu_value', 'cmu_args', 'type_value'];
+  table($('#tbl-class-cat'), [{ h: 'Error type', v: r => CAT[r].label }, ...cls.map(c => ({ h: c.group, r: 1, v: r => { const x = D.class_cat[c.group][r]; return x ? `${S(x.pct)}%` : '–'; }, cls: r => { const x = D.class_cat[c.group][r]; return x && (x.hi < 0 || x.lo > 0) ? 'sig' : 'ns'; } }))], cats);
+})();
+
+/* ---------- clusters */
+(function () {
+  const names = CL.names, sizes = CL.sizes, z = CL.profile_z, raw = CL.profile_raw;
+  const sel = CL.selection.find(s => s.k === CL.k);
+  $('#clusters-text').innerHTML = `<p>Each of ${CL.n} students with enough errors (at least 50 fixed errors and 30 episodes) is described by five features. These are fix time relative to what is typical for the same error type, the share of errors fixed at the next run, the speed-up on syntax errors, the share of whack-a-mole episodes, and the share of errors left unresolved. All features are relative to the error type or unit, so meeting harder errors does not make a student look slow.</p><p>The structure is weak. The best silhouette is ${CL.selection[0].silhouette.toFixed(2)} (k = 2), and no solution separates students cleanly. Read the clusters as regions of a continuum, not as types. The five-cluster k-means solution was chosen because it is the most stable solution that a different method (Ward clustering) reproduces: bootstrap ARI ${sel.stability_ari.toFixed(2)}, agreement with Ward ${sel.ward_agreement_ari.toFixed(2)}, silhouette ${sel.silhouette.toFixed(2)}. Its profiles are easy to name. A two-group split (fluent vs struggling) is the coarser alternative that a Gaussian mixture prefers. The main axis of variation (${P(CL.pca_var[0])} of the variance) is fix speed, together with one-shot fixes and leaving errors unresolved. The syntax learning slope is a separate, nearly independent dimension.</p><p>The profiles differ in how many errors students make (p ${CL.kruskal.err_rate < 0.001 ? '< .001' : '= ' + CL.kruskal.err_rate}) and in how much they practised (runs, p ${CL.kruskal.attempts < 0.001 ? '< .001' : '= ' + CL.kruskal.attempts}). The fluent fixers made the most runs, which fits a conditioning account: more trials, more fluent escape. Class membership is not independent of profile (p = ${CL.group_p.toFixed(3)}). Most of this is a cohort difference (p < .001): TE23 students are over-represented among “often stuck” and “whack-a-mole debuggers”.</p>`;
+  // diverging profile heatmap
+  const feats = [['speed', 'Fix time vs typical', 1], ['one_shot', 'Fixed at next run', 1], ['learning', 'Speed-up on syntax errors', -1], ['mole', 'Whack-a-mole episodes', 1], ['gave_up', 'Errors left unresolved', 1]];
+  const bins = [-1.5, -0.75, -0.25, 0.25, 0.75, 1.5], cl = ['dn3', 'dn2', 'dn1', 'd0', 'dp1', 'dp2', 'dp3'];
+  const qd = v => { let i = 0; while (i < bins.length && v >= bins[i]) i++; return cl[i]; };
+  const leg = $('#div-legend'); h('span', { text: 'z vs average student:' }, leg);
+  ['≤ −1.5', '−1.5…−0.75', '−0.75…−0.25', '±0.25', '0.25…0.75', '0.75…1.5', '≥ 1.5'].forEach((l, i) => { const k = h('span', { cls: 'k' }, leg); h('span', { cls: 'sw bg-' + cl[i] }, k); h('span', { text: l }, k); });
+  const host = $('#ch-profile'), lw = 240, cw = 150, rh = 42, top = 44, Wd = lw + feats.length * cw, H = top + 5 * rh + 4;
+  const svg = el('svg', { viewBox: `0 0 ${Wd} ${H}`, cls: 'chart', role: 'img', 'aria-label': 'Heatmap of cluster profiles', style: `max-width:${Wd}px` }, host);
+  feats.forEach(([f, lab], j) => { const words = lab.split(' '); const mid = Math.ceil(words.length / 2); el('text', { x: lw + j * cw + cw / 2, y: 16, cls: 'tick', 'text-anchor': 'middle', text: words.slice(0, mid).join(' ') }, svg); el('text', { x: lw + j * cw + cw / 2, y: 30, cls: 'tick', 'text-anchor': 'middle', text: words.slice(mid).join(' ') }, svg); });
+  [1, 2, 3, 4, 5].forEach((c, i) => {
+    const y = top + i * rh;
+    el('text', { x: 0, y: y + rh / 2 - 6, cls: 'end-label', 'dominant-baseline': 'middle', text: names[c] }, svg);
+    el('text', { x: 0, y: y + rh / 2 + 9, cls: 'tick', 'dominant-baseline': 'middle', text: `${sizes[c]} students` }, svg);
+    feats.forEach(([f, lab, sgn], j) => {
+      const v = z[c][f] * sgn, k = qd(v);
+      const r = el('rect', { x: lw + j * cw + 1, y: y + 1, width: cw - 2, height: rh - 2, rx: 3, cls: 'cell ' + k }, svg);
+      el('text', { x: lw + j * cw + cw / 2, y: y + rh / 2 + 1, 'text-anchor': 'middle', 'dominant-baseline': 'middle', cls: 'val tc-' + k, text: S(v, 2) }, svg);
+      bindTip(r, () => [`${names[c]} · ${lab}`, [{ value: S(v, 2), label: 'z vs average student' }]]);
+    });
+  });
+  table($('#tbl-clusters'), [
+    { h: 'Profile', v: c => names[c] }, { h: 'n', r: 1, v: c => sizes[c] }, { h: 'Median fix', r: 1, v: c => sec(raw[c].med_latency) },
+    { h: 'Fixed at next run', r: 1, v: c => P(raw[c].one_shot_raw) }, { h: '3+ error episodes', r: 1, v: c => P(raw[c].mole_raw, 1) }, { h: 'Left unresolved', r: 1, v: c => P(raw[c].gave_up, 1) },
+    { h: 'Syntax slope', r: 1, v: c => S(raw[c].learning) + '%' }, { h: 'Runtime slope', r: 1, v: c => S(raw[c].learning_runtime) + '%' },
+    { h: 'Runs with error', r: 1, v: c => P(raw[c].err_rate, 1) }, { h: 'Runs', r: 1, v: c => N(raw[c].attempts) }
+  ], [1, 2, 3, 4, 5]);
+  const groups = Object.keys(CL.by_group);
+  table($('#tbl-class-cluster'), [{ h: 'Class', v: g => g }, ...[1, 2, 3, 4, 5].map(c => ({ h: names[c], r: 1, v: g => String(CL.by_group[g][c] || 0) }))], groups);
+})();
+
+/* ---------- methods */
+(function () {
+  const o = O;
+  $('#methods-text').innerHTML = `
+  <p><strong>Data.</strong> CMU CS Academy event logs for the CS1 course (cs1-22) in the cohorts' own course years: TE22 (te22a, te22b, te22c; ${o.dates.TE22[0]} to ${o.dates.TE22[1]}) and TE23 (te23b, te23c; ${o.dates.TE23[0]} to ${o.dates.TE23[1]}). Exercise pages were mapped to units with the exercise list. Lesson-note pages were mapped by their id ranges, which run in curriculum order with gaps between units. Activity in other courses (cs0, cs2) was dropped.</p>
+  <p><strong>Executions.</strong> A run is a <code>run_code_exercise</code>, <code>run_code_inline</code> or <code>run_code_sandbox</code> event. Errors (<code>compile_error</code>, <code>runtime_error</code>) are linked to the latest execution before them. The platform also re-runs saved code when a page is loaded or reset, and the autograder runs it on submit; these count as executions too. About 4.5% of compile errors had no logged run just before them (runs started some other way). A compile error more than 2 s after its run, or any error more than 1.5 s after the previous error of the same run, was treated as a new, unlogged run. Error events logged twice within a second were removed (${N(2350)}). ${N(o.env_messages_excluded)} messages that are not programming errors were excluded (closed input box, media that failed to load). Totals: ${N(o.attempts)} runs, ${N(o.errors)} errors.</p>
+  <p><strong>Spells.</strong> A spell follows one exact message (so <code>line 12</code> and <code>line 30</code> are different instances) on one page. It runs from the run that first shows the message to the first later run on the same page that does not. It ends <em>solved</em> if that run is clean and <em>replaced</em> if it shows a different error. It is <em>censored</em> if the student first runs code on another page, is silent for more than 10 minutes, or never runs again. Fix time is the time from the error to that run. Analyses of fix time use <em>fresh</em> spells: the error came from the student's own run, not a page load, and the student had already edited that page. This excludes bugs planted in starter code (unit 1 checkpoints, for example).</p>
+  <p><strong>Episodes.</strong> An episode runs from the first error after a clean run on a page to the next clean run there, with the same censoring. Its length is the number of different messages met. <em>Whack-a-mole</em> means three or more.</p>
+  <p><strong>Learning slopes.</strong> For each error type, log<sub>10</sub>(fix time) was regressed on log<sub>2</sub>(k), where k is the student's k-th spell of that type. The model has student fixed effects and standard errors clustered by student, so the slope compares each student with themselves and is reported as % change per doubling of k. Adjusted models add unit and page type (exercise, creative task, notes, sandbox). A random-intercept-and-slope mixed model gives nearly the same estimates. Shares (fixed at next run, chain, whack-a-mole) use the same fixed-effects design as linear probability models. Across-day curves use only the first spell of each type per student and day.</p>`;
+  const rows = []; let fam = null;
+  D.categories.forEach(c => { if (c.family !== fam) { rows.push({ __group: c.family }); fam = c.family; } rows.push(c); });
+  table($('#tbl-tax'), [
+    { h: 'Type', v: r => r.label }, { h: 'Class', v: r => { const s = h('span', { cls: 'pill ' + (r.eclass === 'syntax' ? 'syn' : 'rt'), text: r.eclass }); return s; } },
+    { h: 'Most common message', mono: 1, v: r => r.example.length > 90 ? r.example.slice(0, 88) + '…' : r.example },
+    { h: 'Errors', r: 1, v: r => N(r.errors) }, { h: 'Fresh spells', r: 1, v: r => N(r.spells) }, { h: 'Students', r: 1, v: r => r.students },
+    { h: 'Median fix', r: 1, v: r => sec(r.med_latency) }, { h: 'Fixed at next run', r: 1, v: r => P(r.one_shot) }
+  ], rows);
+  table($('#tbl-sens'), [
+    { h: 'Error type', v: r => r.label },
+    ...[['main', 'Main'], ['under5min', 'Fixes ≤ 5 min'], ['exercises', 'Exercises only'], ['TE22', 'TE22'], ['TE23', 'TE23']].map(([k, lab]) => ({ h: lab, r: 1, v: r => r[k] == null ? '–' : S(r[k]) + '%', cls: r => (r[k + '_p'] != null && r[k + '_p'] < 0.05 ? 'sig' : 'ns') }))
+  ], D.sensitivity);
+  $('#limits-text').innerHTML = `
+  <h3>Limitations</h3>
+  <ul>
+  <li>The logs hold no code, so a “fix” is inferred from the message disappearing. A new syntax error earlier in the file can mask an older one. A clean run only shows that no error fired: runtime errors in event handlers appear only when the student triggers them.</li>
+  <li>Fix time includes everything between the message and the next run: reading, thinking, editing, and sometimes writing more code before running again. Teacher talk inside a lesson can inflate it, so silences over 10 minutes end a spell. Results hold when only fixes under 5 minutes are kept.</li>
+  <li>Running code on any other page ends a spell, including running an example on a lesson page in the middle of debugging. Fixes that involved consulting the notes are therefore partly lost (1.2% of fresh spells end this way).</li>
+  <li>Encounter number and course progress grow together. The adjusted models separate them as far as the data allow, but “experience with this error” and “later in the course” cannot be fully disentangled.</li>
+  <li>Lesson-note pages hold several small editors that the log does not tell apart, so notes-page spells can mix programs. Notes pages are a small share of runs (${P(o.ctx_attempts.notes / o.attempts)}).</li>
+  <li>Clusters are exploratory and weakly separated. Individual slopes have reliability around 0.35. Group-level statements are much firmer than statements about single students.</li>
+  </ul>
+  <h3>Related work to connect to</h3>
+  <ul class="small">
+  <li>Thorndike, E. L. (1898). Animal intelligence: An experimental study of the associative processes in animals. <em>Psychological Review Monograph Supplements, 2</em>(4). Puzzle-box escape latencies and the law of effect.</li>
+  <li>Skinner, B. F. (1953). <em>Science and Human Behavior.</em> Macmillan. Escape and avoidance, punishment, discriminative stimuli, chaining.</li>
+  <li>Mowrer, O. H. (1947). On the dual nature of learning. <em>Harvard Educational Review, 17</em>, 102–148. Two-factor theory of avoidance.</li>
+  <li>Newell, A., &amp; Rosenbloom, P. S. (1981). Mechanisms of skill acquisition and the law of practice. In J. R. Anderson (Ed.), <em>Cognitive Skills and Their Acquisition.</em> Power-law learning curves.</li>
+  <li>Jadud, M. C. (2006). Methods and tools for exploring novice compilation behaviour. <em>ICER 2006.</em> Repeated-error sequences (the Error Quotient).</li>
+  <li>Denny, P., Luxton-Reilly, A., &amp; Tempero, E. (2012). All syntax errors are not equal. <em>ITiCSE 2012.</em></li>
+  <li>Altadmri, A., &amp; Brown, N. C. C. (2015). 37 million compilations: Investigating novice programming mistakes in large-scale student data. <em>SIGCSE 2015.</em></li>
+  <li>Becker, B. A., et al. (2019). Compiler error messages considered unhelpful: The landscape of text-based programming error message research. <em>ITiCSE-WGR 2019.</em></li>
+  </ul>`;
+})();
+</script>
+
+</body></html>

@@ -1,0 +1,740 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>TE22A Schedule and Activity</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..700&family=IBM+Plex+Sans:wght@400;500;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400..600;1,8..60,400&display=swap">
+<style>
+
+/* Layout: one reading column for prose (~68ch) inside a 1120px frame; figures use the full frame width. */
+:root {
+  --bg: #f4f5f7;
+  --surface: #ffffff;
+  --surface-2: #eceef2;
+  --ink: #14171c;
+  --ink-2: #454c57;
+  --muted: #6f7783;
+  --hair: #e0e3e8;
+  --axis: #c3c8d0;
+  --link: #1d5fae;
+  --accent: #2a78d6;
+  --series-2: #eb6834;
+  --cp: #eb6834;
+  --cr: #1baf7a;
+  --ex: #cfd4db;
+  --st0: #eceef2;
+  --st1: #86b6ef;
+  --st2: #3987e5;
+  --st3: #184f95;
+  --ga: #0d366b;
+  --gb: #1c5cab;
+  --gc: #3987e5;
+  --gde: #86b6ef;
+  --band: #edf2f9;
+  --note-bg: #fbf3ec;
+  --note-rule: #eb6834;
+  --font-display: "Bricolage Grotesque", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  --font-text: "Source Serif 4", "Iowan Old Style", Georgia, "Times New Roman", serif;
+  --font-ui: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --step--1: 0.8125rem;
+  --step-0: 1.0625rem;
+  --step-1: 1.25rem;
+  --step-2: 1.625rem;
+  --step-3: 2.5rem;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0e1014; --surface: #171a20; --surface-2: #20242b; --ink: #f1f3f6; --ink-2: #b9c0cb;
+    --muted: #8b939f; --hair: #2a2f37; --axis: #3d434c; --link: #86b6ef; --accent: #3987e5;
+    --series-2: #d95926; --cp: #d95926; --cr: #199e70; --ex: #3d434c;
+    --st0: #20242b; --st1: #1c5cab; --st2: #3987e5; --st3: #9ec5f4;
+    --ga: #cde2fb; --gb: #86b6ef; --gc: #3987e5; --gde: #184f95;
+    --band: #1a2130; --note-bg: #2a1d16; --note-rule: #d95926;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0e1014; --surface: #171a20; --surface-2: #20242b; --ink: #f1f3f6; --ink-2: #b9c0cb;
+  --muted: #8b939f; --hair: #2a2f37; --axis: #3d434c; --link: #86b6ef; --accent: #3987e5;
+  --series-2: #d95926; --cp: #d95926; --cr: #199e70; --ex: #3d434c;
+  --st0: #20242b; --st1: #1c5cab; --st2: #3987e5; --st3: #9ec5f4;
+  --ga: #cde2fb; --gb: #86b6ef; --gc: #3987e5; --gde: #184f95;
+  --band: #1a2130; --note-bg: #2a1d16; --note-rule: #d95926;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font-family: var(--font-text); font-size: var(--step-0); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+.page { max-width: 1120px; margin: 0 auto; padding-inline: clamp(16px, 4vw, 40px); padding-block: 40px 80px; }
+.prose { max-width: 68ch; }
+p { margin: 0; }
+.prose > * + * { margin-top: 0.9em; }
+a { color: var(--link); text-underline-offset: 2px; }
+a:focus-visible, button:focus-visible, [tabindex]:focus-visible, summary:focus-visible, input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 3px; }
+code, .mono { font-family: var(--font-mono); font-size: 0.84em; background: var(--surface-2); padding: 0.08em 0.35em; border-radius: 4px; color: var(--ink); white-space: nowrap; }
+strong { font-weight: 600; }
+
+/* header */
+.masthead { display: grid; gap: 14px; padding-bottom: 28px; border-bottom: 1px solid var(--hair); }
+.eyebrow { font-family: var(--font-ui); font-size: var(--step--1); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); font-weight: 500; }
+h1 { font-family: var(--font-display); font-weight: 650; font-size: clamp(2rem, 5vw, var(--step-3)); line-height: 1.08; letter-spacing: -0.015em; margin: 0; text-wrap: balance; max-width: 22ch; font-variation-settings: "opsz" 96; }
+.lede { font-size: var(--step-1); line-height: 1.5; color: var(--ink-2); max-width: 60ch; }
+.meta { display: flex; flex-wrap: wrap; gap: 6px 18px; font-family: var(--font-ui); font-size: var(--step--1); color: var(--muted); }
+.meta span { white-space: nowrap; }
+
+/* in brief */
+.brief { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 0 36px; margin-top: 28px; }
+.brief > div { padding-block: 16px 18px; border-top: 1px solid var(--hair); min-width: 0; }
+.brief .k { font-family: var(--font-ui); font-size: var(--step--1); font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-2); margin-bottom: 6px; }
+.brief p { font-size: 1rem; line-height: 1.55; }
+
+nav.toc { margin-top: 26px; display: flex; flex-wrap: wrap; gap: 8px; font-family: var(--font-ui); font-size: 0.875rem; }
+nav.toc a { text-decoration: none; color: var(--ink-2); border: 1px solid var(--hair); background: var(--surface); padding: 4px 11px; border-radius: 999px; }
+nav.toc a:hover { color: var(--ink); border-color: var(--axis); }
+
+/* sections */
+section { padding-top: 56px; }
+h2 { font-family: var(--font-display); font-weight: 650; font-size: var(--step-2); line-height: 1.2; letter-spacing: -0.01em; margin: 0 0 14px; text-wrap: balance; font-variation-settings: "opsz" 48; }
+h3 { font-family: var(--font-ui); font-weight: 600; font-size: 1.0625rem; margin: 30px 0 8px; letter-spacing: 0; }
+.qtag { font-family: var(--font-ui); font-size: var(--step--1); color: var(--muted); font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase; display: block; margin-bottom: 2px; }
+
+/* figures */
+figure { margin: 22px 0 0; background: var(--surface); border: 1px solid var(--hair); border-radius: 10px; padding: 18px 18px 14px; min-width: 0; }
+figcaption.title { font-family: var(--font-ui); font-weight: 600; font-size: 0.95rem; color: var(--ink); margin-bottom: 2px; }
+figcaption.sub { font-family: var(--font-ui); font-size: var(--step--1); color: var(--muted); margin-bottom: 12px; line-height: 1.45; }
+.fig-note { font-family: var(--font-ui); font-size: var(--step--1); color: var(--muted); margin-top: 10px; line-height: 1.5; }
+.chart { width: 100%; position: relative; }
+.chart svg { display: block; overflow: visible; }
+svg text { font-family: var(--font-ui); }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 16px; font-family: var(--font-ui); font-size: var(--step--1); color: var(--ink-2); margin-bottom: 10px; }
+.legend span { display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
+.sw { width: 11px; height: 11px; border-radius: 3px; display: inline-block; }
+.lk { width: 16px; height: 0; border-top: 2.5px solid; display: inline-block; border-radius: 2px; }
+.legend .gap { width: 10px; }
+
+/* heatmap */
+.hm-scroll { overflow-x: auto; position: relative; }
+.hm-wrap { position: relative; }
+.hm-wrap canvas { display: block; }
+.hm-row-hi, .hm-col-hi { position: absolute; pointer-events: none; border: 1.5px solid var(--ink); border-radius: 2px; }
+.hm-col-hi { border-width: 0 1.5px; border-radius: 0; }
+
+/* tooltip */
+#tip { position: fixed; z-index: 20; pointer-events: none; background: var(--surface); color: var(--ink); border: 1px solid var(--hair); box-shadow: 0 6px 24px rgba(0,0,0,0.14); border-radius: 8px; padding: 9px 11px; font-family: var(--font-ui); font-size: 0.8125rem; line-height: 1.45; max-width: 300px; }
+#tip .t-strong { font-weight: 600; font-size: 0.9rem; font-variant-numeric: tabular-nums; }
+#tip .t-sub { color: var(--muted); }
+#tip .t-row { display: flex; align-items: center; gap: 8px; }
+#tip .t-row b { font-weight: 600; font-variant-numeric: tabular-nums; min-width: 34px; }
+
+/* forest */
+.controls { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 18px; margin-bottom: 14px; font-family: var(--font-ui); font-size: 0.875rem; }
+.seg { display: inline-flex; border: 1px solid var(--axis); border-radius: 8px; overflow: hidden; }
+.seg button { font: inherit; font-size: 0.8125rem; background: transparent; color: var(--ink-2); border: 0; padding: 6px 12px; cursor: pointer; }
+.seg button + button { border-left: 1px solid var(--axis); }
+.seg button[aria-pressed="true"] { background: var(--ink); color: var(--surface); }
+.check { display: inline-flex; align-items: center; gap: 7px; color: var(--ink-2); cursor: pointer; }
+.check input { width: 16px; height: 16px; accent-color: var(--accent); margin: 0; }
+.forest { display: grid; grid-template-columns: minmax(150px, 250px) minmax(0, 1fr) 164px; font-family: var(--font-ui); font-size: 0.8125rem; }
+.forest .f-row, .forest .f-fam, .forest .f-head { display: contents; }
+.forest .f-label { padding: 4px 12px 4px 0; color: var(--ink); line-height: 1.3; display: flex; align-items: center; min-width: 0; }
+.forest .f-strip { position: relative; min-height: 26px; }
+.forest .f-strip svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.forest .f-val { padding: 4px 0 4px 12px; color: var(--ink-2); font-variant-numeric: tabular-nums; display: flex; align-items: center; white-space: nowrap; }
+.forest .f-val b { color: var(--ink); font-weight: 600; margin-right: 6px; }
+.forest .f-fam > div { padding: 14px 0 4px; font-weight: 600; font-size: 0.75rem; letter-spacing: 0.07em; text-transform: uppercase; color: var(--muted); border-bottom: 1px solid var(--hair); }
+.forest .f-head .f-strip { min-height: 22px; }
+.forest .f-head .f-label, .forest .f-head .f-val { color: var(--muted); font-size: 0.75rem; }
+.forest .f-row:hover .f-label, .forest .f-row:focus-within .f-label { color: var(--link); }
+.forest .f-row > * { cursor: default; }
+
+@media (max-width: 620px) {
+  .forest { grid-template-columns: minmax(0, 1fr) 96px; }
+  .forest .f-val { flex-direction: column; align-items: flex-end; justify-content: center; padding-left: 8px; font-size: 0.75rem; line-height: 1.25; }
+  .forest .f-val b { margin-right: 0; font-size: 0.8125rem; }
+  .forest .f-label { grid-column: 1 / -1; padding: 8px 0 0; }
+  .forest .f-head .f-label { display: none; }
+  .forest .f-fam > div { grid-column: 1 / -1; }
+}
+
+/* small multiples */
+.multiples { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 14px; margin-top: 22px; }
+.multiples figure { margin: 0; padding: 14px 14px 10px; }
+.panel-head { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; }
+.panel-head .rho { font-family: var(--font-ui); font-size: var(--step--1); color: var(--ink-2); white-space: nowrap; font-variant-numeric: tabular-nums; }
+
+/* tables */
+.tbl-wrap { overflow-x: auto; margin-top: 18px; border: 1px solid var(--hair); border-radius: 10px; background: var(--surface); }
+table { border-collapse: collapse; width: 100%; font-family: var(--font-ui); font-size: 0.84rem; line-height: 1.45; }
+th, td { text-align: left; padding: 9px 12px; vertical-align: top; border-bottom: 1px solid var(--hair); }
+tr:last-child td { border-bottom: 0; }
+th { font-weight: 600; font-size: 0.78rem; letter-spacing: 0.01em; color: var(--muted); background: var(--surface); }
+td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+td .mono { font-size: 0.8rem; }
+table.compact td, table.compact th { padding: 6px 10px; }
+.xt td.cell { text-align: center; font-variant-numeric: tabular-nums; min-width: 42px; }
+.muted { color: var(--muted); }
+.neg { font-variant-numeric: tabular-nums; }
+
+@media (max-width: 620px) {
+  table.stack thead { display: none; }
+  table.stack, table.stack tbody, table.stack tr, table.stack td { display: block; width: 100%; }
+  table.stack tr { padding: 10px 14px; border-bottom: 1px solid var(--hair); }
+  table.stack tr:last-child { border-bottom: 0; }
+  table.stack td { border: 0; padding: 1px 0; text-align: left; white-space: normal; }
+  table.stack td:empty { display: none; }
+  table.stack td[data-label]::before { content: attr(data-label); display: block; font-size: 0.72rem; color: var(--muted); font-weight: 600; margin-top: 6px; }
+  table.stack td.lead { font-weight: 600; font-size: 0.9rem; }
+  .hide-sm { display: none; }
+}
+
+/* callout */
+.note { margin-top: 18px; background: var(--note-bg); border-left: 3px solid var(--note-rule); border-radius: 0 8px 8px 0; padding: 12px 16px; font-family: var(--font-ui); font-size: 0.9rem; line-height: 1.5; color: var(--ink); max-width: 80ch; }
+.note .nk { font-weight: 600; display: block; margin-bottom: 2px; }
+
+/* lists */
+ol.steps, ul.plain { padding-left: 1.3em; margin: 0; }
+ol.steps > li, ul.plain > li { margin-top: 0.55em; padding-left: 0.2em; }
+ol.steps > li::marker { font-family: var(--font-ui); font-weight: 600; color: var(--muted); }
+.two-col { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 12px 40px; margin-top: 10px; }
+.two-col > div { min-width: 0; }
+.two-col h3 { margin-top: 12px; }
+
+details { margin-top: 12px; font-family: var(--font-ui); font-size: 0.875rem; }
+details > summary { cursor: pointer; color: var(--link); font-weight: 500; list-style-position: inside; }
+details[open] > summary { margin-bottom: 8px; }
+dl.defs { display: grid; grid-template-columns: minmax(160px, 260px) minmax(0, 1fr); gap: 8px 20px; margin: 12px 0 0; font-family: var(--font-ui); font-size: 0.875rem; line-height: 1.5; }
+dl.defs dt { font-weight: 600; color: var(--ink); }
+dl.defs dd { margin: 0; color: var(--ink-2); }
+@media (max-width: 620px) { dl.defs { grid-template-columns: 1fr; } dl.defs dd { margin-bottom: 8px; } }
+
+footer { margin-top: 64px; padding-top: 18px; border-top: 1px solid var(--hair); font-family: var(--font-ui); font-size: var(--step--1); color: var(--muted); }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+
+:root { --c1: #2a78d6; --c2: #eb6834; --c3: #1baf7a; --c4: #eda100; --c5: #e87ba4; --c6: #008300; --brk: #eceef2; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --c1: #3987e5; --c2: #d95926; --c3: #199e70; --c4: #c98500; --c5: #d55181; --c6: #008300; --brk: #1f232a; } }
+:root[data-theme="dark"] { --c1: #3987e5; --c2: #d95926; --c3: #199e70; --c4: #c98500; --c5: #d55181; --c6: #008300; --brk: #1f232a; }
+.slots { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; margin-top: 18px; }
+.slot { background: var(--surface); border: 1px solid var(--hair); border-radius: 10px; padding: 16px 18px; font-family: var(--font-ui); min-width: 0; }
+.slot .d { font-size: 0.8rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+.slot .t { font-family: var(--font-display); font-size: 2rem; font-weight: 650; line-height: 1.15; margin-top: 4px; font-variation-settings: "opsz" 48; }
+.slot .s { font-size: 0.85rem; color: var(--ink-2); margin-top: 4px; line-height: 1.45; }
+table.sched td { vertical-align: middle; }
+table.sched td.wk { font-variant-numeric: tabular-nums; color: var(--muted); white-space: nowrap; }
+table.sched .cell { display: inline-flex; align-items: center; gap: 8px; }
+table.sched .dot { width: 9px; height: 9px; border-radius: 50%; flex: none; }
+table.sched .dot.prog { background: var(--accent); }
+table.sched .dot.low { background: transparent; box-shadow: inset 0 0 0 2px var(--accent); }
+table.sched .dot.none { background: var(--axis); }
+table.sched .time { font-variant-numeric: tabular-nums; font-weight: 500; }
+table.sched .snote { color: var(--muted); }
+table.sched tr.break td { background: var(--brk); }
+table.sched td.day { min-width: 180px; }
+.sched-wrap { max-height: 720px; overflow: auto; }
+.sched-wrap thead th { position: sticky; top: 0; z-index: 1; }
+.hm-grid-wrap { overflow-x: auto; }
+</style>
+
+<div class="page">
+  <header class="masthead">
+    <div class="eyebrow">CMU CS Academy CS1 · Programmering 1 · class TE22A · 2023/24 · event log</div>
+    <h1>When TE22A programmed, in lessons and out of them</h1>
+    <p class="lede">The platform's event log records every page view, code run and edit with a timestamp. Filtered to the 27 TE22A students, it is enough to rebuild the lesson timetable for the whole year, see who was working in each lesson, and follow the work students did at school, in the evening and at weekends.</p>
+    <div class="meta"><span>348,031 events</span><span>59 programming lessons</span><span>1,414 active hours</span><span>Swedish local time, summer and winter time handled</span><span>Prepared 28 Sep 2026</span></div>
+  </header>
+
+  <div class="brief" aria-label="In brief">
+    <div><div class="k">The timetable</div><p>Two lessons a week: Tuesday about 12:45–14:00 and Wednesday about 15:05–16:10. 59 lessons met your rule of two thirds of the class active at once; three more had only 14–17 students active. Five weeks had no lessons for any group: the autumn, Christmas, winter and Easter breaks.</p></div>
+    <div><div class="k">Wednesdays are shorter</div><p>Measured from activity, the median Tuesday lesson lasts 74 minutes and the median Wednesday 61. If both are timetabled at 1 h 20, the Wednesday one loses about 20 minutes at the start or end.</p></div>
+    <div><div class="k">In the lessons</div><p>Of 1,593 student-lessons, 67% were fully active, 18% partly (late start, early stop or a break over 20 minutes), 2% barely active and 13% had no activity at all. The spring was weaker than the autumn: 16 fully active students per lesson against 20.</p></div>
+    <div><div class="k">Outside the lessons</div><p>35% of all active time happened outside lessons. After school and at weekends about 70% of it went to the assigned creative tasks and the final project; the scaffolded exercises were done mostly in lessons.</p></div>
+    <div><div class="k">Deadlines and late nights</div><p>The week before the unit 7 task was due holds 17% of all out-of-lesson time, the last week of the final project 14%. 24 students worked between 23:00 and 05:00 at some point, eight of them for more than 100 minutes over the year.</p></div>
+    <div><div class="k">Against the grades</div><p>Turning up tracks the grade modestly (ρ = 0.36; 0.55 with the final project grade). How fully active students were in the lessons they attended does not (ρ 0.05–0.07). After-school minutes correlate 0.64 with the final project grade.</p></div>
+  </div>
+
+  <nav class="toc" aria-label="Sections">
+    <a href="#timetable">The timetable</a><a href="#year">Week by week</a><a href="#lessons">In the lessons</a><a href="#grades">Against the grades</a><a href="#outside">Outside the lessons</a><a href="#what">What they work on</a><a href="#notes">Data notes</a><a href="#defs">Definitions</a>
+  </nav>
+
+  <!-- ============================== TIMETABLE -->
+  <section id="timetable">
+    <h2>The timetable, rebuilt from activity</h2>
+    <div class="prose">
+      <p>For every minute of the year the log tells how many TE22A students were working on the platform (active within four minutes either side). A programming lesson is a stretch where at least 18 of the 27 students, two thirds, were active at the same time. Its start and end are where the count first rises above and finally falls below 9 students, a third of the class, on either side of that core. Short dips inside a lesson, such as a teacher introduction, do not split it.</p>
+    </div>
+    <div class="slots" id="slots"></div>
+    <figure>
+      <figcaption class="title">Every lesson of the year</figcaption>
+      <figcaption class="sub">Each bar runs from the detected start to the detected end. Hollow bars: lessons where fewer than two thirds of the class were active at once. Grey bands: weeks with no lessons for any group.</figcaption>
+      <div class="legend">
+        <span><i class="sw" style="background:var(--c1)"></i>Tuesday</span>
+        <span><i class="sw" style="background:var(--c2)"></i>Wednesday</span>
+        <span><i class="sw" style="background:transparent;box-shadow:inset 0 0 0 2px var(--ink-2)"></i>Below two thirds</span>
+      </div>
+      <div class="chart" id="times"></div>
+    </figure>
+    <h3>Lessons that ran differently</h3>
+    <div class="tbl-wrap"><table class="compact stack" id="odd"></table></div>
+  </section>
+
+  <!-- ============================== YEAR -->
+  <section id="year">
+    <h2>The whole year, week by week</h2>
+    <div class="prose">
+      <p>Every Tuesday and Wednesday from week 34 to week 24. Where no lesson was found, the other three groups in the log tell whether the whole school was off (no group had a lesson) or only TE22A was doing something else.</p>
+    </div>
+    <div class="legend" style="margin-top:14px">
+      <span><i class="sw" style="background:var(--accent);border-radius:50%"></i>Programming lesson (two thirds active)</span>
+      <span><i class="sw" style="background:transparent;box-shadow:inset 0 0 0 2px var(--accent);border-radius:50%"></i>Lesson with fewer active</span>
+      <span><i class="sw" style="background:var(--axis);border-radius:50%"></i>No lesson found</span>
+    </div>
+    <div class="tbl-wrap sched-wrap"><table class="compact sched" id="sched"></table></div>
+  </section>
+
+  <!-- ============================== LESSONS -->
+  <section id="lessons">
+    <h2>Who was there, and how active</h2>
+    <div class="prose">
+      <p>For each student and lesson, the share of the lesson's working minutes in which the student was active (an event within two minutes). A lesson counts as fully active when that share is at least 75% and the student never went more than 20 minutes without activity. Partly active covers late starts, early stops and long breaks; barely active is five minutes or less. A lesson with no events at all may mean the student was absent, or present but not using the platform.</p>
+      <p>Median activity in attended lessons was 91% of the working minutes, and the median longest pause 5 minutes. Among the 288 partly active lessons, 82 had a break over 20 minutes, 67 stopped more than 15 minutes early and 44 started more than 15 minutes late.</p>
+    </div>
+    <figure>
+      <figcaption class="title">Activity in each lesson</figcaption>
+      <figcaption class="sub">Number of the 27 students in each state, lesson by lesson.</figcaption>
+      <div class="legend" id="att-legend"></div>
+      <div class="chart" id="attseries"></div>
+    </figure>
+    <figure>
+      <figcaption class="title">Every student in every lesson</figcaption>
+      <figcaption class="sub">Rows are students grouped by final grade; columns are the 59 programming lessons in date order. Hover a cell for the details.</figcaption>
+      <div class="legend" id="att-legend2"></div>
+      <div class="hm-grid-wrap"><div class="chart" id="attgrid"></div></div>
+      <p class="fig-note">Three students account for 84 of the 212 lessons with no activity: 10004059 (43 of 59), 10004060 (21) and 10004061 (20). Everyone else has at most 11.</p>
+    </figure>
+  </section>
+
+  <!-- ============================== GRADES -->
+  <section id="grades">
+    <h2>Lesson behaviour and work outside against the grades</h2>
+    <div class="prose">
+      <p>Spearman's ρ with 95% bootstrap intervals, 27 students; the shaded band is roughly where p &gt; 0.05. Being there matters more than how busy students were once there: attendance relates to both grades, while the share of each lesson spent active does not. Minutes after school relate strongly to the final project grade, which fits where the project work happened.</p>
+    </div>
+    <figure>
+      <figcaption class="title">Rank correlation with the grade</figcaption>
+      <figcaption class="sub" id="forest-sub"></figcaption>
+      <div class="controls">
+        <div class="seg" role="group" aria-label="Outcome" id="outcome-seg">
+          <button type="button" data-o="grade_num" aria-pressed="true">Final grade</button>
+          <button type="button" data-o="final_project_num" aria-pressed="false">Final project grade</button>
+        </div>
+      </div>
+      <div class="forest" id="forest" role="table" aria-label="Spearman correlations with 95% intervals"></div>
+    </figure>
+  </section>
+
+  <!-- ============================== OUTSIDE -->
+  <section id="outside">
+    <h2>Work outside the lessons</h2>
+    <div class="prose">
+      <p>Every active minute outside a lesson is placed in one of four bins: at school outside lessons (school days 08:00–17:00), after school (school days 17:00–08:00), weekends, and school breaks. Together they are 35% of all active time: 236 hours at school outside lessons, 136 after school, 108 at weekends and 20 during breaks.</p>
+      <p>Much of the at-school time comes straight after the Tuesday lesson. Activity stops at 14:00, but after a break of about ten minutes a median of eight students are back at work between 14:15 and 14:25, and at least nine on 13 of the 30 Tuesdays; over the year that hour holds 24 hours of work. Wednesday mornings and Friday afternoons are the other busy school-time slots.</p>
+    </div>
+    <figure>
+      <figcaption class="title">Out-of-lesson activity, week by week</figcaption>
+      <figcaption class="sub">Active hours summed over all students. Vertical lines mark when most students marked the unit 7 task and the final project complete.</figcaption>
+      <div class="legend" id="ctx-legend"></div>
+      <div class="chart" id="weekly"></div>
+    </figure>
+    <figure>
+      <figcaption class="title">When in the week, outside lessons</figcaption>
+      <figcaption class="sub">Active minutes by weekday and hour, all students, lessons excluded. Darker is more.</figcaption>
+      <div class="hm-grid-wrap"><div class="chart" id="hourgrid"></div></div>
+    </figure>
+    <figure>
+      <figcaption class="title">Each student's time outside lessons</figcaption>
+      <figcaption class="sub">Active hours by context, students grouped by final grade.</figcaption>
+      <div class="legend" id="ctx-legend2"></div>
+      <div class="chart" id="perstudent"></div>
+    </figure>
+  </section>
+
+  <!-- ============================== WHAT -->
+  <section id="what">
+    <h2>What they work on outside the lessons</h2>
+    <div class="prose">
+      <p>Each active minute is tied to the page the student was on, and 95% of exercise and lesson-page minutes could be matched to a named curriculum item. In lessons, almost half the time goes to scaffolded exercises. After school and at weekends about 70% goes to the assigned creative tasks and the final project, and optional creative tasks take a larger share (10% at weekends) than in lessons (6%).</p>
+    </div>
+    <figure>
+      <figcaption class="title">Share of active time by content</figcaption>
+      <figcaption class="sub">Each bar adds up to 100% of that context's active minutes.</figcaption>
+      <div class="legend" id="content-legend"></div>
+      <div class="chart" id="content"></div>
+    </figure>
+    <h3>Exercises and lesson pages outside lessons: behind, level or ahead?</h3>
+    <div class="prose"><p>For curriculum items only, each minute compared with the unit the class was working on in lessons that week. Most out-of-lesson curriculum work is on the current unit; after school it leans towards catching up, at weekends towards working ahead.</p></div>
+    <div class="tbl-wrap"><table class="compact" id="relative"></table></div>
+  </section>
+
+  <!-- ============================== NOTES -->
+  <section id="notes">
+    <h2>Data notes</h2>
+    <div class="tbl-wrap">
+      <table class="stack">
+        <thead><tr><th>Issue</th><th>What was done</th></tr></thead>
+        <tbody>
+          <tr><td class="lead">Time zone</td><td data-label="What was done">Log times are UTC. They were converted to Swedish time, including the switches to winter time on 29 October and back on 31 March; lesson times line up across both.</td></tr>
+          <tr><td class="lead">Platform activity is not attendance</td><td data-label="What was done">A lesson with no events may be an absence, a student working on paper, or a lesson spent on something else. Your attendance records would separate these.</td></tr>
+          <tr><td class="lead">The other groups</td><td data-label="What was done">65 users from the three other groups were used only to tell school-wide days off from TE22A-only gaps.</td></tr>
+          <tr><td class="lead">What an event means</td><td data-label="What was done">Edits and code runs dominate. Window-focus events (returning to the platform's window) come in bursts and are frequent even in busy lessons, so they are not used as a distraction signal.</td></tr>
+          <tr><td class="lead">Matching pages to items</td><td data-label="What was done">Exercise ids were matched to named items through the completion timestamps and, for the rest, through which students visited them. Ids run in curriculum order, so the few unmatched pages still get a unit.</td></tr>
+          <tr><td class="lead">A correction to the first report</td><td data-label="What was done">The completion file suggested 10004059 stopped after 5 September. The log shows log-ins on 24 days up to 30 January, mostly for a few minutes, so the student was not entirely absent from the platform.</td></tr>
+          <tr><td class="lead">After the Tuesday lesson</td><td data-label="What was done">Activity stops at 14:00 and about eight students return between 14:15 and 14:25. If that slot is timetabled for the course (for example a study period), it is lesson time that is counted here as at-school time outside lessons.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <details><summary>Per-student summary (user_id only)</summary><div class="tbl-wrap"><table class="compact" id="roster"></table></div></details>
+  </section>
+
+  <!-- ============================== DEFINITIONS -->
+  <section id="defs">
+    <h2>Definitions</h2>
+    <dl class="defs">
+      <dt>Active minute</dt><dd>A minute in which the student produced at least one event of any kind. Active hours are these minutes summed, so idle time with the page open does not count, unlike the platform's time-on-task figure.</dd>
+      <dt>Programming lesson</dt><dd>At least 18 of 27 students active within four minutes of the same moment. Stretches under two thirds that are less than 30 minutes apart belong to the same lesson.</dd>
+      <dt>Lesson start and end</dt><dd>Where the number of active students first rises above, and last falls below, 9 (a third of the class) around the two-thirds core.</dd>
+      <dt>Lesson with fewer active</dt><dd>At least a third but never two thirds of the class active together, at the usual lesson time. Not counted in the attendance figures.</dd>
+      <dt>Fully, partly, barely active</dt><dd>Fully: active in at least 75% of the lesson's working minutes, with no gap over 20 minutes. Barely: 5 active minutes or fewer. Partly: everything in between. Working minutes are those when at least a third of the class was active.</dd>
+      <dt>Late start, early stop</dt><dd>First activity more than 15 minutes after the lesson start; last activity more than 15 minutes before its end.</dd>
+      <dt>Contexts outside lessons</dt><dd>School hours: weekdays 08:00–17:00 in weeks with lessons, outside the lesson window plus five minutes either side. After school: the same days before 08:00 or after 17:00. Weekend: Saturday and Sunday. School break: weekdays in weeks when no group had lessons, public holidays and June.</dd>
+      <dt>Late night</dt><dd>23:00–05:00 outside lessons.</dd>
+      <dt>Behind, level, ahead</dt><dd>The unit of the exercise or lesson page compared with the median unit worked on in that week's lessons.</dd>
+    </dl>
+  </section>
+
+  <footer>Built from <span class="mono">te22.csv.gz</span> with the scripts <span class="mono">schedule.py</span>, <span class="mono">attendance.py</span>, <span class="mono">itemmap.py</span>, <span class="mono">itemmap2.py</span>, <span class="mono">outside.py</span> and <span class="mono">summary.py</span>.</footer>
+</div>
+
+<div id="tip" role="tooltip" hidden></div>
+
+<script type="application/json" id="report-data">{"att_grid":[{"user_id":10004066,"grade":"A","s":"33330333333333333333333323333332333333332003232333330233322","cov":[0.93,1.0,0.93,1.0,null,1.0,1.0,0.96,1.0,0.84,1.0,1.0,1.0,0.85,1.0,1.0,1.0,0.99,1.0,0.86,1.0,1.0,1.0,0.97,0.62,0.97,0.95,0.95,0.82,0.88,1.0,0.5,0.93,0.84,0.84,0.81,0.95,0.94,0.94,0.99,0.51,null,null,0.86,0.67,0.79,0.67,0.87,0.79,0.93,0.79,0.92,null,0.5,0.78,0.83,0.95,0.61,0.41],"gap":[4,0,5,0,null,0,0,3,0,9,0,0,0,8,0,0,0,1,0,10,0,0,0,1,25,2,2,4,7,9,0,30,4,5,4,5,2,4,4,1,12,null,null,10,11,9,20,6,7,4,8,4,null,22,5,9,3,27,18]},{"user_id":10004065,"grade":"A","s":"33333333333333333332333333333323333233233333332323222333333","cov":[0.85,1.0,0.93,1.0,0.85,0.95,0.91,1.0,0.93,0.91,0.98,1.0,1.0,1.0,1.0,0.94,1.0,1.0,1.0,0.69,0.95,1.0,0.75,0.89,0.82,0.92,0.92,1.0,0.94,0.91,0.42,0.97,0.88,0.86,0.76,0.5,0.94,0.99,0.65,0.86,0.89,0.98,0.92,0.76,0.79,0.86,0.47,0.97,0.67,0.93,0.65,0.58,0.36,0.86,0.99,0.89,0.84,1.0,0.89],"gap":[8,0,5,0,5,3,5,0,4,5,1,0,0,0,0,4,0,0,0,9,3,0,7,8,5,4,4,0,3,6,21,2,7,10,4,10,3,1,16,7,4,1,3,8,10,3,18,1,13,4,8,12,28,11,1,8,9,0,5]},{"user_id":10004044,"grade":"A","s":"33333303232323231333333333332232333333233223033333222333323","cov":[0.93,0.75,0.97,0.97,0.84,0.86,null,0.92,0.62,0.93,0.7,0.81,0.73,1.0,0.63,0.99,0.2,1.0,0.96,1.0,0.88,1.0,0.82,1.0,0.88,1.0,0.91,1.0,0.67,0.74,0.84,0.39,0.85,0.97,0.93,0.79,0.82,0.93,0.69,0.87,0.9,0.6,0.74,0.8,null,0.75,0.93,1.0,0.88,0.83,0.56,0.6,0.55,1.0,0.83,0.8,1.0,0.68,0.86],"gap":[4,8,2,2,9,10,null,5,15,3,11,8,8,0,15,1,26,0,2,0,3,0,7,0,8,0,5,0,18,13,8,31,6,2,4,12,7,5,7,9,6,9,13,14,null,13,3,0,6,9,15,20,29,0,12,13,0,24,6]},{"user_id":10004043,"grade":"A","s":"33333333300333232333333333333232333203333233333033323333333","cov":[0.89,1.0,0.88,0.97,0.96,1.0,0.91,1.0,0.85,null,null,0.95,0.97,0.96,0.65,0.96,0.57,1.0,0.94,0.92,0.95,1.0,1.0,1.0,0.91,1.0,1.0,1.0,1.0,0.66,0.95,0.47,0.9,0.92,1.0,0.71,null,0.99,0.89,1.0,0.97,0.53,0.75,0.8,1.0,0.86,0.9,null,0.9,0.95,0.86,0.68,1.0,1.0,0.99,1.0,1.0,1.0,0.9],"gap":[6,0,5,2,2,0,3,0,9,null,null,4,2,3,17,3,25,0,3,6,2,0,0,0,4,0,0,0,0,10,2,28,6,6,0,14,null,1,7,0,2,22,16,14,0,8,3,null,4,2,4,10,0,0,1,0,0,0,5]},{"user_id":10004067,"grade":"A","s":"33333333330322333333333333233303300233333333333330322033233","cov":[0.91,1.0,0.87,0.95,1.0,1.0,0.95,0.95,0.8,0.91,null,0.97,0.73,0.74,1.0,0.86,0.9,1.0,1.0,0.9,0.88,0.92,0.84,0.99,0.76,0.79,0.58,0.92,0.92,1.0,null,0.84,1.0,null,null,0.66,0.98,0.94,0.8,0.87,0.75,0.98,0.98,0.83,0.98,1.0,0.92,0.75,1.0,null,0.82,0.35,0.63,null,0.91,0.85,0.52,0.84,0.89],"gap":[5,0,7,3,0,0,2,2,7,4,null,1,11,17,0,6,4,0,0,6,4,6,10,1,13,12,20,3,5,0,null,9,0,null,null,20,1,4,9,8,5,1,1,9,1,0,5,12,0,null,9,31,26,null,4,4,16,7,5]},{"user_id":10004058,"grade":"A","s":"33303033222003222003222233223322303220033312332223202312223","cov":[0.79,0.95,0.79,null,1.0,null,0.85,0.96,0.6,0.64,0.65,null,null,0.95,0.57,0.67,0.28,null,null,0.97,0.59,0.49,0.39,0.57,0.88,0.9,0.64,0.74,0.97,0.81,0.69,0.62,1.0,null,0.86,0.28,0.67,null,null,0.92,0.98,1.0,0.15,0.7,0.81,0.84,0.5,0.28,0.47,0.85,0.46,null,0.49,0.78,0.3,0.73,0.62,0.72,0.87],"gap":[11,3,11,null,0,null,4,3,20,12,13,null,null,2,9,22,37,null,null,2,10,27,18,32,6,4,8,8,2,6,7,10,0,null,6,34,10,null,null,3,1,0,45,11,8,9,12,32,10,8,20,null,21,6,20,13,20,16,7]},{"user_id":10004057,"grade":"A","s":"33330333333333333320333230322322330233333233312222213323323","cov":[0.91,1.0,1.0,1.0,null,0.8,1.0,1.0,0.97,0.89,1.0,0.77,0.98,0.95,0.94,1.0,0.97,1.0,0.7,null,0.95,1.0,0.98,0.61,1.0,null,0.81,0.64,0.74,0.87,0.73,0.64,0.98,0.97,null,0.74,0.86,0.93,0.83,0.97,0.84,0.47,0.77,0.78,1.0,0.19,0.58,0.47,0.46,0.65,0.53,0.25,0.88,0.94,0.61,0.84,1.0,0.62,0.77],"gap":[5,0,0,0,null,11,0,0,2,6,0,10,1,4,4,0,2,0,9,null,1,0,1,29,0,null,5,14,7,4,15,11,1,2,null,9,4,4,5,2,6,26,4,15,0,21,11,17,21,17,20,24,8,5,11,6,0,24,14]},{"user_id":10004050,"grade":"A","s":"33033323333332232333333333333333333330033333333333233323333","cov":[0.91,1.0,null,1.0,0.98,0.96,0.44,0.99,0.92,0.93,1.0,0.92,0.78,0.61,0.37,0.8,0.72,0.99,0.98,0.93,0.91,1.0,0.95,0.93,0.77,0.96,0.98,0.89,0.89,0.88,1.0,0.96,0.9,0.93,1.0,0.9,0.94,null,null,0.9,0.95,0.82,1.0,0.8,1.0,0.81,0.97,0.88,0.93,1.0,0.44,0.85,1.0,0.92,0.3,0.99,1.0,1.0,0.81],"gap":[5,0,null,0,1,3,29,1,4,4,0,6,13,17,24,14,15,1,1,5,5,0,3,4,15,2,1,6,4,6,0,3,4,5,0,6,3,null,null,8,3,10,0,14,0,8,1,7,3,0,19,9,0,3,48,1,0,0,13]},{"user_id":10004055,"grade":"B","s":"33333333333333233333233333330333333333233333333333323333302","cov":[0.89,0.98,0.91,1.0,0.85,0.91,0.92,0.94,0.75,0.85,1.0,1.0,0.87,1.0,0.52,0.99,0.87,0.97,0.89,0.87,0.71,1.0,1.0,0.92,0.98,0.82,0.8,0.93,null,0.99,0.97,0.78,1.0,0.96,0.97,0.91,1.0,1.0,0.71,0.96,0.98,1.0,0.97,0.86,1.0,0.93,0.97,0.75,0.98,0.97,0.96,0.73,0.76,0.9,0.84,1.0,0.95,null,0.69],"gap":[6,1,7,0,8,3,5,5,6,4,0,0,5,0,25,1,6,2,3,9,9,0,0,3,1,10,4,4,null,1,2,11,0,3,2,4,0,0,14,3,1,0,2,8,0,4,1,12,1,1,1,8,8,3,7,0,3,null,22]},{"user_id":10004045,"grade":"B","s":"33333333333323333333333333333333333333333333333313333322020","cov":[0.91,1.0,0.88,1.0,0.94,0.99,1.0,0.97,0.97,0.94,0.91,0.85,0.75,1.0,1.0,1.0,0.98,0.99,1.0,0.99,0.98,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,0.98,0.99,0.95,0.84,0.93,0.9,0.98,1.0,1.0,0.77,0.89,1.0,0.89,1.0,0.92,0.95,0.9,0.91,0.14,1.0,1.0,1.0,0.97,0.96,0.39,0.13,null,0.47,null],"gap":[5,0,5,0,3,1,0,2,2,3,6,11,5,0,0,0,1,1,0,1,1,0,0,0,0,0,0,0,0,0,1,1,2,11,4,6,1,0,0,6,7,0,4,0,4,3,4,2,36,0,0,0,1,3,21,63,null,13,null]},{"user_id":10004062,"grade":"B","s":"33300333333333233223032002323333323332222332322123232222322","cov":[0.87,1.0,0.91,null,null,0.99,0.92,0.96,0.98,0.91,0.89,1.0,0.91,0.93,0.71,0.97,0.98,0.64,0.7,0.87,null,0.96,0.67,null,null,0.44,0.88,0.58,1.0,0.87,0.77,0.91,0.83,0.59,0.86,0.91,0.84,0.53,0.55,0.71,0.47,0.96,0.92,0.73,1.0,0.74,0.67,0.23,0.26,0.97,0.56,0.93,0.69,0.65,0.74,0.64,0.88,0.5,0.73],"gap":[6,0,7,null,null,1,5,3,1,5,7,0,5,5,17,2,1,18,14,7,null,3,8,null,null,19,5,26,0,3,7,4,9,25,8,4,10,29,15,16,17,1,5,9,0,7,9,27,36,1,20,3,16,26,10,25,7,29,7]},{"user_id":10004059,"grade":"B","s":"33333000212001101021020000000300000001000000000000000000000","cov":[0.91,0.98,1.0,1.0,0.94,null,null,null,0.47,0.07,0.35,null,null,0.15,0.08,null,0.12,null,0.35,0.1,null,0.29,null,null,null,null,null,null,null,0.9,null,null,null,null,null,null,null,0.07,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],"gap":[5,1,0,0,3,null,null,null,15,51,19,null,null,26,59,null,41,null,30,40,null,19,null,null,null,null,null,null,null,5,null,null,null,null,null,null,null,45,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null]},{"user_id":10004054,"grade":"C","s":"33333333333333313333333333333230333333333333323333200010000","cov":[0.91,1.0,0.92,1.0,0.98,1.0,1.0,0.99,1.0,0.91,0.97,1.0,1.0,0.88,1.0,0.23,0.95,1.0,1.0,0.94,0.97,1.0,0.89,1.0,0.95,1.0,0.86,0.95,0.94,0.52,0.9,null,0.95,0.8,0.79,1.0,0.97,0.99,0.86,0.78,0.82,0.93,0.8,0.97,1.0,0.53,0.87,0.88,0.79,1.0,0.25,null,null,null,0.14,null,null,null,null],"gap":[4,0,6,0,1,0,0,1,0,5,2,0,0,9,0,45,2,0,0,3,1,0,3,0,2,0,8,3,2,27,6,null,3,15,7,0,2,1,7,8,6,3,6,2,0,27,8,8,11,0,28,null,null,null,58,null,null,null,null]},{"user_id":10004069,"grade":"C","s":"33303003333333333333333320033320333320033332333323303003332","cov":[0.89,0.98,0.92,null,1.0,null,null,1.0,0.97,0.94,1.0,0.78,1.0,0.99,1.0,1.0,0.93,0.95,1.0,1.0,0.93,1.0,0.9,1.0,0.53,null,null,1.0,0.91,0.96,0.5,null,0.88,1.0,0.95,0.95,0.68,null,null,0.86,0.92,1.0,0.85,0.7,0.9,0.88,0.95,0.9,0.53,1.0,1.0,null,0.92,null,null,0.87,1.0,0.86,0.46],"gap":[6,1,6,null,0,null,null,0,2,3,0,13,0,1,0,0,4,2,0,0,4,0,4,0,19,null,null,0,6,2,19,null,5,0,1,1,13,null,null,6,5,0,8,13,5,4,3,7,12,0,0,null,4,null,null,4,0,7,29]},{"user_id":10004053,"grade":"C","s":"33303333323003333333033333333333333333233333331333233333333","cov":[0.91,1.0,0.96,null,0.93,1.0,0.95,1.0,1.0,0.6,1.0,null,null,0.92,0.8,1.0,1.0,0.99,0.96,0.96,null,1.0,0.95,1.0,1.0,0.92,1.0,0.91,0.97,1.0,1.0,1.0,0.98,0.85,0.93,1.0,1.0,0.92,0.72,0.95,1.0,1.0,0.81,0.86,1.0,0.96,0.1,0.94,0.9,0.98,0.35,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],"gap":[5,0,2,null,4,0,3,0,0,22,0,null,null,6,13,0,0,1,2,3,null,0,2,0,0,4,0,7,2,0,0,0,1,8,3,0,0,5,18,4,0,0,11,9,0,1,49,3,6,1,33,0,0,0,0,0,0,0,0]},{"user_id":10004063,"grade":"C","s":"33332220033333332233220223033223332222023320021023212023333","cov":[0.91,0.98,0.93,1.0,0.55,0.53,0.55,null,null,0.85,0.85,0.95,0.78,0.81,0.89,0.8,0.54,0.71,0.83,0.76,0.66,0.71,null,0.73,0.47,0.78,null,0.89,0.82,0.71,0.37,0.81,0.98,0.85,0.71,0.69,0.73,0.53,null,0.48,0.77,1.0,0.26,null,null,0.61,0.23,null,0.39,0.82,0.58,0.3,0.57,null,0.33,0.77,0.84,0.92,0.94],"gap":[5,1,3,0,14,18,12,null,null,4,4,2,10,14,7,11,10,8,6,5,6,6,null,14,23,6,null,3,10,11,19,6,1,7,8,8,16,34,null,13,7,0,33,null,null,14,45,null,13,11,13,26,14,null,21,8,9,5,2]},{"user_id":10004049,"grade":"C","s":"33233333333333323333333333003333330333333332323303312322333","cov":[0.91,0.97,0.67,0.98,1.0,1.0,0.97,0.97,1.0,0.98,0.79,0.97,0.94,0.81,0.97,0.74,0.93,0.94,1.0,1.0,1.0,0.99,1.0,0.89,0.83,1.0,null,null,1.0,0.95,0.89,0.91,0.9,0.99,null,0.84,0.86,0.78,0.79,0.97,0.79,0.79,1.0,0.56,0.94,0.7,1.0,0.87,null,0.98,0.88,0.17,0.65,0.94,0.38,0.71,0.86,1.0,0.96],"gap":[5,2,19,1,0,0,2,2,0,1,14,2,3,8,1,18,4,4,0,0,0,1,0,6,10,0,null,null,0,2,6,7,5,1,null,9,5,7,6,1,6,5,0,14,2,16,0,8,null,1,5,44,15,2,18,12,3,0,2]},{"user_id":10004052,"grade":"C","s":"33333323333223333300033333300333333233300330033333323033303","cov":[0.91,0.95,0.87,0.97,1.0,1.0,0.32,1.0,0.87,0.78,0.82,0.47,0.7,0.86,0.79,0.9,0.87,0.83,null,null,null,0.9,0.93,0.92,0.77,0.93,0.83,null,null,0.95,0.92,0.92,0.81,0.96,0.78,0.74,0.78,0.99,0.91,null,null,0.93,0.83,null,null,1.0,0.92,0.9,0.88,1.0,0.86,0.62,1.0,null,1.0,1.0,1.0,null,0.93],"gap":[5,2,8,1,0,0,41,0,8,10,10,23,12,10,11,6,8,6,null,null,null,4,3,6,9,5,5,null,null,2,5,4,8,3,8,7,10,1,4,null,null,4,6,null,null,0,4,7,7,0,8,19,0,null,0,0,0,null,3]},{"user_id":10004056,"grade":"C","s":"33333233332333233333333333333333333333333333322233133333331","cov":[0.93,1.0,0.9,0.95,1.0,0.62,0.83,0.97,0.77,0.89,0.67,0.91,0.95,0.99,0.57,0.96,0.75,0.87,0.91,0.94,0.95,0.92,0.9,0.99,0.97,1.0,1.0,0.99,1.0,1.0,0.95,1.0,0.9,0.92,0.86,0.88,0.94,0.86,0.77,0.96,1.0,1.0,0.91,0.89,0.81,0.68,0.37,0.69,0.81,0.82,0.39,0.9,0.88,1.0,0.97,0.99,0.93,0.76,0.09],"gap":[4,0,6,3,0,20,6,1,10,5,22,6,3,1,18,3,14,7,5,3,3,3,3,1,2,0,0,1,0,0,2,0,3,3,4,3,4,7,6,3,0,0,3,4,8,11,24,11,10,7,22,6,7,0,2,1,4,8,63]},{"user_id":10004068,"grade":"C","s":"23333333323303223332220033333333323320333333332233000333333","cov":[0.72,0.95,0.9,0.95,1.0,0.89,0.76,0.95,0.78,0.74,0.98,0.77,null,0.92,0.54,0.56,0.87,0.94,0.87,0.73,0.6,0.26,null,null,0.98,0.9,0.89,0.99,1.0,0.78,0.82,0.88,0.88,0.66,0.83,0.84,0.57,null,0.88,0.83,0.93,0.98,0.81,0.99,0.9,1.0,0.72,0.71,0.88,0.95,null,null,null,0.76,0.78,1.0,0.86,0.78,1.0],"gap":[15,2,8,3,0,6,15,3,5,12,1,9,null,6,18,22,5,3,7,10,8,39,null,null,1,4,5,1,0,10,10,7,7,11,7,9,11,null,5,13,4,1,11,1,5,0,7,12,7,2,null,null,null,11,7,0,6,11,0]},{"user_id":10004046,"grade":"C","s":"00000333332233333333333333333333332333333332322233033333233","cov":[null,null,null,null,null,0.89,0.94,0.97,0.83,0.82,0.61,0.54,0.91,0.77,0.91,1.0,0.95,0.94,0.85,0.86,1.0,0.81,0.92,0.99,0.89,0.78,1.0,0.96,1.0,0.96,0.98,0.93,0.98,0.92,0.74,0.78,0.97,0.99,0.75,0.91,0.98,0.98,0.94,0.75,0.85,0.68,0.6,0.73,0.79,0.92,null,0.8,0.85,1.0,0.97,0.89,0.68,0.85,0.84],"gap":[null,null,null,null,null,4,4,1,3,7,20,23,4,7,6,0,3,3,6,6,0,14,4,1,4,11,0,2,0,3,1,4,1,3,14,6,1,1,13,3,1,1,3,11,3,10,12,9,5,3,null,5,5,0,2,5,8,4,6]},{"user_id":10004061,"grade":"C","s":"30300333330033300330330320233003203223033000232022223003332","cov":[0.85,null,0.84,null,null,0.91,1.0,1.0,0.82,0.89,null,null,0.82,0.96,0.8,null,null,0.92,0.85,null,0.76,0.78,null,0.85,0.65,null,0.7,0.91,0.94,null,null,0.91,0.61,null,0.86,0.66,0.64,0.85,null,0.88,1.0,null,null,null,0.67,0.86,0.63,null,0.7,0.73,0.54,0.58,0.84,null,null,0.97,0.84,0.95,0.66],"gap":[6,null,6,null,null,7,0,0,5,5,null,null,10,3,13,null,null,6,8,null,8,10,null,6,21,null,7,4,2,null,null,7,21,null,4,8,13,5,null,6,0,null,null,null,9,4,11,null,8,8,16,24,9,null,null,2,6,4,9]},{"user_id":10004047,"grade":"D","s":"33333333333303333333333330333333333333230333333033233333330","cov":[0.89,1.0,0.96,1.0,1.0,1.0,0.89,1.0,0.93,0.93,0.98,0.95,null,0.92,1.0,1.0,1.0,0.91,1.0,0.93,1.0,0.99,0.93,0.96,0.98,null,1.0,1.0,0.95,0.96,1.0,1.0,1.0,0.97,0.95,0.95,1.0,0.93,0.48,0.92,null,0.98,0.94,1.0,1.0,0.95,0.95,null,0.95,1.0,0.35,1.0,1.0,0.97,1.0,1.0,1.0,0.84,null],"gap":[6,0,3,0,0,0,4,0,1,4,1,3,null,4,0,0,0,6,0,3,0,1,2,3,1,null,0,0,3,3,0,0,0,2,3,3,0,5,18,6,null,1,4,0,0,3,3,null,3,0,26,0,0,2,0,0,0,12,null]},{"user_id":10004051,"grade":"D","s":"33333323232323233232333031023300223122133222302200230330312","cov":[0.85,1.0,0.96,0.79,1.0,1.0,0.68,1.0,0.63,0.84,0.62,0.99,0.39,0.86,0.74,0.84,1.0,0.71,0.94,0.73,0.91,0.82,0.89,null,0.94,0.07,null,0.64,0.85,0.97,null,null,0.68,0.51,0.91,0.26,0.62,0.57,0.17,0.75,0.9,0.32,0.34,0.75,0.77,null,0.28,0.44,null,null,0.67,1.0,null,0.83,0.99,null,0.93,0.14,0.23],"gap":[7,0,3,9,0,0,11,0,8,7,16,1,19,10,16,12,0,15,2,8,4,10,7,null,4,46,null,12,9,2,null,null,11,13,2,16,18,26,34,11,5,38,30,17,11,null,37,28,null,null,16,0,null,8,1,null,2,41,34]},{"user_id":10004048,"grade":"D","s":"23332222012232221222222212023003022223010322320213220213033","cov":[0.72,0.97,0.8,0.91,0.6,0.62,0.32,0.64,null,0.27,0.68,0.74,0.87,0.62,0.72,0.44,0.29,0.7,0.69,0.58,0.69,0.54,0.61,0.71,0.21,0.5,null,0.36,0.91,null,null,0.91,null,0.64,0.47,0.5,0.75,0.93,null,0.13,null,1.0,0.54,0.63,0.81,0.54,null,0.5,0.21,0.97,0.72,0.55,null,0.36,0.28,0.85,null,0.77,1.0],"gap":[14,2,8,5,10,12,35,9,null,18,14,18,9,18,9,35,15,12,7,19,15,27,22,8,30,23,null,30,5,null,null,4,null,13,9,11,8,3,null,47,null,0,12,10,5,12,null,14,24,2,8,8,null,25,25,11,null,11,0]},{"user_id":10004060,"grade":"E","s":"33333323323302323320200232223022002230323020000220200003000","cov":[0.79,1.0,0.84,0.91,0.98,0.86,0.73,0.96,0.87,0.58,0.95,0.86,null,0.58,0.85,0.63,0.8,0.95,0.5,null,0.43,null,null,0.67,0.92,0.43,0.55,0.46,1.0,null,0.68,0.41,null,null,0.74,0.64,0.86,null,0.89,0.62,0.89,null,0.57,null,null,null,null,0.62,0.51,null,0.49,null,null,null,null,0.96,null,null,null],"gap":[11,0,9,5,1,7,13,1,5,13,1,6,null,11,6,25,7,2,13,null,12,null,null,19,5,23,24,22,0,null,8,27,null,null,6,17,5,null,4,22,6,null,13,null,null,null,null,9,12,null,23,null,null,null,null,3,null,null,null]},{"user_id":10004064,"grade":"E","s":"33333333333023333333333333333333023233133332332323223233333","cov":[0.91,1.0,0.97,1.0,1.0,0.99,0.95,1.0,0.93,0.87,1.0,null,0.58,0.97,0.98,0.94,0.95,0.97,0.94,0.9,0.97,0.99,0.98,0.99,0.85,0.82,1.0,1.0,0.79,0.99,0.87,0.93,null,0.7,0.93,0.72,0.76,0.88,0.12,0.92,0.98,0.9,0.95,0.69,1.0,0.88,0.63,0.75,0.72,0.92,0.72,0.25,0.84,0.59,0.93,0.83,0.96,0.99,0.87],"gap":[5,0,2,0,0,1,2,0,3,7,0,null,16,2,1,3,2,1,2,4,1,1,1,1,7,12,0,0,4,1,6,3,null,9,2,9,8,7,34,6,1,5,1,6,0,7,19,9,9,4,5,30,10,13,4,12,1,1,8]}],"sessions_meta":[{"id":"2023-08-22_1305","date":"2023-08-22","dow":"Tue","label":"13:05\u201313:57"},{"id":"2023-08-23_1510","date":"2023-08-23","dow":"Wed","label":"15:10\u201316:09"},{"id":"2023-08-29_1245","date":"2023-08-29","dow":"Tue","label":"12:45\u201314:00"},{"id":"2023-09-05_1300","date":"2023-09-05","dow":"Tue","label":"13:00\u201313:57"},{"id":"2023-09-06_1515","date":"2023-09-06","dow":"Wed","label":"15:15\u201316:09"},{"id":"2023-09-12_1245","date":"2023-09-12","dow":"Tue","label":"12:45\u201313:58"},{"id":"2023-09-13_1506","date":"2023-09-13","dow":"Wed","label":"15:06\u201316:11"},{"id":"2023-09-19_1244","date":"2023-09-19","dow":"Tue","label":"12:44\u201314:00"},{"id":"2023-09-20_1509","date":"2023-09-20","dow":"Wed","label":"15:09\u201316:08"},{"id":"2023-09-26_1246","date":"2023-09-26","dow":"Tue","label":"12:46\u201313:59"},{"id":"2023-09-27_1506","date":"2023-09-27","dow":"Wed","label":"15:06\u201316:11"},{"id":"2023-10-03_1247","date":"2023-10-03","dow":"Tue","label":"12:47\u201314:00"},{"id":"2023-10-04_1509","date":"2023-10-04","dow":"Wed","label":"15:09\u201316:15"},{"id":"2023-10-10_1244","date":"2023-10-10","dow":"Tue","label":"12:44\u201313:57"},{"id":"2023-10-11_1508","date":"2023-10-11","dow":"Wed","label":"15:08\u201316:12"},{"id":"2023-10-17_1245","date":"2023-10-17","dow":"Tue","label":"12:45\u201313:57"},{"id":"2023-10-18_1505","date":"2023-10-18","dow":"Wed","label":"15:05\u201316:05"},{"id":"2023-10-24_1251","date":"2023-10-24","dow":"Tue","label":"12:51\u201314:07"},{"id":"2023-10-25_1507","date":"2023-10-25","dow":"Wed","label":"15:07\u201316:00"},{"id":"2023-11-07_1252","date":"2023-11-07","dow":"Tue","label":"12:52\u201314:02"},{"id":"2023-11-08_1511","date":"2023-11-08","dow":"Wed","label":"15:11\u201316:08"},{"id":"2023-11-14_1251","date":"2023-11-14","dow":"Tue","label":"12:51\u201314:02"},{"id":"2023-11-15_1508","date":"2023-11-15","dow":"Wed","label":"15:08\u201316:08"},{"id":"2023-11-21_1250","date":"2023-11-21","dow":"Tue","label":"12:50\u201314:04"},{"id":"2023-11-22_1505","date":"2023-11-22","dow":"Wed","label":"15:05\u201316:10"},{"id":"2023-11-28_1247","date":"2023-11-28","dow":"Tue","label":"12:47\u201313:58"},{"id":"2023-11-29_1504","date":"2023-11-29","dow":"Wed","label":"15:04\u201316:07"},{"id":"2023-12-05_1248","date":"2023-12-05","dow":"Tue","label":"12:48\u201314:01"},{"id":"2023-12-06_1510","date":"2023-12-06","dow":"Wed","label":"15:10\u201316:15"},{"id":"2023-12-12_1243","date":"2023-12-12","dow":"Tue","label":"12:43\u201313:59"},{"id":"2023-12-13_1508","date":"2023-12-13","dow":"Wed","label":"15:08\u201316:09"},{"id":"2023-12-19_1246","date":"2023-12-19","dow":"Tue","label":"12:46\u201313:59"},{"id":"2024-01-10_1247","date":"2024-01-10","dow":"Wed","label":"12:47\u201313:45"},{"id":"2024-01-16_1243","date":"2024-01-16","dow":"Tue","label":"12:43\u201313:56"},{"id":"2024-01-17_1508","date":"2024-01-17","dow":"Wed","label":"15:08\u201316:05"},{"id":"2024-01-23_1302","date":"2024-01-23","dow":"Tue","label":"13:02\u201313:59"},{"id":"2024-01-24_1507","date":"2024-01-24","dow":"Wed","label":"15:07\u201316:09"},{"id":"2024-01-30_1248","date":"2024-01-30","dow":"Tue","label":"12:48\u201314:00"},{"id":"2024-01-31_1454","date":"2024-01-31","dow":"Wed","label":"14:54\u201315:58"},{"id":"2024-02-06_1241","date":"2024-02-06","dow":"Tue","label":"12:41\u201313:57"},{"id":"2024-02-07_1503","date":"2024-02-07","dow":"Wed","label":"15:03\u201316:03"},{"id":"2024-02-13_1302","date":"2024-02-13","dow":"Tue","label":"13:02\u201313:58"},{"id":"2024-02-14_1510","date":"2024-02-14","dow":"Wed","label":"15:10\u201316:14"},{"id":"2024-02-27_1247","date":"2024-02-27","dow":"Tue","label":"12:47\u201313:57"},{"id":"2024-02-28_1512","date":"2024-02-28","dow":"Wed","label":"15:12\u201315:59"},{"id":"2024-03-06_1517","date":"2024-03-06","dow":"Wed","label":"15:17\u201316:13"},{"id":"2024-03-13_1458","date":"2024-03-13","dow":"Wed","label":"14:58\u201315:57"},{"id":"2024-03-19_1248","date":"2024-03-19","dow":"Tue","label":"12:48\u201313:55"},{"id":"2024-03-20_1510","date":"2024-03-20","dow":"Wed","label":"15:10\u201316:06"},{"id":"2024-03-26_1257","date":"2024-03-26","dow":"Tue","label":"12:57\u201313:56"},{"id":"2024-04-09_1301","date":"2024-04-09","dow":"Tue","label":"13:01\u201313:57"},{"id":"2024-04-10_1505","date":"2024-04-10","dow":"Wed","label":"15:05\u201316:04"},{"id":"2024-04-16_1246","date":"2024-04-16","dow":"Tue","label":"12:46\u201314:00"},{"id":"2024-04-23_1244","date":"2024-04-23","dow":"Tue","label":"12:44\u201314:01"},{"id":"2024-04-24_1505","date":"2024-04-24","dow":"Wed","label":"15:05\u201316:13"},{"id":"2024-05-07_1246","date":"2024-05-07","dow":"Tue","label":"12:46\u201314:00"},{"id":"2024-05-08_1504","date":"2024-05-08","dow":"Wed","label":"15:04\u201315:59"},{"id":"2024-05-14_1246","date":"2024-05-14","dow":"Tue","label":"12:46\u201313:59"},{"id":"2024-05-22_1446","date":"2024-05-22","dow":"Wed","label":"14:46\u201315:55"}],"content6":{"order":["Lesson pages and checkpoints","Scaffolded exercises","Assigned creative tasks","Final project","Optional creative tasks","Other pages"],"rows":{"lesson":[9722,25465,8309,6655,3129,1592],"school hours":[944,2277,5651,2502,1650,1126],"after school":[276,1281,2858,2808,527,390],"weekend":[276,410,2825,1964,648,341],"school break":[78,265,267,433,46,106]}},"summary":{"n_events":348031,"n_minutes":84821,"sessions":59,"low":[{"date":"2023-12-20","dow":"Wed","label":"15:00\u201315:50","peak":14},{"date":"2024-05-15","dow":"Wed","label":"15:06\u201316:08","peak":17},{"date":"2024-05-28","dow":"Tue","label":"12:51\u201313:32","peak":14}],"extra":[{"date":"2024-02-09","dow":"Fri","label":"15:42\u201315:55","peak":11}],"student_sessions":1593,"present":1381,"absent":212,"full":1061,"partial":288,"minimal":32,"partial_late":44,"partial_early":67,"partial_break":82,"coverage_median":0.906,"gap_median":5.0,"minutes_by_context":{"lesson":54872,"school hours":14150,"after school":8140,"weekend":6464,"school break":1195},"late_night_minutes":1961,"late_night_students":24,"tue_after":{"minutes":1456},"deadlines":{"unit7":{"minutes":5127,"students":26,"share_of_all_outside":0.171},"final":{"minutes":4279,"students":25,"share_of_all_outside":0.143}},"timetable":{"Tue":{"start":"12:47","end":"13:59","n":30,"minutes":74.0,"start_iqr":["12:45","12:51"],"end_iqr":["13:57","14:00"]},"Wed":{"start":"15:07","end":"16:08","n":29,"minutes":61.0,"start_iqr":["15:05","15:10"],"end_iqr":["16:03","16:11"]}}},"weeks":[{"year":2023,"week":34,"monday":"2023-08-21","cells":[{"dow":"Tue","date":"2023-08-22","kind":"programming","start":"13:05","end":"13:57","minutes":53,"peak":26,"present":26,"full":24,"partial":2},{"dow":"Wed","date":"2023-08-23","kind":"programming","start":"15:10","end":"16:09","minutes":60,"peak":25,"present":25,"full":25,"partial":0}],"extra":[]},{"year":2023,"week":35,"monday":"2023-08-28","cells":[{"dow":"Tue","date":"2023-08-29","kind":"programming","start":"12:45","end":"14:00","minutes":76,"peak":25,"present":25,"full":24,"partial":1},{"dow":"Wed","date":"2023-08-30","kind":"none","why":"no lesson (other groups had lessons)"}],"extra":[]},{"year":2023,"week":36,"monday":"2023-09-04","cells":[{"dow":"Tue","date":"2023-09-05","kind":"programming","start":"13:00","end":"13:57","minutes":58,"peak":21,"present":21,"full":21,"partial":0},{"dow":"Wed","date":"2023-09-06","kind":"programming","start":"15:15","end":"16:09","minutes":55,"peak":22,"present":22,"full":20,"partial":2}],"extra":[]},{"year":2023,"week":37,"monday":"2023-09-11","cells":[{"dow":"Tue","date":"2023-09-12","kind":"programming","start":"12:45","end":"13:58","minutes":74,"peak":24,"present":24,"full":21,"partial":3},{"dow":"Wed","date":"2023-09-13","kind":"programming","start":"15:06","end":"16:11","minutes":66,"peak":23,"present":24,"full":18,"partial":6}],"extra":[]},{"year":2023,"week":38,"monday":"2023-09-18","cells":[{"dow":"Tue","date":"2023-09-19","kind":"programming","start":"12:44","end":"14:00","minutes":77,"peak":25,"present":25,"full":24,"partial":1},{"dow":"Wed","date":"2023-09-20","kind":"programming","start":"15:09","end":"16:08","minutes":60,"peak":25,"present":25,"full":21,"partial":4}],"extra":[]},{"year":2023,"week":39,"monday":"2023-09-25","cells":[{"dow":"Tue","date":"2023-09-26","kind":"programming","start":"12:46","end":"13:59","minutes":74,"peak":25,"present":26,"full":20,"partial":4},{"dow":"Wed","date":"2023-09-27","kind":"programming","start":"15:06","end":"16:11","minutes":66,"peak":24,"present":24,"full":17,"partial":7}],"extra":[]},{"year":2023,"week":40,"monday":"2023-10-02","cells":[{"dow":"Tue","date":"2023-10-03","kind":"programming","start":"12:47","end":"14:00","minutes":74,"peak":22,"present":22,"full":19,"partial":3},{"dow":"Wed","date":"2023-10-04","kind":"programming","start":"15:09","end":"16:15","minutes":67,"peak":21,"present":21,"full":15,"partial":6}],"extra":[]},{"year":2023,"week":41,"monday":"2023-10-09","cells":[{"dow":"Tue","date":"2023-10-10","kind":"programming","start":"12:44","end":"13:57","minutes":74,"peak":27,"present":27,"full":22,"partial":4},{"dow":"Wed","date":"2023-10-11","kind":"programming","start":"15:08","end":"16:12","minutes":65,"peak":26,"present":27,"full":16,"partial":10}],"extra":[]},{"year":2023,"week":42,"monday":"2023-10-16","cells":[{"dow":"Tue","date":"2023-10-17","kind":"programming","start":"12:45","end":"13:57","minutes":73,"peak":25,"present":25,"full":19,"partial":5},{"dow":"Wed","date":"2023-10-18","kind":"programming","start":"15:05","end":"16:05","minutes":61,"peak":24,"present":26,"full":19,"partial":4}],"extra":[]},{"year":2023,"week":43,"monday":"2023-10-23","cells":[{"dow":"Tue","date":"2023-10-24","kind":"programming","start":"12:51","end":"14:07","minutes":77,"peak":25,"present":25,"full":21,"partial":4},{"dow":"Wed","date":"2023-10-25","kind":"programming","start":"15:07","end":"16:00","minutes":54,"peak":25,"present":25,"full":20,"partial":5}],"extra":[]},{"year":2023,"week":44,"monday":"2023-10-30","cells":[{"dow":"Tue","date":"2023-10-31","kind":"none","why":"school break"},{"dow":"Wed","date":"2023-11-01","kind":"none","why":"school break"}],"extra":[]},{"year":2023,"week":45,"monday":"2023-11-06","cells":[{"dow":"Tue","date":"2023-11-07","kind":"programming","start":"12:52","end":"14:02","minutes":71,"peak":23,"present":23,"full":18,"partial":4},{"dow":"Wed","date":"2023-11-08","kind":"programming","start":"15:11","end":"16:08","minutes":58,"peak":23,"present":23,"full":17,"partial":6}],"extra":[]},{"year":2023,"week":46,"monday":"2023-11-13","cells":[{"dow":"Tue","date":"2023-11-14","kind":"programming","start":"12:51","end":"14:02","minutes":72,"peak":26,"present":26,"full":21,"partial":5},{"dow":"Wed","date":"2023-11-15","kind":"programming","start":"15:08","end":"16:08","minutes":61,"peak":22,"present":22,"full":19,"partial":3}],"extra":[]},{"year":2023,"week":47,"monday":"2023-11-20","cells":[{"dow":"Tue","date":"2023-11-21","kind":"programming","start":"12:50","end":"14:04","minutes":75,"peak":23,"present":23,"full":18,"partial":5},{"dow":"Wed","date":"2023-11-22","kind":"programming","start":"15:05","end":"16:10","minutes":66,"peak":25,"present":25,"full":20,"partial":4}],"extra":[]},{"year":2023,"week":48,"monday":"2023-11-27","cells":[{"dow":"Tue","date":"2023-11-28","kind":"programming","start":"12:47","end":"13:58","minutes":72,"peak":21,"present":22,"full":18,"partial":3},{"dow":"Wed","date":"2023-11-29","kind":"programming","start":"15:04","end":"16:07","minutes":64,"peak":21,"present":21,"full":17,"partial":4}],"extra":[]},{"year":2023,"week":49,"monday":"2023-12-04","cells":[{"dow":"Tue","date":"2023-12-05","kind":"programming","start":"12:48","end":"14:01","minutes":74,"peak":24,"present":24,"full":18,"partial":6},{"dow":"Wed","date":"2023-12-06","kind":"programming","start":"15:10","end":"16:15","minutes":66,"peak":24,"present":24,"full":22,"partial":2}],"extra":[]},{"year":2023,"week":50,"monday":"2023-12-11","cells":[{"dow":"Tue","date":"2023-12-12","kind":"programming","start":"12:43","end":"13:59","minutes":77,"peak":24,"present":24,"full":20,"partial":4},{"dow":"Wed","date":"2023-12-13","kind":"programming","start":"15:08","end":"16:09","minutes":62,"peak":22,"present":22,"full":16,"partial":6}],"extra":[]},{"year":2023,"week":51,"monday":"2023-12-18","cells":[{"dow":"Tue","date":"2023-12-19","kind":"programming","start":"12:46","end":"13:59","minutes":74,"peak":22,"present":23,"full":17,"partial":6},{"dow":"Wed","date":"2023-12-20","kind":"low activity","start":"15:00","end":"15:50","minutes":51,"peak":14,"present":null,"full":null,"partial":null}],"extra":[]},{"year":2023,"week":52,"monday":"2023-12-25","cells":[{"dow":"Tue","date":"2023-12-26","kind":"none","why":"school break"},{"dow":"Wed","date":"2023-12-27","kind":"none","why":"school break"}],"extra":[]},{"year":2024,"week":1,"monday":"2024-01-01","cells":[{"dow":"Tue","date":"2024-01-02","kind":"none","why":"school break"},{"dow":"Wed","date":"2024-01-03","kind":"none","why":"school break"}],"extra":[]},{"year":2024,"week":2,"monday":"2024-01-08","cells":[{"dow":"Tue","date":"2024-01-09","kind":"none","why":"no lesson (no group had lessons)"},{"dow":"Wed","date":"2024-01-10","kind":"programming","start":"12:47","end":"13:45","minutes":59,"peak":23,"present":23,"full":21,"partial":2}],"extra":[]},{"year":2024,"week":3,"monday":"2024-01-15","cells":[{"dow":"Tue","date":"2024-01-16","kind":"programming","start":"12:43","end":"13:56","minutes":74,"peak":22,"present":22,"full":17,"partial":5},{"dow":"Wed","date":"2024-01-17","kind":"programming","start":"15:08","end":"16:05","minutes":58,"peak":23,"present":23,"full":19,"partial":4}],"extra":[]},{"year":2024,"week":4,"monday":"2024-01-22","cells":[{"dow":"Tue","date":"2024-01-23","kind":"programming","start":"13:02","end":"13:59","minutes":58,"peak":25,"present":26,"full":14,"partial":11},{"dow":"Wed","date":"2024-01-24","kind":"programming","start":"15:07","end":"16:09","minutes":63,"peak":25,"present":25,"full":18,"partial":7}],"extra":[]},{"year":2024,"week":5,"monday":"2024-01-29","cells":[{"dow":"Tue","date":"2024-01-30","kind":"programming","start":"12:48","end":"14:00","minutes":73,"peak":21,"present":22,"full":18,"partial":3},{"dow":"Wed","date":"2024-01-31","kind":"programming","start":"14:54","end":"15:58","minutes":65,"peak":19,"present":20,"full":12,"partial":6}],"extra":[]},{"year":2024,"week":6,"monday":"2024-02-05","cells":[{"dow":"Tue","date":"2024-02-06","kind":"programming","start":"12:41","end":"13:57","minutes":77,"peak":25,"present":25,"full":21,"partial":3},{"dow":"Wed","date":"2024-02-07","kind":"programming","start":"15:03","end":"16:03","minutes":61,"peak":23,"present":23,"full":21,"partial":2}],"extra":[{"date":"2024-02-09","dow":"Fri","kind":"group work outside timetable","start":"15:42","end":"15:55","peak":11}]},{"year":2024,"week":7,"monday":"2024-02-12","cells":[{"dow":"Tue","date":"2024-02-13","kind":"programming","start":"13:02","end":"13:58","minutes":57,"peak":23,"present":23,"full":19,"partial":4},{"dow":"Wed","date":"2024-02-14","kind":"programming","start":"15:10","end":"16:14","minutes":65,"peak":23,"present":24,"full":18,"partial":5}],"extra":[]},{"year":2024,"week":8,"monday":"2024-02-19","cells":[{"dow":"Tue","date":"2024-02-20","kind":"none","why":"school break"},{"dow":"Wed","date":"2024-02-21","kind":"none","why":"school break"}],"extra":[]},{"year":2024,"week":9,"monday":"2024-02-26","cells":[{"dow":"Tue","date":"2024-02-27","kind":"programming","start":"12:47","end":"13:57","minutes":71,"peak":22,"present":22,"full":14,"partial":8},{"dow":"Wed","date":"2024-02-28","kind":"programming","start":"15:12","end":"15:59","minutes":48,"peak":22,"present":22,"full":20,"partial":2}],"extra":[]},{"year":2024,"week":10,"monday":"2024-03-04","cells":[{"dow":"Tue","date":"2024-03-05","kind":"none","why":"no lesson (no group had lessons)"},{"dow":"Wed","date":"2024-03-06","kind":"programming","start":"15:17","end":"16:13","minutes":57,"peak":24,"present":24,"full":16,"partial":7}],"extra":[]},{"year":2024,"week":11,"monday":"2024-03-11","cells":[{"dow":"Tue","date":"2024-03-12","kind":"none","why":"no lesson (no group had lessons)"},{"dow":"Wed","date":"2024-03-13","kind":"programming","start":"14:58","end":"15:57","minutes":60,"peak":23,"present":24,"full":11,"partial":11}],"extra":[]},{"year":2024,"week":12,"monday":"2024-03-18","cells":[{"dow":"Tue","date":"2024-03-19","kind":"programming","start":"12:48","end":"13:55","minutes":68,"peak":22,"present":22,"full":13,"partial":8},{"dow":"Wed","date":"2024-03-20","kind":"programming","start":"15:10","end":"16:06","minutes":57,"peak":23,"present":24,"full":13,"partial":9}],"extra":[]},{"year":2024,"week":13,"monday":"2024-03-25","cells":[{"dow":"Tue","date":"2024-03-26","kind":"programming","start":"12:57","end":"13:56","minutes":60,"peak":23,"present":23,"full":21,"partial":2},{"dow":"Wed","date":"2024-03-27","kind":"none","why":"no lesson (no group had lessons)"}],"extra":[]},{"year":2024,"week":14,"monday":"2024-04-01","cells":[{"dow":"Tue","date":"2024-04-02","kind":"none","why":"school break"},{"dow":"Wed","date":"2024-04-03","kind":"none","why":"school break"}],"extra":[]},{"year":2024,"week":15,"monday":"2024-04-08","cells":[{"dow":"Tue","date":"2024-04-09","kind":"programming","start":"13:01","end":"13:57","minutes":57,"peak":23,"present":24,"full":8,"partial":15},{"dow":"Wed","date":"2024-04-10","kind":"programming","start":"15:05","end":"16:04","minutes":60,"peak":20,"present":21,"full":9,"partial":9}],"extra":[]},{"year":2024,"week":16,"monday":"2024-04-15","cells":[{"dow":"Tue","date":"2024-04-16","kind":"programming","start":"12:46","end":"14:00","minutes":75,"peak":20,"present":20,"full":13,"partial":7},{"dow":"Wed","date":"2024-04-17","kind":"none","why":"no lesson (other groups had lessons)"}],"extra":[]},{"year":2024,"week":17,"monday":"2024-04-22","cells":[{"dow":"Tue","date":"2024-04-23","kind":"programming","start":"12:44","end":"14:01","minutes":78,"peak":19,"present":19,"full":15,"partial":4},{"dow":"Wed","date":"2024-04-24","kind":"programming","start":"15:05","end":"16:13","minutes":69,"peak":22,"present":23,"full":14,"partial":6}],"extra":[]},{"year":2024,"week":18,"monday":"2024-04-29","cells":[{"dow":"Tue","date":"2024-04-30","kind":"none","why":"no lesson (no group had lessons)"},{"dow":"Wed","date":"2024-05-01","kind":"none","why":"public holiday"}],"extra":[]},{"year":2024,"week":19,"monday":"2024-05-06","cells":[{"dow":"Tue","date":"2024-05-07","kind":"programming","start":"12:46","end":"14:00","minutes":75,"peak":23,"present":24,"full":20,"partial":4},{"dow":"Wed","date":"2024-05-08","kind":"programming","start":"15:04","end":"15:59","minutes":56,"peak":22,"present":22,"full":19,"partial":3}],"extra":[]},{"year":2024,"week":20,"monday":"2024-05-13","cells":[{"dow":"Tue","date":"2024-05-14","kind":"programming","start":"12:46","end":"13:59","minutes":74,"peak":21,"present":22,"full":15,"partial":6},{"dow":"Wed","date":"2024-05-15","kind":"low activity","start":"15:06","end":"16:08","minutes":63,"peak":17,"present":null,"full":null,"partial":null}],"extra":[]},{"year":2024,"week":21,"monday":"2024-05-20","cells":[{"dow":"Tue","date":"2024-05-21","kind":"none","why":"no lesson (no group had lessons)"},{"dow":"Wed","date":"2024-05-22","kind":"programming","start":"14:46","end":"15:55","minutes":70,"peak":21,"present":22,"full":15,"partial":6}],"extra":[]},{"year":2024,"week":22,"monday":"2024-05-27","cells":[{"dow":"Tue","date":"2024-05-28","kind":"low activity","start":"12:51","end":"13:32","minutes":42,"peak":14,"present":null,"full":null,"partial":null},{"dow":"Wed","date":"2024-05-29","kind":"none","why":"no lesson (other groups had lessons)"}],"extra":[]},{"year":2024,"week":23,"monday":"2024-06-03","cells":[{"dow":"Tue","date":"2024-06-04","kind":"none","why":"course over"},{"dow":"Wed","date":"2024-06-05","kind":"none","why":"course over"}],"extra":[]},{"year":2024,"week":24,"monday":"2024-06-10","cells":[{"dow":"Tue","date":"2024-06-11","kind":"none","why":"school break"},{"dow":"Wed","date":"2024-06-12","kind":"none","why":"school break"}],"extra":[]}],"odd":[{"date":"2023-08-22","dow":"Tue","label":"13:05\u201313:57","notes":["started 18 min late"]},{"date":"2023-09-05","dow":"Tue","label":"13:00\u201313:57","notes":["started 13 min late"]},{"date":"2023-09-26","dow":"Tue","label":"12:46\u201313:59","notes":["19-min pause in platform use"]},{"date":"2024-01-10","dow":"Wed","label":"12:47\u201313:45","notes":["held at another time of day (the usual Tuesday slot)"]},{"date":"2024-01-23","dow":"Tue","label":"13:02\u201313:59","notes":["started 15 min late"]},{"date":"2024-01-31","dow":"Wed","label":"14:54\u201315:58","notes":["started 13 min early","ended 10 min early","two thirds active for only 19 min"]},{"date":"2024-02-13","dow":"Tue","label":"13:02\u201313:58","notes":["started 15 min late"]},{"date":"2024-03-06","dow":"Wed","label":"15:17\u201316:13","notes":["started 10 min late"]},{"date":"2024-03-13","dow":"Wed","label":"14:58\u201315:57","notes":["ended 11 min early"]},{"date":"2024-03-26","dow":"Tue","label":"12:57\u201313:56","notes":["started 10 min late"]},{"date":"2024-04-09","dow":"Tue","label":"13:01\u201313:57","notes":["started 14 min late"]},{"date":"2024-04-10","dow":"Wed","label":"15:05\u201316:04","notes":["two thirds active for only 16 min"]},{"date":"2024-04-23","dow":"Tue","label":"12:44\u201314:01","notes":["two thirds active for only 30 min"]},{"date":"2024-05-22","dow":"Wed","label":"14:46\u201315:55","notes":["started 21 min early","ended 13 min early"]}],"series":[{"date":"2023-08-22","dow":"Tue","label":"13:05\u201313:57","full":24,"partial":2,"minimal":0,"absent":1},{"date":"2023-08-23","dow":"Wed","label":"15:10\u201316:09","full":25,"partial":0,"minimal":0,"absent":2},{"date":"2023-08-29","dow":"Tue","label":"12:45\u201314:00","full":24,"partial":1,"minimal":0,"absent":2},{"date":"2023-09-05","dow":"Tue","label":"13:00\u201313:57","full":21,"partial":0,"minimal":0,"absent":6},{"date":"2023-09-06","dow":"Wed","label":"15:15\u201316:09","full":20,"partial":2,"minimal":0,"absent":5},{"date":"2023-09-12","dow":"Tue","label":"12:45\u201313:58","full":21,"partial":3,"minimal":0,"absent":3},{"date":"2023-09-13","dow":"Wed","label":"15:06\u201316:11","full":18,"partial":6,"minimal":0,"absent":3},{"date":"2023-09-19","dow":"Tue","label":"12:44\u201314:00","full":24,"partial":1,"minimal":0,"absent":2},{"date":"2023-09-20","dow":"Wed","label":"15:09\u201316:08","full":21,"partial":4,"minimal":0,"absent":2},{"date":"2023-09-26","dow":"Tue","label":"12:46\u201313:59","full":20,"partial":4,"minimal":2,"absent":1},{"date":"2023-09-27","dow":"Wed","label":"15:06\u201316:11","full":17,"partial":7,"minimal":0,"absent":3},{"date":"2023-10-03","dow":"Tue","label":"12:47\u201314:00","full":19,"partial":3,"minimal":0,"absent":5},{"date":"2023-10-04","dow":"Wed","label":"15:09\u201316:15","full":15,"partial":6,"minimal":0,"absent":6},{"date":"2023-10-10","dow":"Tue","label":"12:44\u201313:57","full":22,"partial":4,"minimal":1,"absent":0},{"date":"2023-10-11","dow":"Wed","label":"15:08\u201316:12","full":16,"partial":10,"minimal":1,"absent":0},{"date":"2023-10-17","dow":"Tue","label":"12:45\u201313:57","full":19,"partial":5,"minimal":1,"absent":2},{"date":"2023-10-18","dow":"Wed","label":"15:05\u201316:05","full":19,"partial":4,"minimal":3,"absent":1},{"date":"2023-10-24","dow":"Tue","label":"12:51\u201314:07","full":21,"partial":4,"minimal":0,"absent":2},{"date":"2023-10-25","dow":"Wed","label":"15:07\u201316:00","full":20,"partial":5,"minimal":0,"absent":2},{"date":"2023-11-07","dow":"Tue","label":"12:52\u201314:02","full":18,"partial":4,"minimal":1,"absent":4},{"date":"2023-11-08","dow":"Wed","label":"15:11\u201316:08","full":17,"partial":6,"minimal":0,"absent":4},{"date":"2023-11-14","dow":"Tue","label":"12:51\u201314:02","full":21,"partial":5,"minimal":0,"absent":1},{"date":"2023-11-15","dow":"Wed","label":"15:08\u201316:08","full":19,"partial":3,"minimal":0,"absent":5},{"date":"2023-11-21","dow":"Tue","label":"12:50\u201314:04","full":18,"partial":5,"minimal":0,"absent":4},{"date":"2023-11-22","dow":"Wed","label":"15:05\u201316:10","full":20,"partial":4,"minimal":1,"absent":2},{"date":"2023-11-28","dow":"Tue","label":"12:47\u201313:58","full":18,"partial":3,"minimal":1,"absent":5},{"date":"2023-11-29","dow":"Wed","label":"15:04\u201316:07","full":17,"partial":4,"minimal":0,"absent":6},{"date":"2023-12-05","dow":"Tue","label":"12:48\u201314:01","full":18,"partial":6,"minimal":0,"absent":3},{"date":"2023-12-06","dow":"Wed","label":"15:10\u201316:15","full":22,"partial":2,"minimal":0,"absent":3},{"date":"2023-12-12","dow":"Tue","label":"12:43\u201313:59","full":20,"partial":4,"minimal":0,"absent":3},{"date":"2023-12-13","dow":"Wed","label":"15:08\u201316:09","full":16,"partial":6,"minimal":0,"absent":5},{"date":"2023-12-19","dow":"Tue","label":"12:46\u201313:59","full":17,"partial":6,"minimal":0,"absent":4},{"date":"2024-01-10","dow":"Wed","label":"12:47\u201313:45","full":21,"partial":2,"minimal":0,"absent":4},{"date":"2024-01-16","dow":"Tue","label":"12:43\u201313:56","full":17,"partial":5,"minimal":0,"absent":5},{"date":"2024-01-17","dow":"Wed","label":"15:08\u201316:05","full":19,"partial":4,"minimal":0,"absent":4},{"date":"2024-01-23","dow":"Tue","label":"13:02\u201313:59","full":14,"partial":11,"minimal":1,"absent":1},{"date":"2024-01-24","dow":"Wed","label":"15:07\u201316:09","full":18,"partial":7,"minimal":0,"absent":2},{"date":"2024-01-30","dow":"Tue","label":"12:48\u201314:00","full":18,"partial":3,"minimal":1,"absent":5},{"date":"2024-01-31","dow":"Wed","label":"14:54\u201315:58","full":12,"partial":6,"minimal":2,"absent":7},{"date":"2024-02-06","dow":"Tue","label":"12:41\u201313:57","full":21,"partial":3,"minimal":1,"absent":2},{"date":"2024-02-07","dow":"Wed","label":"15:03\u201316:03","full":21,"partial":2,"minimal":0,"absent":4},{"date":"2024-02-13","dow":"Tue","label":"13:02\u201313:58","full":19,"partial":4,"minimal":0,"absent":4},{"date":"2024-02-14","dow":"Wed","label":"15:10\u201316:14","full":18,"partial":5,"minimal":1,"absent":3},{"date":"2024-02-27","dow":"Tue","label":"12:47\u201313:57","full":14,"partial":8,"minimal":0,"absent":5},{"date":"2024-02-28","dow":"Wed","label":"15:12\u201315:59","full":20,"partial":2,"minimal":0,"absent":5},{"date":"2024-03-06","dow":"Wed","label":"15:17\u201316:13","full":16,"partial":7,"minimal":1,"absent":3},{"date":"2024-03-13","dow":"Wed","label":"14:58\u201315:57","full":11,"partial":11,"minimal":2,"absent":3},{"date":"2024-03-19","dow":"Tue","label":"12:48\u201313:55","full":13,"partial":8,"minimal":1,"absent":5},{"date":"2024-03-20","dow":"Wed","label":"15:10\u201316:06","full":13,"partial":9,"minimal":2,"absent":3},{"date":"2024-03-26","dow":"Tue","label":"12:57\u201313:56","full":21,"partial":2,"minimal":0,"absent":4},{"date":"2024-04-09","dow":"Tue","label":"13:01\u201313:57","full":8,"partial":15,"minimal":1,"absent":3},{"date":"2024-04-10","dow":"Wed","label":"15:05\u201316:04","full":9,"partial":9,"minimal":3,"absent":6},{"date":"2024-04-16","dow":"Tue","label":"12:46\u201314:00","full":13,"partial":7,"minimal":0,"absent":7},{"date":"2024-04-23","dow":"Tue","label":"12:44\u201314:01","full":15,"partial":4,"minimal":0,"absent":8},{"date":"2024-04-24","dow":"Wed","label":"15:05\u201316:13","full":14,"partial":6,"minimal":3,"absent":4},{"date":"2024-05-07","dow":"Tue","label":"12:46\u201314:00","full":20,"partial":4,"minimal":0,"absent":3},{"date":"2024-05-08","dow":"Wed","label":"15:04\u201315:59","full":19,"partial":3,"minimal":0,"absent":5},{"date":"2024-05-14","dow":"Tue","label":"12:46\u201313:59","full":15,"partial":6,"minimal":1,"absent":5},{"date":"2024-05-22","dow":"Wed","label":"14:46\u201315:55","full":15,"partial":6,"minimal":1,"absent":5}],"forest":[{"key":"attend_rate","label":"Lessons with any platform activity","family":"In lessons","r":{"grade_num":{"rho":0.362,"lo":-0.029,"hi":0.69,"p":0.0636,"n":27},"final_project_num":{"rho":0.554,"lo":0.193,"hi":0.8,"p":0.0027,"n":27}}},{"key":"working_rate","label":"Lessons with more than 5 active minutes","family":"In lessons","r":{"grade_num":{"rho":0.382,"lo":-0.011,"hi":0.705,"p":0.0494,"n":27},"final_project_num":{"rho":0.549,"lo":0.193,"hi":0.815,"p":0.003,"n":27}}},{"key":"full_rate","label":"Share of attended lessons fully active","family":"In lessons","r":{"grade_num":{"rho":0.074,"lo":-0.332,"hi":0.464,"p":0.7154,"n":27},"final_project_num":{"rho":0.167,"lo":-0.256,"hi":0.529,"p":0.4064,"n":27}}},{"key":"coverage_med","label":"Typical share of the lesson active","family":"In lessons","r":{"grade_num":{"rho":0.049,"lo":-0.346,"hi":0.442,"p":0.8069,"n":27},"final_project_num":{"rho":0.233,"lo":-0.175,"hi":0.584,"p":0.2415,"n":27}}},{"key":"break_rate","label":"Share of lessons with a break over 20 min","family":"In lessons","r":{"grade_num":{"rho":0.006,"lo":-0.41,"hi":0.416,"p":0.9761,"n":27},"final_project_num":{"rho":-0.058,"lo":-0.464,"hi":0.372,"p":0.7722,"n":27}}},{"key":"late_rate","label":"Share of lessons started over 15 min late","family":"In lessons","r":{"grade_num":{"rho":0.282,"lo":-0.16,"hi":0.683,"p":0.1537,"n":27},"final_project_num":{"rho":0.094,"lo":-0.335,"hi":0.558,"p":0.6407,"n":27}}},{"key":"min_school hours","label":"At school, outside lessons (minutes)","family":"Outside lessons","r":{"grade_num":{"rho":0.317,"lo":-0.073,"hi":0.644,"p":0.1072,"n":27},"final_project_num":{"rho":0.454,"lo":0.023,"hi":0.764,"p":0.0174,"n":27}}},{"key":"min_after school","label":"After school, 17\u201308 (minutes)","family":"Outside lessons","r":{"grade_num":{"rho":0.281,"lo":-0.085,"hi":0.602,"p":0.1557,"n":27},"final_project_num":{"rho":0.637,"lo":0.35,"hi":0.819,"p":0.0004,"n":27}}},{"key":"min_weekend","label":"Weekends (minutes)","family":"Outside lessons","r":{"grade_num":{"rho":0.057,"lo":-0.307,"hi":0.411,"p":0.7765,"n":27},"final_project_num":{"rho":0.326,"lo":-0.043,"hi":0.652,"p":0.0971,"n":27}}},{"key":"outside_share","label":"Share of all activity outside lessons","family":"Outside lessons","r":{"grade_num":{"rho":0.181,"lo":-0.201,"hi":0.536,"p":0.3676,"n":27},"final_project_num":{"rho":0.386,"lo":0.003,"hi":0.698,"p":0.0468,"n":27}}},{"key":"home_days","label":"Days with work after school or at weekends","family":"Outside lessons","r":{"grade_num":{"rho":-0.062,"lo":-0.434,"hi":0.299,"p":0.7605,"n":27},"final_project_num":{"rho":0.304,"lo":-0.07,"hi":0.627,"p":0.1232,"n":27}}},{"key":"late_night_min","label":"Late night, 23\u201305 (minutes)","family":"Outside lessons","r":{"grade_num":{"rho":0.245,"lo":-0.156,"hi":0.597,"p":0.219,"n":27},"final_project_num":{"rho":0.344,"lo":-0.053,"hi":0.69,"p":0.0785,"n":27}}}],"weekly":{"weeks":["2023-W34","2023-W35","2023-W36","2023-W37","2023-W38","2023-W39","2023-W40","2023-W41","2023-W42","2023-W43","2023-W44","2023-W45","2023-W46","2023-W47","2023-W48","2023-W49","2023-W50","2023-W51","2023-W52","2024-W01","2024-W02","2024-W03","2024-W04","2024-W05","2024-W06","2024-W07","2024-W08","2024-W09","2024-W10","2024-W11","2024-W12","2024-W13","2024-W14","2024-W15","2024-W16","2024-W17","2024-W18","2024-W19","2024-W20","2024-W21","2024-W22","2024-W23","2024-W24"],"monday":["2023-08-21","2023-08-28","2023-09-04","2023-09-11","2023-09-18","2023-09-25","2023-10-02","2023-10-09","2023-10-16","2023-10-23","2023-10-30","2023-11-06","2023-11-13","2023-11-20","2023-11-27","2023-12-04","2023-12-11","2023-12-18","2023-12-25","2024-01-01","2024-01-08","2024-01-15","2024-01-22","2024-01-29","2024-02-05","2024-02-12","2024-02-19","2024-02-26","2024-03-04","2024-03-11","2024-03-18","2024-03-25","2024-04-01","2024-04-08","2024-04-15","2024-04-22","2024-04-29","2024-05-06","2024-05-13","2024-05-20","2024-05-27","2024-06-03","2024-06-10"],"series":{"school hours":[216,192,375,148,132,213,129,185,404,153,0,157,332,229,258,720,1192,928,0,0,216,219,204,1301,1770,550,0,356,308,153,135,79,0,396,86,397,27,255,590,625,520,0,0],"after school":[112,89,127,9,37,53,26,24,119,30,0,29,469,148,341,592,231,108,0,0,239,100,35,439,1058,336,0,8,194,63,12,30,0,178,36,227,14,298,538,1670,121,0,0],"weekend":[108,39,0,1,27,0,302,12,0,2,15,8,63,60,225,233,5,101,20,333,128,16,5,238,1949,182,13,86,2,6,3,19,4,0,0,10,14,147,254,1660,173,1,0],"school break":[0,0,0,0,0,0,0,0,0,0,93,0,0,0,0,0,0,0,294,111,0,0,0,0,0,0,101,0,0,0,0,7,79,0,0,0,1,101,0,0,0,63,345]},"lesson":[2315,1446,1844,2106,2423,1777,1823,2190,2082,2243,0,1718,2092,2188,1682,2124,1908,1253,0,0,928,1667,1548,1547,1942,1545,0,1425,680,652,1181,908,0,999,826,1536,0,1769,1457,777,271,0,0]},"grid":[[110,32,80,48,34,51,1,24,51,243,269,148,114,115,89,196,144,86,41,116,116,14,73,70],[21,0,31,0,0,0,0,59,54,234,180,272,425,218,1463,639,179,264,217,277,356,235,191,121],[73,14,2,0,0,0,0,88,308,646,1020,430,321,129,568,184,209,428,436,558,412,401,237,69],[28,2,1,3,0,0,1,119,383,454,359,406,283,369,408,137,166,199,136,243,337,253,129,127],[106,57,20,0,0,0,3,30,268,330,238,125,350,252,439,934,120,227,168,182,205,336,135,183],[83,32,3,0,0,0,0,0,3,23,103,150,226,169,135,117,211,141,140,150,121,71,140,134],[128,61,80,0,0,0,0,47,51,63,47,242,262,346,302,209,325,124,200,355,446,495,321,208]],"grid_all":[[110,32,80,48,34,51,1,24,51,243,269,148,114,115,89,196,144,86,41,116,116,14,73,70],[21,0,31,0,0,0,0,59,54,234,180,272,4976,25422,1927,639,179,264,217,277,356,235,191,121],[73,14,2,0,0,0,0,88,308,646,1020,430,488,890,792,20753,3141,428,436,558,412,401,237,69],[28,2,1,3,0,0,1,119,383,454,359,406,283,369,408,137,166,199,136,243,337,253,129,127],[106,57,20,0,0,0,3,30,268,330,238,125,350,252,439,934,120,227,168,182,205,336,135,183],[83,32,3,0,0,0,0,0,3,23,103,150,226,169,135,117,211,141,140,150,121,71,140,134],[128,61,80,0,0,0,0,47,51,63,47,242,262,346,302,209,325,124,200,355,446,495,321,208]],"content_order":["lesson pages & checkpoints","exercises 1 pt","exercises 2 pt","exercises 3\u20134 pt","assigned creative task","optional creative task","final project","documentation","sandbox","other pages"],"content":{"after school":[276,360,494,427,2858,527,2808,51,186,153],"lesson":[9722,8878,9015,7572,8309,3129,6655,65,98,1429],"school break":[78,124,72,69,267,46,433,21,48,37],"school hours":[944,690,713,874,5651,1650,2502,173,464,489],"weekend":[276,109,149,152,2825,648,1964,35,179,127]},"relative":{"after school":{"ahead":152,"catching up":442,"current unit":969},"lesson":{"ahead":3493,"catching up":2838,"current unit":28981},"school break":{"ahead":27,"catching up":74,"current unit":253},"school hours":{"ahead":411,"catching up":730,"current unit":2083},"weekend":{"ahead":150,"catching up":108,"current unit":503}},"roster":[{"user_id":10004066,"grade":"A","present":55,"absent":4,"full":47,"partial":8,"minimal":0,"late":2,"long_break":4,"coverage":0.93,"school":1342,"after":702,"weekend":188,"brk":17,"lesson":2313,"late_night":47,"home_days":29},{"user_id":10004065,"grade":"A","present":59,"absent":0,"full":50,"partial":9,"minimal":0,"late":0,"long_break":2,"coverage":0.92,"school":311,"after":51,"weekend":113,"brk":9,"lesson":2485,"late_night":22,"home_days":5},{"user_id":10004044,"grade":"A","present":57,"absent":2,"full":42,"partial":14,"minimal":1,"late":4,"long_break":4,"coverage":0.86,"school":210,"after":382,"weekend":333,"brk":16,"lesson":2375,"late_night":28,"home_days":16},{"user_id":10004043,"grade":"A","present":55,"absent":4,"full":48,"partial":7,"minimal":0,"late":3,"long_break":3,"coverage":0.95,"school":339,"after":543,"weekend":132,"brk":26,"lesson":2728,"late_night":189,"home_days":17},{"user_id":10004067,"grade":"A","present":53,"absent":6,"full":46,"partial":7,"minimal":0,"late":2,"long_break":2,"coverage":0.91,"school":467,"after":4,"weekend":101,"brk":0,"lesson":2228,"late_night":3,"home_days":6},{"user_id":10004058,"grade":"A","present":49,"absent":10,"full":22,"partial":25,"minimal":2,"late":4,"long_break":8,"coverage":0.72,"school":566,"after":989,"weekend":419,"brk":42,"lesson":1319,"late_night":485,"home_days":36},{"user_id":10004057,"grade":"A","present":55,"absent":4,"full":38,"partial":15,"minimal":2,"late":4,"long_break":6,"coverage":0.87,"school":707,"after":337,"weekend":264,"brk":5,"lesson":2143,"late_night":261,"home_days":26},{"user_id":10004050,"grade":"A","present":56,"absent":3,"full":50,"partial":6,"minimal":0,"late":4,"long_break":3,"coverage":0.93,"school":196,"after":142,"weekend":53,"brk":4,"lesson":2350,"late_night":32,"home_days":6},{"user_id":10004055,"grade":"B","present":57,"absent":2,"full":52,"partial":5,"minimal":0,"late":2,"long_break":2,"coverage":0.94,"school":1251,"after":593,"weekend":842,"brk":434,"lesson":2594,"late_night":0,"home_days":83},{"user_id":10004045,"grade":"B","present":57,"absent":2,"full":52,"partial":4,"minimal":1,"late":3,"long_break":3,"coverage":0.98,"school":1175,"after":683,"weekend":126,"brk":1,"lesson":2831,"late_night":0,"home_days":18},{"user_id":10004062,"grade":"B","present":54,"absent":5,"full":31,"partial":22,"minimal":1,"late":3,"long_break":8,"coverage":0.86,"school":2189,"after":674,"weekend":763,"brk":2,"lesson":1760,"late_night":142,"home_days":39},{"user_id":10004059,"grade":"B","present":16,"absent":43,"full":6,"partial":4,"minimal":6,"late":6,"long_break":7,"coverage":0.35,"school":67,"after":29,"weekend":68,"brk":0,"lesson":350,"late_night":30,"home_days":7},{"user_id":10004054,"grade":"C","present":51,"absent":8,"full":46,"partial":3,"minimal":2,"late":0,"long_break":5,"coverage":0.95,"school":1201,"after":731,"weekend":347,"brk":42,"lesson":2184,"late_night":113,"home_days":45},{"user_id":10004069,"grade":"C","present":48,"absent":11,"full":42,"partial":6,"minimal":0,"late":1,"long_break":1,"coverage":0.95,"school":465,"after":55,"weekend":116,"brk":0,"lesson":2287,"late_night":21,"home_days":7},{"user_id":10004053,"grade":"C","present":55,"absent":4,"full":51,"partial":3,"minimal":1,"late":2,"long_break":3,"coverage":0.99,"school":219,"after":199,"weekend":190,"brk":7,"lesson":2872,"late_night":26,"home_days":11},{"user_id":10004063,"grade":"C","present":50,"absent":9,"full":26,"partial":22,"minimal":2,"late":3,"long_break":6,"coverage":0.77,"school":252,"after":127,"weekend":141,"brk":30,"lesson":1416,"late_night":26,"home_days":15},{"user_id":10004049,"grade":"C","present":55,"absent":4,"full":47,"partial":7,"minimal":1,"late":1,"long_break":1,"coverage":0.94,"school":429,"after":505,"weekend":535,"brk":138,"lesson":2309,"late_night":59,"home_days":38},{"user_id":10004052,"grade":"C","present":48,"absent":11,"full":43,"partial":5,"minimal":0,"late":1,"long_break":2,"coverage":0.91,"school":134,"after":123,"weekend":59,"brk":0,"lesson":2070,"late_night":11,"home_days":6},{"user_id":10004056,"grade":"C","present":59,"absent":0,"full":51,"partial":6,"minimal":2,"late":2,"long_break":4,"coverage":0.91,"school":390,"after":391,"weekend":130,"brk":7,"lesson":2197,"late_night":15,"home_days":20},{"user_id":10004068,"grade":"C","present":52,"absent":7,"full":41,"partial":11,"minimal":0,"late":1,"long_break":2,"coverage":0.87,"school":424,"after":110,"weekend":505,"brk":70,"lesson":1920,"late_night":202,"home_days":16},{"user_id":10004046,"grade":"C","present":53,"absent":6,"full":45,"partial":8,"minimal":0,"late":0,"long_break":1,"coverage":0.91,"school":383,"after":26,"weekend":92,"brk":1,"lesson":1892,"late_night":1,"home_days":9},{"user_id":10004061,"grade":"C","present":39,"absent":20,"full":27,"partial":12,"minimal":0,"late":2,"long_break":3,"coverage":0.84,"school":264,"after":0,"weekend":55,"brk":0,"lesson":1441,"late_night":0,"home_days":4},{"user_id":10004047,"grade":"D","present":54,"absent":5,"full":52,"partial":2,"minimal":0,"late":0,"long_break":1,"coverage":0.98,"school":88,"after":123,"weekend":435,"brk":62,"lesson":2658,"late_night":3,"home_days":24},{"user_id":10004051,"grade":"D","present":50,"absent":9,"full":27,"partial":19,"minimal":4,"late":3,"long_break":9,"coverage":0.78,"school":223,"after":21,"weekend":32,"brk":6,"lesson":1694,"late_night":5,"home_days":25},{"user_id":10004048,"grade":"D","present":49,"absent":10,"full":13,"partial":30,"minimal":6,"late":3,"long_break":11,"coverage":0.64,"school":339,"after":212,"weekend":104,"brk":3,"lesson":1203,"late_night":118,"home_days":27},{"user_id":10004060,"grade":"E","present":38,"absent":21,"full":19,"partial":19,"minimal":0,"late":5,"long_break":7,"coverage":0.77,"school":55,"after":135,"weekend":163,"brk":18,"lesson":1099,"late_night":3,"home_days":18},{"user_id":10004064,"grade":"E","present":57,"absent":2,"full":47,"partial":9,"minimal":1,"late":1,"long_break":2,"coverage":0.93,"school":464,"after":253,"weekend":158,"brk":255,"lesson":2154,"late_night":119,"home_days":15}]}</script>
+<script>
+(function () {
+  "use strict";
+  const D = JSON.parse(document.getElementById("report-data").textContent);
+  const NS = "http://www.w3.org/2000/svg";
+  const $ = (s, el) => (el || document).querySelector(s);
+  const MINUS = "−";
+  const fmt = (v, d = 2) => v == null || isNaN(v) ? "–" : (v < 0 ? MINUS : "") + Math.abs(v).toFixed(d);
+  const fmtNum = (v, d = 0) => v == null || isNaN(v) ? "–" : (v < 0 ? MINUS : "") + Math.abs(v).toLocaleString("en-GB", { minimumFractionDigits: d, maximumFractionDigits: d });
+  const cssVar = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+  const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  const DOWS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+  const fmtDate = s => { const d = new Date(s + "T12:00:00"); return DOWS[(d.getDay() + 6) % 7] + " " + d.getDate() + " " + MONTHS[d.getMonth()] + " " + d.getFullYear(); };
+  const hm = s => { const [h, m] = s.split(":").map(Number); return h * 60 + m; };
+  function el(tag, attrs, parent, text) { const e = document.createElementNS(NS, tag); if (attrs) for (const k in attrs) e.setAttribute(k, attrs[k]); if (text != null) e.textContent = text; if (parent) parent.appendChild(e); return e; }
+  function h(tag, attrs, parent, text) { const e = document.createElement(tag); if (attrs) for (const k in attrs) { if (k === "class") e.className = attrs[k]; else e.setAttribute(k, attrs[k]); } if (text != null) e.textContent = text; if (parent) parent.appendChild(e); return e; }
+  function niceTicks(lo, hi, n) { const span = hi - lo || 1; const s0 = span / (n || 5); const mag = Math.pow(10, Math.floor(Math.log10(s0))); const err = s0 / mag; const step = (err >= 7.5 ? 10 : err >= 3.5 ? 5 : err >= 1.5 ? 2 : 1) * mag; const a = Math.floor(lo / step) * step, b = Math.ceil(hi / step) * step; const out = []; for (let v = a; v <= b + step / 2; v += step) out.push(+v.toFixed(10)); return out; }
+
+  const tip = $("#tip");
+  function showTip(x, y, lines) {
+    tip.replaceChildren();
+    for (const ln of lines) {
+      if (ln.rows) { for (const r of ln.rows) { const row = h("div", { class: "t-row" }, tip); if (r.color) { const k = h("i", { class: "lk" }, row); k.style.borderColor = r.color; } h("b", null, row, r.value); h("span", { class: "t-sub" }, row, r.label); } }
+      else h("div", { class: ln.cls || "" }, tip, ln.text);
+    }
+    tip.hidden = false;
+    const pad = 14, w = tip.offsetWidth, hh = tip.offsetHeight;
+    let left = x + pad, top = y + pad;
+    if (left + w > window.innerWidth - 8) left = x - w - pad;
+    if (top + hh > window.innerHeight - 8) top = y - hh - pad;
+    tip.style.left = Math.max(8, left) + "px"; tip.style.top = Math.max(8, top) + "px";
+  }
+  function hideTip() { tip.hidden = true; }
+  function hover(t, lines) { t.addEventListener("pointermove", e => showTip(e.clientX, e.clientY, typeof lines === "function" ? lines() : lines)); t.addEventListener("pointerleave", hideTip); }
+  function legend(host, items) { host.replaceChildren(); items.forEach(([label, color, style]) => { const s = h("span", null, host); const k = h("i", { class: "sw" }, s); k.style.background = color; if (style) Object.assign(k.style, style); s.appendChild(document.createTextNode(label)); }); }
+
+  const S = D.summary;
+  const STATUS = [["No activity", "var(--st0)", { outline: "1px solid var(--hair)" }], ["Barely active", "var(--st1)"], ["Partly active", "var(--st2)"], ["Fully active", "var(--st3)"]];
+  const CTX = [["school hours", "At school, outside lessons", "--c1"], ["after school", "After school (17–08)", "--c2"], ["weekend", "Weekend", "--c3"], ["school break", "School break", "--c4"]];
+  legend($("#att-legend"), STATUS.slice().reverse()); legend($("#att-legend2"), STATUS.slice().reverse());
+  legend($("#ctx-legend"), CTX.map(c => [c[1], `var(${c[2]})`])); legend($("#ctx-legend2"), CTX.map(c => [c[1], `var(${c[2]})`]));
+
+  /* ---------- slots ---------- */
+  (function slots() {
+    const host = $("#slots"), T = S.timetable;
+    [["Tue", "Tuesday"], ["Wed", "Wednesday"]].forEach(([k, name]) => {
+      const t = T[k], d = h("div", { class: "slot" }, host);
+      h("div", { class: "d" }, d, name + " · " + t.n + " lessons");
+      h("div", { class: "t" }, d, t.start + "–" + t.end);
+      h("div", { class: "s" }, d, "Median start and end. Half the lessons started between " + t.start_iqr[0] + " and " + t.start_iqr[1] + " and ended between " + t.end_iqr[0] + " and " + t.end_iqr[1] + "; median " + t.minutes + " active minutes.");
+    });
+  })();
+
+  /* ---------- lesson times chart ---------- */
+  const BREAKS = [["2023-10-30", "2023-11-05", "Autumn break"], ["2023-12-25", "2024-01-07", "Christmas"], ["2024-02-19", "2024-02-25", "Winter break"], ["2024-04-01", "2024-04-07", "Easter"]];
+  function renderTimes() {
+    const host = $("#times"); host.replaceChildren();
+    const W = host.clientWidth; if (!W) return;
+    const H = 300, left = 44, right = 12, top = 24, bottom = 26;
+    const t0 = Date.parse("2023-08-18T00:00:00"), t1 = Date.parse("2024-06-05T00:00:00");
+    const xs = s => left + (Date.parse(s + "T12:00:00") - t0) / (t1 - t0) * (W - left - right);
+    const y0 = 12 * 60 + 15, y1 = 16 * 60 + 45;
+    const ys = m => top + (m - y0) / (y1 - y0) * (H - top - bottom);
+    const svg = el("svg", { width: W, height: H, viewBox: `0 0 ${W} ${H}`, role: "img", "aria-label": "Start and end of every lesson" }, host);
+    BREAKS.forEach(([a, b, lab]) => { const x0 = xs(a), x1 = xs(b); el("rect", { x: x0, y: top, width: Math.max(2, x1 - x0), height: H - top - bottom, fill: "var(--brk)" }, svg); if (W > 560) el("text", { x: (x0 + x1) / 2, y: top - 8, "font-size": 10, fill: "var(--muted)", "text-anchor": "middle" }, svg, lab); });
+    for (let m = 12 * 60 + 30; m <= 16 * 60 + 30; m += 30) { el("line", { x1: left, x2: W - right, y1: ys(m), y2: ys(m), stroke: "var(--hair)", "stroke-width": 1 }, svg); if (m % 60 === 0 || W > 520) el("text", { x: left - 6, y: ys(m) + 4, "font-size": 10.5, fill: "var(--muted)", "text-anchor": "end" }, svg, String(Math.floor(m / 60)).padStart(2, "0") + ":" + String(m % 60).padStart(2, "0")); }
+    for (let d = new Date(2023, 8, 1); d <= new Date(2024, 5, 1); d.setMonth(d.getMonth() + 1)) { const iso = d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-01"; el("text", { x: xs(iso), y: H - 8, "font-size": 10.5, fill: "var(--muted)", "text-anchor": "middle" }, svg, W < 520 ? MONTHS[d.getMonth()][0] : MONTHS[d.getMonth()]); }
+    const all = [];
+    D.weeks.forEach(w => { w.cells.forEach(c => { if (c.kind !== "none") all.push(c); }); });
+    all.forEach(c => {
+      const x = xs(c.date), a = ys(hm(c.start)), b = ys(hm(c.end));
+      const color = c.dow === "Tue" ? "var(--c1)" : "var(--c2)";
+      const low = c.kind !== "programming";
+      el("rect", { x: x - 2.5, y: a, width: 5, height: Math.max(3, b - a), rx: 2.5, fill: low ? "var(--surface)" : color, stroke: low ? color : "none", "stroke-width": low ? 1.5 : 0 }, svg);
+      const hit = el("rect", { x: x - 7, y: a - 4, width: 14, height: Math.max(12, b - a + 8), fill: "transparent" }, svg);
+      hover(hit, [{ text: c.start + "–" + c.end + " (" + c.minutes + " min)", cls: "t-strong" }, { text: fmtDate(c.date) }, { text: (low ? "Below two thirds: " : "") + "at most " + c.peak + " students active together", cls: "t-sub" }]);
+    });
+  }
+
+  /* ---------- odd sessions ---------- */
+  (function oddTable() {
+    const t = $("#odd");
+    const hr = h("tr", null, h("thead", null, t)); ["Date", "Lesson", "What was unusual"].forEach(c => h("th", null, hr, c));
+    const tb = h("tbody", null, t);
+    D.odd.forEach(o => { const tr = h("tr", null, tb); h("td", { class: "lead" }, tr, fmtDate(o.date)); h("td", { "data-label": "Lesson" }, tr, o.label); h("td", { "data-label": "What was unusual" }, tr, o.notes.join("; ")); });
+    S.low.forEach(o => { const tr = h("tr", null, tb); h("td", { class: "lead" }, tr, fmtDate(o.date)); h("td", { "data-label": "Lesson" }, tr, o.label); h("td", { "data-label": "What was unusual" }, tr, "at most " + o.peak + " of 27 active together, below two thirds"); });
+    S.extra.forEach(o => { const tr = h("tr", null, tb); h("td", { class: "lead" }, tr, fmtDate(o.date)); h("td", { "data-label": "Lesson" }, tr, o.label); h("td", { "data-label": "What was unusual" }, tr, o.peak + " students working together on a Friday, outside the timetable, two days before the unit 7 task was due"); });
+  })();
+
+  /* ---------- schedule table ---------- */
+  (function schedTable() {
+    const t = $("#sched");
+    const hr = h("tr", null, h("thead", null, t)); ["Week", "Week of", "Tuesday", "Wednesday", "Other days"].forEach(c => h("th", null, hr, c));
+    const tb = h("tbody", null, t);
+    const WHY = { "school break": "School break", "public holiday": "Public holiday", "course over": "Course over", "no lesson (other groups had lessons)": "No lesson (other groups had lessons)", "no lesson (no group had lessons)": "No lesson (no group had lessons)" };
+    D.weeks.forEach(w => {
+      const allBreak = w.cells.every(c => c.kind === "none" && (c.why === "school break" || c.why === "course over"));
+      const tr = h("tr", { class: allBreak ? "break" : "" }, tb);
+      h("td", { class: "wk" }, tr, String(w.week));
+      const d = new Date(w.monday + "T12:00:00"); h("td", { class: "wk" }, tr, d.getDate() + " " + MONTHS[d.getMonth()]);
+      if (allBreak) { const td = h("td", { class: "snote", colspan: "3" }, tr, WHY[w.cells[0].why]); return; }
+      w.cells.forEach(c => {
+        const td = h("td", { class: "day" }, tr), cell = h("span", { class: "cell" }, td);
+        if (c.kind === "none") { h("span", { class: "dot none" }, cell); h("span", { class: "snote" }, cell, WHY[c.why] || c.why); return; }
+        h("span", { class: "dot " + (c.kind === "programming" ? "prog" : "low") }, cell);
+        h("span", { class: "time" }, cell, c.start + "–" + c.end);
+        h("span", { class: "snote" }, cell, c.kind === "programming" ? (c.full != null ? c.full + " fully active" : "") : "only " + c.peak + " active together");
+      });
+      const ex = h("td", { class: "snote" }, tr);
+      ex.textContent = w.extra.length ? w.extra.map(e => e.dow + " " + e.start + "–" + e.end + " (" + e.peak + " together)").join("; ") : "";
+    });
+  })();
+
+  /* ---------- attendance series ---------- */
+  function renderAttSeries() {
+    const host = $("#attseries"); host.replaceChildren();
+    const W = host.clientWidth; if (!W) return;
+    const H = 220, left = 32, right = 8, top = 8, bottom = 26, n = D.series.length;
+    const bw = (W - left - right) / n;
+    const ys = v => top + (1 - v / 27) * (H - top - bottom);
+    const svg = el("svg", { width: W, height: H, viewBox: `0 0 ${W} ${H}`, role: "img", "aria-label": "Students by activity state in each lesson" }, host);
+    [0, 9, 18, 27].forEach(t => { el("line", { x1: left, x2: W - right, y1: ys(t), y2: ys(t), stroke: t === 0 ? "var(--axis)" : "var(--hair)" }, svg); el("text", { x: left - 6, y: ys(t) + 4, "font-size": 10.5, fill: "var(--muted)", "text-anchor": "end" }, svg, String(t)); });
+    const keys = [["full", "var(--st3)", "Fully active"], ["partial", "var(--st2)", "Partly active"], ["minimal", "var(--st1)", "Barely active"], ["absent", "var(--st0)", "No activity"]];
+    let lastMonth = -1;
+    D.series.forEach((s, i) => {
+      let acc = 0; const x = left + i * bw + 1;
+      keys.forEach(([k, c]) => { const v = s[k]; if (!v) return; el("rect", { x, y: ys(acc + v), width: Math.max(1, bw - 2), height: ys(acc) - ys(acc + v) - (acc + v < 27 ? 1 : 0), fill: c }, svg); acc += v; });
+      const m = new Date(s.date + "T12:00:00").getMonth();
+      if (m !== lastMonth) { el("text", { x: x, y: H - 8, "font-size": 10.5, fill: "var(--muted)" }, svg, W < 520 ? MONTHS[m][0] : MONTHS[m]); lastMonth = m; }
+      const hit = el("rect", { x: left + i * bw, y: top, width: bw, height: H - top - bottom, fill: "transparent" }, svg);
+      hover(hit, [{ text: fmtDate(s.date) + " · " + s.label, cls: "t-strong" }, { rows: keys.map(([k, c, l]) => ({ value: String(s[k]), label: l, color: cssVar(c.slice(4, -1)) })) }]);
+    });
+  }
+
+  /* ---------- attendance grid ---------- */
+  function renderAttGrid() {
+    const host = $("#attgrid"); host.replaceChildren();
+    const avail = host.parentElement.clientWidth; if (!avail) return;
+    const left = 26, top = 4, n = D.sessions_meta.length, rows = D.att_grid;
+    const cw = Math.max(7, (avail - left - 4) / n), rh = 11, gap = 5;
+    const W = Math.ceil(left + cw * n + 4);
+    const ys = []; let y = top, prev = null; rows.forEach(r => { if (prev !== null && r.grade !== prev) y += gap; ys.push(y); y += rh; prev = r.grade; });
+    const H = y + 4;
+    const svg = el("svg", { width: W, height: H, viewBox: `0 0 ${W} ${H}`, role: "img", "aria-label": "Activity state of every student in every lesson" }, host);
+    const fills = ["var(--st0)", "var(--st1)", "var(--st2)", "var(--st3)"], names = ["No activity", "Barely active", "Partly active", "Fully active"];
+    rows.forEach((r, ri) => {
+      for (let c = 0; c < n; c++) {
+        const code = +r.s[c];
+        const rect = el("rect", { x: left + c * cw, y: ys[ri], width: Math.max(1, cw - 1), height: rh - 1, fill: fills[code] }, svg);
+        const meta = D.sessions_meta[c];
+        hover(rect, () => [{ text: names[code], cls: "t-strong" }, { text: fmtDate(meta.date) + " · " + meta.label }, ...(r.cov[c] != null ? [{ text: "Active in " + Math.round(r.cov[c] * 100) + "% of working minutes; longest pause " + r.gap[c] + " min", cls: "t-sub" }] : []), { text: "Student " + r.user_id + " · final grade " + r.grade, cls: "t-sub" }]);
+      }
+    });
+    let g0 = 0;
+    for (let i = 1; i <= rows.length; i++) { if (i === rows.length || rows[i].grade !== rows[g0].grade) { el("text", { x: 6, y: (ys[g0] + ys[i - 1] + rh) / 2 + 4, "font-size": 12, "font-weight": 600, fill: "var(--ink)" }, svg, rows[g0].grade); g0 = i; } }
+  }
+
+  /* ---------- forest ---------- */
+  let outcome = "grade_num";
+  function renderForest() {
+    const host = $("#forest"); host.replaceChildren();
+    $("#forest-sub").textContent = (outcome === "grade_num" ? "Final grade" : "Final project grade") + ", 27 students.";
+    const head = h("div", { class: "f-head", role: "row" }, host);
+    h("div", { class: "f-label", role: "columnheader" }, head, "Measure");
+    const axisCell = h("div", { class: "f-strip", role: "columnheader" }, head);
+    h("div", { class: "f-val", role: "columnheader" }, head, "ρ [95% interval]");
+    const strips = []; let fam = null;
+    D.forest.forEach(f => {
+      if (f.family !== fam) { fam = f.family; const fr = h("div", { class: "f-fam", role: "row" }, host); const d = h("div", { role: "cell" }, fr, fam); d.style.gridColumn = "1 / -1"; }
+      const r = f.r[outcome];
+      const row = h("div", { class: "f-row", role: "row" }, host);
+      h("div", { class: "f-label", role: "rowheader" }, row, f.label);
+      const cell = h("div", { class: "f-strip", role: "cell", tabindex: 0, "aria-label": f.label + ": rho " + fmt(r.rho) }, row);
+      const v = h("div", { class: "f-val", role: "cell" }, row);
+      h("b", null, v, fmt(r.rho)); h("span", { class: "muted" }, v, "[" + fmt(r.lo) + ", " + fmt(r.hi) + "]");
+      strips.push({ cell, r });
+      const lines = [{ text: f.label, cls: "t-strong" }, { text: "ρ = " + fmt(r.rho) + "  (95% interval " + fmt(r.lo) + " to " + fmt(r.hi) + ")" }, { text: "p = " + (r.p < 0.001 ? "< 0.001" : r.p.toFixed(3)) + ", n = " + r.n, cls: "t-sub" }];
+      [row.children[0], cell, v].forEach(t => hover(t, lines));
+      cell.addEventListener("focus", () => { const b = cell.getBoundingClientRect(); showTip(b.left + b.width / 2, b.top + b.height / 2, lines); });
+      cell.addEventListener("blur", hideTip);
+    });
+    const W = axisCell.clientWidth; if (!W) return;
+    const pad = 10, xs = v => pad + (v + 1) / 2 * (W - 2 * pad);
+    const ax = el("svg", { width: "100%", height: "100%", "aria-hidden": "true" }, axisCell);
+    [-1, -0.5, 0, 0.5, 1].forEach(t => el("text", { x: xs(t), y: 15, "font-size": 11, fill: "var(--muted)", "text-anchor": "middle" }, ax, (t < 0 ? MINUS : "") + Math.abs(t)));
+    strips.forEach(({ cell, r }) => {
+      const svg = el("svg", { width: "100%", height: "100%", "aria-hidden": "true" }, cell);
+      el("rect", { x: xs(-0.38), y: 0, width: xs(0.38) - xs(-0.38), height: "100%", fill: "var(--band)" }, svg);
+      [-0.5, 0.5].forEach(t => el("line", { x1: xs(t), x2: xs(t), y1: 0, y2: "100%", stroke: "var(--hair)", "stroke-width": 1 }, svg));
+      el("line", { x1: xs(0), x2: xs(0), y1: 0, y2: "100%", stroke: "var(--axis)", "stroke-width": 1 }, svg);
+      el("line", { x1: xs(r.lo), x2: xs(r.hi), y1: "50%", y2: "50%", stroke: "var(--accent)", "stroke-width": 2, "stroke-linecap": "round", opacity: 0.55 }, svg);
+      el("circle", { cx: xs(r.rho), cy: "50%", r: 5, fill: "var(--accent)", stroke: "var(--surface)", "stroke-width": 2 }, svg);
+    });
+  }
+  $("#outcome-seg").addEventListener("click", e => { const b = e.target.closest("button"); if (!b) return; outcome = b.dataset.o; $("#outcome-seg").querySelectorAll("button").forEach(x => x.setAttribute("aria-pressed", x === b ? "true" : "false")); renderForest(); });
+
+  /* ---------- weekly stacked columns ---------- */
+  function renderWeekly() {
+    const host = $("#weekly"); host.replaceChildren();
+    const W = host.clientWidth; if (!W) return;
+    const Wk = D.weekly, n = Wk.weeks.length;
+    const H = 262, left = 36, right = 8, top = 28, bottom = 26;
+    const totals = Wk.weeks.map((_, i) => CTX.reduce((a, c) => a + Wk.series[c[0]][i], 0) / 60);
+    const ticks = niceTicks(0, Math.max(...totals), 4), hi = ticks[ticks.length - 1];
+    const bw = (W - left - right) / n, ys = v => top + (1 - v / hi) * (H - top - bottom);
+    const svg = el("svg", { width: W, height: H, viewBox: `0 0 ${W} ${H}`, role: "img", "aria-label": "Out-of-lesson active hours per week" }, host);
+    ticks.forEach(t => { el("line", { x1: left, x2: W - right, y1: ys(t), y2: ys(t), stroke: t === 0 ? "var(--axis)" : "var(--hair)" }, svg); el("text", { x: left - 6, y: ys(t) + 4, "font-size": 10.5, fill: "var(--muted)", "text-anchor": "end" }, svg, fmtNum(t)); });
+    let lastMonth = -1;
+    Wk.weeks.forEach((wk, i) => {
+      let acc = 0; const x = left + i * bw + 1;
+      CTX.forEach(([k, , v]) => { const val = Wk.series[k][i] / 60; if (val <= 0) return; el("rect", { x, y: ys(acc + val), width: Math.max(1, bw - 2), height: Math.max(0.5, ys(acc) - ys(acc + val) - 1), fill: `var(${v})` }, svg); acc += val; });
+      const m = new Date(Wk.monday[i] + "T12:00:00").getMonth();
+      if (m !== lastMonth) { el("text", { x, y: H - 8, "font-size": 10.5, fill: "var(--muted)" }, svg, W < 520 ? MONTHS[m][0] : MONTHS[m]); lastMonth = m; }
+      const hit = el("rect", { x: left + i * bw, y: top, width: bw, height: H - top - bottom, fill: "transparent" }, svg);
+      hover(hit, () => [{ text: "Week " + wk.split("-W")[1] + " · from " + fmtDate(Wk.monday[i]), cls: "t-strong" }, { rows: CTX.map(([k, l, v]) => ({ value: fmtNum(Wk.series[k][i] / 60, 1) + " h", label: l, color: cssVar(v) })) }, { text: "In lessons: " + fmtNum(Wk.lesson[i] / 60, 1) + " h", cls: "t-sub" }]);
+    });
+    [["2024-02-11", "Unit 7 task"], ["2024-05-26", "Final project"]].forEach(([d, lab]) => {
+      const i = Wk.monday.findIndex((m, j) => d >= m && (j === n - 1 || d < Wk.monday[j + 1])); if (i < 0) return;
+      const x = left + (i + 1) * bw;
+      el("line", { x1: x, x2: x, y1: top - 10, y2: H - bottom, stroke: "var(--ink-2)", "stroke-width": 1 }, svg);
+      el("text", { x: x - 4, y: top - 14, "font-size": 10.5, fill: "var(--ink-2)", "text-anchor": "end", "font-weight": 500 }, svg, lab);
+    });
+  }
+
+  /* ---------- weekday x hour heat ---------- */
+  function renderHourGrid() {
+    const host = $("#hourgrid"); host.replaceChildren();
+    const avail = host.parentElement.clientWidth; if (!avail) return;
+    const left = 40, top = 18, cw = Math.max(16, (avail - left - 4) / 24), rh = 24;
+    const W = Math.ceil(left + cw * 24 + 4), H = top + rh * 7 + 6;
+    const svg = el("svg", { width: W, height: H, viewBox: `0 0 ${W} ${H}`, role: "img", "aria-label": "Out-of-lesson activity by weekday and hour" }, host);
+    const G = D.grid, mx = Math.max(...G.flat());
+    for (let hr = 0; hr < 24; hr += (cw < 22 ? 3 : 2)) el("text", { x: left + hr * cw + cw / 2, y: 12, "font-size": 10.5, fill: "var(--muted)", "text-anchor": "middle" }, svg, String(hr).padStart(2, "0"));
+    G.forEach((row, d) => {
+      el("text", { x: left - 8, y: top + d * rh + rh / 2 + 4, "font-size": 11, fill: "var(--ink-2)", "text-anchor": "end" }, svg, DOWS[d]);
+      row.forEach((v, hr) => {
+        const a = v / mx;
+        const r = el("rect", { x: left + hr * cw, y: top + d * rh, width: cw - 2, height: rh - 2, rx: 2, fill: v ? `color-mix(in srgb, var(--accent) ${Math.round(8 + Math.sqrt(a) * 82)}%, var(--surface))` : "var(--surface-2)" }, svg);
+        hover(r, [{ text: fmtNum(v) + " active minutes", cls: "t-strong" }, { text: DOWS[d] + " " + String(hr).padStart(2, "0") + ":00–" + String(hr + 1).padStart(2, "0") + ":00, outside lessons", cls: "t-sub" }]);
+      });
+    });
+  }
+
+  /* ---------- per-student stacked bars ---------- */
+  function renderPerStudent() {
+    const host = $("#perstudent"); host.replaceChildren();
+    const W = host.clientWidth; if (!W) return;
+    const R = D.roster, left = 96, right = 44, rh = 16, top = 4;
+    const H = top + R.length * rh + 26;
+    const tot = R.map(r => (r.school + r.after + r.weekend + r.brk) / 60);
+    const ticks = niceTicks(0, Math.max(...tot), 5), hi = ticks[ticks.length - 1];
+    const xs = v => left + v / hi * (W - left - right);
+    const svg = el("svg", { width: W, height: H, viewBox: `0 0 ${W} ${H}`, role: "img", "aria-label": "Out-of-lesson hours per student" }, host);
+    ticks.forEach(t => { el("line", { x1: xs(t), x2: xs(t), y1: top, y2: H - 22, stroke: t === 0 ? "var(--axis)" : "var(--hair)" }, svg); el("text", { x: xs(t), y: H - 8, "font-size": 10.5, fill: "var(--muted)", "text-anchor": "middle" }, svg, fmtNum(t) + (t === hi ? " h" : "")); });
+    const keyOf = { "school hours": "school", "after school": "after", "weekend": "weekend", "school break": "brk" };
+    R.forEach((r, i) => {
+      const y = top + i * rh;
+      el("text", { x: 0, y: y + rh / 2 + 4, "font-size": 11, fill: "var(--ink-2)", style: "font-variant-numeric: tabular-nums" }, svg, r.grade + " · " + r.user_id);
+      let acc = 0;
+      CTX.forEach(([k, l, v]) => { const val = r[keyOf[k]] / 60; if (val <= 0) return; const rect = el("rect", { x: xs(acc), y: y + 2, width: Math.max(0.5, xs(acc + val) - xs(acc) - 1), height: rh - 5, fill: `var(${v})` }, svg); hover(rect, [{ text: fmtNum(val, 1) + " h", cls: "t-strong" }, { text: l, cls: "t-sub" }, { text: "Student " + r.user_id + " · final grade " + r.grade, cls: "t-sub" }]); acc += val; });
+      el("text", { x: xs(acc) + 5, y: y + rh / 2 + 4, "font-size": 10.5, fill: "var(--muted)" }, svg, fmtNum(acc, 0));
+    });
+  }
+
+  /* ---------- content 100% bars ---------- */
+  function renderContent() {
+    const host = $("#content"); host.replaceChildren();
+    const W = host.clientWidth; if (!W) return;
+    const C6 = D.content6, cols = ["--c1", "--c2", "--c3", "--c4", "--c5", "--c6"];
+    legend($("#content-legend"), C6.order.map((o, i) => [o, `var(${cols[i]})`]));
+    const rowsDef = [["lesson", "In lessons"], ["school hours", "At school, outside lessons"], ["after school", "After school"], ["weekend", "Weekend"], ["school break", "School break"]];
+    const left = W < 520 ? 96 : 170, right = 8, rh = 34, bh = 22;
+    const H = rowsDef.length * rh + 6;
+    const svg = el("svg", { width: W, height: H, viewBox: `0 0 ${W} ${H}`, role: "img", "aria-label": "Content of active time by context" }, host);
+    rowsDef.forEach(([k, lab], i) => {
+      const row = C6.rows[k]; if (!row) return;
+      const tot = row.reduce((a, b) => a + b, 0), y = i * rh + (rh - bh) / 2;
+      el("text", { x: 0, y: y + bh / 2 + 4, "font-size": 12, fill: "var(--ink)" }, svg, W < 520 ? lab.replace("At school, outside lessons", "At school").replace("In lessons", "Lessons") : lab);
+      let x = left; const span = W - left - right;
+      row.forEach((v, j) => {
+        const w = v / tot * span; if (w <= 0) return;
+        const r = el("rect", { x, y, width: Math.max(0.5, w - 2), height: bh, rx: 2, fill: `var(${cols[j]})` }, svg);
+        const pct = Math.round(v / tot * 100);
+        if (w > 38) el("text", { x: x + (w - 2) / 2, y: y + bh / 2 + 4, "font-size": 11, "font-weight": 600, fill: j === 3 || j === 2 || j === 4 ? "#14171c" : "#fff", "text-anchor": "middle", "pointer-events": "none" }, svg, pct + "%");
+        hover(r, [{ text: pct + "% · " + fmtNum(v / 60, 1) + " h", cls: "t-strong" }, { text: C6.order[j] + " · " + lab, cls: "t-sub" }]);
+        x += w;
+      });
+    });
+  }
+
+  /* ---------- relative table ---------- */
+  (function relTable() {
+    const t = $("#relative"), R = D.relative;
+    const hr = h("tr", null, h("thead", null, t)); ["Context", "Catching up", "Current unit", "Working ahead", "Hours"].forEach((c, i) => h("th", { class: i ? "num" : "" }, hr, c));
+    const tb = h("tbody", null, t);
+    [["lesson", "In lessons"], ["school hours", "At school, outside lessons"], ["after school", "After school"], ["weekend", "Weekend"]].forEach(([k, lab]) => {
+      const r = R[k]; if (!r) return; const tot = (r["catching up"] || 0) + (r["current unit"] || 0) + (r["ahead"] || 0);
+      const tr = h("tr", null, tb); h("td", null, tr, lab);
+      ["catching up", "current unit", "ahead"].forEach(c => h("td", { class: "num" }, tr, Math.round((r[c] || 0) / tot * 100) + "%"));
+      h("td", { class: "num" }, tr, fmtNum(tot / 60, 0));
+    });
+  })();
+
+  /* ---------- roster ---------- */
+  (function roster() {
+    const t = $("#roster");
+    const cols = [["user_id", "user_id"], ["grade", "Final"], ["full", "Fully active"], ["partial", "Partly"], ["minimal", "Barely"], ["absent", "No activity"], ["late", "Late starts"], ["long_break", "Breaks > 20 min"], ["school", "At school (h)"], ["after", "After school (h)"], ["weekend", "Weekend (h)"], ["late_night", "Late night (h)"], ["home_days", "Days working from home"]];
+    const hr = h("tr", null, h("thead", null, t)); cols.forEach(([, l], i) => h("th", { class: i > 1 ? "num" : "" }, hr, l));
+    const tb = h("tbody", null, t);
+    D.roster.forEach(r => { const tr = h("tr", null, tb); cols.forEach(([k], i) => { let v = r[k]; if (["school", "after", "weekend", "late_night"].includes(k)) v = fmtNum(v / 60, 1); h("td", { class: i > 1 ? "num" : "" }, tr, String(v)); }); });
+  })();
+
+  function renderAll() { renderTimes(); renderAttSeries(); renderAttGrid(); renderForest(); renderWeekly(); renderHourGrid(); renderPerStudent(); renderContent(); }
+  let raf = null, lastW = 0;
+  new ResizeObserver(() => { const w = document.querySelector(".page").clientWidth; if (w === lastW) return; lastW = w; cancelAnimationFrame(raf); raf = requestAnimationFrame(renderAll); }).observe(document.querySelector(".page"));
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { lastW = 0; renderAll(); });
+  renderAll();
+  window.addEventListener("scroll", hideTip, { passive: true });
+})();
+</script>
+
+</body></html>

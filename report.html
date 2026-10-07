@@ -1,0 +1,929 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Block, Text & Self-Efficacy Overview</title>
+<style>
+:root {
+  color-scheme: light;
+  --page: #f9f9f7;
+  --surface-1: #fcfcfb;
+  --surface-2: #f0efec;
+  --text-primary: #0b0b0b;
+  --text-secondary: #52514e;
+  --text-muted: #898781;
+  --grid: #e1e0d9;
+  --axis: #c3c2b7;
+  --border: rgba(11,11,11,0.10);
+  --series-1: #2a78d6;
+  --series-2: #eb6834;
+  --series-1-soft: #86b6ef;
+  --deemph: #c3c2b7;
+  --neg: #e34948;
+  --neutral: #d9d8d1;
+  --seq-lo: #cde2fb;
+  --seq-hi: #0d366b;
+  --seq-text-strong: #ffffff;
+  --seq-text-weak: #0b0b0b;
+  --band: rgba(235,104,52,0.07);
+  --ceiling: rgba(42,120,214,0.08);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --page: #0d0d0d;
+    --surface-1: #1a1a19;
+    --surface-2: #262624;
+    --text-primary: #ffffff;
+    --text-secondary: #c3c2b7;
+    --text-muted: #898781;
+    --grid: #2c2c2a;
+    --axis: #383835;
+    --border: rgba(255,255,255,0.10);
+    --series-1: #3987e5;
+    --series-2: #d95926;
+    --series-1-soft: #184f95;
+    --deemph: #4a4a46;
+    --neg: #e66767;
+    --neutral: #4a4a46;
+    --seq-lo: #1c2b40;
+    --seq-hi: #86b6ef;
+    --seq-text-strong: #0b0b0b;
+    --seq-text-weak: #ffffff;
+    --band: rgba(217,89,38,0.10);
+    --ceiling: rgba(57,135,229,0.12);
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --page: #0d0d0d;
+  --surface-1: #1a1a19;
+  --surface-2: #262624;
+  --text-primary: #ffffff;
+  --text-secondary: #c3c2b7;
+  --text-muted: #898781;
+  --grid: #2c2c2a;
+  --axis: #383835;
+  --border: rgba(255,255,255,0.10);
+  --series-1: #3987e5;
+  --series-2: #d95926;
+  --series-1-soft: #184f95;
+  --deemph: #4a4a46;
+  --neg: #e66767;
+  --neutral: #4a4a46;
+  --seq-lo: #1c2b40;
+  --seq-hi: #86b6ef;
+  --seq-text-strong: #0b0b0b;
+  --seq-text-weak: #ffffff;
+  --band: rgba(217,89,38,0.10);
+  --ceiling: rgba(57,135,229,0.12);
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0; background: var(--page); color: var(--text-primary);
+  font: 16px/1.55 system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+main { max-width: 960px; margin: 0 auto; padding: 32px 16px 80px; }
+header.top { display: flex; justify-content: space-between; gap: 16px; align-items: flex-start; }
+h1 { font-size: 28px; line-height: 1.2; margin: 0 0 8px; letter-spacing: -0.01em; }
+h2 { font-size: 21px; margin: 56px 0 8px; letter-spacing: -0.005em; }
+h3 { font-size: 16px; margin: 28px 0 6px; }
+p, li { color: var(--text-primary); max-width: 72ch; }
+.lede { color: var(--text-secondary); margin: 0 0 4px; }
+.meta { color: var(--text-muted); font-size: 13px; }
+.muted { color: var(--text-secondary); }
+small, .small { font-size: 13px; color: var(--text-secondary); }
+button.theme {
+  font: inherit; font-size: 13px; color: var(--text-secondary); background: var(--surface-1);
+  border: 1px solid var(--border); border-radius: 8px; padding: 6px 10px; cursor: pointer; white-space: nowrap;
+}
+.card {
+  background: var(--surface-1); border: 1px solid var(--border); border-radius: 12px;
+  padding: 20px; margin: 16px 0;
+}
+.findings { padding-left: 20px; margin: 0; }
+.findings li { margin: 0 0 10px; }
+.findings li::marker { color: var(--text-muted); font-variant-numeric: tabular-nums; }
+.tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 12px; margin: 16px 0; }
+.tile { background: var(--surface-1); border: 1px solid var(--border); border-radius: 12px; padding: 14px 16px; }
+.tile .label { font-size: 13px; color: var(--text-secondary); }
+.tile .value { font-size: 30px; font-weight: 600; line-height: 1.2; margin-top: 2px; }
+.tile .sub { font-size: 13px; color: var(--text-muted); }
+figure { margin: 0; }
+figcaption { font-weight: 600; font-size: 15px; margin-bottom: 2px; }
+figcaption + .sub { font-size: 13px; color: var(--text-secondary); margin-bottom: 10px; }
+.chart { width: 100%; position: relative; }
+.chart svg { display: block; overflow: visible; }
+.legend { display: flex; flex-wrap: wrap; gap: 14px; font-size: 13px; color: var(--text-secondary); margin: 4px 0 8px; }
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+.sw { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+.sw.sq { border-radius: 2px; }
+details { margin-top: 12px; font-size: 14px; }
+summary { cursor: pointer; color: var(--text-secondary); font-size: 13px; }
+.tablewrap { overflow-x: auto; }
+table { border-collapse: collapse; font-size: 13px; margin-top: 8px; width: 100%; }
+th, td { text-align: left; padding: 6px 10px 6px 0; border-bottom: 1px solid var(--grid); vertical-align: top; }
+th { color: var(--text-secondary); font-weight: 600; }
+td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; padding-right: 10px; }
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+@media (max-width: 720px) { .grid2 { grid-template-columns: 1fr; } h1 { font-size: 24px; } }
+.callout { border-left: 3px solid var(--axis); padding: 4px 0 4px 14px; margin: 14px 0; color: var(--text-secondary); }
+.callout strong { color: var(--text-primary); }
+.tag { display: inline-block; font-size: 12px; padding: 1px 8px; border-radius: 999px; background: var(--surface-2); color: var(--text-secondary); }
+#tip {
+  position: fixed; pointer-events: none; z-index: 10; opacity: 0; transition: opacity .08s;
+  background: var(--surface-1); color: var(--text-primary); border: 1px solid var(--border);
+  border-radius: 8px; padding: 8px 10px; font-size: 13px; line-height: 1.4;
+  box-shadow: 0 4px 16px rgba(0,0,0,.12); max-width: 260px;
+}
+#tip.on { opacity: 1; }
+#tip b { font-weight: 600; }
+svg text { font-family: system-ui, -apple-system, "Segoe UI", sans-serif; }
+.ax { fill: var(--text-muted); font-size: 12px; font-variant-numeric: tabular-nums; }
+.lab { fill: var(--text-secondary); font-size: 12px; }
+.lab-strong { fill: var(--text-primary); font-size: 13px; font-weight: 600; }
+.gridline { stroke: var(--grid); stroke-width: 1; }
+.baseline { stroke: var(--axis); stroke-width: 1; }
+[data-tip]:focus { outline: 2px solid var(--series-1); outline-offset: 1px; }
+.hit { fill: transparent; }
+</style>
+</head>
+<body>
+<main>
+<header class="top">
+  <div>
+    <h1>Block, text, grades & self-efficacy</h1>
+    <p class="lede">Exploratory overview of the TE22 and TE23 cohorts at NTI Uppsala</p>
+    <p class="meta">Built <span data-v="built"></span> from <code>organized/</code> · students identified by CS Academy user id (names are in <code>code_book.csv</code>) · exploratory, not confirmatory</p>
+  </div>
+  <button class="theme" id="themeBtn" type="button">Theme: auto</button>
+</header>
+
+<section class="card">
+  <h3 style="margin-top:0">What stands out</h3>
+  <ol class="findings">
+    <li><strong>The answer key can be recovered from the forms.</strong> One key reproduces every student's total score exactly in all three administrations, so per-question correctness is reliable without a separate key.</li>
+    <li><strong>Block is slightly easier than text, and the gap is in the second half of each section.</strong> Text matches or beats block on questions 3–8 but falls 14–40 points behind on every question from 9 to 14 (the loop questions, if the ordering in your description holds).</li>
+    <li><strong>Programming in free time matters most, and matters more for text.</strong> Each step up in free-time hours is worth ≈<span data-v="experience_ols.per_step_free|1"></span> points out of 28, about twice the effect of hours in compulsory school. Whether school was mostly block or mostly text shows no relationship with either score.</li>
+    <li><strong>On average, the chain you expected holds:</strong> experience → entry score → grade → self-efficacy, with ρ ≈ 0.5–0.6 at each link. The direct links that skip a step are weaker (ρ ≈ 0.3), which looks like a sequence rather than one underlying trait.</li>
+    <li><strong>About a third of students change lanes.</strong> Of <span data-v="n_profiles"></span> students with both an entry score and a final grade, <span data-v="profiles.1.n"></span> climbed (bottom half at entry → C or above) and <span data-v="profiles.2.n"></span> slipped (top half at entry → D or below).</li>
+    <li><strong>Climbers and slippers differ in what they do, not what they knew.</strong> Climbers had little prior experience, but they handed everything in, worked outside class as much as the strongest group, and report self-efficacy close to the strongest group. Slippers had more to start with but more missing work and lower self-efficacy.</li>
+    <li><strong>Self-efficacy follows the grade more closely than the starting point</strong> (ρ <span data-v="chain.grade→SE.all.rho|2"></span> vs <span data-v="chain.entry→SE.all.rho|2"></span>). Asking AI for help is unrelated to grades and to self-efficacy, so it is not a marker of struggling.</li>
+    <li><strong>The goal, help-seeking and habit items group by motivation, not by survey section</strong> (section 7). A stable two-factor structure (Engagement and Help from others) refines into four factors. Enjoyment and self-reliance is the factor most tied to grades, and climbers combine it with the most help-seeking from others.</li>
+  </ol>
+</section>
+
+<!-- ============================================================ 1 -->
+<h2>1 · The assessment: block vs text</h2>
+<p class="muted">Programming Assessment taken at the start of upper secondary school (TE22 in Sept 2022, TE23 in Sept 2023). The whole cohort is used here, including classes outside the study.</p>
+
+<div class="tiles">
+  <div class="tile"><div class="label">Block score (of 14)</div><div class="value" data-v="entry_block|1"></div><div class="sub">TE22 + TE23, n = <span data-v="entry_n"></span></div></div>
+  <div class="tile"><div class="label">Text score (of 14)</div><div class="value" data-v="entry_text|1"></div><div class="sub">paired difference p &lt; .05 in both cohorts</div></div>
+  <div class="tile"><div class="label">Block–text correlation</div><div class="value">ρ <span data-v="scores.TE22.rho_block_text|2"></span></div><div class="sub">TE23: ρ <span data-v="scores.TE23.rho_block_text|2"></span></div></div>
+  <div class="tile"><div class="label">Near ceiling on block (≥13)</div><div class="value" data-v="block_ceiling_pct"></div><div class="sub">vs <span data-v="text_ceiling_pct"></span> on text</div></div>
+</div>
+
+<div class="card">
+  <h3 style="margin-top:0">Can the right answers be read from the survey?</h3>
+  <p>Yes. Google Forms exports each student's total <em>Score</em> but not which questions were right. With 150 + 83 + 27 students there is only one answer key that reproduces every total, and searching for it gives the same key in all three forms, with zero mismatches. The two example questions are not scored, which leaves <strong>28 scored questions: 14 block and 14 text</strong>.</p>
+  <p class="callout"><strong>Please check:</strong> your description adds up to 12 per section (2 assignment, 4 conditionals, 2 for, 2 while, 2 loop+conditional), but each section has 14. One reading that fits 14 is assignment 1–2, conditionals 3–8, for 9–10, while 11–12, loop+conditional 13–14. Under your 12-question description, positions 13–14 would be unlabelled. The overall findings don't depend on this mapping, but the per-concept conclusions do. If you tell me the order, I'll add concept labels.</p>
+  <p class="small">A naive "most common answer" key would be wrong on question 26 (answer 6, most beginners say 4), question 29 (answer 1, most say 0) and, in 2023, question 15. The reconstructed key with % correct per question is in <code>analysis/answer_key.csv</code>.</p>
+</div>
+
+<figure class="card">
+  <figcaption>Where text falls behind block</figcaption>
+  <div class="sub">% correct per question position, both entry cohorts pooled (n = <span data-v="entry_n"></span>). The shaded rows are where text trails block by 10+ points.</div>
+  <div class="legend"><span><i class="sw" style="background:var(--series-1)"></i>Block</span><span><i class="sw" style="background:var(--series-2)"></i>Text</span></div>
+  <div class="chart" id="c-items"></div>
+  <details><summary>Show table</summary><div class="tablewrap" id="t-items"></div></details>
+</figure>
+<p>Text questions 3–8 are answered as well as block, sometimes better: position 5 is 85% in text vs 52% in block. Text questions 9–14 are where students struggle (24–47%). Question 2 is the one early exception, where text trails block by 19 points. Question 13 is the hardest in both sections and still the hardest for TE22 two years later (68% block, 44% text). This pattern fits the literature on loop semantics in text (range bounds, update of the loop variable) being harder than block <em>repeat</em>. The block section also has a ceiling problem: <span data-v="block_ceiling_pct"></span> score 13–14, which compresses differences at the top.</p>
+
+<!-- ============================================================ 2 -->
+<h2>2 · Prior experience and the entry scores</h2>
+<div class="grid2">
+  <figure class="card">
+    <figcaption>Programming in free time</figcaption>
+    <div class="sub">Mean score (of 14) by self-reported hours before upper secondary</div>
+    <div class="legend"><span><i class="sw sq" style="background:var(--series-1)"></i>Block</span><span><i class="sw sq" style="background:var(--series-2)"></i>Text</span></div>
+    <div class="chart" id="c-free"></div>
+  </figure>
+  <figure class="card">
+    <figcaption>Programming in compulsory school</figcaption>
+    <div class="sub">Mean score (of 14) by hours of programming in lessons</div>
+    <div class="legend"><span><i class="sw sq" style="background:var(--series-1)"></i>Block</span><span><i class="sw sq" style="background:var(--series-2)"></i>Text</span></div>
+    <div class="chart" id="c-school"></div>
+  </figure>
+</div>
+<div class="card">
+  <h3 style="margin-top:0">Rank correlations with the entry scores</h3>
+  <div class="tablewrap" id="t-exp"></div>
+  <p class="small">Spearman ρ; ** p &lt; .01, * p &lt; .05. In a regression with both, each step of free-time hours adds ≈<span data-v="experience_ols.per_step_free|1"></span> points (of 28) and each step of school hours ≈<span data-v="experience_ols.per_step_school|1"></span>.</p>
+</div>
+<p>Three things are worth noting. First, <strong>free-time programming is the strongest predictor, and more so for text</strong> (ρ ≈ .45) than block (ρ ≈ .37), in both cohorts. Students who code on their own seem to bring the text-specific knowledge the block items don't need. Second, <strong>having done block programming at all</strong> (Scratch etc.) goes with higher scores in <em>both</em> sections, while having done text in school adds little. Third, <strong>whether school was mostly block or mostly text makes no difference</strong>, so the amount of exposure matters more than the modality. The few 15+ hour students dip slightly on block (n = 14), which looks like noise or ceiling effects.</p>
+
+<!-- ============================================================ 3 -->
+<h2>3 · TE22 two years later (same test, Jan 2025)</h2>
+<figure class="card">
+  <figcaption>Everyone improves, and most reach the ceiling</figcaption>
+  <div class="sub">Total score (of 28) in Sept 2022 → Jan 2025, one row per student (n = <span data-v="followup.n"></span>), sorted by 2022 score</div>
+  <div class="legend"><span><i class="sw" style="background:var(--series-1-soft)"></i>2022</span><span><i class="sw" style="background:var(--series-1)"></i>2025</span><span><i class="sw sq" style="background:var(--ceiling);border:1px solid var(--grid)"></i>26–28 (ceiling)</span></div>
+  <div class="chart" id="c-fu"></div>
+  <details><summary>Show table</summary><div class="tablewrap" id="t-fu"></div></details>
+</figure>
+<p>The mean rose from <span data-v="followup.mean_22|1"></span> to <span data-v="followup.mean_25|1"></span>, and <span data-v="followup.at_ceiling_25"></span> of <span data-v="followup.n"></span> students now score 26–28. The students who started lowest gained the most (ρ start vs gain = <span data-v="followup.gain_vs_start.rho"></span>), but that is largely forced by the ceiling, so the test can no longer tell the stronger third-year students apart. If you reuse it, it needs harder items (nested loops, functions, lists) to measure growth past year 1.</p>
+
+<!-- ============================================================ 4 -->
+<h2>4 · Grade pathways</h2>
+<div class="grid2">
+  <figure class="card">
+    <figcaption>TE23: Feb 2025 estimate → final grade</figcaption>
+    <div class="sub">Number of students. Outlined cells = same grade; cells to the right of them = improved. (n = <span data-v="grades.te23_n"></span>)</div>
+    <div class="chart" id="c-te23tr"></div>
+  </figure>
+  <figure class="card">
+    <figcaption>TE22b/c: first unit → final grade</figcaption>
+    <div class="sub">Unit 4 grade vs course grade. te22a is left out because its first unit is graded only E/F.</div>
+    <div class="chart" id="c-te22tr"></div>
+  </figure>
+</div>
+<p><strong>TE23 grades mostly hold or rise.</strong> From the February estimate to the final grade, <span data-v="te23_up"></span> students went up, <span data-v="te23_same"></span> stayed the same and <span data-v="te23_down"></span> went down. The February estimate is already a strong predictor (ρ <span data-v="grades.te23_rho_first_final.rho"></span>). The May and June 2025 estimates are identical, so all later movement happened between June 2025 and the final grade, and it lines up with the final project (ρ project–final <span data-v="grades.te23_rho_project_final.rho"></span>). <strong>The final project is how students climb</strong>: three of the four two-step climbers got an A on it. TE22 is noisier (first unit → final ρ <span data-v="grades.te22bc_rho_first_final.rho"></span>): many students with an E on unit 4 ended anywhere from F to A.</p>
+
+<div class="grid2">
+  <div class="card">
+    <h3 style="margin-top:0">Biggest climbers (TE23, ≥ 2 steps)</h3>
+    <div class="tablewrap" id="t-up"></div>
+  </div>
+  <div class="card">
+    <h3 style="margin-top:0">Went down (TE23)</h3>
+    <div class="tablewrap" id="t-down"></div>
+  </div>
+</div>
+
+<figure class="card">
+  <figcaption>Missing work is the clearest warning sign (TE22)</figcaption>
+  <div class="sub">Mean final grade by number of unit/project grades recorded as "na"</div>
+  <div class="chart" id="c-miss"></div>
+  <p class="small" style="margin-bottom:0"><span data-v="grades.te22_missing_any_low.with_missing_final_E_or_F"></span> of <span data-v="grades.te22_missing_any_low.with_missing"></span> students with any missing part ended on E or F, compared with <span data-v="grades.te22_missing_any_low.without_missing_final_E_or_F"></span> of <span data-v="grades.te22_missing_any_low.without_missing"></span> without.</p>
+</figure>
+
+<div class="card">
+  <h3 style="margin-top:0">What to look out for in future cohorts</h3>
+  <ul>
+    <li><strong>Missing or ungraded units ("na") early in the course</strong> are the strongest warning sign. Two or more missing parts almost always ends in E/F.</li>
+    <li><strong>An E or F estimate in February is not final</strong>, but recovery runs through the final project. Students who are not producing project work by May are the ones who stay low.</li>
+    <li><strong>High entry score plus missing work</strong> is the "slipped" pattern (section 6). These students are easy to miss because they look strong on paper.</li>
+    <li><strong>Low self-efficacy despite good grades</strong> (section 5) may matter for who chooses to continue with programming.</li>
+    <li><strong>Data quality:</strong> in te22a, <span data-v="odd_n"></span> students have a final grade above every recorded component (e.g. F, F, F → B). These could be completions after the export or entry errors, and they should be checked before any te22a grade analysis.</li>
+  </ul>
+</div>
+
+<!-- ============================================================ 5 -->
+<h2>5 · Self-efficacy and the SCT survey (May–June 2025)</h2>
+<p class="muted">n = <span data-v="sct.n"></span> students who consented. Items are scored 1–7. Subscales: tracing program flow (6 items), persistence/debugging/problem solving (6), control flow & functions (3), classes & recursion (5, not taught to everyone). <em>Core</em> = the first three together. All subscales have Cronbach's α ≥ .90.</p>
+<div class="grid2">
+  <figure class="card">
+    <figcaption>Self-efficacy by class</figcaption>
+    <div class="sub">Mean of 1–7 items; stronger blue = higher</div>
+    <div class="chart" id="c-sct"></div>
+  </figure>
+  <figure class="card">
+    <figcaption>When stuck, I…</figcaption>
+    <div class="sub">Share disagreeing (1–3), neutral (4), agreeing (5–7)</div>
+    <div class="legend"><span><i class="sw sq" style="background:var(--neg)"></i>Disagree</span><span><i class="sw sq" style="background:var(--neutral)"></i>Neutral</span><span><i class="sw sq" style="background:var(--series-1)"></i>Agree</span></div>
+    <div class="chart" id="c-help"></div>
+  </figure>
+</div>
+<p><strong>Students are confident tracing code and writing conditionals, and much less confident about persisting and debugging when things go wrong.</strong> Persistence is the lowest of the core subscales in every class. te22b is lowest across the board, which matches its grades (more E grades than any other class). For help-seeking, <strong>trying it themselves</strong> comes first, then <strong>AI and classmates</strong> about equally, and the teacher last. AI help-seeking does not go with lower self-efficacy (ρ <span data-v="sct.rho_AI_se.rho|2"></span>) or lower grades (ρ <span data-v="chain.AI help→grade.all.rho|2"></span>), so in this data heavy AI use is not a sign of struggling.</p>
+
+<figure class="card">
+  <figcaption>Why are you learning programming?</figcaption>
+  <div class="sub">Mean agreement (1–7)</div>
+  <div class="chart" id="c-goals"></div>
+</figure>
+
+<div class="card">
+  <h3 style="margin-top:0">"Who improved most in self-efficacy?" — not answerable yet</h3>
+  <p>The SCT was given once (2025), so there is no individual change to measure. The earlier forms used different scales: attitudes in 2022, and a general self-efficacy scale in 2023/2025 whose answer options changed between rounds. Your old codebook shows te23 students registering again in August 2026 as "te4". <strong>If a 2026 SCT round exists, that gives a true second wave</strong> for these students.</p>
+  <p>The closest thing available now is <strong>calibration</strong>: self-efficacy compared with the grade the student actually received (rank within cohort).</p>
+  <div class="grid2">
+    <div><h3>Confidence ahead of grade</h3><div class="tablewrap" id="t-over"></div></div>
+    <div><h3>Grade ahead of confidence</h3><div class="tablewrap" id="t-under"></div></div>
+  </div>
+  <p class="small">The second group are capable students who don't see themselves as capable. They may be the most interesting for retention in programming.</p>
+</div>
+
+<!-- ============================================================ 6 -->
+<h2>6 · How the pieces fit together</h2>
+<figure class="card">
+  <figcaption>The average chain, and the shortcuts</figcaption>
+  <div class="sub">Spearman ρ, both cohorts pooled, students in the five study classes. Gray arcs = links that skip a step.</div>
+  <div class="chart" id="c-chain"></div>
+  <details><summary>Show all correlations by cohort</summary><div class="tablewrap" id="t-chain"></div></details>
+</figure>
+<p>Your basic model holds <em>on average</em>, and each link is roughly as strong as the next. But the links that skip a step are clearly weaker: free-time experience → grade is only ρ <span data-v="chain.hrs_free→grade.all.rho"></span>. That points to a <strong>chain of stages</strong>, where each stage opens a new chance to diverge, rather than one stable "programming ability" running through everything. The self-efficacy link is also cross-sectional: the SCT was collected near the end of the course, so it more likely reflects the grade (mastery experience, in Bandura's terms) than causes it.</p>
+
+<figure class="card">
+  <figcaption>Where students started vs where they finished</figcaption>
+  <div class="sub">Entry score as a percentile within the whole cohort vs final course grade (n = <span data-v="n_profiles"></span>). Grades are jittered vertically so overlapping dots stay visible.</div>
+  <div class="legend"><span><i class="sw" style="background:var(--series-1)"></i>Climber</span><span><i class="sw" style="background:var(--series-2)"></i>Slipped</span><span><i class="sw" style="background:var(--deemph)"></i>Steady (strong or struggling)</span></div>
+  <div class="chart" id="c-prof"></div>
+</figure>
+
+<div class="card">
+  <h3 style="margin-top:0">Four profiles</h3>
+  <p class="small">Start = above/below the cohort median on the entry assessment. Finish = final grade C or above vs D or below. SCT measures only cover students who took the SCT (n shown).</p>
+  <div class="tablewrap" id="t-prof"></div>
+</div>
+<div class="callout">
+  <p><strong>Climbers</strong> start with as little free-time experience as the struggling group and below-median block <em>and</em> text scores. What sets them apart is behavior: almost no missing work, as much work outside class as the steady-strong group, and self-efficacy nearly as high. They are the clearest example of students working their way up.</p>
+  <p><strong>Slipped</strong> students started above the median (block 11.2/14) but have the most missing work, the least work outside class among the higher starters, and self-efficacy as low as the struggling group. These are the students who "fall off the train". In TE22 they outnumber climbers 10 to 6.</p>
+  <p><strong>Steady struggling</strong> students are the most "just pass the course" motivated (highest <em>pass courses</em>, lowest <em>fun</em>) and use AI help the most. <strong>Steady strong</strong> students have the highest prior experience and enjoy programming the most.</p>
+</div>
+
+<h3>So is behaviour static?</h3>
+<p>Mostly, with important exceptions. Grades within a course are sticky (the Feb estimate predicts the final grade at ρ ≈ .8), and entry score predicts the final grade at ρ ≈ .5. Still, <strong>about 3 in 10 students end up somewhere their starting point wouldn't predict</strong>, and the variables that separate them (handing work in, working outside class, enjoyment, self-efficacy) are things a teacher can actually influence. Prior experience is not. For a paper, the profile split is a good motivation for a person-centred analysis (latent profile or latent transition analysis) once more cohorts are added. With about 100 students, the four groups here should be read as descriptive.</p>
+
+<!-- ============================================================ 7 -->
+<h2>7 · Goals, help-seeking and habits: what goes together?</h2>
+<p class="muted">Exploratory factor analysis of the 16 items at the end of the SCT survey: 8 goal items, 4 help-seeking items and 4 habit items, with TE22 and TE23 pooled (n = <span data-v="fa.n"></span> complete answers out of <span data-v="fa.n_consenting"></span>). The emotion items are left out because only 4 students answered them.</p>
+
+<div class="tiles">
+  <div class="tile"><div class="label">Sampling adequacy (KMO)</div><div class="value" data-v="fa.kmo|2"></div><div class="sub">Bartlett's test p &lt; .001: suitable for FA</div></div>
+  <div class="tile"><div class="label">Factors suggested</div><div class="value">2–4</div><div class="sub">2 = robust, 4 = refined (see below)</div></div>
+  <div class="tile"><div class="label">Survey sections as scales (α)</div><div class="value" data-v="fa_sections"></div><div class="sub">goals · help · habits: too low to sum</div></div>
+  <div class="tile"><div class="label">Same structure with Spearman ρ</div><div class="value">≥ <span data-v="fa_min_cong"></span></div><div class="sub">Tucker congruence, 4-factor solution</div></div>
+</div>
+
+<div class="grid2">
+  <figure class="card">
+    <figcaption>How many factors?</figcaption>
+    <div class="sub">Eigenvalues of the correlation matrix vs what random data of the same size produces (95th percentile, 1,000 simulations)</div>
+    <div class="legend"><span><i class="sw" style="background:var(--series-1)"></i>Observed</span><span><i class="sw" style="background:var(--deemph)"></i>Random (parallel analysis)</span></div>
+    <div class="chart" id="c-scree"></div>
+  </figure>
+  <div class="card">
+    <h3 style="margin-top:0">Model fit by number of factors</h3>
+    <div class="tablewrap" id="t-fit"></div>
+    <p class="small">ML estimation. RMSEA ≤ .06 and TLI ≥ .90–.95 are the usual targets; lower BIC is better. Parallel analysis (components) says <span data-v="fa.pa.retain_pc"></span>, parallel analysis (factors) says <span data-v="fa.pa.retain_fa"></span>, and Velicer's MAP says <span data-v="fa.map_k"></span>–2. Fit becomes acceptable at 4.</p>
+  </div>
+</div>
+
+<p>The tests disagree, as they often do with about 90 students. The honest reading has two levels. <strong>Two factors</strong> are very stable (median bootstrap congruence <span data-v="fa.solutions.2.bootstrap.median_congruence.Engagement|2"></span> and <span data-v="fa.solutions.2.bootstrap.median_congruence.Help from others|2"></span>). Separately, <strong>four factors</strong> fit acceptably (RMSEA <span data-v="fa_fit4_rmsea"></span>, TLI <span data-v="fa_fit4_tli"></span>) and split the first factor into interpretable parts, but they are less stable (bootstrap congruence .84–.93). A three-factor solution is the least stable of all and isn't shown.</p>
+
+<figure class="card">
+  <figcaption>Four-factor solution</figcaption>
+  <div class="sub">Pattern loadings (minres, oblimin). Blue = positive, red = negative; loadings below .30 are faded. h² = communality; "stable" = share of 300 bootstrap samples in which the item had the same main factor.</div>
+  <div class="tablewrap" id="t-load4"></div>
+  <details><summary>Show the two-factor solution</summary><div class="tablewrap" id="t-load2"></div></details>
+</figure>
+
+<div class="callout">
+  <p><strong>Future &amp; utility:</strong> learning to prepare for university, get a job, make projects and understand the digital world, plus doing schoolwork outside class.</p>
+  <p><strong>Enjoyment &amp; self-reliance:</strong> learning because it's fun, trying to solve problems yourself, finishing tasks in class, and own projects in free time.</p>
+  <p><strong>Help from others:</strong> asking classmates, the teacher and AI.</p>
+  <p><strong>Course-bound / no goal:</strong> no particular goal, learning mainly to pass, and working outside school only before deadlines.</p>
+  <p>In the two-factor view the first two merge into one <strong>Engagement</strong> factor, and the course-bound items drop out.</p>
+</div>
+
+<p>Several details are worth noting for the genAI and help-seeking part of your work:</p>
+<ul>
+  <li><strong>AI help behaves like asking a classmate, not like asking the teacher.</strong> AI–peers r = <span data-v="fa_r_ai_peers"></span> vs AI–teacher r = <span data-v="fa_r_ai_teacher"></span>. AI loads weakest on the help factor (h² ≈ .20), so it is partly its own behavior.</li>
+  <li><strong>Solving it yourself is not the opposite of asking for help.</strong> Self vs classmates r = <span data-v="fa_r_self_peers"></span>. Self-reliance goes with <em>enjoyment</em> instead (r = <span data-v="fa_r_self_fun"></span>), so it reads more as intrinsic motivation than as a help-seeking style.</li>
+  <li><strong>The habits don't form an in-school vs out-of-school dimension</strong> (habits as a scale: α = <span data-v="fa_alpha_habits"></span>). Each habit attaches to a type of motivation: working outside class goes with future/utility, finishing in class and own projects with enjoyment, and working only before deadlines with course-bound.</li>
+  <li><strong>"My parents expect it" doesn't fit well.</strong> It cross-loads (future .49, course-bound .33) but has a low communality (.21). 67% answered 1, and it has the lowest sampling adequacy (MSA .36), so I left it out of the scales.</li>
+</ul>
+
+<div class="grid2">
+  <div class="card">
+    <h3 style="margin-top:0">Scales (mean of the items)</h3>
+    <div class="tablewrap" id="t-scales"></div>
+    <p class="small">The two 3-item scales are only modestly reliable, so treat them as provisional.</p>
+  </div>
+  <div class="card">
+    <h3 style="margin-top:0">How the scales relate to outcomes</h3>
+    <div class="tablewrap" id="t-links"></div>
+    <p class="small">Spearman ρ; ** p &lt; .01, * p &lt; .05. Blue = positive, red = negative.</p>
+  </div>
+</div>
+
+<figure class="card">
+  <figcaption>Scale means by profile (section 6)</figcaption>
+  <div class="sub">Mean of 1–7 items; stronger blue = higher within each column. Profile groups are small (n shown).</div>
+  <div class="tablewrap" id="t-fa-prof"></div>
+</figure>
+
+<p><strong>What this adds to the profiles:</strong> enjoyment and self-reliance is the scale most tied to grades (ρ <span data-v="fa.links.Enjoyment & self-reliance.grade_final.rho|2"></span>) and self-efficacy (ρ <span data-v="fa.links.Enjoyment & self-reliance.se_core.rho|2"></span>). Help from others is unrelated to grades, but it is <strong>highest among climbers and lowest among students who slipped</strong>. Climbers match the steady-strong group on enjoyment and future goals <em>and</em> ask for help more. Slippers are as low on future goals as the struggling group, in between on enjoyment, and the least likely of all four groups to ask for help. Steady-struggling students are the most course-bound and enjoy programming least. With 11–12 students in each small group these differences are suggestive, but they fit the climber story: <em>motivated students who also ask for help move up.</em> TE22 and TE23 do not differ significantly on any scale.</p>
+<p class="callout"><strong>Next step for a paper:</strong> this structure was found and scored in the same sample, so it needs confirming. Your old codebook lists about 200 TE24/TE25 students who registered SCT IDs. If their SCT responses exist, they are an independent sample for a <strong>confirmatory factor analysis</strong> of the 2- and 4-factor models. Polychoric correlations would be the more rigorous choice there; Spearman gave the same structure here.</p>
+
+<h2>Caveats</h2>
+<ul>
+  <li><strong>Consent:</strong> rows where students answered "Nej" are excluded (<span data-v="consent_text"></span>). Grades for students who never took the SCT have <em>unknown</em> StudyBee consent and are included here; check this against your ethics approval.</li>
+  <li><strong>Missing identities:</strong> 23 TE22 students have no name or email in the source files, so their assessment answers can't be linked to grades or the SCT.</li>
+  <li><strong>Small groups:</strong> the class-level and profile-level numbers rest on 10–50 students each. Treat differences as hypotheses.</li>
+  <li><strong>Grades are on a 0–5 scale</strong> (F = 0 … A = 5) for correlations; te22 and te23 grading structures differ (units vs repeated overall estimates).</li>
+  <li><strong>Timing:</strong> the SCT (2025) was collected after or near the end of the course, so it can't be read as a predictor of those grades.</li>
+  <li><strong>Factor analysis:</strong> about 90 students for 16 items is at the low end for EFA. Factors with 3 items have modest reliability, and the structure was found and scored in the same sample, so it should be confirmed with a CFA on a new cohort.</li>
+</ul>
+</main>
+<div id="tip" role="tooltip"></div>
+
+<script>
+const D = {"consent_dropped": {"assessment TE22": 3, "assessment TE23": 5, "assessment FU25": 2, "SCT answers": 2, "grades (StudyBee 'Nej')": 14}, "items": [{"position": 1, "block": 46.2, "text": 44.9, "block_fu": 96.0, "text_fu": 88.0}, {"position": 2, "block": 80.0, "text": 61.3, "block_fu": 100.0, "text_fu": 96.0}, {"position": 3, "block": 65.3, "text": 74.2, "block_fu": 100.0, "text_fu": 96.0}, {"position": 4, "block": 84.0, "text": 86.7, "block_fu": 100.0, "text_fu": 100.0}, {"position": 5, "block": 52.0, "text": 84.9, "block_fu": 96.0, "text_fu": 92.0}, {"position": 6, "block": 73.8, "text": 72.9, "block_fu": 96.0, "text_fu": 96.0}, {"position": 7, "block": 59.6, "text": 71.1, "block_fu": 76.0, "text_fu": 96.0}, {"position": 8, "block": 59.1, "text": 72.0, "block_fu": 100.0, "text_fu": 96.0}, {"position": 9, "block": 73.8, "text": 47.1, "block_fu": 100.0, "text_fu": 96.0}, {"position": 10, "block": 75.1, "text": 35.6, "block_fu": 100.0, "text_fu": 96.0}, {"position": 11, "block": 60.0, "text": 42.7, "block_fu": 96.0, "text_fu": 80.0}, {"position": 12, "block": 53.3, "text": 37.3, "block_fu": 92.0, "text_fu": 88.0}, {"position": 13, "block": 38.2, "text": 24.4, "block_fu": 68.0, "text_fu": 44.0}, {"position": 14, "block": 56.4, "text": 39.6, "block_fu": 92.0, "text_fu": 88.0}], "scores": {"TE22": {"n": 147, "block_mean": 8.959, "block_sd": 3.976, "text_mean": 8.007, "text_sd": 3.493, "rho_block_text": 0.73, "p_block_vs_text": 0.0, "block_ceiling": 39, "text_ceiling": 17}, "TE23": {"n": 78, "block_mean": 8.41, "block_sd": 4.359, "text_mean": 7.833, "text_sd": 3.576, "rho_block_text": 0.72, "p_block_vs_text": 0.045, "block_ceiling": 13, "text_ceiling": 8}, "FU25": {"n": 25, "block_mean": 13.12, "block_sd": 0.971, "text_mean": 12.52, "text_sd": 1.851, "rho_block_text": 0.28, "p_block_vs_text": 0.139, "block_ceiling": 19, "text_ceiling": 17}}, "score_hist": {"block": [7, 8, 5, 11, 13, 9, 17, 15, 11, 13, 20, 14, 30, 29, 23], "text": [7, 5, 5, 9, 13, 14, 21, 23, 27, 18, 28, 15, 15, 16, 9]}, "experience_rho": {"hrs_free": {"label": "Programming in free time", "block": {"TE22": {"rho": 0.36, "p": 0.0, "n": 147}, "TE23": {"rho": 0.39, "p": 0.0, "n": 78}}, "text": {"TE22": {"rho": 0.46, "p": 0.0, "n": 147}, "TE23": {"rho": 0.44, "p": 0.0, "n": 78}}}, "hrs_school": {"label": "Programming in compulsory school", "block": {"TE22": {"rho": 0.23, "p": 0.005, "n": 145}, "TE23": {"rho": 0.18, "p": 0.122, "n": 77}}, "text": {"TE22": {"rho": 0.18, "p": 0.034, "n": 145}, "TE23": {"rho": 0.23, "p": 0.041, "n": 77}}}, "mostly_text": {"label": "School was mostly text (1) … (5)", "block": {"TE22": {"rho": -0.12, "p": 0.159, "n": 135}, "TE23": {"rho": -0.03, "p": 0.824, "n": 69}}, "text": {"TE22": {"rho": -0.09, "p": 0.294, "n": 135}, "TE23": {"rho": 0.01, "p": 0.917, "n": 69}}}, "did_block": {"label": "Did block programming", "block": {"TE22": {"rho": 0.43, "p": 0.0, "n": 147}, "TE23": {"rho": 0.46, "p": 0.0, "n": 78}}, "text": {"TE22": {"rho": 0.29, "p": 0.0, "n": 147}, "TE23": {"rho": 0.31, "p": 0.005, "n": 78}}}, "did_text": {"label": "Did text programming", "block": {"TE22": {"rho": 0.19, "p": 0.024, "n": 147}, "TE23": {"rho": 0.06, "p": 0.583, "n": 78}}, "text": {"TE22": {"rho": 0.17, "p": 0.035, "n": 147}, "TE23": {"rho": 0.05, "p": 0.694, "n": 78}}}}, "experience_means": {"hrs_free": [{"level": "0–1 h", "n": 110, "block": 7.573, "text": 6.636}, {"level": "1–5 h", "n": 65, "block": 8.938, "text": 8.077}, {"level": "6–10 h", "n": 25, "block": 11.4, "text": 10.0}, {"level": "11–15 h", "n": 11, "block": 12.091, "text": 11.727}, {"level": "15+ h", "n": 14, "block": 10.071, "text": 11.0}], "hrs_school": [{"level": "0–1 h", "n": 39, "block": 7.077, "text": 6.538}, {"level": "1–5 h", "n": 77, "block": 8.558, "text": 7.701}, {"level": "6–10 h", "n": 67, "block": 9.463, "text": 8.522}, {"level": "11–15 h", "n": 26, "block": 8.654, "text": 7.577}, {"level": "15+ h", "n": 13, "block": 11.692, "text": 10.308}]}, "experience_ols": {"n": 222, "intercept": 12.919, "per_step_school": 1.051, "per_step_free": 2.372}, "mostly_means": [{"mostly_text": 1.0, "block": 9.169, "text": 8.181}, {"mostly_text": 2.0, "block": 9.304, "text": 8.217}, {"mostly_text": 3.0, "block": 9.607, "text": 8.036}, {"mostly_text": 4.0, "block": 8.417, "text": 7.875}, {"mostly_text": 5.0, "block": 7.957, "text": 7.783}], "followup": {"n": 23, "mean_22": 19.609, "mean_25": 25.696, "rho_22_25": {"rho": 0.36, "p": 0.096, "n": 23}, "gain_vs_start": {"rho": -0.88, "p": 0.0, "n": 23}, "at_ceiling_25": 15}, "grades": {"te23_transition_first_final": [[2, 3, 0, 0, 0, 0], [0, 4, 6, 1, 0, 0], [1, 1, 5, 3, 1, 0], [0, 0, 3, 12, 3, 2], [0, 0, 0, 3, 4, 7], [0, 0, 0, 0, 0, 2]], "te23_transition_first_mid": [[1, 3, 1, 0, 0, 0], [0, 4, 6, 1, 0, 0], [0, 1, 5, 4, 1, 0], [0, 0, 3, 15, 2, 0], [0, 0, 0, 5, 8, 1], [0, 0, 0, 0, 0, 2]], "te23_transition_mid_final": [[1, 0, 0, 0, 0, 0], [0, 8, 0, 0, 0, 0], [2, 0, 12, 1, 0, 0], [0, 0, 2, 18, 2, 3], [0, 0, 0, 0, 6, 5], [0, 0, 0, 0, 0, 3]], "te22_transition_first_final": [[0, 0, 0, 0, 0, 0], [1, 11, 4, 2, 0, 2], [1, 2, 3, 3, 1, 3], [2, 1, 0, 6, 4, 2], [0, 0, 0, 0, 0, 2], [0, 0, 0, 0, 0, 1]], "te23_rho_first_final": {"rho": 0.83, "p": 0.0, "n": 63}, "te23_rho_project_final": {"rho": 0.73, "p": 0.0, "n": 63}, "te23_rho_unit10_final": {"rho": 0.67, "p": 0.0, "n": 62}, "te22bc_rho_first_final": {"rho": 0.46, "p": 0.001, "n": 51}, "te22_rho_project_final": {"rho": 0.83, "p": 0.0, "n": 68}, "te23_delta_counts": {"-2.0": 1, "-1.0": 7, "0.0": 29, "1.0": 22, "2.0": 4}, "te23_n": 63, "final_dist": {"te22a": [0, 2, 2, 10, 4, 6], "te22b": [3, 12, 4, 6, 0, 4], "te22c": [4, 3, 3, 7, 5, 6], "te23b": [3, 4, 6, 8, 3, 10], "te23c": [0, 4, 8, 11, 5, 1]}, "te22_missing_vs_final": [{"missing": "0", "mean_final": 3.091, "n": 55}, {"missing": "1", "mean_final": 2.75, "n": 16}, {"missing": "2+", "mean_final": 0.6, "n": 10}], "te22_missing_any_low": {"with_missing": 26, "with_missing_final_E_or_F": 13, "without_missing_final_E_or_F": 11, "without_missing": 55}, "te22a_grade_above_components": [{"user_id": "10004059", "units": {"unit_6": "f", "unit_7": "f", "final_project": "f", "grade": "b"}}, {"user_id": "10004060", "units": {"unit_6": "f", "unit_7": "f", "final_project": "f", "grade": "e"}}, {"user_id": "10004067", "units": {"unit_6": "e", "unit_7": "f", "final_project": "f", "grade": "a"}}]}, "sct": {"n": 100, "alphas": {"flow": {"items": 6, "alpha": 0.94}, "persist": {"items": 6, "alpha": 0.9}, "control": {"items": 3, "alpha": 0.94}, "struct": {"items": 5, "alpha": 0.94}}, "by_class": {"te22a": {"flow": 5.62, "persist": 5.03, "control": 5.7, "struct": 4.01, "se_core": 5.4}, "te22b": {"flow": 4.89, "persist": 3.88, "control": 4.79, "struct": 3.04, "se_core": 4.49}, "te22c": {"flow": 5.47, "persist": 4.66, "control": 5.54, "struct": 3.47, "se_core": 5.16}, "te23b": {"flow": 5.3, "persist": 5.07, "control": 5.75, "struct": 3.99, "se_core": 5.3}, "te23c": {"flow": 5.47, "persist": 4.23, "control": 5.62, "struct": 2.35, "se_core": 4.98}}, "n_by_class": {"te22a": 24, "te22c": 24, "te22b": 20, "te23b": 16, "te23c": 16}, "help": {"peers": [11, 8, 8, 12, 20, 19, 19], "teacher": [10, 13, 19, 21, 11, 14, 9], "AI": [12, 8, 11, 10, 14, 17, 25], "self": [2, 4, 8, 13, 18, 29, 23]}, "help_means": {"peers": 4.598, "teacher": 3.907, "AI": 4.619, "self": 5.268}, "goals": {"university": 3.464, "job": 4.175, "own projects": 4.438, "pass courses": 4.68, "fun": 4.649, "parents": 1.701, "digital world": 4.165, "no goal": 3.768}, "habits": {"finish in class": 4.969, "work outside class": 4.495, "own projects": 3.26, "only near deadline": 4.516}, "rho_AI_se": {"rho": 0.0, "p": 0.993, "n": 97}, "rho_AI_self": {"rho": -0.12, "p": 0.259, "n": 97}, "rho_AI_teacher": {"rho": 0.17, "p": 0.098, "n": 97}, "AI_by_cohort": {"te22": 4.53, "te23": 4.806}}, "chain": {"hrs_free": {"TE22": {"rho": 0.51, "p": 0.0, "n": 62}, "TE23": {"rho": 0.45, "p": 0.001, "n": 48}, "all": {"rho": 0.48, "p": 0.0, "n": 110}}, "hrs_school": {"TE22": {"rho": 0.17, "p": 0.2, "n": 61}, "TE23": {"rho": 0.24, "p": 0.108, "n": 47}, "all": {"rho": 0.27, "p": 0.006, "n": 108}}, "entry": {"TE22": {"rho": 0.43, "p": 0.002, "n": 52}, "TE23": {"rho": 0.58, "p": 0.0, "n": 45}, "all": {"rho": 0.49, "p": 0.0, "n": 97}}, "entry_block": {"TE22": {"rho": 0.46, "p": 0.001, "n": 52}, "TE23": {"rho": 0.51, "p": 0.0, "n": 45}, "all": {"rho": 0.47, "p": 0.0, "n": 97}}, "entry_text": {"TE22": {"rho": 0.29, "p": 0.035, "n": 52}, "TE23": {"rho": 0.57, "p": 0.0, "n": 45}, "all": {"rho": 0.43, "p": 0.0, "n": 97}}, "hrs_free→grade": {"TE22": {"rho": 0.29, "p": 0.035, "n": 52}, "TE23": {"rho": 0.31, "p": 0.041, "n": 45}, "all": {"rho": 0.31, "p": 0.002, "n": 97}}, "grade→SE": {"TE22": {"rho": 0.64, "p": 0.0, "n": 57}, "TE23": {"rho": 0.51, "p": 0.004, "n": 29}, "all": {"rho": 0.6, "p": 0.0, "n": 86}}, "entry→SE": {"TE22": {"rho": 0.39, "p": 0.002, "n": 60}, "TE23": {"rho": 0.28, "p": 0.167, "n": 26}, "all": {"rho": 0.36, "p": 0.001, "n": 86}}, "hrs_free→SE": {"TE22": {"rho": 0.37, "p": 0.003, "n": 60}, "TE23": {"rho": 0.15, "p": 0.457, "n": 26}, "all": {"rho": 0.31, "p": 0.003, "n": 86}}, "project→SE": {"TE22": {"rho": 0.48, "p": 0.0, "n": 49}, "TE23": {"rho": 0.38, "p": 0.042, "n": 29}, "all": {"rho": 0.44, "p": 0.0, "n": 78}}, "AI help→grade": {"TE22": {"rho": -0.07, "p": 0.608, "n": 55}, "TE23": {"rho": -0.07, "p": 0.735, "n": 29}, "all": {"rho": -0.06, "p": 0.584, "n": 84}}, "own projects→grade": {"TE22": {"rho": 0.26, "p": 0.053, "n": 54}, "TE23": {"rho": 0.34, "p": 0.067, "n": 29}, "all": {"rho": 0.31, "p": 0.005, "n": 83}}, "work outside class→grade": {"TE22": {"rho": 0.21, "p": 0.129, "n": 55}, "TE23": {"rho": 0.44, "p": 0.018, "n": 29}, "all": {"rho": 0.29, "p": 0.007, "n": 84}}}, "profiles": [{"type": "Steady strong", "n": 46, "n_te22": 28, "n_te23": 18, "entry_pct": 78.504, "entry_block": 12.348, "entry_text": 10.957, "hrs_free": 1.696, "hrs_school": 1.889, "grade_final": 4.043, "final_project": 3.886, "missing_parts": 0.109, "se_core": 5.559, "n_sct": 42, "help_AI": 4.548, "habit_outside": 4.69, "goal_fun": 5.143, "goal_pass": 4.595}, {"type": "Climber", "n": 15, "n_te22": 6, "n_te23": 9, "entry_pct": 29.246, "entry_block": 5.267, "entry_text": 6.6, "hrs_free": 0.533, "hrs_school": 1.571, "grade_final": 3.333, "final_project": 2.8, "missing_parts": 0.067, "se_core": 5.18, "n_sct": 12, "help_AI": 4.167, "habit_outside": 4.667, "goal_fun": 4.583, "goal_pass": 4.917}, {"type": "Slipped", "n": 15, "n_te22": 10, "n_te23": 5, "entry_pct": 65.542, "entry_block": 11.2, "entry_text": 9.6, "hrs_free": 1.0, "hrs_school": 1.533, "grade_final": 1.267, "final_project": 1.25, "missing_parts": 0.6, "se_core": 4.113, "n_sct": 11, "help_AI": 4.273, "habit_outside": 3.909, "goal_fun": 4.0, "goal_pass": 4.818}, {"type": "Steady struggling", "n": 21, "n_te22": 8, "n_te23": 13, "entry_pct": 23.46, "entry_block": 4.857, "entry_text": 5.0, "hrs_free": 0.429, "hrs_school": 1.095, "grade_final": 1.333, "final_project": 1.55, "missing_parts": 0.19, "se_core": 4.166, "n_sct": 11, "help_AI": 4.889, "habit_outside": 3.111, "goal_fun": 3.0, "goal_pass": 5.556}], "profile_points": [{"id": "10004043", "group": "te22a", "x": 69.728, "y": 5.0, "se": 4.933, "type": "Steady strong", "block": 14.0, "text": 8.0}, {"id": "10004044", "group": "te22a", "x": 57.143, "y": 5.0, "se": 5.733, "type": "Steady strong", "block": 13.0, "text": 7.0}, {"id": "10004045", "group": "te22a", "x": 96.259, "y": 4.0, "se": 6.467, "type": "Steady strong", "block": 14.0, "text": 13.0}, {"id": "10004046", "group": "te22a", "x": 77.551, "y": 3.0, "se": 4.643, "type": "Steady strong", "block": 11.0, "text": 12.0}, {"id": "10004048", "group": "te22a", "x": 30.612, "y": 2.0, "se": null, "type": "Steady struggling", "block": 5.0, "text": 8.0}, {"id": "10004050", "group": "te22a", "x": 84.354, "y": 5.0, "se": 6.733, "type": "Steady strong", "block": 13.0, "text": 11.0}, {"id": "10004054", "group": "te22a", "x": 91.497, "y": 3.0, "se": 5.6, "type": "Steady strong", "block": 13.0, "text": 13.0}, {"id": "10004052", "group": "te22a", "x": 57.143, "y": 3.0, "se": 5.133, "type": "Steady strong", "block": 11.0, "text": 9.0}, {"id": "10004055", "group": "te22a", "x": 91.497, "y": 4.0, "se": 5.75, "type": "Steady strong", "block": 13.0, "text": 13.0}, {"id": "10004056", "group": "te22a", "x": 84.354, "y": 3.0, "se": 5.067, "type": "Steady strong", "block": 13.0, "text": 11.0}, {"id": "10004061", "group": "te22a", "x": 36.395, "y": 3.0, "se": 4.0, "type": "Climber", "block": 8.0, "text": 6.0}, {"id": "10004062", "group": "te22a", "x": 96.259, "y": 4.0, "se": 7.0, "type": "Steady strong", "block": 14.0, "text": 13.0}, {"id": "10004063", "group": "te22a", "x": 77.551, "y": 3.0, "se": 7.0, "type": "Steady strong", "block": 11.0, "text": 12.0}, {"id": "10004064", "group": "te22a", "x": 22.789, "y": 1.0, "se": 5.533, "type": "Steady struggling", "block": 7.0, "text": 4.0}, {"id": "10004065", "group": "te22a", "x": 69.728, "y": 5.0, "se": 5.333, "type": "Steady strong", "block": 12.0, "text": 10.0}, {"id": "10004066", "group": "te22a", "x": 84.354, "y": 5.0, "se": 6.2, "type": "Steady strong", "block": 14.0, "text": 10.0}, {"id": "10004067", "group": "te22a", "x": 57.143, "y": 5.0, "se": 6.333, "type": "Steady strong", "block": 11.0, "text": 9.0}, {"id": "10004068", "group": "te22a", "x": 77.551, "y": 3.0, "se": 2.933, "type": "Steady strong", "block": 13.0, "text": 10.0}, {"id": "10004069", "group": "te22a", "x": 69.728, "y": 3.0, "se": 6.067, "type": "Steady strong", "block": 12.0, "text": 10.0}, {"id": "10003960", "group": "te22b", "x": 69.728, "y": 1.0, "se": 3.2, "type": "Slipped", "block": 12.0, "text": 10.0}, {"id": "10003963", "group": "te22b", "x": 30.612, "y": 3.0, "se": 4.667, "type": "Climber", "block": 6.0, "text": 7.0}, {"id": "10003964", "group": "te22b", "x": 30.612, "y": 1.0, "se": 4.067, "type": "Steady struggling", "block": 6.0, "text": 7.0}, {"id": "10003982", "group": "te22b", "x": 57.143, "y": 1.0, "se": 5.8, "type": "Slipped", "block": 12.0, "text": 8.0}, {"id": "10003969", "group": "te22b", "x": 9.184, "y": 2.0, "se": 2.0, "type": "Steady struggling", "block": 4.0, "text": 3.0}, {"id": "10003971", "group": "te22b", "x": 20.068, "y": 1.0, "se": 5.667, "type": "Steady struggling", "block": 8.0, "text": 2.0}, {"id": "10003972", "group": "te22b", "x": 84.354, "y": 5.0, "se": 5.6, "type": "Steady strong", "block": 12.0, "text": 12.0}, {"id": "10003976", "group": "te22b", "x": 57.143, "y": 2.0, "se": 5.133, "type": "Slipped", "block": 10.0, "text": 10.0}, {"id": "10003979", "group": "te22b", "x": 84.354, "y": 1.0, "se": 1.067, "type": "Slipped", "block": 13.0, "text": 11.0}, {"id": "10003965", "group": "te22b", "x": 77.551, "y": 1.0, "se": 3.778, "type": "Slipped", "block": 9.0, "text": 14.0}, {"id": "10003983", "group": "te22b", "x": 7.143, "y": 5.0, "se": 6.4, "type": "Climber", "block": 0.0, "text": 6.0}, {"id": "10003984", "group": "te22b", "x": 30.612, "y": 2.0, "se": 4.231, "type": "Steady struggling", "block": 6.0, "text": 7.0}, {"id": "10003988", "group": "te22b", "x": 49.66, "y": 0.0, "se": 3.8, "type": "Steady struggling", "block": 8.0, "text": 10.0}, {"id": "10003989", "group": "te22b", "x": 52.721, "y": 2.0, "se": 3.6, "type": "Slipped", "block": 13.0, "text": 6.0}, {"id": "10003990", "group": "te22b", "x": 96.259, "y": 5.0, "se": 6.0, "type": "Steady strong", "block": 14.0, "text": 13.0}, {"id": "10003926", "group": "te22c", "x": 77.551, "y": 3.0, "se": 5.067, "type": "Steady strong", "block": 13.0, "text": 10.0}, {"id": "10003927", "group": "te22c", "x": 57.143, "y": 0.0, "se": 3.333, "type": "Slipped", "block": 11.0, "text": 9.0}, {"id": "10003928", "group": "te22c", "x": 77.551, "y": 5.0, "se": 6.067, "type": "Steady strong", "block": 13.0, "text": 10.0}, {"id": "10003929", "group": "te22c", "x": 63.265, "y": 1.0, "se": 3.133, "type": "Slipped", "block": 13.0, "text": 8.0}, {"id": "10003931", "group": "te22c", "x": 40.476, "y": 3.0, "se": 3.231, "type": "Climber", "block": 7.0, "text": 8.0}, {"id": "10003933", "group": "te22c", "x": 77.551, "y": 4.0, "se": 5.933, "type": "Steady strong", "block": 12.0, "text": 11.0}, {"id": "10003936", "group": "te22c", "x": 63.265, "y": 5.0, "se": 6.0, "type": "Steady strong", "block": 13.0, "text": 8.0}, {"id": "10003937", "group": "te22c", "x": 84.354, "y": 4.0, "se": 6.4, "type": "Steady strong", "block": 11.0, "text": 13.0}, {"id": "10003938", "group": "te22c", "x": 98.98, "y": 5.0, "se": 6.533, "type": "Steady strong", "block": 14.0, "text": 14.0}, {"id": "10003939", "group": "te22c", "x": 96.259, "y": 5.0, "se": 6.267, "type": "Steady strong", "block": 13.0, "text": 14.0}, {"id": "10003940", "group": "te22c", "x": 91.497, "y": 4.0, "se": 5.267, "type": "Steady strong", "block": 14.0, "text": 12.0}, {"id": "10003941", "group": "te22c", "x": 57.143, "y": 4.0, "se": 4.733, "type": "Steady strong", "block": 10.0, "text": 10.0}, {"id": "10003943", "group": "te22c", "x": 77.551, "y": 0.0, "se": 5.467, "type": "Slipped", "block": 12.0, "text": 11.0}, {"id": "10003944", "group": "te22c", "x": 91.497, "y": 3.0, "se": 4.4, "type": "Steady strong", "block": 14.0, "text": 12.0}, {"id": "10003945", "group": "te22c", "x": 77.551, "y": 2.0, "se": 5.8, "type": "Slipped", "block": 11.0, "text": 12.0}, {"id": "10003948", "group": "te22c", "x": 45.918, "y": 2.0, "se": 3.667, "type": "Steady struggling", "block": 10.0, "text": 7.0}, {"id": "10003949", "group": "te22c", "x": 36.395, "y": 3.0, "se": 6.867, "type": "Climber", "block": 8.0, "text": 6.0}, {"id": "10003951", "group": "te22c", "x": 36.395, "y": 3.0, "se": 3.929, "type": "Climber", "block": 7.0, "text": 7.0}, {"id": "10005905", "group": "te23b", "x": 44.231, "y": 3.0, "se": 4.467, "type": "Climber", "block": 8.0, "text": 8.0}, {"id": "10005906", "group": "te23b", "x": 33.333, "y": 4.0, "se": null, "type": "Climber", "block": 7.0, "text": 6.0}, {"id": "10005907", "group": "te23b", "x": 52.564, "y": 0.0, "se": null, "type": "Slipped", "block": 10.0, "text": 8.0}, {"id": "10005908", "group": "te23b", "x": 21.795, "y": 3.0, "se": null, "type": "Climber", "block": 4.0, "text": 6.0}, {"id": "10005909", "group": "te23b", "x": 7.051, "y": 1.0, "se": null, "type": "Steady struggling", "block": 1.0, "text": 3.0}, {"id": "10005911", "group": "te23b", "x": 21.795, "y": 2.0, "se": 5.0, "type": "Steady struggling", "block": 4.0, "text": 6.0}, {"id": "10005912", "group": "te23b", "x": 60.897, "y": 5.0, "se": null, "type": "Steady strong", "block": 7.0, "text": 12.0}, {"id": "10005913", "group": "te23b", "x": 10.897, "y": 0.0, "se": null, "type": "Steady struggling", "block": 3.0, "text": 4.0}, {"id": "10005915", "group": "te23b", "x": 80.128, "y": 5.0, "se": 5.8, "type": "Steady strong", "block": 14.0, "text": 9.0}, {"id": "10005916", "group": "te23b", "x": 25.641, "y": 2.0, "se": null, "type": "Steady struggling", "block": 3.0, "text": 8.0}, {"id": "10005917", "group": "te23b", "x": 96.154, "y": 3.0, "se": 5.267, "type": "Steady strong", "block": 14.0, "text": 13.0}, {"id": "10005918", "group": "te23b", "x": 73.718, "y": 5.0, "se": 5.2, "type": "Steady strong", "block": 13.0, "text": 9.0}, {"id": "10005919", "group": "te23b", "x": 52.564, "y": 3.0, "se": null, "type": "Steady strong", "block": 10.0, "text": 8.0}, {"id": "10005920", "group": "te23b", "x": 2.564, "y": 0.0, "se": null, "type": "Steady struggling", "block": 0.0, "text": 0.0}, {"id": "10005921", "group": "te23b", "x": 39.103, "y": 2.0, "se": null, "type": "Steady struggling", "block": 10.0, "text": 5.0}, {"id": "10005922", "group": "te23b", "x": 5.769, "y": 5.0, "se": 5.133, "type": "Climber", "block": 1.0, "text": 2.0}, {"id": "10005923", "group": "te23b", "x": 89.744, "y": 5.0, "se": 5.333, "type": "Steady strong", "block": 12.0, "text": 13.0}, {"id": "10005924", "group": "te23b", "x": 25.641, "y": 2.0, "se": 3.4, "type": "Steady struggling", "block": 4.0, "text": 7.0}, {"id": "10005928", "group": "te23b", "x": 19.231, "y": 3.0, "se": 5.533, "type": "Climber", "block": 3.0, "text": 6.0}, {"id": "10005931", "group": "te23b", "x": 46.795, "y": 3.0, "se": 5.467, "type": "Climber", "block": 12.0, "text": 5.0}, {"id": "10005932", "group": "te23b", "x": 89.744, "y": 5.0, "se": 7.0, "type": "Steady strong", "block": 12.0, "text": 13.0}, {"id": "10005935", "group": "te23b", "x": 44.231, "y": 1.0, "se": 4.667, "type": "Steady struggling", "block": 9.0, "text": 7.0}, {"id": "10005936", "group": "te23c", "x": 60.897, "y": 2.0, "se": 4.933, "type": "Slipped", "block": 9.0, "text": 10.0}, {"id": "10005937", "group": "te23c", "x": 30.128, "y": 2.0, "se": null, "type": "Steady struggling", "block": 5.0, "text": 7.0}, {"id": "10005938", "group": "te23c", "x": 98.718, "y": 4.0, "se": null, "type": "Steady strong", "block": 14.0, "text": 14.0}, {"id": "10005939", "group": "te23c", "x": 15.385, "y": 2.0, "se": 3.8, "type": "Steady struggling", "block": 2.0, "text": 6.0}, {"id": "10005940", "group": "te23c", "x": 25.641, "y": 1.0, "se": null, "type": "Steady struggling", "block": 7.0, "text": 4.0}, {"id": "10005941", "group": "te23c", "x": 80.128, "y": 3.0, "se": null, "type": "Steady strong", "block": 12.0, "text": 11.0}, {"id": "10005943", "group": "te23c", "x": 60.897, "y": 2.0, "se": null, "type": "Slipped", "block": 12.0, "text": 7.0}, {"id": "10005946", "group": "te23c", "x": 98.718, "y": 4.0, "se": 4.933, "type": "Steady strong", "block": 14.0, "text": 14.0}, {"id": "10005947", "group": "te23c", "x": 2.564, "y": 1.0, "se": null, "type": "Steady struggling", "block": 0.0, "text": 0.0}, {"id": "10005948", "group": "te23c", "x": 67.308, "y": 4.0, "se": 4.6, "type": "Steady strong", "block": 11.0, "text": 10.0}, {"id": "10005949", "group": "te23c", "x": 52.564, "y": 4.0, "se": 5.733, "type": "Steady strong", "block": 9.0, "text": 9.0}, {"id": "10005950", "group": "te23c", "x": 2.564, "y": 1.0, "se": null, "type": "Steady struggling", "block": 0.0, "text": 0.0}, {"id": "10005951", "group": "te23c", "x": 84.615, "y": 3.0, "se": 5.8, "type": "Steady strong", "block": 12.0, "text": 12.0}, {"id": "10005952", "group": "te23c", "x": 30.128, "y": 3.0, "se": 6.333, "type": "Climber", "block": 0.0, "text": 12.0}, {"id": "10005953", "group": "te23c", "x": 67.308, "y": 3.0, "se": 5.0, "type": "Steady strong", "block": 12.0, "text": 9.0}, {"id": "10005954", "group": "te23c", "x": 10.897, "y": 3.0, "se": 6.133, "type": "Climber", "block": 1.0, "text": 6.0}, {"id": "10005955", "group": "te23c", "x": 89.744, "y": 5.0, "se": 5.467, "type": "Steady strong", "block": 13.0, "text": 12.0}, {"id": "10005958", "group": "te23c", "x": 60.897, "y": 2.0, "se": null, "type": "Slipped", "block": 9.0, "text": 10.0}, {"id": "10005960", "group": "te23c", "x": 64.744, "y": 4.0, "se": 4.8, "type": "Steady strong", "block": 12.0, "text": 8.0}, {"id": "10005962", "group": "te23c", "x": 73.718, "y": 2.0, "se": null, "type": "Slipped", "block": 12.0, "text": 10.0}, {"id": "10005963", "group": "te23c", "x": 52.564, "y": 3.0, "se": 3.933, "type": "Steady strong", "block": 10.0, "text": 8.0}, {"id": "10005965", "group": "te23c", "x": 39.103, "y": 3.0, "se": null, "type": "Climber", "block": 7.0, "text": 8.0}, {"id": "10005966", "group": "te23c", "x": 73.718, "y": 3.0, "se": 5.4, "type": "Steady strong", "block": 12.0, "text": 10.0}], "n_profiles": 97, "calibration": {"n": 86, "over": [{"study_id": "10005952", "group": "te23c", "grade_final": 3.0, "se_core": 6.333}, {"study_id": "10004063", "group": "te22a", "grade_final": 3.0, "se_core": 7.0}, {"study_id": "10005954", "group": "te23c", "grade_final": 3.0, "se_core": 6.133}, {"study_id": "10003982", "group": "te22b", "grade_final": 1.0, "se_core": 5.8}, {"study_id": "10003949", "group": "te22c", "grade_final": 3.0, "se_core": 6.867}, {"study_id": "10003943", "group": "te22c", "grade_final": 0.0, "se_core": 5.467}], "under": [{"study_id": "10004043", "group": "te22a", "grade_final": 5.0, "se_core": 4.933}, {"study_id": "10005948", "group": "te23c", "grade_final": 4.0, "se_core": 4.6}, {"study_id": "10004068", "group": "te22a", "grade_final": 3.0, "se_core": 2.933}, {"study_id": "10005922", "group": "te23b", "grade_final": 5.0, "se_core": 5.133}, {"study_id": "10004065", "group": "te22a", "grade_final": 5.0, "se_core": 5.333}, {"study_id": "10005960", "group": "te23c", "grade_final": 4.0, "se_core": 4.8}]}, "movers": {"te23_up": [{"study_id": "10005918", "group": "te23b", "grade_first": 3.0, "grade_mid": 4.0, "grade_final": 5.0, "final_project": 5.0, "entry_pct": 73.718, "se_core": 5.2}, {"study_id": "10005932", "group": "te23b", "grade_first": 3.0, "grade_mid": 3.0, "grade_final": 5.0, "final_project": 5.0, "entry_pct": 89.744, "se_core": 7.0}, {"study_id": "10005948", "group": "te23c", "grade_first": 2.0, "grade_mid": 4.0, "grade_final": 4.0, "final_project": 5.0, "entry_pct": 67.308, "se_core": 4.6}, {"study_id": "10005963", "group": "te23c", "grade_first": 1.0, "grade_mid": 3.0, "grade_final": 3.0, "final_project": 2.0, "entry_pct": 52.564, "se_core": 3.933}], "te23_down": [{"study_id": "10005913", "group": "te23b", "grade_first": 2.0, "grade_mid": 2.0, "grade_final": 0.0, "final_project": 0.0, "entry_pct": 10.897, "se_core": null}, {"study_id": "10005921", "group": "te23b", "grade_first": 3.0, "grade_mid": 2.0, "grade_final": 2.0, "final_project": 2.0, "entry_pct": 39.103, "se_core": null}, {"study_id": "10005934", "group": "te23b", "grade_first": 3.0, "grade_mid": 3.0, "grade_final": 2.0, "final_project": 2.0, "entry_pct": null, "se_core": null}, {"study_id": "10005937", "group": "te23c", "grade_first": 3.0, "grade_mid": 2.0, "grade_final": 2.0, "final_project": 4.0, "entry_pct": 30.128, "se_core": null}, {"study_id": "10005945", "group": "te23c", "grade_first": 4.0, "grade_mid": 3.0, "grade_final": 3.0, "final_project": 5.0, "entry_pct": null, "se_core": null}, {"study_id": "10005950", "group": "te23c", "grade_first": 2.0, "grade_mid": 1.0, "grade_final": 1.0, "final_project": 1.0, "entry_pct": 2.564, "se_core": null}, {"study_id": "10005952", "group": "te23c", "grade_first": 4.0, "grade_mid": 3.0, "grade_final": 3.0, "final_project": 0.0, "entry_pct": 30.128, "se_core": 6.333}, {"study_id": "10005953", "group": "te23c", "grade_first": 4.0, "grade_mid": 3.0, "grade_final": 3.0, "final_project": 3.0, "entry_pct": 67.308, "se_core": 5.0}]}, "followup_points": [{"t22": 10, "t25": 21, "in_study": true}, {"t22": 11, "t25": 26, "in_study": true}, {"t22": 12, "t25": 26, "in_study": true}, {"t22": 13, "t25": 27, "in_study": true}, {"t22": 14, "t25": 28, "in_study": true}, {"t22": 16, "t25": 24, "in_study": false}, {"t22": 17, "t25": 27, "in_study": false}, {"t22": 17, "t25": 18, "in_study": true}, {"t22": 17, "t25": 25, "in_study": false}, {"t22": 18, "t25": 23, "in_study": true}, {"t22": 20, "t25": 27, "in_study": true}, {"t22": 20, "t25": 27, "in_study": true}, {"t22": 21, "t25": 26, "in_study": false}, {"t22": 22, "t25": 26, "in_study": true}, {"t22": 22, "t25": 25, "in_study": false}, {"t22": 23, "t25": 25, "in_study": true}, {"t22": 23, "t25": 27, "in_study": false}, {"t22": 24, "t25": 28, "in_study": true}, {"t22": 24, "t25": 28, "in_study": true}, {"t22": 26, "t25": 28, "in_study": true}, {"t22": 27, "t25": 25, "in_study": true}, {"t22": 27, "t25": 27, "in_study": true}, {"t22": 27, "t25": 27, "in_study": true}], "fa": {"n": 92, "n_consenting": 100, "p": 16, "kmo": 0.751, "bartlett_chi2": 596.358, "bartlett_p": 0.0, "items": [{"item": "goal_university", "section": "Goal", "label": "prepare for university", "mean": 3.37, "sd": 2.157, "floor": 31.522, "ceiling": 13.043, "msa": 0.811}, {"item": "goal_job", "section": "Goal", "label": "get a job", "mean": 4.12, "sd": 2.106, "floor": 15.217, "ceiling": 21.739, "msa": 0.848}, {"item": "goal_own projects", "section": "Goal", "label": "make my own projects", "mean": 4.446, "sd": 2.191, "floor": 13.043, "ceiling": 27.174, "msa": 0.884}, {"item": "goal_pass courses", "section": "Goal", "label": "pass my current courses", "mean": 4.707, "sd": 2.136, "floor": 16.304, "ceiling": 28.261, "msa": 0.652}, {"item": "goal_fun", "section": "Goal", "label": "it's fun / I like solving problems", "mean": 4.685, "sd": 2.048, "floor": 11.957, "ceiling": 27.174, "msa": 0.773}, {"item": "goal_parents", "section": "Goal", "label": "my parents expect it", "mean": 1.663, "sd": 1.337, "floor": 70.652, "ceiling": 2.174, "msa": 0.365}, {"item": "goal_digital world", "section": "Goal", "label": "understand the digital world", "mean": 4.163, "sd": 2.029, "floor": 16.304, "ceiling": 16.304, "msa": 0.869}, {"item": "goal_no goal", "section": "Goal", "label": "no particular goal", "mean": 3.728, "sd": 2.139, "floor": 23.913, "ceiling": 16.304, "msa": 0.743}, {"item": "help_peers", "section": "Help", "label": "ask classmates", "mean": 4.598, "sd": 2.006, "floor": 11.957, "ceiling": 20.652, "msa": 0.468}, {"item": "help_teacher", "section": "Help", "label": "ask the teacher", "mean": 4.0, "sd": 1.785, "floor": 9.783, "ceiling": 9.783, "msa": 0.488}, {"item": "help_AI", "section": "Help", "label": "ask an AI tool", "mean": 4.685, "sd": 2.091, "floor": 11.957, "ceiling": 27.174, "msa": 0.473}, {"item": "help_self", "section": "Help", "label": "try to solve it myself", "mean": 5.272, "sd": 1.527, "floor": 2.174, "ceiling": 23.913, "msa": 0.807}, {"item": "habit_finish in class", "section": "Habit", "label": "finish tasks during class", "mean": 4.967, "sd": 1.93, "floor": 8.696, "ceiling": 29.348, "msa": 0.425}, {"item": "habit_work outside class", "section": "Habit", "label": "work on tasks outside class", "mean": 4.478, "sd": 1.901, "floor": 10.87, "ceiling": 14.13, "msa": 0.814}, {"item": "habit_own projects", "section": "Habit", "label": "own projects in free time", "mean": 3.261, "sd": 2.253, "floor": 33.696, "ceiling": 13.043, "msa": 0.841}, {"item": "habit_only near deadline", "section": "Habit", "label": "work outside school only before deadlines", "mean": 4.478, "sd": 2.057, "floor": 15.217, "ceiling": 22.826, "msa": 0.448}], "corr": [[1.0, 0.701, 0.586, -0.134, 0.489, 0.242, 0.498, -0.245, -0.034, 0.086, 0.053, 0.279, -0.129, 0.374, 0.321, -0.1], [0.701, 1.0, 0.717, -0.258, 0.574, 0.186, 0.517, -0.359, -0.1, 0.073, 0.049, 0.304, 0.036, 0.378, 0.501, 0.004], [0.586, 0.717, 1.0, -0.305, 0.752, 0.134, 0.562, -0.382, -0.234, -0.039, -0.024, 0.381, 0.05, 0.413, 0.691, -0.111], [-0.134, -0.258, -0.305, 1.0, -0.293, 0.204, -0.149, 0.396, 0.226, -0.101, -0.053, -0.134, 0.054, -0.079, -0.313, 0.142], [0.489, 0.574, 0.752, -0.293, 1.0, 0.001, 0.658, -0.323, -0.256, 0.03, -0.077, 0.621, 0.172, 0.445, 0.68, -0.105], [0.242, 0.186, 0.134, 0.204, 0.001, 1.0, 0.187, 0.021, -0.08, -0.051, 0.099, 0.024, -0.034, 0.142, 0.128, 0.055], [0.498, 0.517, 0.562, -0.149, 0.658, 0.187, 1.0, -0.339, -0.011, 0.17, 0.061, 0.401, 0.105, 0.435, 0.457, -0.069], [-0.245, -0.359, -0.382, 0.396, -0.323, 0.021, -0.339, 1.0, 0.253, 0.06, 0.111, -0.105, -0.002, -0.157, -0.471, 0.365], [-0.034, -0.1, -0.234, 0.226, -0.256, -0.08, -0.011, 0.253, 1.0, 0.457, 0.42, -0.061, 0.09, 0.137, -0.237, 0.079], [0.086, 0.073, -0.039, -0.101, 0.03, -0.051, 0.17, 0.06, 0.457, 1.0, 0.174, 0.06, 0.204, 0.049, -0.126, 0.036], [0.053, 0.049, -0.024, -0.053, -0.077, 0.099, 0.061, 0.111, 0.42, 0.174, 1.0, -0.08, -0.005, 0.091, -0.085, 0.143], [0.279, 0.304, 0.381, -0.134, 0.621, 0.024, 0.401, -0.105, -0.061, 0.06, -0.08, 1.0, 0.219, 0.352, 0.442, 0.088], [-0.129, 0.036, 0.05, 0.054, 0.172, -0.034, 0.105, -0.002, 0.09, 0.204, -0.005, 0.219, 1.0, -0.071, 0.101, 0.267], [0.374, 0.378, 0.413, -0.079, 0.445, 0.142, 0.435, -0.157, 0.137, 0.049, 0.091, 0.352, -0.071, 1.0, 0.373, 0.067], [0.321, 0.501, 0.691, -0.313, 0.68, 0.128, 0.457, -0.471, -0.237, -0.126, -0.085, 0.442, 0.101, 0.373, 1.0, -0.21], [-0.1, 0.004, -0.111, 0.142, -0.105, 0.055, -0.069, 0.365, 0.079, 0.036, 0.143, 0.088, 0.267, 0.067, -0.21, 1.0]], "pa": {"eigen": [4.959, 2.049, 1.433, 1.414, 0.944, 0.927, 0.821, 0.649, 0.624, 0.501, 0.463, 0.359, 0.306, 0.221, 0.196, 0.134], "pa_pc95": [1.97, 1.726, 1.575, 1.448, 1.333, 1.23, 1.138, 1.053, 0.976, 0.898, 0.824, 0.757, 0.691, 0.616, 0.55, 0.476], "reduced": [4.583, 1.474, 0.854, 0.779, 0.375, 0.285, 0.273, 0.11, 0.065, 0.021, -0.039, -0.119, -0.146, -0.178, -0.279, -0.308], "pa_fa95": [1.189, 0.939, 0.776, 0.639, 0.51, 0.397, 0.305, 0.21, 0.13, 0.051, -0.029, -0.099, -0.164, -0.234, -0.296, -0.357], "retain_pc": 2, "retain_fa": 4, "kaiser": 4}, "map_k": 1, "fit": [{"k": 1, "chi2": 236.233, "df": 104.0, "p": 0.0, "rmsea": 0.118, "tli": 0.68, "bic": -234.033}, {"k": 2, "chi2": 171.944, "df": 89.0, "p": 0.0, "rmsea": 0.101, "tli": 0.765, "bic": -230.495}, {"k": 3, "chi2": 117.109, "df": 75.0, "p": 0.001, "rmsea": 0.079, "tli": 0.859, "bic": -222.025}, {"k": 4, "chi2": 83.742, "df": 62.0, "p": 0.034, "rmsea": 0.062, "tli": 0.912, "bic": -196.609}, {"k": 5, "chi2": 58.536, "df": 50.0, "p": 0.191, "rmsea": 0.043, "tli": 0.957, "bic": -167.553}], "solutions": {"4": {"factors": ["Future & utility", "Enjoyment & self-reliance", "Help from others", "Course-bound / no goal"], "loadings": [[0.829, -0.052, 0.049, -0.012], [0.677, 0.157, 0.023, -0.099], [0.528, 0.331, -0.126, -0.182], [0.092, -0.107, -0.042, 0.561], [0.218, 0.723, -0.101, -0.152], [0.492, -0.121, -0.122, 0.327], [0.441, 0.364, 0.133, -0.1], [-0.082, 0.006, 0.07, 0.659], [0.051, -0.056, 0.874, 0.036], [-0.052, 0.154, 0.592, -0.134], [0.191, -0.094, 0.417, 0.041], [0.044, 0.694, -0.019, 0.097], [-0.298, 0.546, 0.126, 0.134], [0.439, 0.239, 0.131, 0.054], [0.22, 0.417, -0.172, -0.297], [-0.021, 0.286, 0.039, 0.544]], "communality": [0.652, 0.649, 0.747, 0.314, 0.875, 0.211, 0.535, 0.511, 0.786, 0.339, 0.203, 0.475, 0.253, 0.329, 0.606, 0.291], "spearman_congruence": [0.989, 0.988, 0.996, 0.982], "bootstrap": {"n_boot": 300, "median_congruence": {"Future & utility": 0.904, "Enjoyment & self-reliance": 0.84, "Help from others": 0.932, "Course-bound / no goal": 0.837}, "share_above_85": {"Future & utility": 0.657, "Enjoyment & self-reliance": 0.487, "Help from others": 0.85, "Course-bound / no goal": 0.453}, "item_stability": {"goal_university": 0.903, "goal_job": 0.857, "goal_own projects": 0.683, "goal_pass courses": 0.7, "goal_fun": 0.63, "goal_parents": 0.63, "goal_digital world": 0.593, "goal_no goal": 0.717, "help_peers": 0.96, "help_teacher": 0.9, "help_AI": 0.78, "help_self": 0.76, "habit_finish in class": 0.673, "habit_work outside class": 0.61, "habit_own projects": 0.473, "habit_only near deadline": 0.743}}}, "2": {"factors": ["Engagement", "Help from others"], "loadings": [[0.669, 0.128], [0.776, 0.075], [0.846, -0.109], [-0.291, 0.203], [0.852, -0.075], [0.165, 0.085], [0.749, 0.178], [-0.403, 0.327], [-0.048, 0.777], [0.13, 0.477], [0.064, 0.437], [0.537, 0.077], [0.103, 0.163], [0.561, 0.233], [0.7, -0.241], [-0.069, 0.281]], "communality": [0.437, 0.589, 0.758, 0.145, 0.752, 0.03, 0.551, 0.311, 0.618, 0.224, 0.187, 0.281, 0.032, 0.327, 0.602, 0.09], "spearman_congruence": [0.999, 0.988], "bootstrap": {"n_boot": 300, "median_congruence": {"Engagement": 0.984, "Help from others": 0.899}, "share_above_85": {"Engagement": 0.957, "Help from others": 0.68}, "item_stability": {"goal_university": 0.963, "goal_job": 0.98, "goal_own projects": 0.973, "goal_pass courses": 0.61, "goal_fun": 0.957, "goal_parents": 0.583, "goal_digital world": 0.997, "goal_no goal": 0.607, "help_peers": 0.947, "help_teacher": 0.927, "help_AI": 0.943, "help_self": 0.94, "habit_finish in class": 0.603, "habit_work outside class": 0.93, "habit_own projects": 0.947, "habit_only near deadline": 0.757}}}}, "scales": [{"scale": "Future & utility", "items": ["prepare for university", "get a job", "make my own projects", "understand the digital world", "work on tasks outside class"], "alpha": 0.84, "omega": 0.844, "mean": 4.147, "sd": 1.605}, {"scale": "Enjoyment & self-reliance", "items": ["it's fun / I like solving problems", "try to solve it myself", "finish tasks during class", "own projects in free time"], "alpha": 0.688, "omega": 0.747, "mean": 4.54, "sd": 1.402}, {"scale": "Help from others", "items": ["ask classmates", "ask the teacher", "ask an AI tool"], "alpha": 0.614, "omega": 0.676, "mean": 4.375, "sd": 1.468}, {"scale": "Course-bound / no goal", "items": ["no particular goal", "pass my current courses", "work outside school only before deadlines"], "alpha": 0.572, "omega": 0.632, "mean": 4.304, "sd": 1.586}, {"scale": "Engagement (2-factor)", "items": ["prepare for university", "get a job", "make my own projects", "it's fun / I like solving problems", "understand the digital world", "try to solve it myself", "work on tasks outside class", "own projects in free time"], "alpha": 0.888, "omega": 0.89, "mean": 4.24, "sd": 1.508}], "sections_as_scales": [{"section": "Goals (8 items)", "alpha": 0.605}, {"section": "Help-seeking (4)", "alpha": 0.463}, {"section": "Habits (4)", "alpha": 0.261}], "scale_corr": [[1.0, 0.62, 0.013, -0.315], [0.62, 1.0, -0.104, -0.291], [0.013, -0.104, 1.0, 0.153], [-0.315, -0.291, 0.153, 1.0]], "links": {"Future & utility": {"se_core": {"rho": 0.513, "p": 0.0, "n": 97}, "grade_final": {"rho": 0.273, "p": 0.012, "n": 84}, "final_project": {"rho": 0.399, "p": 0.0, "n": 77}, "entry_total": {"rho": 0.247, "p": 0.025, "n": 83}, "entry_hrs_free": {"rho": 0.167, "p": 0.132, "n": 83}}, "Enjoyment & self-reliance": {"se_core": {"rho": 0.629, "p": 0.0, "n": 97}, "grade_final": {"rho": 0.417, "p": 0.0, "n": 84}, "final_project": {"rho": 0.265, "p": 0.02, "n": 77}, "entry_total": {"rho": 0.146, "p": 0.188, "n": 83}, "entry_hrs_free": {"rho": 0.124, "p": 0.265, "n": 83}}, "Help from others": {"se_core": {"rho": -0.152, "p": 0.138, "n": 97}, "grade_final": {"rho": -0.099, "p": 0.369, "n": 84}, "final_project": {"rho": -0.051, "p": 0.663, "n": 77}, "entry_total": {"rho": -0.238, "p": 0.031, "n": 83}, "entry_hrs_free": {"rho": -0.095, "p": 0.395, "n": 83}}, "Course-bound / no goal": {"se_core": {"rho": -0.149, "p": 0.145, "n": 97}, "grade_final": {"rho": -0.196, "p": 0.074, "n": 84}, "final_project": {"rho": -0.272, "p": 0.017, "n": 77}, "entry_total": {"rho": -0.116, "p": 0.296, "n": 83}, "entry_hrs_free": {"rho": -0.028, "p": 0.8, "n": 83}}, "Engagement (2-factor)": {"se_core": {"rho": 0.627, "p": 0.0, "n": 97}, "grade_final": {"rho": 0.37, "p": 0.001, "n": 84}, "final_project": {"rho": 0.401, "p": 0.0, "n": 77}, "entry_total": {"rho": 0.275, "p": 0.012, "n": 83}, "entry_hrs_free": {"rho": 0.19, "p": 0.085, "n": 83}}}, "link_labels": {"se_core": "Self-efficacy (core)", "grade_final": "Final grade", "final_project": "Final project", "entry_total": "Entry score", "entry_hrs_free": "Free-time programming"}, "by_profile": {"Steady strong": {"Future & utility": 4.333, "Enjoyment & self-reliance": 4.78, "Help from others": 4.135, "Course-bound / no goal": 4.294, "n": 42}, "Climber": {"Future & utility": 4.304, "Enjoyment & self-reliance": 4.743, "Help from others": 4.694, "Course-bound / no goal": 4.514, "n": 12}, "Slipped": {"Future & utility": 3.618, "Enjoyment & self-reliance": 4.136, "Help from others": 4.061, "Course-bound / no goal": 4.212, "n": 11}, "Steady struggling": {"Future & utility": 3.578, "Enjoyment & self-reliance": 3.611, "Help from others": 4.444, "Course-bound / no goal": 4.667, "n": 11}}, "by_cohort": {"TE22": {"Future & utility": 3.973, "Enjoyment & self-reliance": 4.385, "Help from others": 4.404, "Course-bound / no goal": 4.366}, "TE23": {"Future & utility": 4.518, "Enjoyment & self-reliance": 4.871, "Help from others": 4.312, "Course-bound / no goal": 4.172}}, "cohort_p": {"Future & utility": 0.14, "Enjoyment & self-reliance": 0.194, "Help from others": 0.713, "Course-bound / no goal": 0.42}}, "built": "2026-10-06"};
+const G = ["F", "E", "D", "C", "B", "A"];
+const NS = "http://www.w3.org/2000/svg";
+
+// ---------- small utilities
+function get(path) {
+  return path.split(".").reduce((o, k) => (o == null ? o : o[k]), D);
+}
+function fmt(v, d) {
+  if (v == null || Number.isNaN(v)) return "–";
+  return typeof v === "number" ? (d == null ? String(v) : v.toFixed(d)) : String(v);
+}
+function el(tag, attrs = {}, parent) {
+  const e = document.createElementNS(NS, tag);
+  for (const k in attrs) {
+    if (k === "text") e.textContent = attrs[k];
+    else if (attrs[k] != null) e.setAttribute(k, attrs[k]);
+  }
+  if (parent) parent.appendChild(e);
+  return e;
+}
+function svgFor(container, w, h) {
+  container.innerHTML = "";
+  return el("svg", { width: w, height: h, viewBox: `0 0 ${w} ${h}`, role: "img" }, container);
+}
+function tipAttrs(node, html, label) {
+  node.setAttribute("data-tip", html);
+  node.setAttribute("tabindex", "0");
+  node.setAttribute("aria-label", label || html.replace(/<[^>]+>/g, " "));
+}
+function table(id, head, rows, numCols = []) {
+  const t = document.getElementById(id);
+  if (!t) return;
+  const th = head.map((h, i) => `<th class="${numCols.includes(i) ? "num" : ""}">${h}</th>`).join("");
+  const tr = rows.map(r => "<tr>" + r.map((c, i) => `<td class="${numCols.includes(i) ? "num" : ""}">${c}</td>`).join("") + "</tr>").join("");
+  t.innerHTML = `<table><thead><tr>${th}</tr></thead><tbody>${tr}</tbody></table>`;
+}
+const letter = v => (v == null ? "–" : G[Math.round(v)]);
+const gradeAvg = v => (v == null ? "–" : `${v.toFixed(1)} (≈${G[Math.round(v)]})`);
+const stars = p => (p == null ? "" : p < 0.01 ? "**" : p < 0.05 ? "*" : "");
+
+// ---------- tooltip (hover + keyboard focus)
+const tip = document.getElementById("tip");
+function placeTip(x, y) {
+  const r = tip.getBoundingClientRect();
+  let left = x + 14, top = y + 14;
+  if (left + r.width > window.innerWidth - 8) left = x - r.width - 14;
+  if (top + r.height > window.innerHeight - 8) top = y - r.height - 14;
+  tip.style.left = Math.max(8, left) + "px";
+  tip.style.top = Math.max(8, top) + "px";
+}
+function showTip(t, x, y) { tip.innerHTML = t.getAttribute("data-tip"); tip.classList.add("on"); placeTip(x, y); }
+function hideTip() { tip.classList.remove("on"); }
+document.addEventListener("pointerover", e => { const t = e.target.closest && e.target.closest("[data-tip]"); if (t) showTip(t, e.clientX, e.clientY); });
+document.addEventListener("pointermove", e => { if (tip.classList.contains("on")) placeTip(e.clientX, e.clientY); });
+document.addEventListener("pointerout", e => { const t = e.target.closest && e.target.closest("[data-tip]"); if (t) hideTip(); });
+document.addEventListener("focusin", e => { const t = e.target.closest && e.target.closest("[data-tip]"); if (t) { const r = t.getBoundingClientRect(); showTip(t, r.right, r.top); } });
+document.addEventListener("focusout", hideTip);
+
+// ---------- derived values for the prose
+function derive() {
+  const e22 = D.scores.TE22, e23 = D.scores.TE23;
+  const n = e22.n + e23.n;
+  D.entry_n = n;
+  D.entry_block = (e22.block_mean * e22.n + e23.block_mean * e23.n) / n;
+  D.entry_text = (e22.text_mean * e22.n + e23.text_mean * e23.n) / n;
+  D.block_ceiling_pct = Math.round(100 * (e22.block_ceiling + e23.block_ceiling) / n) + "%";
+  D.text_ceiling_pct = Math.round(100 * (e22.text_ceiling + e23.text_ceiling) / n) + "%";
+  const dc = D.grades.te23_delta_counts;
+  const sum = f => Object.entries(dc).filter(([k]) => f(parseFloat(k))).reduce((a, [, v]) => a + v, 0);
+  D.te23_up = sum(k => k > 0); D.te23_same = sum(k => k === 0); D.te23_down = sum(k => k < 0);
+  D.odd_n = D.grades.te22a_grade_above_components.length;
+  D.consent_text = Object.entries(D.consent_dropped).map(([k, v]) => `${k}: ${v}`).join("; ");
+}
+function bind() {
+  document.querySelectorAll("[data-v]").forEach(s => {
+    const [path, d] = s.getAttribute("data-v").split("|");
+    s.textContent = fmt(get(path), d == null ? undefined : +d);
+  });
+}
+
+// ---------- charts
+function widthOf(id) { return Math.max(280, document.getElementById(id).clientWidth); }
+
+function itemsChart() {
+  const id = "c-items", W = widthOf(id), rows = D.items;
+  const m = { l: 44, r: 16, t: 8, b: 30 }, rh = 26, H = m.t + rows.length * rh + m.b;
+  const svg = svgFor(document.getElementById(id), W, H);
+  const x = v => m.l + (W - m.l - m.r) * v / 100;
+  rows.forEach((r, i) => {
+    if (r.block - r.text >= 10) el("rect", { x: m.l, y: m.t + i * rh, width: W - m.l - m.r, height: rh, fill: "var(--band)" }, svg);
+  });
+  [0, 25, 50, 75, 100].forEach(v => {
+    el("line", { x1: x(v), x2: x(v), y1: m.t, y2: H - m.b, class: "gridline" }, svg);
+    el("text", { x: x(v), y: H - m.b + 18, "text-anchor": "middle", class: "ax", text: v + "%" }, svg);
+  });
+  rows.forEach((r, i) => {
+    const cy = m.t + i * rh + rh / 2;
+    el("text", { x: m.l - 10, y: cy + 4, "text-anchor": "end", class: "lab", text: "Q" + r.position }, svg);
+    el("line", { x1: x(Math.min(r.block, r.text)), x2: x(Math.max(r.block, r.text)), y1: cy, y2: cy, stroke: "var(--deemph)", "stroke-width": 2, "stroke-linecap": "round" }, svg);
+    [["block", "var(--series-1)", "Block"], ["text", "var(--series-2)", "Text"]].forEach(([k, c, lab]) => {
+      el("circle", { cx: x(r[k]), cy, r: 5.5, fill: c, stroke: "var(--surface-1)", "stroke-width": 2 }, svg);
+    });
+    const hit = el("rect", { x: m.l, y: m.t + i * rh, width: W - m.l - m.r, height: rh, class: "hit" }, svg);
+    tipAttrs(hit, `<b>Position ${r.position}</b><br>Block ${r.block.toFixed(0)}% · Text ${r.text.toFixed(0)}%<br><span style="color:var(--text-muted)">TE22 in 2025: block ${r.block_fu.toFixed(0)}%, text ${r.text_fu.toFixed(0)}%</span>`);
+  });
+  table("t-items", ["Position", "Block % (entry)", "Text % (entry)", "Gap", "Block % TE22 2025", "Text % TE22 2025"],
+    rows.map(r => [r.position, r.block.toFixed(0), r.text.toFixed(0), (r.block - r.text).toFixed(0), r.block_fu.toFixed(0), r.text_fu.toFixed(0)]), [0, 1, 2, 3, 4, 5]);
+}
+
+function groupedBars(id, data) {
+  const W = widthOf(id), H = 240, m = { l: 30, r: 8, t: 18, b: 44 };
+  const svg = svgFor(document.getElementById(id), W, H);
+  const y = v => H - m.b - (H - m.t - m.b) * v / 14;
+  [0, 7, 14].forEach(v => {
+    el("line", { x1: m.l, x2: W - m.r, y1: y(v), y2: y(v), class: v === 0 ? "baseline" : "gridline" }, svg);
+    el("text", { x: m.l - 6, y: y(v) + 4, "text-anchor": "end", class: "ax", text: v }, svg);
+  });
+  const band = (W - m.l - m.r) / data.length, bw = Math.min(22, band / 2 - 6);
+  data.forEach((d, i) => {
+    const cx = m.l + band * i + band / 2;
+    [["block", "var(--series-1)", -1], ["text", "var(--series-2)", 1]].forEach(([k, c, side]) => {
+      const x0 = side < 0 ? cx - 1 - bw : cx + 1, h = H - m.b - y(d[k]), r = Math.min(4, h / 2);
+      const p = `M${x0},${H - m.b} V${y(d[k]) + r} Q${x0},${y(d[k])} ${x0 + r},${y(d[k])} H${x0 + bw - r} Q${x0 + bw},${y(d[k])} ${x0 + bw},${y(d[k]) + r} V${H - m.b} Z`;
+      el("path", { d: p, fill: c }, svg);
+    });
+    el("text", { x: cx, y: H - m.b + 16, "text-anchor": "middle", class: "lab", text: d.level }, svg);
+    el("text", { x: cx, y: H - m.b + 31, "text-anchor": "middle", class: "ax", text: "n=" + d.n }, svg);
+    const hit = el("rect", { x: cx - band / 2, y: m.t, width: band, height: H - m.t - m.b, class: "hit" }, svg);
+    tipAttrs(hit, `<b>${d.level}</b> (n = ${d.n})<br>Block ${d.block.toFixed(1)} · Text ${d.text.toFixed(1)}`);
+  });
+}
+
+function experienceTable() {
+  const rows = Object.values(D.experience_rho).map(v => [v.label,
+    ...["TE22", "TE23"].flatMap(c => [`${fmt(v.block[c].rho, 2)}${stars(v.block[c].p)}`, `${fmt(v.text[c].rho, 2)}${stars(v.text[c].p)}`])]);
+  table("t-exp", ["Experience", "TE22 block", "TE22 text", "TE23 block", "TE23 text"], rows, [1, 2, 3, 4]);
+}
+
+function followupChart() {
+  const id = "c-fu", W = widthOf(id), pts = D.followup_points;
+  const m = { l: 16, r: 16, t: 8, b: 30 }, rh = 14, H = m.t + pts.length * rh + m.b;
+  const svg = svgFor(document.getElementById(id), W, H);
+  const lo = Math.min(8, ...pts.map(p => p.t22)), x = v => m.l + (W - m.l - m.r) * (v - lo) / (28 - lo);
+  el("rect", { x: x(26), y: m.t, width: x(28) - x(26), height: pts.length * rh, fill: "var(--ceiling)" }, svg);
+  [8, 12, 16, 20, 24, 28].forEach(v => {
+    el("line", { x1: x(v), x2: x(v), y1: m.t, y2: H - m.b, class: "gridline" }, svg);
+    el("text", { x: x(v), y: H - m.b + 18, "text-anchor": "middle", class: "ax", text: v }, svg);
+  });
+  pts.forEach((p, i) => {
+    const cy = m.t + i * rh + rh / 2;
+    el("line", { x1: x(p.t22), x2: x(p.t25), y1: cy, y2: cy, stroke: "var(--deemph)", "stroke-width": 2, "stroke-linecap": "round" }, svg);
+    el("circle", { cx: x(p.t22), cy, r: 4, fill: "var(--series-1-soft)", stroke: "var(--surface-1)", "stroke-width": 1.5 }, svg);
+    el("circle", { cx: x(p.t25), cy, r: 4, fill: "var(--series-1)", stroke: "var(--surface-1)", "stroke-width": 1.5 }, svg);
+    const hit = el("rect", { x: m.l, y: m.t + i * rh, width: W - m.l - m.r, height: rh, class: "hit" }, svg);
+    tipAttrs(hit, `2022: <b>${p.t22}</b> → 2025: <b>${p.t25}</b> (${p.t25 - p.t22 >= 0 ? "+" : ""}${p.t25 - p.t22})`);
+  });
+  table("t-fu", ["2022 total", "2025 total", "Change"], pts.map(p => [p.t22, p.t25, (p.t25 - p.t22 >= 0 ? "+" : "") + (p.t25 - p.t22)]), [0, 1, 2]);
+}
+
+function heatmap(id, M, rowTitle, colTitle, opts = {}) {
+  const W = Math.min(widthOf(id), 420), m = { l: 58, r: 8, t: 26, b: 8 };
+  const n = M.length, cs = Math.min(52, (W - m.l - m.r) / n), H = m.t + cs * n + m.b + 24;
+  const svg = svgFor(document.getElementById(id), W, H);
+  const max = opts.max ?? Math.max(...M.flat());
+  const lo = opts.min ?? 0;
+  el("text", { x: m.l + cs * n / 2, y: 12, "text-anchor": "middle", class: "lab", text: colTitle + " →" }, svg);
+  for (let i = 0; i < n; i++) {
+    const r = opts.rowOrder ? opts.rowOrder[i] : n - 1 - i; // best grade on top
+    el("text", { x: m.l - 8, y: m.t + i * cs + cs / 2 + 4, "text-anchor": "end", class: "lab", text: (opts.rowLabels || G)[r] }, svg);
+    for (let j = 0; j < n; j++) {
+      const v = M[r][j], x0 = m.l + j * cs, y0 = m.t + i * cs;
+      const p = max > lo ? Math.max(0, Math.min(1, (v - lo) / (max - lo))) : 0;
+      const empty = opts.zeroEmpty !== false && v === 0;
+      const fill = empty ? "var(--surface-2)" : `color-mix(in oklab, var(--seq-hi) ${Math.round(8 + 92 * p)}%, var(--seq-lo))`;
+      const cell = el("rect", { x: x0 + 1, y: y0 + 1, width: cs - 2, height: cs - 2, rx: 3, fill }, svg);
+      if (!opts.noDiag && r === j) el("rect", { x: x0 + 1.5, y: y0 + 1.5, width: cs - 3, height: cs - 3, rx: 3, fill: "none", stroke: "var(--text-muted)", "stroke-width": 1.5 }, svg);
+      if (!empty) el("text", { x: x0 + cs / 2, y: y0 + cs / 2 + 4, "text-anchor": "middle", "font-size": 12, "font-variant-numeric": "tabular-nums",
+        fill: p > 0.55 ? "var(--seq-text-strong)" : "var(--seq-text-weak)", text: opts.fmt ? opts.fmt(v) : v }, svg);
+      tipAttrs(cell, opts.tip ? opts.tip(r, j, v) : `${rowTitle} <b>${G[r]}</b> → ${colTitle.toLowerCase()} <b>${G[j]}</b>: ${v} student${v === 1 ? "" : "s"}`);
+    }
+  }
+  for (let j = 0; j < n; j++) el("text", { x: m.l + j * cs + cs / 2, y: m.t + n * cs + 16, "text-anchor": "middle", class: "lab", text: (opts.colLabels || G)[j] }, svg);
+  el("text", { x: 4, y: m.t + cs * n / 2, class: "lab", transform: `rotate(-90 12 ${m.t + cs * n / 2})`, "text-anchor": "middle", text: rowTitle }, svg);
+}
+
+function hbars(id, items, { max, fmtV, tipF, labelW = 140 }) {
+  const W = widthOf(id), rh = 30, m = { l: labelW, r: 64, t: 4, b: 6 }, H = m.t + items.length * rh + m.b;
+  const svg = svgFor(document.getElementById(id), W, H);
+  const x = v => m.l + (W - m.l - m.r) * v / max;
+  el("line", { x1: m.l, x2: m.l, y1: m.t, y2: H - m.b, class: "baseline" }, svg);
+  items.forEach((d, i) => {
+    const cy = m.t + i * rh + rh / 2, bh = 14, w = Math.max(2, x(d.v) - m.l), r = Math.min(4, w / 2);
+    el("text", { x: m.l - 10, y: cy + 4, "text-anchor": "end", class: "lab", text: d.label }, svg);
+    const y0 = cy - bh / 2;
+    el("path", { d: `M${m.l},${y0} H${m.l + w - r} Q${m.l + w},${y0} ${m.l + w},${y0 + r} V${y0 + bh - r} Q${m.l + w},${y0 + bh} ${m.l + w - r},${y0 + bh} H${m.l} Z`, fill: d.color || "var(--series-1)" }, svg);
+    el("text", { x: m.l + w + 8, y: cy + 4, class: "lab", "font-variant-numeric": "tabular-nums", text: fmtV(d) }, svg);
+    const hit = el("rect", { x: 0, y: m.t + i * rh, width: W, height: rh, class: "hit" }, svg);
+    tipAttrs(hit, tipF(d));
+  });
+}
+
+function divergingHelp() {
+  const id = "c-help", W = widthOf(id), labels = { self: "try myself", peers: "ask classmates", AI: "ask an AI tool", teacher: "ask the teacher" };
+  const order = ["self", "peers", "AI", "teacher"], rh = 34, m = { l: 112, r: 12, t: 4, b: 26 }, H = m.t + order.length * rh + m.b;
+  const svg = svgFor(document.getElementById(id), W, H);
+  const span = W - m.l - m.r, mid = m.l + span / 2, x = p => span / 2 * p / 100;
+  [-100, -50, 0, 50, 100].forEach(v => {
+    el("line", { x1: mid + x(v), x2: mid + x(v), y1: m.t, y2: H - m.b, class: v === 0 ? "baseline" : "gridline" }, svg);
+    el("text", { x: mid + x(v), y: H - m.b + 16, "text-anchor": "middle", class: "ax", text: Math.abs(v) + "%" }, svg);
+  });
+  order.forEach((k, i) => {
+    const c = D.sct.help[k], n = c.reduce((a, b) => a + b, 0);
+    const dis = 100 * (c[0] + c[1] + c[2]) / n, neu = 100 * c[3] / n, agr = 100 * (c[4] + c[5] + c[6]) / n;
+    const cy = m.t + i * rh + rh / 2, bh = 16, y0 = cy - bh / 2;
+    el("text", { x: m.l - 10, y: cy + 4, "text-anchor": "end", class: "lab", text: labels[k] }, svg);
+    const segs = [
+      [mid - x(neu / 2) - x(dis), x(dis), "var(--neg)", `Disagree ${dis.toFixed(0)}%`],
+      [mid - x(neu / 2), x(neu), "var(--neutral)", `Neutral ${neu.toFixed(0)}%`],
+      [mid + x(neu / 2), x(agr), "var(--series-1)", `Agree ${agr.toFixed(0)}%`],
+    ];
+    segs.forEach(([x0, w, f], si) => el("rect", { x: x0 + (si ? 1 : 0), y: y0, width: Math.max(0, w - 1), height: bh, fill: f, rx: si === 1 ? 0 : 3 }, svg));
+    el("text", { x: mid + x(neu / 2) + x(agr) + 6, y: cy + 4, class: "ax", text: agr.toFixed(0) + "%" }, svg);
+    const hit = el("rect", { x: 0, y: m.t + i * rh, width: W, height: rh, class: "hit" }, svg);
+    tipAttrs(hit, `<b>When stuck, I ${labels[k]}</b><br>${segs.map(s => s[3]).join(" · ")}<br>mean ${D.sct.help_means[k].toFixed(1)} of 7 (n = ${n})`);
+  });
+}
+
+function sctHeat() {
+  const classes = ["te22a", "te22b", "te22c", "te23b", "te23c"], keys = ["flow", "persist", "control", "struct", "se_core"];
+  const names = { flow: "Flow", persist: "Persist", control: "Control", struct: "Classes/ rec.", se_core: "Core" };
+  const id = "c-sct", W = widthOf(id), m = { l: 56, r: 4, t: 30, b: 6 };
+  const cw = Math.min(64, (W - m.l - m.r) / keys.length), ch = 34, H = m.t + classes.length * ch + m.b;
+  const svg = svgFor(document.getElementById(id), W, H);
+  if (cw < 62) Object.assign(names, { persist: "Persist.", control: "Control", struct: "Cls/rec." });
+  if (cw < 52) Object.assign(names, { persist: "Pers.", control: "Ctrl" });
+  keys.forEach((k, j) => el("text", { x: m.l + j * cw + cw / 2, y: 18, "text-anchor": "middle", class: k === "se_core" ? "lab-strong" : "lab", "font-size": 12, text: names[k].replace("/ ", "/") }, svg));
+  classes.forEach((c, i) => {
+    el("text", { x: m.l - 8, y: m.t + i * ch + ch / 2 + 4, "text-anchor": "end", class: "lab", text: c }, svg);
+    keys.forEach((k, j) => {
+      const v = D.sct.by_class[c][k], p = Math.max(0, Math.min(1, (v - 2) / 4));
+      const cell = el("rect", { x: m.l + j * cw + 1, y: m.t + i * ch + 1, width: cw - 2, height: ch - 2, rx: 3, fill: `color-mix(in oklab, var(--seq-hi) ${Math.round(8 + 92 * p)}%, var(--seq-lo))` }, svg);
+      el("text", { x: m.l + j * cw + cw / 2, y: m.t + i * ch + ch / 2 + 4, "text-anchor": "middle", "font-size": 12, "font-variant-numeric": "tabular-nums", fill: p > 0.55 ? "var(--seq-text-strong)" : "var(--seq-text-weak)", text: v.toFixed(1) }, svg);
+      tipAttrs(cell, `<b>${c}</b> · ${names[k]}<br>mean ${v.toFixed(2)} of 7 (n = ${D.sct.n_by_class[c]})`);
+    });
+  });
+}
+
+function goalsChart() {
+  const labels = { fun: "it's fun / I like solving problems", "pass courses": "to pass my current courses", "own projects": "to make my own projects", job: "to get a job", "digital world": "to understand the digital world", "no goal": "I have no particular goal", university: "to prepare for university", parents: "my parents expect it" };
+  const items = Object.entries(D.sct.goals).map(([k, v]) => ({ label: labels[k] || k, v })).sort((a, b) => b.v - a.v);
+  const narrow = widthOf("c-goals") < 520;
+  hbars("c-goals", items.map(d => ({ ...d, label: narrow ? d.label.split(" / ")[0].slice(0, 26) : d.label })), {
+    max: 7, labelW: narrow ? 170 : 240, fmtV: d => d.v.toFixed(1), tipF: d => `<b>${d.label}</b><br>mean ${d.v.toFixed(2)} of 7`,
+  });
+}
+
+function missingChart() {
+  hbars("c-miss", D.grades.te22_missing_vs_final.map(d => ({ label: `${d.missing} missing (n=${d.n})`, v: d.mean_final, n: d.n })), {
+    max: 5, labelW: 140, fmtV: d => gradeAvg(d.v), tipF: d => `<b>${d.label}</b><br>mean final grade ${gradeAvg(d.v)}`,
+  });
+}
+
+function chainChart() {
+  const id = "c-chain", W = widthOf(id), c = D.chain;
+  const nodes = ["Free-time experience", "Entry score (block + text)", "Course grade", "Self-efficacy (SCT)"];
+  const main = [c["hrs_free"].all, c["entry"].all, c["grade→SE"].all];
+  const skips = [[0, 2, c["hrs_free→grade"].all], [1, 3, c["entry→SE"].all], [0, 3, c["hrs_free→SE"].all]];
+  const vertical = W < 620;
+  const halo = { "paint-order": "stroke", stroke: "var(--surface-1)", "stroke-width": 5, "stroke-linejoin": "round" };
+  if (!vertical) {
+    const H = 250, bw = Math.min(170, (W - 60) / 4 - 24), gap = (W - 4 * bw) / 3, y0 = 62, bh = 56;
+    const svg = svgFor(document.getElementById(id), W, H);
+    const cx = i => i * (bw + gap) + bw / 2;
+    // skip-a-step links first so boxes and labels sit on top: one arc above, two nested below
+    const arcs = [
+      { s: skips[0], x1: cx(0), x2: cx(2), y: y0 - 4, depth: -44 },
+      { s: skips[1], x1: cx(1) + 8, x2: cx(3) - 8, y: y0 + bh + 4, depth: 52 },
+      { s: skips[2], x1: cx(0), x2: cx(3) + 8, y: y0 + bh + 4, depth: 104 },
+    ];
+    arcs.forEach(({ s: [a, b, r], x1, x2, y, depth }) => {
+      el("path", { d: `M${x1},${y} C${x1},${y + depth} ${x2},${y + depth} ${x2},${y}`, fill: "none", stroke: "var(--deemph)", "stroke-width": 1.5 }, svg);
+      const lab = el("text", { x: (x1 + x2) / 2, y: y + depth * 0.75 + 4, "text-anchor": "middle", class: "lab", ...halo, text: "ρ " + fmt(r.rho, 2) }, svg);
+      tipAttrs(lab, `<b>${nodes[a]} → ${nodes[b]}</b> (skips a step)<br>ρ = ${fmt(r.rho, 2)}, n = ${r.n}`);
+    });
+    nodes.forEach((t, i) => {
+      el("rect", { x: i * (bw + gap), y: y0, width: bw, height: bh, rx: 10, fill: "var(--surface-2)", stroke: "var(--border)" }, svg);
+      const words = t.split(" ("), tx = el("text", { x: cx(i), y: y0 + (words[1] ? 24 : 32), "text-anchor": "middle", class: "lab-strong" }, svg);
+      tx.textContent = words[0];
+      if (words[1]) el("text", { x: cx(i), y: y0 + 42, "text-anchor": "middle", class: "ax", text: "(" + words[1] }, svg);
+    });
+    main.forEach((r, i) => {
+      const x1 = i * (bw + gap) + bw + 6, x2 = (i + 1) * (bw + gap) - 8, y = y0 + bh / 2;
+      el("line", { x1, x2, y1: y, y2: y, stroke: "var(--text-secondary)", "stroke-width": 2 }, svg);
+      el("path", { d: `M${x2},${y} l-7,-5 v10 z`, fill: "var(--text-secondary)" }, svg);
+      const lab = el("text", { x: (x1 + x2) / 2, y: y - 9, "text-anchor": "middle", class: "lab-strong", text: "ρ " + fmt(r.rho, 2) }, svg);
+      tipAttrs(lab, `<b>${nodes[i]} → ${nodes[i + 1]}</b><br>ρ = ${fmt(r.rho, 2)}, n = ${r.n}`);
+    });
+  } else {
+    const bh = 46, gap = 44, H = 4 * bh + 3 * gap + 10, bw = Math.min(W - 90, 260);
+    const svg = svgFor(document.getElementById(id), W, H);
+    nodes.forEach((t, i) => {
+      const y = i * (bh + gap);
+      el("rect", { x: 0, y, width: bw, height: bh, rx: 10, fill: "var(--surface-2)", stroke: "var(--border)" }, svg);
+      el("text", { x: bw / 2, y: y + bh / 2 + 5, "text-anchor": "middle", class: "lab-strong", text: t.split(" (")[0] }, svg);
+      if (i < 3) {
+        const y1 = y + bh + 4, y2 = y + bh + gap - 6;
+        el("line", { x1: bw / 2, x2: bw / 2, y1, y2, stroke: "var(--text-secondary)", "stroke-width": 2 }, svg);
+        el("path", { d: `M${bw / 2},${y2 + 2} l-5,-7 h10 z`, fill: "var(--text-secondary)" }, svg);
+        el("text", { x: bw / 2 + 12, y: (y1 + y2) / 2 + 4, class: "lab-strong", text: "ρ " + fmt(main[i].rho, 2) }, svg);
+      }
+    });
+    skips.forEach(([a, b, r], k) => {
+      const ya = a * (bh + gap) + bh / 2, yb = b * (bh + gap) + bh / 2, xo = bw + 14 + k * 22;
+      el("path", { d: `M${bw},${ya} H${xo} V${yb} H${bw}`, fill: "none", stroke: "var(--deemph)", "stroke-width": 1.5 }, svg);
+      el("text", { x: xo, y: (ya + yb) / 2 + 4, "text-anchor": "middle", class: "ax", ...halo, text: fmt(r.rho, 2) }, svg);
+    });
+  }
+  const names = { "hrs_free": "Free-time hours → entry score", "hrs_school": "School hours → entry score", "entry": "Entry score → grade", "entry_block": "Entry block → grade", "entry_text": "Entry text → grade", "hrs_free→grade": "Free-time hours → grade", "grade→SE": "Grade → self-efficacy", "entry→SE": "Entry score → self-efficacy", "hrs_free→SE": "Free-time hours → self-efficacy", "project→SE": "Final project → self-efficacy", "AI help→grade": "Asks AI when stuck ↔ grade", "own projects→grade": "Own projects in free time ↔ grade", "work outside class→grade": "Works outside class ↔ grade" };
+  table("t-chain", ["Link", "TE22 ρ (n)", "TE23 ρ (n)", "Both ρ (n)"],
+    Object.entries(c).map(([k, v]) => [names[k] || k, ...["TE22", "TE23", "all"].map(g => `${fmt(v[g].rho, 2)}${stars(v[g].p)} (${v[g].n})`)]), [1, 2, 3]);
+}
+
+function profileScatter() {
+  // y runs from an empty strip below F (for the bottom quadrant labels) to just above A
+  const id = "c-prof", W = widthOf(id), H = 380, m = { l: 34, r: 12, t: 30, b: 40 };
+  const svg = svgFor(document.getElementById(id), W, H);
+  const x = v => m.l + (W - m.l - m.r) * v / 100, y = v => H - m.b - (H - m.t - m.b) * (v + 1.1) / 6.5;
+  G.forEach((g, i) => {
+    el("line", { x1: m.l, x2: W - m.r, y1: y(i), y2: y(i), class: "gridline" }, svg);
+    el("text", { x: m.l - 8, y: y(i) + 4, "text-anchor": "end", class: "ax", text: g }, svg);
+  });
+  [0, 25, 50, 75, 100].forEach(v => el("text", { x: x(v), y: H - m.b + 18, "text-anchor": "middle", class: "ax", text: v }, svg));
+  el("text", { x: (m.l + W - m.r) / 2, y: H - 4, "text-anchor": "middle", class: "lab", text: "Entry assessment percentile (within cohort)" }, svg);
+  el("line", { x1: x(50), x2: x(50), y1: m.t - 18, y2: H - m.b, stroke: "var(--axis)", "stroke-width": 1 }, svg);
+  el("line", { x1: m.l, x2: W - m.r, y1: (y(2) + y(3)) / 2, y2: (y(2) + y(3)) / 2, stroke: "var(--axis)", "stroke-width": 1 }, svg);
+  const q = [[x(49), m.t - 8, "end", "↑ Climbers"], [x(51), m.t - 8, "start", "Steady strong"], [x(49), y(-0.75), "end", "Steady struggling"], [x(51), y(-0.75), "start", "↓ Slipped"]];
+  q.forEach(([qx, qy, a, t]) => el("text", { x: qx, y: qy, "text-anchor": a, class: "lab-strong", text: t }, svg));
+  const color = { "Climber": "var(--series-1)", "Slipped": "var(--series-2)" };
+  // deterministic jitter so the picture is stable between renders
+  const jit = s => { let h = 0; for (const ch of s) h = (h * 31 + ch.charCodeAt(0)) >>> 0; return ((h % 1000) / 1000 - 0.5) * 0.5; };
+  const pts = [...D.profile_points].sort((a, b) => (color[a.type] ? 1 : 0) - (color[b.type] ? 1 : 0));
+  pts.forEach(p => {
+    const cx = x(p.x), cy = y(p.y + jit(p.id));
+    el("circle", { cx, cy, r: 5, fill: color[p.type] || "var(--deemph)", stroke: "var(--surface-1)", "stroke-width": 2 }, svg);
+    const hit = el("circle", { cx, cy, r: 9, class: "hit" }, svg);
+    tipAttrs(hit, `<b>${p.type}</b> · ${p.group} · id ${p.id}<br>Entry: ${p.x.toFixed(0)}th pct (block ${p.block}, text ${p.text})<br>Final grade ${letter(p.y)}${p.se != null ? ` · self-efficacy ${p.se.toFixed(1)}` : ""}`);
+  });
+}
+
+function profileTable() {
+  const P = D.profiles, hrs = v => v == null ? "–" : `${v.toFixed(1)} <span class="muted">(${["0–1", "1–5", "6–10", "11–15", "15+"][Math.round(v)]} h)</span>`;
+  const rows = [
+    ["Students (TE22 / TE23)", ...P.map(p => `${p.n} (${p.n_te22} / ${p.n_te23})`)],
+    ["Entry percentile", ...P.map(p => fmt(p.entry_pct, 0))],
+    ["Entry block / text (of 14)", ...P.map(p => `${fmt(p.entry_block, 1)} / ${fmt(p.entry_text, 1)}`)],
+    ["Free-time programming", ...P.map(p => hrs(p.hrs_free))],
+    ["School programming", ...P.map(p => hrs(p.hrs_school))],
+    ["Final grade", ...P.map(p => gradeAvg(p.grade_final))],
+    ["Final project", ...P.map(p => gradeAvg(p.final_project))],
+    ["Missing parts (mean)", ...P.map(p => fmt(p.missing_parts, 2))],
+    ["Self-efficacy, core (1–7)", ...P.map(p => `${fmt(p.se_core, 1)} <span class="muted">n=${p.n_sct}</span>`)],
+    ["Works outside class (1–7)", ...P.map(p => fmt(p.habit_outside, 1))],
+    ["Learns because it's fun (1–7)", ...P.map(p => fmt(p.goal_fun, 1))],
+    ["Learns to pass courses (1–7)", ...P.map(p => fmt(p.goal_pass, 1))],
+    ["Asks AI when stuck (1–7)", ...P.map(p => fmt(p.help_AI, 1))],
+  ];
+  table("t-prof", ["", ...P.map(p => p.type)], rows, [1, 2, 3, 4]);
+}
+
+function moversTables() {
+  const r = d => [d.study_id, d.group, `${letter(d.grade_first)} → ${letter(d.grade_mid)} → ${letter(d.grade_final)}`, letter(d.final_project), d.entry_pct == null ? "–" : d.entry_pct.toFixed(0), d.se_core == null ? "–" : d.se_core.toFixed(1)];
+  const head = ["id", "class", "Feb → May → final", "project", "entry pct", "SE"];
+  table("t-up", head, D.movers.te23_up.map(r), [4, 5]);
+  table("t-down", head, D.movers.te23_down.map(r), [4, 5]);
+  const c = d => [d.study_id, d.group, letter(d.grade_final), d.se_core.toFixed(1)];
+  table("t-over", ["id", "class", "grade", "SE (1–7)"], D.calibration.over.map(c), [3]);
+  table("t-under", ["id", "class", "grade", "SE (1–7)"], D.calibration.under.map(c), [3]);
+}
+
+// ---------- section 7: factor analysis
+function faDerive() {
+  const F = D.fa, it = F.items.map(d => d.item), r = (a, b) => F.corr[it.indexOf(a)][it.indexOf(b)];
+  D.fa_sections = F.sections_as_scales.map(s => s.alpha.toFixed(2).replace(/^0/, "")).join(" · ");
+  D.fa_min_cong = Math.min(...F.solutions["4"].spearman_congruence).toFixed(2);
+  const f4 = F.fit.find(f => f.k === 4);
+  D.fa_fit4_rmsea = f4.rmsea.toFixed(3); D.fa_fit4_tli = f4.tli.toFixed(2);
+  D.fa_r_ai_peers = r("help_AI", "help_peers").toFixed(2); D.fa_r_ai_teacher = r("help_AI", "help_teacher").toFixed(2);
+  D.fa_r_self_peers = r("help_self", "help_peers").toFixed(2); D.fa_r_self_fun = r("help_self", "goal_fun").toFixed(2);
+  D.fa_alpha_habits = F.sections_as_scales[2].alpha.toFixed(2);
+}
+
+// tinted cell: blue for positive, red for negative, strength by |v| / full
+function tintCell(v, full, txt, faded) {
+  const p = Math.min(50, Math.round(50 * Math.abs(v) / full));
+  const c = v >= 0 ? "var(--series-1)" : "var(--neg)";
+  const style = faded ? "color:var(--text-muted)" : `background:color-mix(in oklab, ${c} ${p}%, transparent)`;
+  return `<span style="display:block;margin:-6px -10px -6px 0;padding:6px 10px 6px 0;${style}">${txt}</span>`;
+}
+
+function screeChart() {
+  const id = "c-scree", W = widthOf(id), H = 230, m = { l: 30, r: 12, t: 12, b: 34 }, K = 10;
+  const ev = D.fa.pa.eigen.slice(0, K), pa = D.fa.pa.pa_pc95.slice(0, K);
+  const svg = svgFor(document.getElementById(id), W, H);
+  const ymax = Math.ceil(Math.max(...ev));
+  const x = i => m.l + (W - m.l - m.r) * i / (K - 1), y = v => H - m.b - (H - m.t - m.b) * v / ymax;
+  for (let v = 0; v <= ymax; v++) {
+    el("line", { x1: m.l, x2: W - m.r, y1: y(v), y2: y(v), class: v === 0 ? "baseline" : "gridline" }, svg);
+    el("text", { x: m.l - 6, y: y(v) + 4, "text-anchor": "end", class: "ax", text: v }, svg);
+  }
+  ev.forEach((_, i) => el("text", { x: x(i), y: H - m.b + 16, "text-anchor": "middle", class: "ax", text: i + 1 }, svg));
+  el("text", { x: (m.l + W - m.r) / 2, y: H - 2, "text-anchor": "middle", class: "lab", text: "Factor number" }, svg);
+  [[pa, "var(--deemph)"], [ev, "var(--series-1)"]].forEach(([s, c]) => {
+    el("path", { d: s.map((v, i) => `${i ? "L" : "M"}${x(i)},${y(v)}`).join(" "), fill: "none", stroke: c, "stroke-width": 2, "stroke-linejoin": "round" }, svg);
+    s.forEach((v, i) => el("circle", { cx: x(i), cy: y(v), r: 4, fill: c, stroke: "var(--surface-1)", "stroke-width": 2 }, svg));
+  });
+  ev.forEach((v, i) => {
+    const hit = el("rect", { x: x(i) - (W - m.l - m.r) / (2 * (K - 1)), y: m.t, width: (W - m.l - m.r) / (K - 1), height: H - m.t - m.b, class: "hit" }, svg);
+    tipAttrs(hit, `<b>Factor ${i + 1}</b><br>Observed eigenvalue ${v.toFixed(2)}<br>Random 95th pct ${pa[i].toFixed(2)}<br>${v > pa[i] ? "Above random → retain" : "Not above random"}`);
+  });
+}
+
+function faTables() {
+  const F = D.fa, items = F.items;
+  table("t-fit", ["Factors", "χ² (df)", "RMSEA", "TLI", "BIC"],
+    F.fit.map(f => [f.k, `${f.chi2.toFixed(0)} (${f.df})`, f.rmsea.toFixed(3), f.tli.toFixed(2), f.bic.toFixed(0)]), [1, 2, 3, 4]);
+
+  const loadTable = (tid, sol) => {
+    const S = F.solutions[sol], L = S.loadings, stab = S.bootstrap.item_stability;
+    const prim = L.map(r => r.reduce((b, v, j) => (Math.abs(v) > Math.abs(r[b]) ? j : b), 0));
+    const order = items.map((_, i) => i).sort((a, b) => prim[a] - prim[b] || Math.abs(L[b][prim[b]]) - Math.abs(L[a][prim[a]]));
+    const rows = order.map(i => [
+      `<span class="tag">${items[i].section}</span> ${items[i].label}`,
+      ...L[i].map(v => tintCell(v, 1, v.toFixed(2).replace(/^(-?)0/, "$1"), Math.abs(v) < 0.3)),
+      S.communality[i].toFixed(2), Math.round(100 * stab[items[i].item]) + "%",
+    ]);
+    table(tid, ["Item", ...S.factors, "h²", "stable"], rows, S.factors.map((_, j) => j + 1).concat([S.factors.length + 1, S.factors.length + 2]));
+  };
+  loadTable("t-load4", "4");
+  loadTable("t-load2", "2");
+
+  table("t-scales", ["Scale", "Items", "α", "ω"],
+    F.scales.map(s => [`<strong>${s.scale}</strong>`, `<span class="small">${s.items.join(" · ")}</span>`, s.alpha.toFixed(2), s.omega.toFixed(2)]), [2, 3]);
+
+  const tg = Object.keys(F.link_labels);
+  table("t-links", ["Scale", ...tg.map(t => F.link_labels[t])],
+    Object.entries(F.links).map(([s, v]) => [s, ...tg.map(t => tintCell(v[t].rho, 0.7, `${v[t].rho.toFixed(2)}${stars(v[t].p)}`, false))]),
+    tg.map((_, j) => j + 1));
+
+  const scales = Object.keys(F.by_cohort.TE22), profs = Object.keys(F.by_profile);
+  const col = s => profs.map(p => F.by_profile[p][s]);
+  table("t-fa-prof", ["Profile", ...scales],
+    profs.map(p => [`${p} <span class="muted">n=${F.by_profile[p].n}</span>`, ...scales.map(s => {
+      const v = F.by_profile[p][s], lo = Math.min(...col(s)), hi = Math.max(...col(s));
+      return tintCell(hi > lo ? 0.15 + 0.85 * (v - lo) / (hi - lo) : 0.5, 1, v.toFixed(2), false);
+    })]), scales.map((_, j) => j + 1));
+}
+
+function renderAll() {
+  screeChart();
+  itemsChart();
+  groupedBars("c-free", D.experience_means.hrs_free);
+  groupedBars("c-school", D.experience_means.hrs_school);
+  followupChart();
+  heatmap("c-te23tr", D.grades.te23_transition_first_final, "Feb 2025", "Final grade");
+  heatmap("c-te22tr", D.grades.te22_transition_first_final.map(r => r), "Unit 4", "Final grade");
+  missingChart();
+  sctHeat();
+  divergingHelp();
+  goalsChart();
+  chainChart();
+  profileScatter();
+}
+
+derive(); faDerive(); bind(); experienceTable(); profileTable(); moversTables(); faTables(); renderAll();
+let rt; window.addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(renderAll, 120); });
+
+// ---------- theme toggle (auto → light → dark)
+const btn = document.getElementById("themeBtn"), modes = ["auto", "light", "dark"];
+let mode = "auto";
+try { mode = localStorage.getItem("report-theme") || "auto"; } catch (e) {}
+function applyTheme() {
+  if (mode === "auto") document.documentElement.removeAttribute("data-theme");
+  else document.documentElement.setAttribute("data-theme", mode);
+  btn.textContent = "Theme: " + mode;
+}
+btn.addEventListener("click", () => {
+  mode = modes[(modes.indexOf(mode) + 1) % modes.length];
+  try { localStorage.setItem("report-theme", mode); } catch (e) {}
+  applyTheme();
+});
+applyTheme();
+</script>
+</body>
+</html>
