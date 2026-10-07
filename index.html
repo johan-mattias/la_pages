@@ -1,0 +1,616 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<script src="site-nav.js"></script>
+<title>CS Academy Log Atlas</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&family=Source+Sans+3:wght@300;400;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: single reading column at 50rem, figures breaking out to 64rem, sticky section rail on wide screens */
+:root{
+  --bg:#f7f8fa; --surface:#ffffff; --sunk:#eef1f5;
+  --fg:#161b22; --muted:#5a6472; --faint:#8a94a3; --rule:#dde2e9;
+  --accent:#0f6f7a; --accent-soft:#d7eaec; --ochre:#b2721f; --plum:#6b4d8f; --rose:#a8405a;
+  --ok:#2f7d4f; --warn:#b2721f; --bad:#a8405a;
+  --d:"Newsreader",Georgia,"Times New Roman",serif;
+  --b:"Source Sans 3",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --m:"IBM Plex Mono",ui-monospace,"SF Mono",Menlo,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0f1318; --surface:#161b22; --sunk:#1c222b;
+  --fg:#e6eaf0; --muted:#9aa5b4; --faint:#6b7685; --rule:#28303a;
+  --accent:#4fb3bf; --accent-soft:#17343a; --ochre:#d69a4a; --plum:#a98ac9; --rose:#d4788e;
+  --ok:#5aae7c; --warn:#d69a4a; --bad:#d4788e; color-scheme:dark;
+}}
+:root[data-theme="dark"]{
+  --bg:#0f1318; --surface:#161b22; --sunk:#1c222b;
+  --fg:#e6eaf0; --muted:#9aa5b4; --faint:#6b7685; --rule:#28303a;
+  --accent:#4fb3bf; --accent-soft:#17343a; --ochre:#d69a4a; --plum:#a98ac9; --rose:#d4788e;
+  --ok:#5aae7c; --warn:#d69a4a; --bad:#d4788e; color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--b);font-size:16.5px;line-height:1.62;margin:0}
+.wrap{max-width:64rem;margin:0 auto;padding-inline:20px;padding-block:0}
+.col{max-width:50rem}
+h1,h2,h3{font-family:var(--d);font-weight:600;text-wrap:balance;line-height:1.18;margin:0}
+h1{font-size:clamp(2.1rem,5.5vw,3.3rem);letter-spacing:-.015em}
+h2{font-size:clamp(1.5rem,3.4vw,2.05rem);letter-spacing:-.01em}
+h3{font-size:1.14rem;font-weight:600}
+p{margin:0 0 1em}
+a{color:var(--accent)}
+.eyebrow{font-family:var(--m);font-size:.69rem;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin:0 0 .5em}
+.lede{font-size:1.16rem;color:var(--muted);line-height:1.55}
+.small{font-size:.86rem;color:var(--muted)}
+code,.mono{font-family:var(--m);font-size:.86em}
+code{background:var(--sunk);padding:.1em .34em;border-radius:3px}
+
+header.hero{border-bottom:1px solid var(--rule);background:var(--surface)}
+header.hero .wrap{padding-block:clamp(2.6rem,7vw,4.6rem) 2.2rem}
+.statrow{display:grid;grid-template-columns:repeat(auto-fit,minmax(118px,1fr));gap:1px;background:var(--rule);
+  border:1px solid var(--rule);margin-top:2.2rem;border-radius:4px;overflow:hidden}
+.stat{background:var(--surface);padding:.85rem .9rem}
+.stat b{display:block;font-family:var(--m);font-size:1.22rem;font-weight:500;letter-spacing:-.02em}
+.stat span{display:block;font-size:.74rem;color:var(--faint);text-transform:uppercase;letter-spacing:.07em;margin-top:.15rem}
+
+nav.rail{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--bg) 92%,transparent);
+  backdrop-filter:blur(8px);border-bottom:1px solid var(--rule)}
+nav.rail .wrap{display:flex;gap:.2rem;overflow-x:auto;padding-block:.5rem;scrollbar-width:none}
+nav.rail .wrap::-webkit-scrollbar{display:none}
+nav.rail a{font-family:var(--m);font-size:.74rem;letter-spacing:.04em;text-decoration:none;color:var(--muted);
+  padding:.34rem .6rem;border-radius:3px;white-space:nowrap}
+nav.rail a:hover{background:var(--sunk);color:var(--fg)}
+
+section{padding-block:3.2rem;border-bottom:1px solid var(--rule)}
+section:last-of-type{border-bottom:0}
+.chapter{display:inline-block;font-family:var(--m);font-size:.68rem;letter-spacing:.07em;color:var(--accent);
+  background:var(--accent-soft);padding:.2rem .5rem;border-radius:3px;margin-bottom:.7rem}
+
+figure{margin:1.8rem 0;background:var(--surface);border:1px solid var(--rule);border-radius:5px;overflow:hidden}
+figure .fbody{padding:1.1rem 1.1rem .6rem;min-width:0}
+figcaption{padding:.75rem 1.1rem;border-top:1px solid var(--rule);font-size:.84rem;color:var(--muted);background:var(--sunk)}
+.scroller{overflow-x:auto;min-width:0}
+svg{display:block;max-width:100%;height:auto}
+#c-wtr svg{margin-inline:auto}
+.ctl{display:flex;flex-wrap:wrap;gap:.4rem;align-items:center;padding:.85rem 1.1rem;border-bottom:1px solid var(--rule)}
+button.tab{font-family:var(--b);font-size:.82rem;font-weight:600;color:var(--muted);background:var(--sunk);
+  border:1px solid var(--rule);border-radius:999px;padding:.3rem .78rem;cursor:pointer}
+button.tab[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+:root[data-theme="dark"] button.tab[aria-pressed="true"]{color:#06181b}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) button.tab[aria-pressed="true"]{color:#06181b}}
+button.tab:focus-visible,a:focus-visible,input:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+input[type=range]{accent-color:var(--accent);flex:1;min-width:140px}
+
+table{border-collapse:collapse;width:100%;font-size:.88rem}
+th,td{text-align:left;padding:.44rem .7rem;border-bottom:1px solid var(--rule);vertical-align:top}
+th{font-family:var(--m);font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;color:var(--faint);font-weight:400}
+td.num{font-family:var(--m);font-variant-numeric:tabular-nums;text-align:right}
+.note{border-left:3px solid var(--ochre);background:var(--surface);padding:.85rem 1rem;margin:1.5rem 0;font-size:.93rem}
+.note b{color:var(--ochre)}
+ul.tight{margin:0 0 1em;padding-left:1.15rem}
+ul.tight li{margin-bottom:.35em}
+.legend{display:flex;flex-wrap:wrap;gap:.9rem;font-size:.78rem;color:var(--muted);padding:0 1.1rem .8rem}
+.legend i{display:inline-block;width:11px;height:11px;border-radius:2px;margin-right:.32rem;vertical-align:-1px}
+.tip{position:fixed;pointer-events:none;background:var(--fg);color:var(--bg);font-family:var(--m);font-size:.74rem;
+  padding:.3rem .5rem;border-radius:3px;opacity:0;transition:opacity .12s;z-index:50;max-width:240px}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1rem}
+.kv{background:var(--surface);border:1px solid var(--rule);border-radius:4px;padding:.8rem .9rem}
+.kv b{font-family:var(--m);font-size:1.1rem;font-weight:500;display:block}
+.kv span{font-size:.78rem;color:var(--faint)}
+footer{padding-block:2.4rem 3.4rem;color:var(--faint);font-size:.84rem}
+@media (max-width:560px){body{font-size:16px}.ctl{padding:.7rem}}
+</style>
+
+<header class="hero">
+<div class="wrap col">
+  <p class="eyebrow">NTI Uppsala &middot; TE22 &amp; TE23 &middot; CS Academy</p>
+  <h1>Two school years, 2.6&nbsp;million events</h1>
+  <p class="lede">A tour of the log, survey and catalogue files behind this thesis, and five worked learning-analytics methods applied to them. Every number on this page was computed from the files themselves, not borrowed from the literature.</p>
+  <div class="statrow">
+    <div class="stat"><b>2,638,783</b><span>events</span></div>
+    <div class="stat"><b>159</b><span>students</span></div>
+    <div class="stat"><b>103</b><span>survey responses</span></div>
+    <div class="stat"><b>27,126</b><span>sessions</span></div>
+    <div class="stat"><b>86&nbsp;h</b><span>median per student</span></div>
+  </div>
+</div>
+</header>
+
+<nav class="rail"><div class="wrap">
+  <a href="#data">The files</a>
+  <a href="#shape">Shape</a>
+  <a href="#prediction">Prediction</a>
+  <a href="#clustering">Clustering</a>
+  <a href="#sequence">Sequences</a>
+  <a href="#process">Transitions</a>
+  <a href="#psychometrics">Psychometrics</a>
+  <a href="#theory">Theory</a>
+  <a href="#map">Chapter map</a>
+</div></nav>
+
+<div class="wrap">
+
+<section id="data">
+<div class="col">
+<p class="eyebrow">Source material</p>
+<h2>Six files, one join key, four traps</h2>
+<p>Everything hangs off <code>cs_anon.csv</code>, the bridge between the platform's numeric <code>user_id</code> and the survey's <code>SCT-…</code> identifier. 102 of 103 survey respondents link to an account with log data.</p>
+</div>
+
+<figure><div class="scroller"><table>
+<thead><tr><th>File</th><th>Rows</th><th>Grain</th><th>Carries</th></tr></thead>
+<tbody>
+<tr><td class="mono">te22.csv.gz</td><td class="num">1,519,976</td><td>one event</td><td>Aug 2023 – Jun 2024 course instance</td></tr>
+<tr><td class="mono">te23.csv.gz</td><td class="num">1,149,665</td><td>one event</td><td>Jul 2024 – Jan 2026 course instance</td></tr>
+<tr><td class="mono">cs_anon.csv</td><td class="num">164</td><td>one account</td><td>survey id ↔ user_id ↔ class group</td></tr>
+<tr><td class="mono">exercise_info_eu.csv</td><td class="num">7,186</td><td>one exercise</td><td>name, points, course</td></tr>
+<tr><td class="mono">SCT_…_TE22_2025.csv</td><td class="num">69</td><td>one student</td><td>20 self-efficacy items, 15 May 2025</td></tr>
+<tr><td class="mono">SCT_…_TE23_2025.csv</td><td class="num">32</td><td>one student</td><td>same instrument, 4 Jun 2025</td></tr>
+</tbody></table></div>
+<figcaption>Only three courses appear in the logs: <span class="mono">cs1-22</span> (~45k exercise events), <span class="mono">cs0</span> (~27k) and a trace of <span class="mono">cs2-22</span>. 83% of logged exercise ids resolve against the catalogue.</figcaption></figure>
+
+<div class="col">
+<div class="note"><b>Four joins that fail silently.</b>
+<ul class="tight">
+<li><code>cs_anon.user_id</code> contains the literal string <code>na</code>, so pandas types the column as text and an unconverted join to the logs returns zero matches with no error.</li>
+<li>Four students appear <em>twice</em> in <code>cs_anon.csv</code> — once labelled with a survey id and class, once as <code>na</code>. Merging on <code>user_id</code> fans their events out into duplicate rows. Keep the labelled row before joining.</li>
+<li>The survey files disagree on headers: <code>group&nbsp;</code> with a trailing space and <code>start year</code> in TE22, <code>group</code>/<code>start_year</code> in TE23. The TE23 file also lost the header for the class/instance item, which arrives as <code>Unnamed: 20</code>.</li>
+<li>The TE22 log calls the unix-time column <code>extract</code>; the TE23 log calls it <code>unix_time</code>. Same content.</li>
+</ul></div>
+
+<p>The two log files do <em>not</em> share event ids. 40 students appear in both because they continued across course instances, but their events are distinct, so a concatenation is safe once <code>cs_anon</code> is deduplicated.</p>
+
+<div class="note"><b>The largest threat to validity is 57 students.</b> They carry the group label <code>na</code>, have no survey response, and are invisible to every linked analysis — yet their median activity (14,500 events) matches the labelled classes. That is 36% of the logged population excluded from any behaviour-to-self-efficacy claim. Establishing whether this is a consent boundary or a data-entry gap changes what the survey half can support.</div>
+</div>
+</section>
+
+<section id="shape">
+<div class="col">
+<p class="eyebrow">Orientation</p>
+<h2>Two academic years, cleanly separated</h2>
+<p>Each cohort runs one school year: a September peak, a December dip, a May push, then silence. The unassigned students span both years, which is consistent with them being classmates rather than a different population.</p>
+</div>
+<figure>
+  <div class="fbody"><div class="scroller" id="c-months"></div></div>
+  <div class="legend" id="l-months"></div>
+  <figcaption><b>Timing matters for interpretation.</b> The survey was administered in May and June 2025. For TE23 that is the end of their active course; for TE22 it is roughly eleven months after their logged activity stopped. Any TE22 behaviour-to-self-efficacy correlation is a lagged one.</figcaption>
+</figure>
+<div class="col">
+<div class="grid2">
+  <div class="kv"><b>19.5 min</b><span>median session (30-min inactivity gap)</span></div>
+  <div class="kv"><b>154</b><span>median sessions per student</span></div>
+  <div class="kv"><b>8%</b><span>of events on weekends</span></div>
+  <div class="kv"><b>47.5%</b><span>graded submissions passing</span></div>
+</div>
+<p style="margin-top:1.4rem">Within the week, TE22 concentrates on Wednesday (26.5% of events) and TE23 on Friday (36.3%) — timetable signatures. Hour-of-day shows a sharp lesson block (TE22 at 11:00–13:00 UTC, TE23 at 08:00–09:00) plus a flat evening tail from 16:00 to 21:00 that is almost certainly homework.</p>
+</div>
+</section>
+
+<section id="prediction">
+<span class="chapter">Chapter 7 · Predictive modeling</span>
+<div class="col">
+<h2>How early can you see it coming?</h2>
+<p>The question an early-warning system has to answer: using only what a student did in their first <em>n</em> days, can you tell who ends the year in the upper half for exercises passed? Features are computed inside the window only; the outcome is the full-year count. Five-fold stratified cross-validation, 159 students, base rate 49.7%.</p>
+</div>
+<figure>
+  <div class="ctl">
+    <label class="small mono" for="pwin" style="min-width:8.5rem">Window: <span id="pwinlab">28 days</span></label>
+    <input type="range" id="pwin" min="0" max="6" step="1" value="3" aria-label="Prediction window in days">
+  </div>
+  <div class="fbody"><div class="scroller" id="c-pred"></div></div>
+  <div class="legend"><span><i style="background:var(--accent)"></i>Random forest</span><span><i style="background:var(--ochre)"></i>Logistic regression</span><span><i style="background:var(--faint)"></i>Chance</span></div>
+  <figcaption id="cap-pred"></figcaption>
+</figure>
+<div class="col">
+<p>Two weeks of data already reach AUC 0.83 with a linear model. The curve then climbs slowly — the extra ten weeks between day 14 and day 84 buy about 0.08 AUC. For an intervention that has to happen while there is still time to act, the information is almost all present by the end of the first month.</p>
+</div>
+<figure>
+  <div class="ctl">
+    <button class="tab" data-imp="imp" aria-pressed="true">Permutation importance</button>
+    <button class="tab" data-imp="sp" aria-pressed="false">Rank correlation with outcome</button>
+  </div>
+  <div class="fbody"><div class="scroller" id="c-imp"></div></div>
+  <figcaption id="cap-imp"></figcaption>
+</figure>
+<div class="col">
+<div class="note"><b>Watch the target definition.</b> An earlier run of this model used whole-course features to predict a whole-course outcome and scored AUC 0.92 — almost entirely because the feature <code>submissions</code> and the target <code>exercises passed</code> are the same construct measured twice. Restricting features to an early window is what makes the number mean something. Leakage in log data usually looks like a feature that is a component of the outcome rather than a cause of it.</div>
+<p>Two process features survive alongside the volume measures. <strong>Errors per run</strong> correlates <span class="mono">−0.35</span> with final exercises passed: students who trigger a compile or runtime error on a larger share of their executions finish behind. <strong>Runs per edit</strong> is similar at <span class="mono">−0.29</span> — running repeatedly without editing in between is the behavioural signature of guessing. Neither is a volume measure, and both are actionable in a way that "total events" is not.</p>
+</div>
+</section>
+
+<section id="clustering">
+<span class="chapter">Chapters 8 &amp; 9 · Clustering</span>
+<div class="col">
+<h2>Groups by working style, not by how much</h2>
+<p>Clustering raw activity counts produces one finding: some students do more than others. To get past that, these ten features are all rates, ratios or shapes — pass rate, errors per run, runs per edit, median session length, share of evening and weekend work, day-to-day variability, weekday spread, events per active day, exercises solved per hour. Standardised, then k-means at k=4.</p>
+</div>
+<figure>
+  <div class="ctl" id="ctl-clust"></div>
+  <div class="fbody"><div class="scroller" id="c-clust"></div></div>
+  <figcaption id="cap-clust"></figcaption>
+</figure>
+<div class="col">
+<p>The four profiles differ on when and how students work rather than how much, and they separate on outcomes: median exercises passed runs from 92 to 122 (Kruskal–Wallis H = 10.87, p = 0.012), and mean self-efficacy from 4.22 to 5.36 on the seven-point scale.</p>
+<p>The group that stands out is <strong>cluster 2</strong>: 30% of its activity in the evening, 15% at weekends, the most irregular day-to-day rhythm, the longest total hours — and the highest self-efficacy of the four. The contrast with <strong>cluster 0</strong> is the interesting one. Cluster 0 works in the longest sessions (median 49 minutes), almost entirely inside school hours, very regularly, and reports the <em>lowest</em> self-efficacy. Same institution, similar exercise counts, opposite confidence.</p>
+<div class="note"><b>Report the silhouette honestly.</b> Silhouette width peaks at k=2 (0.23) and sits at 0.15 for k=4. These are weak-to-moderate separations — the structure is real enough to predict outcomes but the clusters are not discrete types. Chapter 9's model-based approach would put a likelihood on that question instead of leaving it to a heuristic index, and is the natural next step before committing to a four-group story in a paper.</div>
+</div>
+</section>
+
+<section id="sequence">
+<span class="chapter">Chapters 10 &amp; 11 · Sequence analysis &amp; VaSSTra</span>
+<div class="col">
+<h2>Engagement as a sequence of weekly states</h2>
+<p>Each student-week is coded into one of four states by event volume, using tertiles of the non-zero distribution as cuts: <strong>Absent</strong> (no events), <strong>Low</strong> (&lt;229), <strong>Moderate</strong> (229–473), <strong>Intense</strong> (&gt;473). That turns 159 students into 159 sequences of 36 symbols — the VaSSTra move of going from variables to states to trajectories.</p>
+</div>
+<figure>
+  <div class="fbody"><div class="scroller" id="c-seq"></div></div>
+  <div class="legend" id="l-seq"></div>
+  <figcaption>Week 0 is each student's own first week, not a calendar date. The three near-total collapses are school holidays; the course calendar has to be modelled or those weeks will dominate any distance measure.</figcaption>
+</figure>
+<div class="col">
+<p>The shape is a steady drain from the top state. In week 0, 119 of 159 students are Intense and none are Absent. By week 20, that is 23 Intense and 92 Low. Students are not dropping out — Absent stays low outside holidays — they are settling into a lower gear.</p>
+</div>
+<figure>
+  <div class="fbody"><div class="scroller" id="c-wtr"></div></div>
+  <figcaption>Week-to-week transition probabilities. Rows are the current state, columns the next week. Hover or tap a cell for the exact value.</figcaption>
+</figure>
+<div class="col">
+<p>Every state is self-sustaining: the diagonal is the largest entry in each row (0.41 to 0.48). The asymmetry is at the edges. From Intense, the chance of being Absent next week is 0.06; from Absent, the chance of returning to Intense is 0.09 while the chance of staying Absent is 0.41. Disengagement is stickier than engagement, which is the quantitative case for intervening on a <em>first</em> missed week rather than a pattern of them.</p>
+</div>
+</section>
+
+<section id="process">
+<span class="chapter">Chapters 12 &amp; 14 · Markov models &amp; process mining</span>
+<div class="col">
+<h2>The edit–run–error loop, one step at a time</h2>
+<p>Zooming from weeks to seconds. Within a session, what follows what? Rows are the current event, columns the next event, restricted to the seven event types that carry the work.</p>
+</div>
+<figure>
+  <div class="fbody"><div class="scroller" id="c-mtr"></div></div>
+  <figcaption>Row-normalised first-order transition probabilities across 2.6M events. Hover or tap a cell for the probability and the underlying count.</figcaption>
+</figure>
+<div class="col">
+<p>Three rows tell most of the story.</p>
+<ul class="tight">
+<li><strong>After a failed submission</strong>, the most likely next action is re-running the code (0.69) — not editing it (0.20). Students re-execute before they revise.</li>
+<li><strong>After a compile error</strong>, the same pattern, harder: run again 0.60, edit 0.30. Running the identical program after a compile error cannot change the result, so this is a genuine misconception about what the run button does, visible 21,000 times.</li>
+<li><strong>After a correct submission</strong>, 0.85 go straight to a pageview — they move on immediately. Almost nobody revisits working code.</li>
+</ul>
+<p>This is the kind of finding that only a transition model surfaces. Aggregate counts show that students make errors; the transition matrix shows what they <em>do</em> about them, and the answer is "press run again". Chapter 14's process mining would turn this into a discovered model with the loops made explicit; chapter 12's mixture Markov models would ask whether the run-first pattern belongs to a subgroup rather than to everyone.</p>
+</div>
+</section>
+
+<section id="psychometrics">
+<span class="chapter">Chapters 19–21 · Psychological networks, factor analysis, SEM</span>
+<div class="col">
+<h2>Twenty items, one strong factor and a telling second</h2>
+<p>The instrument holds up: Cronbach's α = 0.958 across 20 items, mean inter-item r = 0.56, first eigenvalue 11.74 of 20. Students do discriminate between topics rather than flat-lining — the median within-student spread across items is 1.15 scale points.</p>
+</div>
+<figure>
+  <div class="ctl">
+    <button class="tab" data-psy="mean" aria-pressed="true">Mean rating</button>
+    <button class="tab" data-psy="l2" aria-pressed="false">Second component loading</button>
+    <button class="tab" data-psy="n" aria-pressed="false">Responses received</button>
+  </div>
+  <div class="fbody"><div class="scroller" id="c-psy"></div></div>
+  <figcaption id="cap-psy"></figcaption>
+</figure>
+<div class="col">
+<p>The first component is general programming self-efficacy, loading 0.61–0.88 on everything. The second (eigenvalue 2.44) is bipolar and unambiguous: tracing and control-flow items load positively (+0.08 to +0.35), while every object-orientation and recursion item loads negatively (−0.49 to −0.68). The instrument is measuring a basics dimension and an advanced-topics dimension, and that is a factor structure worth reporting rather than averaging away.</p>
+<div class="note"><b>The two data sources agree on where the course gets hard.</b> The five lowest-rated items are inheritance, recursive patterns, class-vs-instance, overload resolution and tracing recursion. Independently, the log data puts the lowest exercise pass rates in chapters 8 and 9 of <span class="mono">cs1-22</span> — <em>9.2.2 Flying letters</em> at 4.2% across 665 attempts, <em>8.2.2 Sunny meadow</em> at 9.6%, <em>9.3.2 Character rain</em> at 9.8% — and most students never pass anything in chapter 10. Self-report and behaviour locate the same wall.</div>
+<p>Item non-response points the same way. The recursion and OOP items have 11–15 missing answers each against 0–6 elsewhere: students who never reached that material declined to rate themselves on it. That missingness is informative, not random, and listwise deletion would quietly drop the students the finding is about.</p>
+</div>
+</section>
+
+<section id="theory">
+<div class="col">
+<p class="eyebrow">Triadic reciprocal causation</p>
+<h2>Where behaviour and self-efficacy actually meet</h2>
+<p>Linking the two halves directly: 102 students with both a survey response and log data. A ridge regression predicting mean self-efficacy from twelve behavioural features reaches a cross-validated R² of 0.10. Behaviour explains a tenth of the variance in confidence — real, and modest.</p>
+</div>
+<figure>
+  <div class="fbody"><div class="scroller" id="c-se"></div></div>
+  <figcaption>Spearman correlation between each behavioural feature and mean self-efficacy, n = 102. Filled bars are significant at p &lt; 0.05.</figcaption>
+</figure>
+<div class="col">
+<p>The pattern is not "students who do more feel more capable". Three of the strongest associations are about <em>rhythm</em>:</p>
+<ul class="tight">
+<li><strong>Day-to-day variability</strong> is the single strongest correlate (ρ = +0.33). Bursty workers report higher self-efficacy than metronomic ones.</li>
+<li><strong>Median session length</strong> runs the other way (ρ = −0.28). Students who sit in long sessions report <em>lower</em> confidence — consistent with long sessions being a symptom of struggle rather than a sign of investment.</li>
+<li><strong>Errors per run</strong> is negative (ρ = −0.22), while raw error counts are not significant. The rate matters; the volume does not.</li>
+</ul>
+<p>Submission pass rate is flatly unrelated to self-efficacy (ρ = +0.04, p = 0.67). That is the result most in tension with a simple mastery-experience account, where success should feed confidence most directly. The likely confound is that pass rate is driven by which exercises a student chose to attempt, so it mixes difficulty selection with ability. Controlling for exercise difficulty — the catalogue carries <code>points</code> — is the test that would separate them.</p>
+<p>Read through the triadic frame, the environmental vertex is doing visible work here: cohort timetables set the weekday and hour signatures, the course calendar produces the three collapsed weeks, and the chapter-8 wall is a property of the curriculum rather than of any student. A model that treats behavioural features as purely personal will attribute curriculum effects to students.</p>
+</div>
+</section>
+
+<section id="map">
+<div class="col">
+<p class="eyebrow">Reference</p>
+<h2>What else these files will support</h2>
+<p>Methods from the book that this dataset has the grain for, beyond the five worked above.</p>
+</div>
+<figure><div class="scroller"><table>
+<thead><tr><th>Chapter</th><th>Method</th><th>What it would need from these files</th></tr></thead>
+<tbody>
+<tr><td class="mono">Ch 11</td><td>VaSSTra</td><td>Already half-built: the weekly states exist. Cluster the sequences, then model transitions between trajectory types across the two cohorts.</td></tr>
+<tr><td class="mono">Ch 13</td><td>Multi-channel sequences</td><td>Run a second channel alongside engagement — error state, or exercise chapter — and model them jointly. The log carries both.</td></tr>
+<tr><td class="mono">Ch 14</td><td>Process mining</td><td>Event log is already in the right shape (case = student-session, activity = event_type, timestamp present). Discovery should go straight in.</td></tr>
+<tr><td class="mono">Ch 15–17</td><td>Network analysis</td><td>No interaction data in these files. Would need a co-activity network (students on the same exercise in the same window) as a proxy, which is a different construct and should be named as one.</td></tr>
+<tr><td class="mono">Ch 19</td><td>Psychological networks</td><td>20 items, n = 103. Estimable but thin — report edge stability, and consider pooling both cohorts as done here.</td></tr>
+<tr><td class="mono">Ch 20</td><td>Factor analysis</td><td>The bipolar second component is the target. Confirmatory two-factor model against the basics/advanced split.</td></tr>
+<tr><td class="mono">Ch 21</td><td>SEM</td><td>The triadic model: behaviour → attainment → self-efficacy, with cohort as a grouping variable. n = 102 constrains this to a small number of paths.</td></tr>
+</tbody></table></div>
+<figcaption>Source: Saqr &amp; López-Pernas (eds.), <em>Learning Analytics Methods and Tutorials: A Practical Guide Using R</em>, Springer 2024.</figcaption></figure>
+</section>
+
+<footer class="col">
+<p>All figures computed from <span class="mono">te22.csv.gz</span>, <span class="mono">te23.csv.gz</span>, <span class="mono">cs_anon.csv</span>, <span class="mono">exercise_info_eu.csv</span> and the two <span class="mono">SCT</span> survey exports. Models use scikit-learn with five-fold cross-validation and a fixed seed; cluster labels are arbitrary and will renumber on re-run.</p>
+</footer>
+</div>
+<div class="tip" id="tip"></div>
+
+<script>
+const D = {"months": {"labels": ["2023-08", "2023-09", "2023-10", "2023-11", "2023-12", "2024-01", "2024-02", "2024-03", "2024-04", "2024-05", "2024-06", "2024-08", "2024-09", "2024-10", "2024-11", "2024-12", "2025-01", "2025-02", "2025-03", "2025-04", "2025-05", "2025-06", "2025-08", "2025-09"], "series": {"TE22": [67982, 159867, 153673, 130214, 119830, 78990, 92794, 79403, 104251, 149274, 13952, 58, 169, 321, 75, 55, 160, 102, 48, 153, 106, 7, 0, 0], "TE23": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 35225, 79371, 78214, 70318, 82268, 62147, 50675, 58614, 41012, 51814, 863, 238, 173], "Unassigned": [24063, 59105, 40105, 42397, 42298, 21339, 21082, 21152, 32913, 36363, 14073, 46798, 72751, 74283, 49347, 50140, 43662, 31794, 45017, 48743, 55845, 1051, 294, 656]}}, "pred": {"curve": {"7": {"auc_rf": 0.7518229166666666, "auc_lr": 0.7828125, "acc": 0.6665322580645161}, "14": {"auc_rf": 0.8155729166666668, "auc_lr": 0.8328645833333332, "acc": 0.7233870967741935}, "21": {"auc_rf": 0.8111458333333333, "auc_lr": 0.8046875, "acc": 0.7290322580645161}, "28": {"auc_rf": 0.8271354166666667, "auc_lr": 0.8656770833333333, "acc": 0.7794354838709678}, "42": {"auc_rf": 0.8586458333333333, "auc_lr": 0.8403645833333334, "acc": 0.7290322580645161}, "56": {"auc_rf": 0.8778645833333334, "auc_lr": 0.88515625, "acc": 0.7981854838709678}, "84": {"auc_rf": 0.9139583333333334, "auc_lr": 0.9140104166666667, "acc": 0.8175403225806452}}, "imp": {"solved": 0.2409, "evening": 0.0233, "err_per_run": 0.0231, "edits": 0.02, "events": 0.0164, "span_h": 0.0135, "active_days": 0.0134, "pass_rate": 0.0126, "runs": 0.0124, "daily_cv": 0.0121, "runs_per_edit": 0.0108, "weekend": 0.0057, "errors": 0.0036}, "sp": {"events": 0.488, "runs": 0.491, "edits": 0.605, "active_days": 0.313, "errors": 0.156, "solved": 0.814, "pass_rate": -0.029, "err_per_run": -0.351, "runs_per_edit": -0.291, "evening": 0.088, "weekend": 0.062, "daily_cv": -0.001, "span_h": 0.075}, "base": 0.497}, "se": {"n": 102, "cv_r2_ridge": 0.097, "spearman": {"events": [0.234, 0.018], "active_days": [0.299, 0.0023], "hours": [0.304, 0.0019], "med_sess_min": [-0.275, 0.0051], "solved": [0.204, 0.0393], "pass_rate": [0.043, 0.6707], "err_per_run": [-0.217, 0.0282], "runs_per_edit": [-0.1, 0.3169], "evening": [0.268, 0.0064], "weekend": [0.044, 0.6599], "day_entropy": [0.222, 0.0248], "daily_cv": [0.325, 0.0009]}}, "clust": {"k": 4, "feat": ["pass_rate", "err_per_run", "runs_per_edit", "med_sess_min", "evening", "weekend", "daily_cv", "day_entropy", "events_per_day", "solve_per_hour"], "sizes": {"0": 43, "1": 29, "2": 38, "3": 49}, "cent": {"0": [-0.42, 0.04, 0.28, 1.0, -0.22, -0.19, -0.77, -0.13, 0.49, -0.27], "1": [0.84, -0.1, -0.5, 0.37, -0.76, -0.7, -0.67, -0.93, -0.16, 1.48], "2": [-0.03, -0.38, 0.14, -0.4, 1.37, 1.31, 0.96, 1.26, 0.42, -0.68], "3": [-0.1, 0.32, -0.05, -0.79, -0.42, -0.44, 0.33, -0.31, -0.66, -0.11]}, "outcome": {"solved": {"0": 96.0, "1": 122.0, "2": 109.0, "3": 92.0}, "events": {"0": 16720.0, "1": 10841.0, "2": 23795.5, "3": 12570.0}, "hours": {"0": 87.3, "1": 59.3, "2": 151.8, "3": 75.1}}, "se": {"0": 4.22, "1": 5.0, "2": 5.36, "3": 4.88}, "sil": {"2": 0.229, "3": 0.168, "4": 0.153, "5": 0.145, "6": 0.154, "7": 0.144}, "kruskal": {"H": 10.87, "p": 0.0124}, "raw": {"pass_rate": {"0": 0.48, "1": 0.64, "2": 0.51, "3": 0.52}, "err_per_run": {"0": 0.21, "1": 0.21, "2": 0.18, "3": 0.23}, "runs_per_edit": {"0": 1.46, "1": 1.07, "2": 1.24, "3": 1.2}, "med_sess_min": {"0": 49.03, "1": 38.51, "2": 16.29, "3": 9.98}, "evening": {"0": 0.11, "1": 0.03, "2": 0.3, "3": 0.07}, "weekend": {"0": 0.04, "1": 0.0, "2": 0.15, "3": 0.02}, "daily_cv": {"0": 0.88, "1": 0.91, "2": 1.33, "3": 1.18}, "day_entropy": {"0": 1.22, "1": 1.0, "2": 1.67, "3": 1.19}, "events_per_day": {"0": 186.57, "1": 144.95, "2": 186.43, "3": 120.13}, "solve_per_hour": {"0": 1.19, "1": 2.05, "2": 0.88, "3": 1.3}}}, "seq": {"labels": ["file_edit", "run_code_exercise", "compile_error", "runtime_error", "autograde_correct", "autograde_incorrect", "pageview"], "matrix": [[0.599, 0.356, 0.005, 0.011, 0.003, 0.003, 0.023], [0.25, 0.477, 0.087, 0.113, 0.024, 0.025, 0.024], [0.295, 0.599, 0.054, 0.009, 0.0, 0.0, 0.043], [0.322, 0.548, 0.004, 0.061, 0.0, 0.001, 0.065], [0.104, 0.043, 0.0, 0.0, 0.006, 0.0, 0.846], [0.198, 0.694, 0.0, 0.001, 0.0, 0.089, 0.017], [0.141, 0.108, 0.02, 0.024, 0.002, 0.002, 0.703]], "counts": [[393993, 233936, 3246, 6995, 2198, 2015, 15353], [174995, 334286, 60873, 79267, 17074, 17642, 16814], [21372, 43392, 3883, 635, 2, 3, 3112], [31270, 53271, 366, 5890, 15, 57, 6273], [2071, 848, 0, 9, 128, 2, 16775], [4378, 15317, 4, 17, 10, 1959, 374], [31036, 23808, 4497, 5232, 447, 469, 155119]], "weekly": {"labels": ["Absent", "Low", "Moderate", "Intense"], "matrix": [[0.408, 0.343, 0.159, 0.09], [0.149, 0.421, 0.259, 0.171], [0.08, 0.264, 0.379, 0.277], [0.059, 0.178, 0.285, 0.478]], "cuts": [229.0, 473.0], "dist": [[0, 6, 34, 119], [3, 16, 51, 89], [8, 15, 47, 89], [3, 27, 66, 63], [3, 26, 68, 62], [1, 22, 60, 76], [2, 27, 69, 61], [6, 26, 63, 64], [3, 39, 46, 71], [12, 29, 50, 68], [55, 71, 12, 21], [7, 32, 53, 67], [23, 54, 53, 29], [7, 27, 71, 54], [7, 25, 65, 62], [8, 21, 45, 85], [4, 33, 37, 85], [37, 67, 32, 23], [128, 26, 2, 3], [126, 25, 6, 2], [12, 92, 32, 23], [9, 57, 64, 29], [6, 47, 74, 32], [9, 57, 63, 30], [7, 44, 58, 50], [14, 66, 60, 19], [86, 56, 10, 7], [15, 47, 65, 32], [12, 73, 48, 26], [13, 63, 49, 34], [12, 76, 43, 28], [38, 52, 26, 43], [18, 90, 25, 26], [26, 43, 30, 60], [21, 76, 28, 34], [18, 82, 32, 27]]}}, "psy": [{"label": "Trace a program", "mean": 5.44, "sd": 1.52, "n": 103, "l1": 0.75, "l2": 0.2}, {"label": "Trace nested conditionals", "mean": 5.79, "sd": 1.32, "n": 102, "l1": 0.82, "l2": 0.23}, {"label": "Trace list / array", "mean": 5.36, "sd": 1.42, "n": 101, "l1": 0.88, "l2": 0.08}, {"label": "Trace nested structures", "mean": 4.8, "sd": 1.53, "n": 99, "l1": 0.82, "l2": 0.02}, {"label": "Trace calls & returns", "mean": 5.29, "sd": 1.5, "n": 99, "l1": 0.82, "l2": 0.18}, {"label": "Trace reused var names", "mean": 5.71, "sd": 1.37, "n": 101, "l1": 0.75, "l2": 0.35}, {"label": "Decompose a problem", "mean": 5.03, "sd": 1.29, "n": 101, "l1": 0.69, "l2": 0.21}, {"label": "Analyse, design, implement", "mean": 4.72, "sd": 1.38, "n": 101, "l1": 0.86, "l2": 0.15}, {"label": "Locate the bug", "mean": 4.7, "sd": 1.49, "n": 98, "l1": 0.74, "l2": -0.13}, {"label": "Design tests", "mean": 4.37, "sd": 1.58, "n": 101, "l1": 0.79, "l2": -0.06}, {"label": "Retrace after failing", "mean": 4.3, "sd": 1.41, "n": 97, "l1": 0.78, "l2": 0.08}, {"label": "Persist after hours of bugs", "mean": 4.68, "sd": 1.63, "n": 99, "l1": 0.72, "l2": 0.32}, {"label": "Write functions", "mean": 5.68, "sd": 1.5, "n": 101, "l1": 0.84, "l2": 0.31}, {"label": "Evaluate boolean", "mean": 5.52, "sd": 1.79, "n": 99, "l1": 0.81, "l2": 0.28}, {"label": "Construct boolean", "mean": 5.39, "sd": 1.88, "n": 99, "l1": 0.78, "l2": 0.28}, {"label": "Class vs instance", "mean": 3.54, "sd": 2.27, "n": 92, "l1": 0.64, "l2": -0.64}, {"label": "Design with inheritance", "mean": 3.39, "sd": 2.22, "n": 92, "l1": 0.61, "l2": -0.68}, {"label": "Resolve overloads", "mean": 3.59, "sd": 2.07, "n": 91, "l1": 0.65, "l2": -0.6}, {"label": "Trace recursion", "mean": 3.7, "sd": 2.2, "n": 88, "l1": 0.74, "l2": -0.49}, {"label": "Find recursive patterns", "mean": 3.54, "sd": 1.9, "n": 89, "l1": 0.76, "l2": -0.51}], "eigen": [11.74, 2.44, 0.89, 0.8, 0.6, 0.49]};
+
+const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+const SV = (w,h,inner) => `<svg viewBox="0 0 ${w} ${h}" width="${w}" height="${h}" role="img">${inner}</svg>`;
+const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;');
+const tip = document.getElementById('tip');
+function bindTip(root){
+  root.querySelectorAll('[data-tip]').forEach(el=>{
+    const show = e => { tip.textContent = el.getAttribute('data-tip');
+      const x = (e.touches?e.touches[0].clientX:e.clientX), y = (e.touches?e.touches[0].clientY:e.clientY);
+      tip.style.left = Math.min(x+12, innerWidth-250)+'px'; tip.style.top = (y-34)+'px'; tip.style.opacity=1; };
+    el.addEventListener('mouseenter',show); el.addEventListener('mousemove',show);
+    el.addEventListener('touchstart',show,{passive:true});
+    el.addEventListener('mouseleave',()=>tip.style.opacity=0);
+    el.addEventListener('touchend',()=>tip.style.opacity=0);
+  });
+}
+const fmt = n => n>=1000 ? (n/1000).toFixed(n>=10000?0:1)+'k' : String(n);
+
+/* ---------- monthly activity ---------- */
+function months(){
+  const W=860,H=300,P={t:14,r:12,b:46,l:52};
+  const L=D.months.labels, keys=['TE22','TE23','Unassigned'];
+  const cols=[css('--accent'),css('--plum'),css('--faint')];
+  const max=Math.max(...keys.flatMap(k=>D.months.series[k]));
+  const iw=W-P.l-P.r, ih=H-P.t-P.b;
+  const x=i=>P.l+ (L.length<2?0:i*iw/(L.length-1));
+  const y=v=>P.t+ih-(v/max)*ih;
+  let g='';
+  for(let i=0;i<=4;i++){const v=max*i/4,yy=y(v);
+    g+=`<line x1="${P.l}" y1="${yy}" x2="${W-P.r}" y2="${yy}" stroke="${css('--rule')}" stroke-width="1"/>`;
+    g+=`<text x="${P.l-8}" y="${yy+4}" text-anchor="end" font-size="11" font-family="${css('--m')}" fill="${css('--faint')}">${fmt(Math.round(v))}</text>`;}
+  L.forEach((lab,i)=>{ if(i%3) return;
+    g+=`<text x="${x(i)}" y="${H-P.b+18}" text-anchor="middle" font-size="10.5" font-family="${css('--m')}" fill="${css('--faint')}">${lab}</text>`;});
+  keys.forEach((k,ki)=>{
+    const s=D.months.series[k];
+    const d=s.map((v,i)=>`${i?'L':'M'}${x(i).toFixed(1)},${y(v).toFixed(1)}`).join(' ');
+    g+=`<path d="${d}" fill="none" stroke="${cols[ki]}" stroke-width="2" stroke-linejoin="round"/>`;
+    s.forEach((v,i)=>{ g+=`<circle cx="${x(i)}" cy="${y(v)}" r="7" fill="transparent" data-tip="${k} · ${L[i]} · ${v.toLocaleString()} events"/>`;
+      g+=`<circle cx="${x(i)}" cy="${y(v)}" r="2" fill="${cols[ki]}"/>`;});
+  });
+  document.getElementById('c-months').innerHTML=SV(W,H,g);
+  document.getElementById('l-months').innerHTML=keys.map((k,i)=>
+    `<span><i style="background:${cols[i]}"></i>${k==='Unassigned'?'Unassigned students':k+' classes'}</span>`).join('');
+  bindTip(document.getElementById('c-months'));
+}
+
+/* ---------- prediction curve ---------- */
+const PW=[7,14,21,28,42,56,84];
+function pred(sel){
+  const W=860,H=300,P={t:16,r:16,b:48,l:52};
+  const iw=W-P.l-P.r, ih=H-P.t-P.b;
+  const x=d=>P.l+(d-7)/(84-7)*iw, y=v=>P.t+ih-((v-0.5)/0.45)*ih;
+  let g='';
+  for(let v=0.5;v<=0.95001;v+=0.1){const yy=y(v);
+    g+=`<line x1="${P.l}" y1="${yy}" x2="${W-P.r}" y2="${yy}" stroke="${css('--rule')}"/>`;
+    g+=`<text x="${P.l-8}" y="${yy+4}" text-anchor="end" font-size="11" font-family="${css('--m')}" fill="${css('--faint')}">${v.toFixed(1)}</text>`;}
+  g+=`<line x1="${P.l}" y1="${y(0.5)}" x2="${W-P.r}" y2="${y(0.5)}" stroke="${css('--faint')}" stroke-dasharray="4 4"/>`;
+  PW.forEach(d=>g+=`<text x="${x(d)}" y="${H-P.b+19}" text-anchor="middle" font-size="11" font-family="${css('--m')}" fill="${css('--faint')}">${d}</text>`);
+  g+=`<text x="${P.l+iw/2}" y="${H-8}" text-anchor="middle" font-size="11.5" fill="${css('--muted')}">days of data used</text>`;
+  [['auc_rf',css('--accent')],['auc_lr',css('--ochre')]].forEach(([k,c])=>{
+    const d=PW.map((w,i)=>`${i?'L':'M'}${x(w).toFixed(1)},${y(D.pred.curve[w][k]).toFixed(1)}`).join(' ');
+    g+=`<path d="${d}" fill="none" stroke="${c}" stroke-width="2.4" stroke-linejoin="round"/>`;
+    PW.forEach(w=>{const v=D.pred.curve[w][k];
+      g+=`<circle cx="${x(w)}" cy="${y(v)}" r="3.4" fill="${c}"/>`;
+      g+=`<circle cx="${x(w)}" cy="${y(v)}" r="10" fill="transparent" data-tip="${k==='auc_rf'?'Random forest':'Logistic regression'} · ${w} days · AUC ${v.toFixed(3)}"/>`;});
+  });
+  const w=PW[sel];
+  g+=`<line x1="${x(w)}" y1="${P.t}" x2="${x(w)}" y2="${P.t+ih}" stroke="${css('--fg')}" stroke-width="1.2" opacity=".45"/>`;
+  document.getElementById('c-pred').innerHTML=SV(W,H,g);
+  bindTip(document.getElementById('c-pred'));
+  const c=D.pred.curve[w];
+  document.getElementById('pwinlab').textContent=w+' days';
+  document.getElementById('cap-pred').innerHTML=
+    `At <b>${w} days</b>: random forest AUC <span class="mono">${c.auc_rf.toFixed(3)}</span>, logistic regression AUC <span class="mono">${c.auc_lr.toFixed(3)}</span>, accuracy <span class="mono">${(c.acc*100).toFixed(1)}%</span> against a 49.7% base rate.`;
+}
+
+/* ---------- importance bars ---------- */
+const IMPTXT={imp:'Permutation importance of each first-28-day feature, measured as the drop in accuracy when that feature is shuffled. One feature dominates: exercises already passed inside the window.',
+  sp:'Spearman correlation between each first-28-day feature and the final full-year count of exercises passed. Negative bars are the process signals — error rate and run-without-editing both predict finishing behind.'};
+function imps(which){
+  const obj=D.pred[which];
+  const ks=Object.keys(obj).sort((a,b)=>Math.abs(obj[b])-Math.abs(obj[a]));
+  const W=860,rowH=24,P={t:8,r:16,b:26,l:124};
+  const H=P.t+ks.length*rowH+P.b, iw=W-P.l-P.r;
+  const max=Math.max(...ks.map(k=>Math.abs(obj[k])));
+  const zero=which==='sp'?P.l+iw/2:P.l;
+  const scale=which==='sp'?iw/2/max:iw/max;
+  let g=`<line x1="${zero}" y1="${P.t}" x2="${zero}" y2="${P.t+ks.length*rowH}" stroke="${css('--rule')}"/>`;
+  ks.forEach((k,i)=>{
+    const v=obj[k], w=Math.abs(v)*scale*0.94, yy=P.t+i*rowH+4;
+    const c=v<0?css('--rose'):css('--accent');
+    g+=`<rect x="${v<0?zero-w:zero}" y="${yy}" width="${Math.max(w,1)}" height="${rowH-9}" rx="2" fill="${c}" data-tip="${k} · ${v.toFixed(3)}"/>`;
+    g+=`<text x="${P.l-10}" y="${yy+11}" text-anchor="end" font-size="11.5" font-family="${css('--m')}" fill="${css('--muted')}">${k}</text>`;
+    g+=`<text x="${(v<0?zero-w-6:zero+w+6)}" y="${yy+11}" text-anchor="${v<0?'end':'start'}" font-size="11" font-family="${css('--m')}" fill="${css('--faint')}">${v.toFixed(2)}</text>`;
+  });
+  document.getElementById('c-imp').innerHTML=SV(W,H,g);
+  bindTip(document.getElementById('c-imp'));
+  document.getElementById('cap-imp').textContent=IMPTXT[which];
+}
+
+/* ---------- cluster explorer ---------- */
+const CNAME=['Long-session regulars','Efficient finishers','Evening irregulars','Short-burst workers'];
+const CDESC=[
+ 'Longest sessions of the four (median 49 minutes), almost entirely in school hours, the most regular day-to-day rhythm, and the highest runs-per-edit ratio. Lowest self-efficacy despite solid attendance.',
+ 'Highest submission pass rate (0.64) and by far the most exercises solved per hour. Lowest total hours of any group, almost no evening or weekend work, and the narrowest weekday spread — they do it in class and leave.',
+ 'Thirty percent of activity in the evening and 15% at weekends, the widest weekday spread, the most irregular day-to-day pattern, and the longest total hours. Highest self-efficacy.',
+ 'Shortest sessions (median 10 minutes) and the fewest events per active day. Highest error rate per run. Lowest median exercises passed.'];
+function clusters(sel){
+  const F=D.clust.feat, cent=D.clust.cent[sel], raw=D.clust.raw;
+  const W=860,rowH=27,P={t:10,r:16,b:28,l:140};
+  const H=P.t+F.length*rowH+P.b, iw=W-P.l-P.r, zero=P.l+iw/2;
+  const max=1.6, scale=iw/2/max;
+  let g=`<line x1="${zero}" y1="${P.t}" x2="${zero}" y2="${P.t+F.length*rowH}" stroke="${css('--rule')}"/>`;
+  g+=`<text x="${zero}" y="${H-9}" text-anchor="middle" font-size="11" fill="${css('--faint')}">cohort mean</text>`;
+  F.forEach((f,i)=>{
+    const v=Math.max(-max,Math.min(max,cent[i]));
+    const w=Math.abs(v)*scale*0.95, yy=P.t+i*rowH+5;
+    const c=v<0?css('--ochre'):css('--accent');
+    g+=`<rect x="${v<0?zero-w:zero}" y="${yy}" width="${Math.max(w,1.5)}" height="${rowH-11}" rx="2" fill="${c}" data-tip="${f} · ${cent[i]>0?'+':''}${cent[i]} SD · median ${raw[f][sel]}"/>`;
+    g+=`<text x="${P.l-10}" y="${yy+12}" text-anchor="end" font-size="11.5" font-family="${css('--m')}" fill="${css('--muted')}">${f}</text>`;
+    g+=`<text x="${(v<0?zero-w-6:zero+w+6)}" y="${yy+12}" text-anchor="${v<0?'end':'start'}" font-size="11" font-family="${css('--m')}" fill="${css('--faint')}">${raw[f][sel]}</text>`;
+  });
+  document.getElementById('c-clust').innerHTML=SV(W,H,g);
+  bindTip(document.getElementById('c-clust'));
+  document.getElementById('cap-clust').innerHTML=
+    `<b>${CNAME[sel]}</b> — ${D.clust.sizes[sel]} students. ${CDESC[sel]} <br><span class="mono" style="color:var(--faint)">median ${D.clust.outcome.solved[sel]} exercises passed · ${D.clust.outcome.hours[sel]} h on platform · mean self-efficacy ${D.clust.se[sel]}/7</span>`;
+  document.querySelectorAll('#ctl-clust button').forEach(b=>b.setAttribute('aria-pressed', b.dataset.c===String(sel)));
+}
+
+/* ---------- weekly state distribution ---------- */
+const SLAB=['Absent','Low','Moderate','Intense'];
+function seqdist(){
+  const cols=[css('--faint'),css('--ochre'),css('--plum'),css('--accent')];
+  const dist=D.seq.weekly.dist, W=860,H=270,P={t:12,r:12,b:44,l:44};
+  const iw=W-P.l-P.r, ih=H-P.t-P.b, n=dist.length, bw=iw/n;
+  let g='';
+  for(let i=0;i<=4;i++){const yy=P.t+ih-ih*i/4;
+    g+=`<line x1="${P.l}" y1="${yy}" x2="${W-P.r}" y2="${yy}" stroke="${css('--rule')}"/>`;
+    g+=`<text x="${P.l-8}" y="${yy+4}" text-anchor="end" font-size="11" font-family="${css('--m')}" fill="${css('--faint')}">${i*25}%</text>`;}
+  dist.forEach((row,i)=>{
+    const tot=row.reduce((a,b)=>a+b,0)||1; let acc=0;
+    row.forEach((v,s)=>{
+      const h=v/tot*ih, yy=P.t+ih-acc-h; acc+=h;
+      g+=`<rect x="${(P.l+i*bw+0.6).toFixed(1)}" y="${yy.toFixed(1)}" width="${(bw-1.2).toFixed(1)}" height="${Math.max(h,0).toFixed(1)}" fill="${cols[s]}" data-tip="Week ${i} · ${SLAB[s]} · ${v} students (${(v/tot*100).toFixed(0)}%)"/>`;
+    });
+    if(i%4===0) g+=`<text x="${P.l+i*bw+bw/2}" y="${H-P.b+18}" text-anchor="middle" font-size="11" font-family="${css('--m')}" fill="${css('--faint')}">${i}</text>`;
+  });
+  g+=`<text x="${P.l+iw/2}" y="${H-7}" text-anchor="middle" font-size="11.5" fill="${css('--muted')}">week of each student's own course</text>`;
+  document.getElementById('c-seq').innerHTML=SV(W,H,g);
+  bindTip(document.getElementById('c-seq'));
+  document.getElementById('l-seq').innerHTML=SLAB.map((s,i)=>`<span><i style="background:${cols[i]}"></i>${s}</span>`).join('');
+}
+
+/* ---------- heatmaps ---------- */
+function heat(elId, labels, M, counts, cell, lmar){
+  const n=labels.length, P={t:cell*0.1+74,r:12,b:12,l:lmar};
+  const W=Math.max(P.l+n*cell+P.r, 420), H=P.t+n*cell+28;
+  let g='';
+  labels.forEach((l,j)=>{
+    const cx=P.l+j*cell+cell/2;
+    g+=`<text transform="translate(${cx},${P.t-10}) rotate(-38)" text-anchor="start" font-size="11" font-family="${css('--m')}" fill="${css('--faint')}">${esc(l)}</text>`;
+  });
+  labels.forEach((l,i)=>{
+    g+=`<text x="${P.l-9}" y="${P.t+i*cell+cell/2+4}" text-anchor="end" font-size="11.5" font-family="${css('--m')}" fill="${css('--muted')}">${esc(l)}</text>`;
+    M[i].forEach((v,j)=>{
+      const t=Math.pow(v,0.55);
+      const tipTxt=counts? `${l} → ${labels[j]} · p = ${v.toFixed(3)} · ${counts[i][j].toLocaleString()} transitions`
+                          : `${l} → ${labels[j]} · p = ${v.toFixed(3)}`;
+      g+=`<rect x="${P.l+j*cell}" y="${P.t+i*cell}" width="${cell-1.5}" height="${cell-1.5}" rx="2"
+           fill="${css('--accent')}" fill-opacity="${(0.07+t*0.93).toFixed(3)}" data-tip="${esc(tipTxt)}"/>`;
+      if(v>=0.045) g+=`<text x="${P.l+j*cell+cell/2-0.75}" y="${P.t+i*cell+cell/2+3.5}" text-anchor="middle" font-size="10.5"
+           font-family="${css('--m')}" fill="${t>0.62?css('--bg'):css('--fg')}" pointer-events="none">${v.toFixed(2).slice(1)}</text>`;
+    });
+  });
+  g+=`<text x="${P.l}" y="${H-7}" font-size="11" fill="${css('--faint')}">row = current &nbsp;·&nbsp; column = next</text>`;
+  document.getElementById(elId).innerHTML=SV(W,H,g);
+  bindTip(document.getElementById(elId));
+}
+
+/* ---------- psychometrics ---------- */
+const PTXT={mean:'Mean rating per item on the 1–7 scale. The five lowest are object-orientation and recursion; the five highest are tracing and control flow.',
+ l2:'Loading on the second principal component (eigenvalue 2.44). The sign split is clean: tracing and control-flow items positive, every OOP and recursion item negative.',
+ n:'Number of students who answered each item, out of 103. The recursion and OOP items lose 11–15 responses — students who never reached the material declined to rate themselves.'};
+function psy(mode){
+  const items=[...D.psy].sort((a,b)=> mode==='mean'? a.mean-b.mean : mode==='l2'? a.l2-b.l2 : a.n-b.n);
+  const W=860,rowH=25,P={t:8,r:18,b:26,l:178};
+  const H=P.t+items.length*rowH+P.b, iw=W-P.l-P.r;
+  let g='';
+  if(mode==='mean'){
+    for(let v=1;v<=7;v++){const xx=P.l+(v-1)/6*iw;
+      g+=`<line x1="${xx}" y1="${P.t}" x2="${xx}" y2="${P.t+items.length*rowH}" stroke="${css('--rule')}"/>`;
+      g+=`<text x="${xx}" y="${H-9}" text-anchor="middle" font-size="11" font-family="${css('--m')}" fill="${css('--faint')}">${v}</text>`;}
+  }
+  items.forEach((it,i)=>{
+    const yy=P.t+i*rowH+4, bh=rowH-10;
+    let v,w,x0,c,lab;
+    if(mode==='mean'){ v=it.mean; w=(v-1)/6*iw; x0=P.l; c=v<4.2?css('--rose'):v<5.1?css('--ochre'):css('--accent'); lab=v.toFixed(2);
+      g+=`<rect x="${x0}" y="${yy}" width="${w}" height="${bh}" rx="2" fill="${c}" data-tip="${it.label} · mean ${it.mean} · SD ${it.sd} · n ${it.n}"/>`;
+      const sdw=it.sd/6*iw;
+      g+=`<line x1="${x0+w-sdw/2}" y1="${yy+bh/2}" x2="${Math.min(x0+w+sdw/2,P.l+iw)}" y2="${yy+bh/2}" stroke="${css('--fg')}" stroke-opacity=".4" stroke-width="1.5"/>`;
+    } else if(mode==='l2'){ v=it.l2; const zero=P.l+iw/2, mx=0.75; w=Math.abs(v)/mx*iw/2*0.96; c=v<0?css('--rose'):css('--accent'); lab=v.toFixed(2);
+      g+=`<line x1="${zero}" y1="${P.t}" x2="${zero}" y2="${P.t+items.length*rowH}" stroke="${css('--rule')}"/>`;
+      g+=`<rect x="${v<0?zero-w:zero}" y="${yy}" width="${Math.max(w,1.5)}" height="${bh}" rx="2" fill="${c}" data-tip="${it.label} · PC2 ${v} · PC1 ${it.l1}"/>`;
+      x0=v<0?zero-w:zero+w; g+=`<text x="${v<0?x0-6:x0+6}" y="${yy+bh-1}" text-anchor="${v<0?'end':'start'}" font-size="10.5" font-family="${css('--m')}" fill="${css('--faint')}">${lab}</text>`;
+    } else { v=it.n; w=(v-80)/23*iw; x0=P.l; c=v<93?css('--rose'):css('--accent'); lab=String(v);
+      g+=`<rect x="${x0}" y="${yy}" width="${Math.max(w,2)}" height="${bh}" rx="2" fill="${c}" data-tip="${it.label} · ${v} of 103 answered"/>`;
+      g+=`<text x="${x0+w+6}" y="${yy+bh-1}" font-size="10.5" font-family="${css('--m')}" fill="${css('--faint')}">${lab}</text>`;
+    }
+    if(mode==='mean') g+=`<text x="${P.l+w+7}" y="${yy+bh-1}" font-size="10.5" font-family="${css('--m')}" fill="${css('--faint')}">${lab}</text>`;
+    g+=`<text x="${P.l-10}" y="${yy+bh-1}" text-anchor="end" font-size="11.5" fill="${css('--muted')}">${esc(it.label)}</text>`;
+  });
+  document.getElementById('c-psy').innerHTML=SV(W,H,g);
+  bindTip(document.getElementById('c-psy'));
+  document.getElementById('cap-psy').textContent=PTXT[mode];
+}
+
+/* ---------- self-efficacy correlations ---------- */
+function seCorr(){
+  const sp=D.se.spearman;
+  const ks=Object.keys(sp).sort((a,b)=>sp[b][0]-sp[a][0]);
+  const W=860,rowH=26,P={t:10,r:18,b:28,l:132};
+  const H=P.t+ks.length*rowH+P.b, iw=W-P.l-P.r, zero=P.l+iw/2, mx=0.4;
+  let g=`<line x1="${zero}" y1="${P.t}" x2="${zero}" y2="${P.t+ks.length*rowH}" stroke="${css('--rule')}"/>`;
+  [-0.4,-0.2,0.2,0.4].forEach(t=>{const xx=zero+t/mx*iw/2;
+    g+=`<line x1="${xx}" y1="${P.t}" x2="${xx}" y2="${P.t+ks.length*rowH}" stroke="${css('--rule')}" stroke-dasharray="2 4"/>`;
+    g+=`<text x="${xx}" y="${H-10}" text-anchor="middle" font-size="11" font-family="${css('--m')}" fill="${css('--faint')}">${t>0?'+':''}${t}</text>`;});
+  g+=`<text x="${zero}" y="${H-10}" text-anchor="middle" font-size="11" font-family="${css('--m')}" fill="${css('--faint')}">0</text>`;
+  ks.forEach((k,i)=>{
+    const [r,p]=sp[k], sig=p<0.05;
+    const w=Math.abs(r)/mx*iw/2*0.95, yy=P.t+i*rowH+5, bh=rowH-11;
+    const c=r<0?css('--rose'):css('--accent');
+    g+=`<rect x="${r<0?zero-w:zero}" y="${yy}" width="${Math.max(w,1.5)}" height="${bh}" rx="2"
+        fill="${sig?c:'none'}" stroke="${c}" stroke-width="${sig?0:1.3}" stroke-dasharray="${sig?'':'3 2'}"
+        data-tip="${k} · rho ${r>0?'+':''}${r} · p = ${p}"/>`;
+    g+=`<text x="${P.l-10}" y="${yy+bh-1}" text-anchor="end" font-size="11.5" font-family="${css('--m')}" fill="${css('--muted')}">${k}</text>`;
+    g+=`<text x="${r<0?zero-w-6:zero+w+6}" y="${yy+bh-1}" text-anchor="${r<0?'end':'start'}" font-size="10.5" font-family="${css('--m')}" fill="${css('--faint')}">${r>0?'+':''}${r.toFixed(2)}</text>`;
+  });
+  document.getElementById('c-se').innerHTML=SV(W,H,g);
+  bindTip(document.getElementById('c-se'));
+}
+
+/* ---------- wire up ---------- */
+function drawAll(){
+  months(); pred(+document.getElementById('pwin').value);
+  imps(document.querySelector('[data-imp][aria-pressed="true"]').dataset.imp);
+  clusters(+(document.querySelector('#ctl-clust [aria-pressed="true"]')?.dataset.c ?? 0));
+  seqdist();
+  heat('c-wtr', D.seq.weekly.labels, D.seq.weekly.matrix, null, 74, 86);
+  heat('c-mtr', D.seq.labels.map(s=>s.replace(/_/g,' ')), D.seq.matrix, D.seq.counts, 74, 150);
+  psy(document.querySelector('[data-psy][aria-pressed="true"]').dataset.psy);
+  seCorr();
+}
+document.getElementById('ctl-clust').innerHTML = CNAME.map((n,i)=>
+  `<button class="tab" data-c="${i}" aria-pressed="${i===0}">${n} <span style="opacity:.7">(${D.clust.sizes[i]})</span></button>`).join('');
+document.getElementById('ctl-clust').addEventListener('click',e=>{
+  const b=e.target.closest('button[data-c]'); if(b) clusters(+b.dataset.c); });
+document.getElementById('pwin').addEventListener('input',e=>pred(+e.target.value));
+document.querySelectorAll('[data-imp]').forEach(b=>b.addEventListener('click',()=>{
+  document.querySelectorAll('[data-imp]').forEach(o=>o.setAttribute('aria-pressed',o===b)); imps(b.dataset.imp);}));
+document.querySelectorAll('[data-psy]').forEach(b=>b.addEventListener('click',()=>{
+  document.querySelectorAll('[data-psy]').forEach(o=>o.setAttribute('aria-pressed',o===b)); psy(b.dataset.psy);}));
+matchMedia('(prefers-color-scheme: dark)').addEventListener('change',drawAll);
+drawAll();
+</script>
+
+</body></html>
