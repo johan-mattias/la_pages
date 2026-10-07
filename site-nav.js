@@ -5,11 +5,12 @@
 (function () {
   var PAGES = [
     ["index.html", "Overview"],
-    ["TE22A Schedule and Activity.html", "TE22A schedule"],
-    ["TE22–TE23 Activity Trajectories.html", "Activity trajectories"],
-    ["Error Escape Curves.html", "Error escape curves"],
-    ["Self-Efficacy Granularity Study.html", "Self-efficacy: weeks or units"],
-    ["report.html", "Block, text & self-efficacy"]
+    ["te22a-schedule-and-activity.html", "TE22A schedule"],
+    ["te22-te23-activity-trajectories.html", "Activity trajectories"],
+    ["error-escape-curves.html", "Error escape curves"],
+    ["self-efficacy-granularity-study.html", "Self-efficacy: weeks or units"],
+    ["report.html", "Block, text & self-efficacy"],
+    ["how-often-and-how-long-classes-meet.html", "How often & how long to meet"]
   ];
 
   var LIGHT = "--lanav-bg:#ffffff;--lanav-fg:#1d2127;--lanav-muted:#5b636e;--lanav-rule:#dadfe5;--lanav-hover:#eef1f4;--lanav-accent:#0f6f7a;";
@@ -22,6 +23,7 @@
     ".lanav .lanav-in{position:relative;display:flex;align-items:center;gap:2px;overflow-x:auto;scrollbar-width:none;" +
       "padding:6px max(16px,env(safe-area-inset-right,0px)) 6px max(16px,env(safe-area-inset-left,0px));margin:0}" +
     ".lanav .lanav-in::-webkit-scrollbar{display:none}" +
+    "@media (min-width:720px){.lanav .lanav-in{flex-wrap:wrap;overflow-x:visible}}" +
     ".lanav a{flex:none;display:block;margin:0;padding:6px 10px;border-radius:6px;white-space:nowrap;" +
       "font:inherit;color:var(--lanav-muted);text-decoration:none;background:transparent}" +
     ".lanav a:hover{color:var(--lanav-fg);background:var(--lanav-hover)}" +
