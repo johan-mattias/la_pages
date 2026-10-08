@@ -162,7 +162,7 @@ svg text { font-family: system-ui, -apple-system, "Segoe UI", sans-serif; }
   <button class="theme" id="themeBtn" type="button">Theme: auto</button>
 </header>
 
-<section class="card">
+<section class="card" id="summary">
   <h3 style="margin-top:0">What stands out</h3>
   <ol class="findings">
     <li><strong>The answer key can be recovered from the forms.</strong> One key reproduces every student's total score exactly in all three administrations, so per-question correctness is reliable without a separate key.</li>
@@ -177,7 +177,7 @@ svg text { font-family: system-ui, -apple-system, "Segoe UI", sans-serif; }
 </section>
 
 <!-- ============================================================ 1 -->
-<h2>1 · The assessment: block vs text</h2>
+<h2 id="assessment">1 · The assessment: block vs text</h2>
 <p class="muted">Programming Assessment taken at the start of upper secondary school (TE22 in Sept 2022, TE23 in Sept 2023). The whole cohort is used here, including classes outside the study.</p>
 
 <div class="tiles">
@@ -204,7 +204,7 @@ svg text { font-family: system-ui, -apple-system, "Segoe UI", sans-serif; }
 <p>Text questions 3–8 are answered as well as block, sometimes better: position 5 is 85% in text vs 52% in block. Text questions 9–14 are where students struggle (24–47%). Question 2 is the one early exception, where text trails block by 19 points. Question 13 is the hardest in both sections and still the hardest for TE22 two years later (68% block, 44% text). This pattern fits the literature on loop semantics in text (range bounds, update of the loop variable) being harder than block <em>repeat</em>. The block section also has a ceiling problem: <span data-v="block_ceiling_pct"></span> score 13–14, which compresses differences at the top.</p>
 
 <!-- ============================================================ 2 -->
-<h2>2 · Prior experience and the entry scores</h2>
+<h2 id="experience">2 · Prior experience and the entry scores</h2>
 <div class="grid2">
   <figure class="card">
     <figcaption>Programming in free time</figcaption>
@@ -227,7 +227,7 @@ svg text { font-family: system-ui, -apple-system, "Segoe UI", sans-serif; }
 <p>Three things are worth noting. First, <strong>free-time programming is the strongest predictor, and more so for text</strong> (ρ ≈ .45) than block (ρ ≈ .37), in both cohorts. Students who code on their own seem to bring the text-specific knowledge the block items don't need. Second, <strong>having done block programming at all</strong> (Scratch etc.) goes with higher scores in <em>both</em> sections, while having done text in school adds little. Third, <strong>whether school was mostly block or mostly text makes no difference</strong>, so the amount of exposure matters more than the modality. The few 15+ hour students dip slightly on block (n = 14), which looks like noise or ceiling effects.</p>
 
 <!-- ============================================================ 3 -->
-<h2>3 · TE22 two years later (same test, Jan 2025)</h2>
+<h2 id="retest">3 · TE22 two years later (same test, Jan 2025)</h2>
 <figure class="card">
   <figcaption>Everyone improves, and most reach the ceiling</figcaption>
   <div class="sub">Total score (of 28) in Sept 2022 → Jan 2025, one row per student (n = <span data-v="followup.n"></span>), sorted by 2022 score</div>
@@ -238,7 +238,7 @@ svg text { font-family: system-ui, -apple-system, "Segoe UI", sans-serif; }
 <p>The mean rose from <span data-v="followup.mean_22|1"></span> to <span data-v="followup.mean_25|1"></span>, and <span data-v="followup.at_ceiling_25"></span> of <span data-v="followup.n"></span> students now score 26–28. The students who started lowest gained the most (ρ start vs gain = <span data-v="followup.gain_vs_start.rho"></span>), but that is largely forced by the ceiling, so the test can no longer tell the stronger third-year students apart. If you reuse it, it needs harder items (nested loops, functions, lists) to measure growth past year 1.</p>
 
 <!-- ============================================================ 4 -->
-<h2>4 · Grade pathways</h2>
+<h2 id="pathways">4 · Grade pathways</h2>
 <div class="grid2">
   <figure class="card">
     <figcaption>TE23: Feb 2025 estimate → final grade</figcaption>
@@ -283,7 +283,7 @@ svg text { font-family: system-ui, -apple-system, "Segoe UI", sans-serif; }
 </div>
 
 <!-- ============================================================ 5 -->
-<h2>5 · Self-efficacy and the SCT survey (May–June 2025)</h2>
+<h2 id="self-efficacy">5 · Self-efficacy and the SCT survey (May–June 2025)</h2>
 <p class="muted">n = <span data-v="sct.n"></span> students who consented. Items are scored 1–7. Subscales: tracing program flow (6 items), persistence/debugging/problem solving (6), control flow & functions (3), classes & recursion (5, not taught to everyone). <em>Core</em> = the first three together. All subscales have Cronbach's α ≥ .90.</p>
 <div class="grid2">
   <figure class="card">
@@ -299,6 +299,7 @@ svg text { font-family: system-ui, -apple-system, "Segoe UI", sans-serif; }
   </figure>
 </div>
 <p><strong>Students are confident tracing code and writing conditionals, and much less confident about persisting and debugging when things go wrong.</strong> Persistence is the lowest of the core subscales in every class. te22b is lowest across the board, which matches its grades (more E grades than any other class). For help-seeking, <strong>trying it themselves</strong> comes first, then <strong>AI and classmates</strong> about equally, and the teacher last. AI help-seeking does not go with lower self-efficacy (ρ <span data-v="sct.rho_AI_se.rho|2"></span>) or lower grades (ρ <span data-v="chain.AI help→grade.all.rho|2"></span>), so in this data heavy AI use is not a sign of struggling.</p>
+<div class="lathread" role="note"><span class="lathread-k">Story thread · Stalls</span><p>The logs show why persistence ranks lowest. Errors about meaning do not get faster with practice, and trial-and-error debugging does not decline with experience (<a href="error-escape-curves.html#escape">Chapter 5: escape test</a>, <a href="error-escape-curves.html#mole">whack-a-mole</a>). Getting unstuck is where mastery experiences are hardest to come by, and the survey reflects it.</p></div>
 
 <figure class="card">
   <figcaption>Why are you learning programming?</figcaption>
@@ -316,9 +317,10 @@ svg text { font-family: system-ui, -apple-system, "Segoe UI", sans-serif; }
   </div>
   <p class="small">The second group are capable students who don't see themselves as capable. They may be the most interesting for retention in programming.</p>
 </div>
+<div class="lathread" role="note"><span class="lathread-k">Story thread · Improvement, defined</span><p>Until a second wave exists, the story reads improvement through its main source instead: the mastery experiences recorded in the logs, such as finishing what you attempt and getting past errors (<a href="self-efficacy-granularity-study.html#drivers">Chapter 2</a>), and the grades that self-efficacy tracks. See <a href="index.html#defined">how the story defines improvement</a>.</p></div>
 
 <!-- ============================================================ 6 -->
-<h2>6 · How the pieces fit together</h2>
+<h2 id="pieces">6 · How the pieces fit together</h2>
 <figure class="card">
   <figcaption>The average chain, and the shortcuts</figcaption>
   <div class="sub">Spearman ρ, both cohorts pooled, students in the five study classes. Gray arcs = links that skip a step.</div>
@@ -335,7 +337,7 @@ svg text { font-family: system-ui, -apple-system, "Segoe UI", sans-serif; }
 </figure>
 
 <div class="card">
-  <h3 style="margin-top:0">Four profiles</h3>
+  <h3 style="margin-top:0" id="profiles">Four profiles</h3>
   <p class="small">Start = above/below the cohort median on the entry assessment. Finish = final grade C or above vs D or below. SCT measures only cover students who took the SCT (n shown).</p>
   <div class="tablewrap" id="t-prof"></div>
 </div>
@@ -345,11 +347,13 @@ svg text { font-family: system-ui, -apple-system, "Segoe UI", sans-serif; }
   <p><strong>Steady struggling</strong> students are the most "just pass the course" motivated (highest <em>pass courses</em>, lowest <em>fun</em>) and use AI help the most. <strong>Steady strong</strong> students have the highest prior experience and enjoy programming the most.</p>
 </div>
 
+<div class="lathread" role="note"><span class="lathread-k">Story thread · Improves and drops</span><p>What separates climbers from slippers is visible in the logs too. Finishing the exercises you attempt is the strongest log correlate of self-efficacy (ρ&nbsp;.41, <a href="self-efficacy-granularity-study.html#drivers">Chapter 2</a>), and in te22a after-school minutes track the final-project grade (ρ&nbsp;.64, <a href="te22a-schedule-and-activity.html#grades">Chapter 6</a>). Missing work is the grade-book side of missed weeks: after an absent week, the next week is absent 41% of the time (<a href="log-atlas.html#sequence">Chapter 3</a>).</p></div>
+
 <h3>So is behaviour static?</h3>
 <p>Mostly, with important exceptions. Grades within a course are sticky (the Feb estimate predicts the final grade at ρ ≈ .8), and entry score predicts the final grade at ρ ≈ .5. Still, <strong>about 3 in 10 students end up somewhere their starting point wouldn't predict</strong>, and the variables that separate them (handing work in, working outside class, enjoyment, self-efficacy) are things a teacher can actually influence. Prior experience is not. For a paper, the profile split is a good motivation for a person-centred analysis (latent profile or latent transition analysis) once more cohorts are added. With about 100 students, the four groups here should be read as descriptive.</p>
 
 <!-- ============================================================ 7 -->
-<h2>7 · Goals, help-seeking and habits: what goes together?</h2>
+<h2 id="goals">7 · Goals, help-seeking and habits: what goes together?</h2>
 <p class="muted">Exploratory factor analysis of the 16 items at the end of the SCT survey: 8 goal items, 4 help-seeking items and 4 habit items, with TE22 and TE23 pooled (n = <span data-v="fa.n"></span> complete answers out of <span data-v="fa.n_consenting"></span>). The emotion items are left out because only 4 students answered them.</p>
 
 <div class="tiles">
@@ -420,7 +424,7 @@ svg text { font-family: system-ui, -apple-system, "Segoe UI", sans-serif; }
 <p><strong>What this adds to the profiles:</strong> enjoyment and self-reliance is the scale most tied to grades (ρ <span data-v="fa.links.Enjoyment & self-reliance.grade_final.rho|2"></span>) and self-efficacy (ρ <span data-v="fa.links.Enjoyment & self-reliance.se_core.rho|2"></span>). Help from others is unrelated to grades, but it is <strong>highest among climbers and lowest among students who slipped</strong>. Climbers match the steady-strong group on enjoyment and future goals <em>and</em> ask for help more. Slippers are as low on future goals as the struggling group, in between on enjoyment, and the least likely of all four groups to ask for help. Steady-struggling students are the most course-bound and enjoy programming least. With 11–12 students in each small group these differences are suggestive, but they fit the climber story: <em>motivated students who also ask for help move up.</em> TE22 and TE23 do not differ significantly on any scale.</p>
 <p class="callout"><strong>Next step for a paper:</strong> this structure was found and scored in the same sample, so it needs confirming. Your old codebook lists about 200 TE24/TE25 students who registered SCT IDs. If their SCT responses exist, they are an independent sample for a <strong>confirmatory factor analysis</strong> of the 2- and 4-factor models. Polychoric correlations would be the more rigorous choice there; Spearman gave the same structure here.</p>
 
-<h2>Caveats</h2>
+<h2 id="caveats">Caveats</h2>
 <ul>
   <li><strong>Consent:</strong> rows where students answered "Nej" are excluded (<span data-v="consent_text"></span>). Grades for students who never took the SCT have <em>unknown</em> StudyBee consent and are included here; check this against your ethics approval.</li>
   <li><strong>Missing identities:</strong> 23 TE22 students have no name or email in the source files, so their assessment answers can't be linked to grades or the SCT.</li>
