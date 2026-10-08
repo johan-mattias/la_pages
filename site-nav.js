@@ -4,7 +4,7 @@
    The bar is not sticky, so the pages' own sticky section rails and control rows keep working. */
 (function () {
   var PAGES = [
-    ["index.html", "Overview"],
+    ["log-atlas.html", "Overview"],
     ["te22a-schedule-and-activity.html", "TE22A schedule"],
     ["te22-te23-activity-trajectories.html", "Activity trajectories"],
     ["error-escape-curves.html", "Error escape curves"],
