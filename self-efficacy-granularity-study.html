@@ -164,6 +164,7 @@ footer { font-size: 12px; color: var(--muted); }
   <section id="forward">
     <div class="sec-head"><h2>Forward: growing windows from the course start</h2>
       <p>Each point is a model trained on everything from the start up to that point. Unit windows sit at the teaching week by which the class had done 75% of its work on the last unit included. Shaded bands show ±1 SD across CV repeats. The grey line is the mean-prediction baseline.</p></div>
+    <div class="lathread flush" role="note"><span class="lathread-k">Story thread · When it shows</span><p>In their first week, three in four students are in the most active weekly state, and who ends the year in the top half for exercises passed can already be predicted from two weeks of activity (AUC&nbsp;.83; <a href="log-atlas.html#sequence">Chapter 3</a>, <a href="log-atlas.html#prediction">prediction</a>). Self-efficacy cannot. Early activity is high and alike; the differences that go with the belief build up later, as students finish, stall or fall behind (<a href="te22-te23-activity-trajectories.html#findings">Chapter 4</a>).</p></div>
     <div class="two-up">
       <div class="panel"><h3>Raw features</h3><div class="chart" id="c-forward-raw"></div></div>
       <div class="panel"><h3>Family factors</h3><div class="chart" id="c-forward-factors"></div></div>
@@ -217,6 +218,7 @@ footer { font-size: 12px; color: var(--muted); }
     <div class="panel"><div class="chart" id="c-factor-corr"></div></div>
     <h3>Strongest single features</h3>
     <div id="t-features"></div>
+    <div class="lathread flush" role="note"><span class="lathread-k">Story thread · Improves</span><p>This speaks to a puzzle in the Log atlas, where the pass rate of graded submissions was unrelated to self-efficacy (ρ&nbsp;.04) and controlling for exercise points was proposed as the test (<a href="log-atlas.html#theory">Chapter 3</a>). The points-weighted completion rate of attempted exercises is close to that test, and it is the strongest correlate here: finishing counts, however many tries it takes. Recovering from an error on the next run is the same idea at the scale of seconds; <a href="error-escape-curves.html#escape">Chapter 5</a> shows which errors students learn to recover from faster.</p></div>
     <div class="sec-head"><h3>Which families the forest relies on as the course unfolds</h3>
       <p class="note">Share of random forest importance (factor model, forward week windows) by family. Impurity importance is noisy at n = 99, so read the broad pattern rather than individual cells.</p></div>
     <div class="panel"><div class="chart" id="c-family-heat"></div></div>

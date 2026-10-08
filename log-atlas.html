@@ -211,6 +211,7 @@ footer{padding-block:2.4rem 3.4rem;color:var(--faint);font-size:.84rem}
 <div class="col">
 <div class="note"><b>Watch the target definition.</b> An earlier run of this model used whole-course features to predict a whole-course outcome and scored AUC 0.92 — almost entirely because the feature <code>submissions</code> and the target <code>exercises passed</code> are the same construct measured twice. Restricting features to an early window is what makes the number mean something. Leakage in log data usually looks like a feature that is a component of the outcome rather than a cause of it.</div>
 <p>Two process features survive alongside the volume measures. <strong>Errors per run</strong> correlates <span class="mono">−0.35</span> with final exercises passed: students who trigger a compile or runtime error on a larger share of their executions finish behind. <strong>Runs per edit</strong> is similar at <span class="mono">−0.29</span> — running repeatedly without editing in between is the behavioural signature of guessing. Neither is a volume measure, and both are actionable in a way that "total events" is not.</p>
+<div class="lathread" role="note"><span class="lathread-k">Story thread · When it shows</span><p><a href="self-efficacy-granularity-study.html#forward">Chapter 2</a> asks the same early-window question about self-efficacy and gets a different answer: nothing in the first month, a usable signal from about week 12. The volume of work is visible early; what goes with the end-of-course belief separates later.</p></div>
 </div>
 </section>
 
@@ -252,6 +253,7 @@ footer{padding-block:2.4rem 3.4rem;color:var(--faint);font-size:.84rem}
 </figure>
 <div class="col">
 <p>Every state is self-sustaining: the diagonal is the largest entry in each row (0.41 to 0.48). The asymmetry is at the edges. From Intense, the chance of being Absent next week is 0.06; from Absent, the chance of returning to Intense is 0.09 while the chance of staying Absent is 0.41. Disengagement is stickier than engagement, which is the quantitative case for intervening on a <em>first</em> missed week rather than a pattern of them.</p>
+<div class="lathread" role="note"><span class="lathread-k">Story thread · Stalls and drops</span><p><a href="te22-te23-activity-trajectories.html#findings">Chapter 4</a> follows the same idea by curriculum unit instead of calendar week: the least active students drop after unit 3 and partly recover for the final project, and a Low unit is followed by another Low unit 57% of the time. In the story, the lower gear is a stall, and a first missed week is where a drop begins.</p></div>
 </div>
 </section>
 
@@ -273,6 +275,7 @@ footer{padding-block:2.4rem 3.4rem;color:var(--faint);font-size:.84rem}
 <li><strong>After a correct submission</strong>, 0.85 go straight to a pageview — they move on immediately. Almost nobody revisits working code.</li>
 </ul>
 <p>This is the kind of finding that only a transition model surfaces. Aggregate counts show that students make errors; the transition matrix shows what they <em>do</em> about them, and the answer is "press run again". Chapter 14's process mining would turn this into a discovered model with the loops made explicit; chapter 12's mixture Markov models would ask whether the run-first pattern belongs to a subgroup rather than to everyone.</p>
+<div class="lathread" role="note"><span class="lathread-k">Story thread · Stalls</span><p>Rerunning unchanged code is practice that produces no mastery experience: a stall, in the story’s terms. <a href="error-escape-curves.html#escape">Chapter 5</a> times what happens next, and shows which errors students learn to escape faster with each encounter and which they do not.</p></div>
 </div>
 </section>
 
@@ -295,6 +298,7 @@ footer{padding-block:2.4rem 3.4rem;color:var(--faint);font-size:.84rem}
 <p>The first component is general programming self-efficacy, loading 0.61–0.88 on everything. The second (eigenvalue 2.44) is bipolar and unambiguous: tracing and control-flow items load positively (+0.08 to +0.35), while every object-orientation and recursion item loads negatively (−0.49 to −0.68). The instrument is measuring a basics dimension and an advanced-topics dimension, and that is a factor structure worth reporting rather than averaging away.</p>
 <div class="note"><b>The two data sources agree on where the course gets hard.</b> The five lowest-rated items are inheritance, recursive patterns, class-vs-instance, overload resolution and tracing recursion. Independently, the log data puts the lowest exercise pass rates in chapters 8 and 9 of <span class="mono">cs1-22</span> — <em>9.2.2 Flying letters</em> at 4.2% across 665 attempts, <em>8.2.2 Sunny meadow</em> at 9.6%, <em>9.3.2 Character rain</em> at 9.8% — and most students never pass anything in chapter 10. Self-report and behaviour locate the same wall.</div>
 <p>Item non-response points the same way. The recursion and OOP items have 11–15 missing answers each against 0–6 elsewhere: students who never reached that material declined to rate themselves on it. That missingness is informative, not random, and listwise deletion would quietly drop the students the finding is about.</p>
+<div class="lathread" role="note"><span class="lathread-k">Story thread · Drops</span><p><a href="report.html#self-efficacy">Chapter 1</a> breaks the same survey into subscales by class: persistence and debugging is the lowest core subscale in every class, and classes and recursion is lowest of all. <a href="self-efficacy-granularity-study.html#setup">Chapter 2</a> leaves those five advanced items out of its 15-item score.</p></div>
 </div>
 </section>
 
@@ -316,7 +320,9 @@ footer{padding-block:2.4rem 3.4rem;color:var(--faint);font-size:.84rem}
 <li><strong>Errors per run</strong> is negative (ρ = −0.22), while raw error counts are not significant. The rate matters; the volume does not.</li>
 </ul>
 <p>Submission pass rate is flatly unrelated to self-efficacy (ρ = +0.04, p = 0.67). That is the result most in tension with a simple mastery-experience account, where success should feed confidence most directly. The likely confound is that pass rate is driven by which exercises a student chose to attempt, so it mixes difficulty selection with ability. Controlling for exercise difficulty — the catalogue carries <code>points</code> — is the test that would separate them.</p>
+<div class="lathread" role="note"><span class="lathread-k">Story thread · Improves</span><p>The test proposed here comes close to being run in <a href="self-efficacy-granularity-study.html#drivers">Chapter 2</a>: the points-weighted completion rate of attempted exercises is the strongest log correlate of self-efficacy (ρ&nbsp;.41), with recovering from an error on the next run close behind (ρ&nbsp;.33). What goes with confidence is finishing, not first-time success.</p></div>
 <p>Read through the triadic frame, the environmental vertex is doing visible work here: cohort timetables set the weekday and hour signatures, the course calendar produces the three collapsed weeks, and the chapter-8 wall is a property of the curriculum rather than of any student. A model that treats behavioural features as purely personal will attribute curriculum effects to students.</p>
+<div class="lathread" role="note"><span class="lathread-k">Story thread · The setting</span><p>Part III of the story takes up the environmental vertex: one class’s timetable rebuilt from its activity (<a href="te22a-schedule-and-activity.html">Chapter 6</a>) and the timetables of 734 US classes (<a href="how-often-and-how-long-classes-meet.html">Chapter 7</a>).</p></div>
 </div>
 </section>
 

@@ -1,0 +1,694 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>When Students Improve</title>
+<meta name="description" content="Seven learning-analytics studies of one programming course, read as one story through social cognitive theory: when students improve, when they stall and when they drop.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&family=Source+Sans+3:wght@400;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one reading column (46rem) inside a 68rem frame; cards, the loop figure and the timeline use the frame;
+   a sticky section rail under the hero. State colours are a diverging pair (blue improves, red drops) with a
+   neutral midpoint (stalls), always paired with an arrow glyph and a word. */
+:root{
+  color-scheme:light;
+  --bg:#f7f8fa; --surface:#ffffff; --sunk:#eef1f5;
+  --fg:#161b22; --ink2:#2f3742; --muted:#566170; --rule:#dde2e9; --rule2:#c9d0da;
+  --accent:#0f6f7a; --accent-ink:#0b5961; --accent-soft:#e3f0f1;
+  --up:#2a78d6; --flat:#7d7a72; --down:#e34948;
+  --up-soft:#edf4fd; --flat-soft:#f3f2ef; --down-soft:#fdf0ef;
+  --d:"Newsreader",Georgia,"Times New Roman",serif;
+  --b:"Source Sans 3",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --m:"IBM Plex Mono",ui-monospace,"SF Mono",Menlo,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  color-scheme:dark;
+  --bg:#0f1318; --surface:#161b22; --sunk:#1c222b;
+  --fg:#e6eaf0; --ink2:#cdd4de; --muted:#a1abb9; --rule:#28303a; --rule2:#38424e;
+  --accent:#4fb3bf; --accent-ink:#7fd0da; --accent-soft:#14292c;
+  --up:#3987e5; --flat:#8f8c84; --down:#e66767;
+  --up-soft:#16233a; --flat-soft:#211f1c; --down-soft:#2f1a1c;
+}}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#0f1318; --surface:#161b22; --sunk:#1c222b;
+  --fg:#e6eaf0; --ink2:#cdd4de; --muted:#a1abb9; --rule:#28303a; --rule2:#38424e;
+  --accent:#4fb3bf; --accent-ink:#7fd0da; --accent-soft:#14292c;
+  --up:#3987e5; --flat:#8f8c84; --down:#e66767;
+  --up-soft:#16233a; --flat-soft:#211f1c; --down-soft:#2f1a1c;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-padding-top:calc(env(safe-area-inset-top,0px) + 3.4rem)}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--b);font-size:17px;line-height:1.62}
+.wrap{max-width:68rem;margin:0 auto;padding-inline:max(20px,env(safe-area-inset-left,0px))}
+.col{max-width:46rem}
+h1,h2{font-family:var(--d);font-weight:600;line-height:1.14;text-wrap:balance;margin:0}
+h1{font-size:clamp(2.15rem,5.6vw,3.5rem);letter-spacing:-.015em}
+h2{font-size:clamp(1.6rem,3.5vw,2.2rem);letter-spacing:-.01em;margin-bottom:.7rem}
+h3{font-family:var(--b);font-size:1.12rem;font-weight:700;line-height:1.3;margin:0}
+p{margin:0 0 1em}
+a{color:var(--accent-ink);text-underline-offset:2px;text-decoration-thickness:1px}
+a:focus-visible,summary:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:2px}
+.eyebrow{font-family:var(--m);font-size:.72rem;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);margin:0 0 .6rem}
+.lede{font-size:1.2rem;line-height:1.55;color:var(--ink2)}
+.muted{color:var(--muted)}
+
+/* hero */
+header.hero{background:var(--surface);border-bottom:1px solid var(--rule)}
+header.hero .wrap{padding-block:clamp(2.4rem,6vw,4.2rem) 2.2rem}
+header.hero h1{max-width:20ch;margin-bottom:1.1rem}
+header.hero .lede{max-width:44rem}
+header.hero .sub{max-width:44rem;color:var(--muted)}
+.statrow{display:grid;grid-template-columns:repeat(auto-fit,minmax(9.5rem,1fr));gap:1px;margin-top:1.8rem;
+  background:var(--rule);border:1px solid var(--rule);border-radius:6px;overflow:hidden}
+.stat{background:var(--surface);padding:.8rem .95rem}
+.stat b{display:block;font-family:var(--m);font-size:1.3rem;font-weight:500;letter-spacing:-.02em}
+.stat span{display:block;font-size:.8rem;color:var(--muted);line-height:1.35;margin-top:.15rem}
+
+/* section rail */
+nav.rail{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;border-bottom:1px solid var(--rule);
+  background:color-mix(in srgb,var(--bg) 92%,transparent);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+nav.rail .wrap{display:flex;gap:.2rem;overflow-x:auto;padding-block:.5rem;scrollbar-width:none}
+nav.rail .wrap::-webkit-scrollbar{display:none}
+nav.rail a{flex:none;font-family:var(--m);font-size:.76rem;letter-spacing:.03em;text-decoration:none;color:var(--muted);
+  padding:.36rem .62rem;border-radius:4px;white-space:nowrap}
+nav.rail a:hover{background:var(--sunk);color:var(--fg)}
+
+section.band{padding-block:clamp(2.6rem,6vw,3.6rem);border-bottom:1px solid var(--rule)}
+section.band:last-of-type{border-bottom:0}
+
+/* state glyphs */
+.g{display:inline-block;font-family:var(--b);font-weight:700;font-style:normal;line-height:1}
+.g.up{color:var(--up)} .g.flat{color:var(--flat)} .g.down{color:var(--down)}
+
+/* the loop figure */
+figure{margin:1.8rem 0 0}
+.loopfig{background:var(--surface);border:1px solid var(--rule);border-radius:8px;overflow:hidden}
+.loopfig .fbody{padding:1.1rem 1rem .7rem}
+.loopfig figcaption{padding:.8rem 1.1rem;border-top:1px solid var(--rule);background:var(--sunk);font-size:.9rem;line-height:1.5;color:var(--muted)}
+svg.loop{display:block;width:100%;height:auto;max-width:60rem;margin:0 auto}
+svg.loop .nd{fill:var(--surface);stroke:var(--rule2);stroke-width:1.25}
+svg.loop .nd.em{stroke:var(--accent);stroke-width:2}
+svg.loop text{font-family:var(--b);text-anchor:middle}
+svg.loop .t1{font-size:15px;font-weight:700;fill:var(--fg)}
+svg.loop .t2{font-size:12.5px;fill:var(--muted)}
+svg.loop .t3{font-family:var(--m);font-size:10px;letter-spacing:.06em;fill:var(--accent-ink)}
+svg.loop .el{font-size:12.5px;fill:var(--ink2)}
+svg.loop .sl{font-family:var(--m);font-size:11px;font-weight:500;letter-spacing:.08em;fill:var(--fg)}
+svg.loop .gl{font-family:var(--b);font-size:16px;font-weight:700;letter-spacing:0}
+svg.loop .e{fill:none;stroke-width:2;stroke-linejoin:round;stroke-linecap:round}
+svg.loop .e.up{stroke:var(--up)} svg.loop .e.flat{stroke:var(--flat)} svg.loop .e.down{stroke:var(--down);stroke-dasharray:6 5}
+svg.loop .f-up{fill:var(--up)} svg.loop .f-flat{fill:var(--flat)} svg.loop .f-down{fill:var(--down)}
+.loopnarrow{display:none}
+@media (max-width:719px){
+  svg.loop{display:none}
+  .loopnarrow{display:grid;gap:0;max-width:30rem;margin:0 auto}
+}
+.ln-node{border:1px solid var(--rule2);border-radius:8px;background:var(--surface);padding:.55rem .8rem;text-align:center}
+.ln-node.em{border:2px solid var(--accent)}
+.ln-node b{display:block;font-size:1rem}
+.ln-node span{display:block;font-size:.86rem;color:var(--muted);line-height:1.35}
+.ln-node em{display:block;font-style:normal;font-family:var(--m);font-size:.66rem;letter-spacing:.06em;text-transform:uppercase;color:var(--accent-ink);margin-top:.15rem}
+.ln-edge{position:relative;text-align:center;font-size:.86rem;color:var(--ink2);padding:.5rem 0 .55rem}
+.ln-edge::before{content:"";position:absolute;left:50%;top:0;bottom:0;border-left:2px solid var(--up);z-index:0}
+.ln-edge span{position:relative;z-index:1;background:var(--surface);padding:0 .4rem}
+.ln-edge.back::before{display:none}
+.ln-edge.back span{background:none}
+.ln-branch{display:grid;gap:.4rem;margin:.55rem 0}
+.ln-b{display:grid;grid-template-columns:1.4rem 1fr;align-items:baseline;font-size:.88rem;line-height:1.4;
+  padding:.45rem .6rem;border-radius:6px;background:var(--sunk)}
+.ln-b .g{font-size:1rem}
+.ln-b b{font-weight:700}
+
+/* the three states */
+.states{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,16rem),1fr));gap:.8rem;margin:1.6rem 0 0}
+.state{border:1px solid var(--rule);border-top:3px solid var(--sc);border-radius:6px;background:var(--surface);padding:.85rem 1rem .9rem}
+.state.up{--sc:var(--up)} .state.flat{--sc:var(--flat)} .state.down{--sc:var(--down)}
+.state h3{display:flex;align-items:baseline;gap:.45rem;margin-bottom:.3rem}
+.state h3 .g{font-size:1.15rem}
+.state p{margin:0;font-size:.95rem;line-height:1.5;color:var(--ink2)}
+
+/* table */
+.tablewrap{overflow-x:auto;margin:.6rem 0 0;border:1px solid var(--rule);border-radius:6px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:.92rem;line-height:1.45}
+th,td{text-align:left;vertical-align:top;padding:.6rem .8rem;border-bottom:1px solid var(--rule)}
+tr:last-child td{border-bottom:0}
+th{font-family:var(--m);font-size:.7rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);background:var(--sunk)}
+td:first-child{font-weight:700;white-space:nowrap}
+td.ch{white-space:nowrap;font-family:var(--m);font-size:.84rem}
+td.ch a{padding:0 .1rem}
+@media (max-width:560px){td:first-child{white-space:normal}}
+.note{border-left:3px solid var(--accent);background:var(--accent-soft);padding:.85rem 1rem;margin:1.6rem 0 0;border-radius:0 6px 6px 0;font-size:.96rem}
+.note p{margin:0}
+
+/* chapter references */
+a.ref{display:inline-flex;align-items:baseline;gap:.35rem;font-size:.85rem;font-weight:600;line-height:1.35;text-decoration:none;color:var(--accent-ink)}
+a.ref .rn{font-family:var(--m);font-size:.7rem;font-weight:500;letter-spacing:.04em;color:var(--muted);white-space:nowrap}
+a.ref .rt{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:2px}
+a.ref:hover .rt{text-decoration-thickness:2px}
+.refs{display:flex;flex-wrap:wrap;gap:.25rem 1rem;margin-top:.55rem}
+
+/* the answer */
+.group{margin-top:2.2rem}
+.group-h{display:flex;align-items:center;gap:.7rem;margin-bottom:.9rem}
+.group-h .gbig{display:grid;place-items:center;width:2.1rem;height:2.1rem;border-radius:50%;background:var(--gs);font-size:1.15rem}
+.group-h h3{font-family:var(--d);font-size:1.45rem;font-weight:600}
+.group.up{--gc:var(--up);--gs:var(--up-soft)} .group.flat{--gc:var(--flat);--gs:var(--flat-soft)} .group.down{--gc:var(--down);--gs:var(--down-soft)}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,19rem),1fr));gap:.8rem}
+.card{background:var(--surface);border:1px solid var(--rule);border-left:3px solid var(--gc);border-radius:0 6px 6px 0;padding:.9rem 1rem .85rem}
+.card h4{margin:0 0 .3rem;font-size:1.02rem;line-height:1.35}
+.card p{margin:0;font-size:.95rem;line-height:1.52;color:var(--ink2)}
+.card.mirror{background:transparent;border-style:dashed;border-left-style:solid}
+
+/* timeline */
+ol.tl{list-style:none;margin:1.8rem 0 0;padding:0}
+.tl-i{display:grid;grid-template-columns:10rem 2.6rem minmax(0,1fr);column-gap:.6rem}
+.tl-when{grid-column:1;text-align:right;padding-top:.5rem;font-family:var(--m);font-size:.8rem;line-height:1.35;color:var(--fg)}
+.tl-when span{display:block;color:var(--muted);font-size:.74rem}
+.tl-rail{grid-column:2;position:relative;display:flex;justify-content:center}
+.tl-rail::before{content:"";position:absolute;top:0;bottom:0;left:50%;border-left:2px solid var(--rule)}
+.tl-i:first-child .tl-rail::before{top:1rem}
+.tl-i:last-child .tl-rail::before{bottom:auto;height:1rem}
+.tl-dot{position:relative;margin-top:.35rem;display:grid;place-items:center;width:1.9rem;height:1.9rem;border-radius:50%;
+  background:var(--surface);border:2px solid var(--tc);font-size:.95rem;font-weight:700;color:var(--tc)}
+.tl-i.up{--tc:var(--up)} .tl-i.flat{--tc:var(--flat)} .tl-i.down{--tc:var(--down)} .tl-i.obs{--tc:var(--muted)}
+.tl-i.obs .tl-dot{border-style:dashed;color:var(--fg)}
+.tl-body{grid-column:3;padding:.35rem 0 1.6rem}
+.tl-state{font-family:var(--m);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:0 0 .1rem}
+.tl-body h3{margin:0 0 .25rem}
+.tl-body p{margin:0;color:var(--ink2);max-width:44rem}
+@media (max-width:640px){
+  .tl-i{grid-template-columns:2.4rem minmax(0,1fr);column-gap:.7rem}
+  .tl-rail{grid-column:1;grid-row:1 / span 2}
+  .tl-when{grid-column:2;grid-row:1;text-align:left;padding-top:.45rem}
+  .tl-when span{display:inline;margin-left:.4rem}
+  .tl-body{grid-column:2;grid-row:2;padding-top:.15rem}
+}
+
+/* chapters */
+.part{margin-top:2.4rem}
+.part-h{display:grid;gap:.15rem;margin-bottom:.9rem;padding-bottom:.5rem;border-bottom:1px solid var(--rule)}
+.part-h .pn{font-family:var(--m);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent-ink)}
+.part-h h3{font-family:var(--d);font-size:1.45rem;font-weight:600}
+.part-h p{margin:0;color:var(--muted);font-size:.95rem}
+.chap{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,22rem),1fr));gap:.9rem}
+.cc{display:flex;flex-direction:column;background:var(--surface);border:1px solid var(--rule);border-radius:8px;padding:1rem 1.1rem 1rem}
+.cc .cn{font-family:var(--m);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.cc h4{margin:.15rem 0 .35rem;font-family:var(--d);font-size:1.32rem;font-weight:600;line-height:1.2}
+.cc h4 a{color:var(--fg);text-decoration:none}
+.cc h4 a:hover{text-decoration:underline}
+.cc .q{font-weight:600;color:var(--ink2);margin:0 0 .45rem;font-size:.98rem;line-height:1.45}
+.cc .r{margin:0 0 .7rem;font-size:.93rem;line-height:1.52;color:var(--muted)}
+.cc .chips{display:flex;flex-wrap:wrap;gap:.35rem;margin-bottom:.75rem}
+.cc .keys{margin-top:auto;padding-top:.65rem;border-top:1px solid var(--rule);font-size:.86rem;display:flex;flex-wrap:wrap;align-items:baseline;gap:0 .75rem}
+.cc .keys .kk{white-space:nowrap;font-family:var(--m);font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.cc .keys a{white-space:nowrap;line-height:1.9}
+
+/* open threads */
+ol.open{margin:1.4rem 0 0;padding:0;list-style:none;counter-reset:o;display:grid;gap:1.15rem;max-width:48rem}
+ol.open li{counter-increment:o;display:grid;grid-template-columns:2rem minmax(0,1fr);gap:.2rem .5rem}
+ol.open li::before{content:counter(o);font-family:var(--m);font-size:.85rem;color:var(--muted);padding-top:.12rem}
+ol.open li p{grid-column:2;margin:0;color:var(--ink2)}
+ol.open li p b{color:var(--fg)}
+ol.open li .refs{grid-column:2;margin-top:.15rem}
+
+footer.foot{padding-block:2.4rem 1rem;color:var(--muted);font-size:.86rem;line-height:1.55}
+footer.foot p{max-width:48rem}
+@media (max-width:560px){body{font-size:16.5px}.lede{font-size:1.1rem}}
+@media print{nav.rail{display:none}section.band{break-inside:auto}.card,.cc,.state,.tl-i{break-inside:avoid}}
+</style>
+</head>
+<body>
+<script src="site-nav.js"></script>
+
+<header class="hero">
+<div class="wrap">
+  <p class="eyebrow">The story · NTI Uppsala · TE22 &amp; TE23 · CMU CS Academy CS1</p>
+  <h1>When students improve, when they stall, and when they drop</h1>
+  <p class="lede">Seven analyses of one introductory programming course, read as a single story through Bandura’s social cognitive theory. Improvement here means growing self-efficacy: a student’s belief that they can program. Its strongest source is mastery experience, succeeding at something that took effort, and the course logs record those experiences one run, one exercise and one week at a time.</p>
+  <p class="sub">This page follows them through the school year: where they pile up, where practice goes on without producing them, and where they stop. It adds no new analysis; every number is taken from the chapter it links to.</p>
+  <div class="statrow">
+    <div class="stat"><b>159</b><span>students with logs</span></div>
+    <div class="stat"><b>5</b><span>classes in two cohorts</span></div>
+    <div class="stat"><b>2.6M</b><span>logged events</span></div>
+    <div class="stat"><b>~100</b><span>self-efficacy surveys</span></div>
+    <div class="stat"><b>1</b><span>survey wave, at the end of the course</span></div>
+  </div>
+</div>
+</header>
+
+<nav class="rail" aria-label="Sections of this page"><div class="wrap">
+  <a href="#defined">Improvement, defined</a>
+  <a href="#answer">Improves, stalls, drops</a>
+  <a href="#year">The course year</a>
+  <a href="#chapters">Chapters</a>
+  <a href="#open">Open threads</a>
+</div></nav>
+
+<main>
+<!-- ============================================================ 1 -->
+<section class="band" id="defined">
+<div class="wrap">
+  <div class="col">
+    <p class="eyebrow">1 · The yardstick</p>
+    <h2>Improvement means self-efficacy, and self-efficacy is built from mastery</h2>
+    <p>Self-efficacy is a person’s belief that they can do what a task demands. For a programming student, that means believing they can write a program, trace what it does and get it working again when it breaks. Social cognitive theory names four sources of that belief: mastery experience, seeing people like you succeed, encouragement from others, and how your body and mood respond. Mastery experience is the strongest. Success builds the belief and failure undermines it, most of all before the belief is established, and the sturdiest self-efficacy comes from obstacles overcome through effort rather than from easy wins.</p>
+    <p>The belief then feeds back into behaviour. It shapes what students choose to attempt, how much effort they spend and how long they keep going when stuck, and so how many new mastery experiences they get. That loop is the mechanism the whole story rests on, and every chapter observes some part of it.</p>
+  </div>
+
+  <figure class="loopfig">
+    <div class="fbody">
+      <svg class="loop" viewBox="0 44 960 328" role="img" aria-labelledby="loop-t loop-d">
+        <title id="loop-t">The mastery loop</title>
+        <desc id="loop-d">An attempt produces an outcome. An outcome that is overcome becomes a mastery experience, which builds self-efficacy; self-efficacy shapes choice, effort and persistence, and so the next attempt. An outcome that is not overcome either sends the student back to rerun and retry, which is a stall, or, when failures pile up, weakens self-efficacy, which is a drop.</desc>
+        <defs>
+          <marker id="ah-up" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto"><path d="M0,0 L10,5 L0,10 z" class="f-up"/></marker>
+          <marker id="ah-flat" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto"><path d="M0,0 L10,5 L0,10 z" class="f-flat"/></marker>
+          <marker id="ah-down" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto"><path d="M0,0 L10,5 L0,10 z" class="f-down"/></marker>
+        </defs>
+
+        <!-- stall: not overcome, round again -->
+        <path class="e flat" d="M330,140 V104 Q330,94 320,94 H120 Q110,94 110,104 V138" marker-end="url(#ah-flat)"/>
+        <text class="sl" x="220" y="62"><tspan class="gl f-flat">→</tspan> STALLS</text>
+        <text class="el" x="220" y="82">not overcome: rerun, retry</text>
+
+        <!-- drop: failure piles up -->
+        <path class="e down" d="M370,220 V252 Q370,262 380,262 H820 Q830,262 830,252 V222" marker-end="url(#ah-down)"/>
+        <text class="sl" x="600" y="288"><tspan class="gl f-down">↘</tspan> DROPS</text>
+        <text class="el" x="600" y="306">failures that are not overcome weaken the belief</text>
+
+        <!-- improve: the loop closes -->
+        <path class="e up" d="M190,180 H254" marker-end="url(#ah-up)"/>
+        <path class="e up" d="M440,180 H504" marker-end="url(#ah-up)"/>
+        <path class="e up" d="M690,180 H754" marker-end="url(#ah-up)"/>
+        <path class="e up" d="M870,220 V332 Q870,342 860,342 H110 Q100,342 100,332 V222" marker-end="url(#ah-up)"/>
+        <text class="el" x="225" y="170">produces</text>
+        <text class="el" x="475" y="170">overcome</text>
+        <text class="el" x="725" y="170">builds</text>
+        <text class="sl" x="235" y="288"><tspan class="gl f-up">↗</tspan> IMPROVES</text>
+        <text class="el" x="235" y="306">the loop closes through mastery</text>
+        <text class="el" x="485" y="362">self-efficacy shapes choice, effort and persistence, and so the next attempt</text>
+
+        <!-- steps -->
+        <rect class="nd" x="10" y="140" width="180" height="80" rx="10"/>
+        <text class="t1" x="100" y="168">Attempt</text>
+        <text class="t2" x="100" y="188">run, edit, submit</text>
+        <text class="t3" x="100" y="208">LOGS · CH 3, 6</text>
+
+        <rect class="nd" x="260" y="140" width="180" height="80" rx="10"/>
+        <text class="t1" x="350" y="168">Outcome</text>
+        <text class="t2" x="350" y="188">clean run, error, pass</text>
+        <text class="t3" x="350" y="208">LOGS · CH 3, 5</text>
+
+        <rect class="nd" x="510" y="140" width="180" height="80" rx="10"/>
+        <text class="t1" x="600" y="168">Mastery experience</text>
+        <text class="t2" x="600" y="188">error fixed, task done</text>
+        <text class="t3" x="600" y="208">LOGS · CH 2, 5</text>
+
+        <rect class="nd em" x="760" y="140" width="180" height="80" rx="10"/>
+        <text class="t1" x="850" y="168">Self-efficacy</text>
+        <text class="t2" x="850" y="188">“I can program”</text>
+        <text class="t3" x="850" y="208">SURVEY, ONCE · CH 1, 2</text>
+      </svg>
+
+      <div class="loopnarrow">
+        <div class="ln-node"><b>Attempt</b><span>run, edit, submit</span><em>logs · ch 3, 6</em></div>
+        <div class="ln-edge"><span>produces</span></div>
+        <div class="ln-node"><b>Outcome</b><span>clean run, error, pass</span><em>logs · ch 3, 5</em></div>
+        <div class="ln-branch">
+          <div class="ln-b"><span class="g up" aria-hidden="true">↗</span><span><b>Overcome:</b> it becomes a mastery experience (improves)</span></div>
+          <div class="ln-b"><span class="g flat" aria-hidden="true">→</span><span><b>Not overcome:</b> rerun and retry, round again (stalls)</span></div>
+          <div class="ln-b"><span class="g down" aria-hidden="true">↘</span><span><b>Failures pile up:</b> they weaken self-efficacy (drops)</span></div>
+        </div>
+        <div class="ln-node"><b>Mastery experience</b><span>error fixed, task done</span><em>logs · ch 2, 5</em></div>
+        <div class="ln-edge"><span>builds</span></div>
+        <div class="ln-node em"><b>Self-efficacy</b><span>“I can program”</span><em>survey, once · ch 1, 2</em></div>
+        <div class="ln-edge back"><span><span class="g up" aria-hidden="true">↺</span> shapes choice, effort and persistence, and so the next attempt</span></div>
+      </div>
+    </div>
+    <figcaption>The mastery loop. The outcome of an attempt is where the story branches: overcome, it becomes a mastery experience that builds self-efficacy; not overcome, it sends the student round again (a stall) or, when failures pile up, weakens the belief (a drop). The small labels say where the site observes each step.</figcaption>
+  </figure>
+
+  <div class="states">
+    <div class="state up"><h3><span class="g up" aria-hidden="true">↗</span>Improving</h3><p>The loop closes. Attempts end in errors fixed and exercises finished, and the student keeps coming back for more.</p></div>
+    <div class="state flat"><h3><span class="g flat" aria-hidden="true">→</span>Stalling</h3><p>The loop spins without closing. The student keeps running code, but errors repeat, debugging turns into trial and error, and sessions stretch out.</p></div>
+    <div class="state down"><h3><span class="g down" aria-hidden="true">↘</span>Dropping</h3><p>The loop slows, stops or turns against the student. Weeks are missed, work goes missing, or failures pile up faster than they are overcome.</p></div>
+  </div>
+
+  <div class="col" style="margin-top:2.4rem">
+    <h3>What the data can see</h3>
+  </div>
+  <div class="tablewrap">
+  <table>
+    <thead><tr><th scope="col">Part of the story</th><th scope="col">What the data records</th><th scope="col">Chapters</th></tr></thead>
+    <tbody>
+      <tr><td>Mastery experience</td><td>Every run, edit, error and submission: which exercises were attempted and finished, which errors were met and how fast they were escaped</td>
+        <td class="ch"><a href="self-efficacy-granularity-study.html">2</a> · <a href="log-atlas.html">3</a> · <a href="te22-te23-activity-trajectories.html">4</a> · <a href="error-escape-curves.html">5</a></td></tr>
+      <tr><td>Self-efficacy</td><td>A 15–20-item programming self-efficacy survey, given once: TE22 on 15 May 2025, about eleven months after their course ended, and TE23 on 4 June 2025, at the end of theirs</td>
+        <td class="ch"><a href="report.html#self-efficacy">1</a> · <a href="self-efficacy-granularity-study.html#setup">2</a> · <a href="log-atlas.html#psychometrics">3</a></td></tr>
+      <tr><td>Attainment</td><td>An entry test in block and text programming, unit and course grades, and the final project</td>
+        <td class="ch"><a href="report.html#pathways">1</a></td></tr>
+      <tr><td>The setting</td><td>Lesson times rebuilt from activity for one class; timetables inferred for nearly 2,000 US classes</td>
+        <td class="ch"><a href="te22a-schedule-and-activity.html">6</a> · <a href="how-often-and-how-long-classes-meet.html">7</a></td></tr>
+      <tr><td>The other three sources</td><td>Seeing others succeed, encouragement and mood leave no trace in the logs. The survey’s help-seeking items are the nearest proxy; its emotion items were answered by four students</td>
+        <td class="ch"><a href="report.html#goals">1</a></td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="note col"><p><b>One survey wave sets the limits.</b> No page can show a student’s self-efficacy rising, because it was measured once. What the pages can show is the trail of mastery experiences the end-of-course belief is built from, and the grades it tracks (ρ&nbsp;.60). The story reads improvement through those sources and treats the survey as where the trail leads, so its claims are associations, not effects.</p></div>
+</div>
+</section>
+
+<!-- ============================================================ 2 -->
+<section class="band" id="answer">
+<div class="wrap">
+  <div class="col">
+    <p class="eyebrow">2 · The answer in brief</p>
+    <h2>Improves, stalls, drops</h2>
+    <p>Read across the seven chapters, the findings sort into three groups. Each card names a condition, gives the strongest number behind it and links to the evidence.</p>
+  </div>
+
+  <div class="group up">
+    <div class="group-h"><span class="gbig g up" aria-hidden="true">↗</span><h3>Students improve when…</h3></div>
+    <div class="cards">
+      <article class="card">
+        <h4>…they finish what they start.</h4>
+        <p>The share of attempted exercises a student completes is the strongest log correlate of self-efficacy (ρ&nbsp;.41). The pass rate of graded submissions is unrelated (ρ&nbsp;.04). Finishing counts, however many tries it takes.</p>
+        <div class="refs"><a class="ref" href="self-efficacy-granularity-study.html#drivers"><span class="rn">Ch 2</span><span class="rt">What goes with high self-efficacy</span></a><a class="ref" href="log-atlas.html#theory"><span class="rn">Ch 3</span><span class="rt">Behaviour and self-efficacy</span></a></div>
+      </article>
+      <article class="card">
+        <h4>…the error message names the fix.</h4>
+        <p>Fix times fall with every encounter for a missing colon (from 16&nbsp;s at the first encounter to 6&nbsp;s after 33 or more), an unclosed bracket, = for == and a missing indented block. 85% of students speed up on syntax errors, and the gain holds on the first such error of each new day.</p>
+        <div class="refs"><a class="ref" href="error-escape-curves.html#escape"><span class="rn">Ch 5</span><span class="rt">Escape test</span></a><a class="ref" href="error-escape-curves.html#students"><span class="rn">Ch 5</span><span class="rt">Individual students</span></a></div>
+      </article>
+      <article class="card">
+        <h4>…they come back often, and beyond the lesson.</h4>
+        <p>Short gaps between active days go with higher self-efficacy (ρ&nbsp;−.38 for the median gap). Students who do much of their work in the evening and at weekends report the highest self-efficacy of four working styles, and in te22a after-school minutes track the final-project grade (ρ&nbsp;.64).</p>
+        <div class="refs"><a class="ref" href="self-efficacy-granularity-study.html#drivers"><span class="rn">Ch 2</span><span class="rt">Strongest features</span></a><a class="ref" href="log-atlas.html#clustering"><span class="rn">Ch 3</span><span class="rt">Working styles</span></a><a class="ref" href="te22a-schedule-and-activity.html#grades"><span class="rn">Ch 6</span><span class="rt">Against the grades</span></a></div>
+      </article>
+      <article class="card">
+        <h4>…the final project offers a second chance.</h4>
+        <p>In TE23, 26 of 63 students ended above their February estimate, in step with the project grade (ρ&nbsp;.73), and three of the four two-step climbers got an A on it. The least active trajectory partly recovers for the project too.</p>
+        <div class="refs"><a class="ref" href="report.html#pathways"><span class="rn">Ch 1</span><span class="rt">Grade pathways</span></a><a class="ref" href="te22-te23-activity-trajectories.html#findings"><span class="rn">Ch 4</span><span class="rt">Same shapes, different students</span></a></div>
+      </article>
+      <article class="card">
+        <h4>…low starters do the work.</h4>
+        <p>Climbers began below the median on the entry test, but handed everything in, worked outside class as much as the strongest group, and ended with self-efficacy close to theirs (5.2 against 5.6 of 7).</p>
+        <div class="refs"><a class="ref" href="report.html#profiles"><span class="rn">Ch 1</span><span class="rt">Four profiles</span></a></div>
+      </article>
+    </div>
+  </div>
+
+  <div class="group flat">
+    <div class="group-h"><span class="gbig g flat" aria-hidden="true">→</span><h3>Practice stalls when…</h3></div>
+    <div class="cards">
+      <article class="card">
+        <h4>…the error is about meaning, not form.</h4>
+        <p>NameError, AttributeError and type errors do not get faster with practice; only 14% of students speed up on runtime errors. One run in five ends in an error in every unit, because each new construct brings new errors.</p>
+        <div class="refs"><a class="ref" href="error-escape-curves.html#escape"><span class="rn">Ch 5</span><span class="rt">Escape test</span></a><a class="ref" href="error-escape-curves.html#frequency"><span class="rn">Ch 5</span><span class="rt">Errors across units</span></a></div>
+      </article>
+      <article class="card">
+        <h4>…debugging turns into trial and error.</h4>
+        <p>30% of debugging episodes pass through two or more different errors, and each extra error adds about a minute. Experience does not reduce it; loops, strings and lists raise it.</p>
+        <div class="refs"><a class="ref" href="error-escape-curves.html#mole"><span class="rn">Ch 5</span><span class="rt">Whack-a-mole</span></a></div>
+      </article>
+      <article class="card">
+        <h4>…students rerun instead of revising.</h4>
+        <p>After a compile error the next action is another run 60% of the time and an edit 30%: unchanged code, run again 21,000 times. After a failed submission it is a rerun 69% of the time and an edit 20%.</p>
+        <div class="refs"><a class="ref" href="log-atlas.html#process"><span class="rn">Ch 3</span><span class="rt">The edit–run–error loop</span></a></div>
+      </article>
+      <article class="card">
+        <h4>…sessions stretch out.</h4>
+        <p>Long sessions go with lower self-efficacy (ρ&nbsp;−.28), consistent with struggle rather than investment. The working style with the longest in-school sessions reports the lowest self-efficacy of the four.</p>
+        <div class="refs"><a class="ref" href="log-atlas.html#theory"><span class="rn">Ch 3</span><span class="rt">Behaviour and self-efficacy</span></a><a class="ref" href="self-efficacy-granularity-study.html#drivers"><span class="rn">Ch 2</span><span class="rt">Long, dense sessions</span></a></div>
+      </article>
+      <article class="card">
+        <h4>…engagement settles into a lower gear.</h4>
+        <p>119 of 159 students start in the most active state; by week 20, 23 are there and 92 are Low. They are not dropping out; they are practising less, which leaves less room for new mastery. In te22a, 16 students were fully active per lesson in the spring against 20 in the autumn.</p>
+        <div class="refs"><a class="ref" href="log-atlas.html#sequence"><span class="rn">Ch 3</span><span class="rt">Weekly states</span></a><a class="ref" href="te22a-schedule-and-activity.html#lessons"><span class="rn">Ch 6</span><span class="rt">In the lessons</span></a></div>
+      </article>
+      <article class="card mirror">
+        <h4>…and the survey says the same.</h4>
+        <p>Persistence and debugging is the lowest core self-efficacy subscale in every class. Students are confident tracing code and writing conditionals, much less so about getting unstuck.</p>
+        <div class="refs"><a class="ref" href="report.html#self-efficacy"><span class="rn">Ch 1</span><span class="rt">Self-efficacy by class</span></a></div>
+      </article>
+    </div>
+  </div>
+
+  <div class="group down">
+    <div class="group-h"><span class="gbig g down" aria-hidden="true">↘</span><h3>Progress drops when…</h3></div>
+    <div class="cards">
+      <article class="card">
+        <h4>…a week is missed.</h4>
+        <p>Absence is sticky. After an absent week, 41% of students are absent again and 9% return to the most active state; after a most-active week, only 6% go absent. The case for acting on the first missed week.</p>
+        <div class="refs"><a class="ref" href="log-atlas.html#sequence"><span class="rn">Ch 3</span><span class="rt">Weekly states</span></a></div>
+      </article>
+      <article class="card">
+        <h4>…the least active fall behind after unit 3.</h4>
+        <p>In 13 of 14 ways of defining activity states, the lowest trajectory drops further after the first three units. In the default definition, a Low unit is followed by another Low unit 57% of the time.</p>
+        <div class="refs"><a class="ref" href="te22-te23-activity-trajectories.html#findings"><span class="rn">Ch 4</span><span class="rt">Findings</span></a><a class="ref" href="te22-te23-activity-trajectories.html#explorer"><span class="rn">Ch 4</span><span class="rt">Trajectory explorer</span></a></div>
+      </article>
+      <article class="card">
+        <h4>…the course hits its wall.</h4>
+        <p>The lowest exercise pass rates sit in units 8 and 9 (Flying letters: 4.2% of 665 attempts), and most students never pass anything in unit 10. The self-efficacy items rated lowest are the advanced topics, and students who never got that far left them blank.</p>
+        <div class="refs"><a class="ref" href="log-atlas.html#psychometrics"><span class="rn">Ch 3</span><span class="rt">Where the course gets hard</span></a></div>
+      </article>
+      <article class="card">
+        <h4>…work goes missing.</h4>
+        <p>In TE22, students with two or more missing unit or project grades averaged a final grade near E. Slippers started above the median but had the most missing work, and ended with self-efficacy as low as the struggling group (4.1 of 7).</p>
+        <div class="refs"><a class="ref" href="report.html#pathways"><span class="rn">Ch 1</span><span class="rt">Missing work</span></a><a class="ref" href="report.html#profiles"><span class="rn">Ch 1</span><span class="rt">Four profiles</span></a></div>
+      </article>
+      <article class="card">
+        <h4>…a break interrupts practice.</h4>
+        <p>School holidays empty whole weeks, and the first fixes after a long gap are slower: the missing colon takes 4.5% longer per doubling of the days since it was last met.</p>
+        <div class="refs"><a class="ref" href="error-escape-curves.html#retention"><span class="rn">Ch 5</span><span class="rt">Retention and recovery</span></a><a class="ref" href="log-atlas.html#shape"><span class="rn">Ch 3</span><span class="rt">The course calendar</span></a></div>
+      </article>
+      <article class="card">
+        <h4>…the class moves on without them.</h4>
+        <p>In the US classes of chapter 7, roughly a quarter of students had not finished 80% of a unit’s lessons when their class moved on to the next. Classes that met more often kept about 7 percentage points more students up per doubling of meetings.</p>
+        <div class="refs"><a class="ref" href="how-often-and-how-long-classes-meet.html#keeping-up"><span class="rn">Ch 7</span><span class="rt">Keeping up</span></a></div>
+      </article>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ============================================================ 3 -->
+<section class="band" id="year">
+<div class="wrap">
+  <div class="col">
+    <p class="eyebrow">3 · When, in the year</p>
+    <h2>The course year, as the data sees it</h2>
+    <p>The same findings in the order a class meets them. Positions are approximate: the two cohorts took the course a year apart (TE22 in 2023/24, TE23 in 2024/25), and a unit took a class about 3.3 weeks on average.</p>
+  </div>
+
+  <ol class="tl">
+    <li class="tl-i obs">
+      <div class="tl-when">August<span>unit 1 · week 0</span></div>
+      <div class="tl-rail"><span class="tl-dot" aria-hidden="true">○</span></div>
+      <div class="tl-body"><p class="tl-state">Start</p><h3>Everyone starts busy</h3>
+        <p>In their first week, 119 of 159 students are in the most active state and none are absent. Who will end the year in the top half for exercises passed can already be predicted from two weeks of activity (AUC&nbsp;.83).</p>
+        <div class="refs"><a class="ref" href="log-atlas.html#sequence"><span class="rn">Ch 3</span><span class="rt">Weekly states</span></a><a class="ref" href="log-atlas.html#prediction"><span class="rn">Ch 3</span><span class="rt">How early can you see it coming?</span></a></div></div>
+    </li>
+    <li class="tl-i obs">
+      <div class="tl-when">The first month<span>units 1–3</span></div>
+      <div class="tl-rail"><span class="tl-dot" aria-hidden="true">◇</span></div>
+      <div class="tl-body"><p class="tl-state">Measured</p><h3>Self-efficacy is not yet visible</h3>
+        <p>Log windows covering the first month say nothing about end-of-course self-efficacy (R²&nbsp;≈ 0). Activity is high and much alike, and the best models later leave these weeks out.</p>
+        <div class="refs"><a class="ref" href="self-efficacy-granularity-study.html#forward"><span class="rn">Ch 2</span><span class="rt">Forward windows</span></a><a class="ref" href="self-efficacy-granularity-study.html#backward"><span class="rn">Ch 2</span><span class="rt">Backward windows</span></a></div></div>
+    </li>
+    <li class="tl-i up">
+      <div class="tl-when">Units 2–5<span>functions, conditionals</span></div>
+      <div class="tl-rail"><span class="tl-dot" aria-hidden="true">↗</span></div>
+      <div class="tl-body"><p class="tl-state">Improves</p><h3>Syntax errors peak, and students learn to escape them</h3>
+        <p>Block-structure errors arrive with functions and conditionals, and their fixes speed up with every encounter: the missing colon falls from 16&nbsp;s to 6&nbsp;s.</p>
+        <div class="refs"><a class="ref" href="error-escape-curves.html#frequency"><span class="rn">Ch 5</span><span class="rt">Errors across units</span></a><a class="ref" href="error-escape-curves.html#escape"><span class="rn">Ch 5</span><span class="rt">Escape test</span></a></div></div>
+    </li>
+    <li class="tl-i down">
+      <div class="tl-when">After unit 3</div>
+      <div class="tl-rail"><span class="tl-dot" aria-hidden="true">↘</span></div>
+      <div class="tl-body"><p class="tl-state">Drops</p><h3>The least active group starts to slide</h3>
+        <p>In 13 of 14 state definitions, the lowest activity trajectory drops further once the first three units are done.</p>
+        <div class="refs"><a class="ref" href="te22-te23-activity-trajectories.html#findings"><span class="rn">Ch 4</span><span class="rt">Same shapes, different students</span></a></div></div>
+    </li>
+    <li class="tl-i obs">
+      <div class="tl-when">Week 12<span>end of unit 5</span></div>
+      <div class="tl-rail"><span class="tl-dot" aria-hidden="true">◇</span></div>
+      <div class="tl-body"><p class="tl-state">Measured</p><h3>Self-efficacy becomes legible</h3>
+        <p>The first growing window that beats the baseline is weeks 1–12 (R²&nbsp;.16). The best window of all starts around week 8 and runs to the end (R²&nbsp;.24).</p>
+        <div class="refs"><a class="ref" href="self-efficacy-granularity-study.html#key"><span class="rn">Ch 2</span><span class="rt">Key windows</span></a></div></div>
+    </li>
+    <li class="tl-i down">
+      <div class="tl-when">Breaks<span>autumn, Christmas, winter, Easter</span></div>
+      <div class="tl-rail"><span class="tl-dot" aria-hidden="true">↘</span></div>
+      <div class="tl-body"><p class="tl-state">Drops</p><h3>Breaks interrupt practice</h3>
+        <p>The breaks empty whole weeks of activity, and after a long gap the first fixes of a familiar error are slower again.</p>
+        <div class="refs"><a class="ref" href="log-atlas.html#shape"><span class="rn">Ch 3</span><span class="rt">The course calendar</span></a><a class="ref" href="error-escape-curves.html#retention"><span class="rn">Ch 5</span><span class="rt">Retention and recovery</span></a></div></div>
+    </li>
+    <li class="tl-i flat">
+      <div class="tl-when">By week 20<span>about unit 6</span></div>
+      <div class="tl-rail"><span class="tl-dot" aria-hidden="true">→</span></div>
+      <div class="tl-body"><p class="tl-state">Stalls</p><h3>Engagement settles into a lower gear</h3>
+        <p>23 students are in the most active state and 92 are Low. Absence stays rare outside holidays: students keep practising, at a lower volume.</p>
+        <div class="refs"><a class="ref" href="log-atlas.html#sequence"><span class="rn">Ch 3</span><span class="rt">Weekly states</span></a></div></div>
+    </li>
+    <li class="tl-i flat">
+      <div class="tl-when">Units 6–11<span>loops, strings, lists</span></div>
+      <div class="tl-rail"><span class="tl-dot" aria-hidden="true">→</span></div>
+      <div class="tl-body"><p class="tl-state">Stalls</p><h3>Errors shift from form to meaning</h3>
+        <p>Runtime errors take over. They do not get faster with practice, and whack-a-mole debugging becomes more common with each unit.</p>
+        <div class="refs"><a class="ref" href="error-escape-curves.html#frequency"><span class="rn">Ch 5</span><span class="rt">Errors across units</span></a><a class="ref" href="error-escape-curves.html#mole"><span class="rn">Ch 5</span><span class="rt">Whack-a-mole</span></a></div></div>
+    </li>
+    <li class="tl-i flat">
+      <div class="tl-when">Spring term</div>
+      <div class="tl-rail"><span class="tl-dot" aria-hidden="true">→</span></div>
+      <div class="tl-body"><p class="tl-state">Stalls</p><h3>Fewer students fully active in lessons</h3>
+        <p>In te22a, 16 students were fully active per lesson in the spring against 20 in the autumn.</p>
+        <div class="refs"><a class="ref" href="te22a-schedule-and-activity.html#lessons"><span class="rn">Ch 6</span><span class="rt">In the lessons</span></a></div></div>
+    </li>
+    <li class="tl-i down">
+      <div class="tl-when">Units 8–10</div>
+      <div class="tl-rail"><span class="tl-dot" aria-hidden="true">↘</span></div>
+      <div class="tl-body"><p class="tl-state">Drops</p><h3>The wall</h3>
+        <p>The lowest pass rates of the course, and in unit 10 most students pass nothing at all. On the survey, the lowest-rated items are the most advanced topics, which many students never reached.</p>
+        <div class="refs"><a class="ref" href="log-atlas.html#psychometrics"><span class="rn">Ch 3</span><span class="rt">Where the course gets hard</span></a></div></div>
+    </li>
+    <li class="tl-i up">
+      <div class="tl-when">Units 11–12<span>the final project</span></div>
+      <div class="tl-rail"><span class="tl-dot" aria-hidden="true">↗</span></div>
+      <div class="tl-body"><p class="tl-state">Improves</p><h3>A second chance</h3>
+        <p>te22a’s out-of-lesson work goes mostly to creative tasks and the project, and the project’s last week alone holds 14% of it. The least active trajectory partly recovers, and TE23’s late grade gains follow the project grade (ρ&nbsp;.73).</p>
+        <div class="refs"><a class="ref" href="te22a-schedule-and-activity.html#outside"><span class="rn">Ch 6</span><span class="rt">Outside the lessons</span></a><a class="ref" href="te22-te23-activity-trajectories.html#findings"><span class="rn">Ch 4</span><span class="rt">Findings</span></a><a class="ref" href="report.html#pathways"><span class="rn">Ch 1</span><span class="rt">Grade pathways</span></a></div></div>
+    </li>
+    <li class="tl-i obs">
+      <div class="tl-when">May–June 2025</div>
+      <div class="tl-rail"><span class="tl-dot" aria-hidden="true">◇</span></div>
+      <div class="tl-body"><p class="tl-state">Measured</p><h3>Self-efficacy is measured, once</h3>
+        <p>TE23 at the end of their course, TE22 about eleven months after theirs. It follows the grade (ρ&nbsp;.60) more than the entry score (ρ&nbsp;.36), and the logs explain 14–24% of it.</p>
+        <div class="refs"><a class="ref" href="report.html#pieces"><span class="rn">Ch 1</span><span class="rt">How the pieces fit together</span></a><a class="ref" href="self-efficacy-granularity-study.html#summary"><span class="rn">Ch 2</span><span class="rt">What the analysis found</span></a></div></div>
+    </li>
+  </ol>
+</div>
+</section>
+
+<!-- ============================================================ 4 -->
+<section class="band" id="chapters">
+<div class="wrap">
+  <div class="col">
+    <p class="eyebrow">4 · Read on</p>
+    <h2>Seven chapters in three parts</h2>
+    <p>The parts follow social cognitive theory’s triad of causes that act on one another: what students believe and achieve, what they do, and the setting they do it in. Each chapter opens with a strip that places it in this story and ends with links to its neighbours.</p>
+  </div>
+
+  <div class="part">
+    <div class="part-h"><span class="pn">Part I · The person</span><h3>The yardstick</h3><p>Where students start, what they achieve, and what they come to believe.</p></div>
+    <div class="chap">
+      <article class="cc">
+        <span class="cn">Chapter 1</span>
+        <h4><a href="report.html">Where students start and finish</a></h4>
+        <p class="q">Who climbs, who slips, and does self-efficacy follow?</p>
+        <p class="r">Sets the yardstick. Entry score, grade and self-efficacy form a chain, and self-efficacy follows the grade (ρ&nbsp;.60) more than the starting point (ρ&nbsp;.36). About a third of students change lanes: climbers hand everything in and work outside class; slippers leave work missing.</p>
+        <div class="chips"><span class="lachip up"><span class="lachip-i" aria-hidden="true">↗</span>Improves</span><span class="lachip down"><span class="lachip-i" aria-hidden="true">↘</span>Drops</span></div>
+        <p class="keys"><span class="kk">Start at</span><a href="report.html#pathways">Grade pathways</a><a href="report.html#self-efficacy">Self-efficacy</a><a href="report.html#profiles">Four profiles</a></p>
+      </article>
+      <article class="cc">
+        <span class="cn">Chapter 2</span>
+        <h4><a href="self-efficacy-granularity-study.html">Mastery experience in the logs</a></h4>
+        <p class="q">Which traces of practice go with high self-efficacy, and when do they show?</p>
+        <p class="r">Turns mastery experience into log measures. Finishing what you attempt (ρ&nbsp;.41), getting past an error on the next run (ρ&nbsp;.33) and coming back regularly go with higher end-of-course self-efficacy. The signal is invisible in the first month and appears around week 12.</p>
+        <div class="chips"><span class="lachip up"><span class="lachip-i" aria-hidden="true">↗</span>Improves</span><span class="lachip flat"><span class="lachip-i" aria-hidden="true">→</span>Stalls</span></div>
+        <p class="keys"><span class="kk">Start at</span><a href="self-efficacy-granularity-study.html#summary">What the analysis found</a><a href="self-efficacy-granularity-study.html#forward">Forward windows</a><a href="self-efficacy-granularity-study.html#drivers">What goes with high self-efficacy</a></p>
+      </article>
+    </div>
+  </div>
+
+  <div class="part">
+    <div class="part-h"><span class="pn">Part II · Behaviour</span><h3>The course year</h3><p>Practice, errors and persistence, from seconds to months: when improvement happens, stalls and drops.</p></div>
+    <div class="chap">
+      <article class="cc">
+        <span class="cn">Chapter 3</span>
+        <h4><a href="log-atlas.html">Two school years in the logs</a></h4>
+        <p class="q">What does practice look like across 2.6 million events?</p>
+        <p class="r">The wide view of practice. Weekly engagement settles into a lower gear by week 20, a missed week is hard to come back from, students rerun code after an error instead of editing it, and the hardest exercises and the lowest self-ratings point to the same wall.</p>
+        <div class="chips"><span class="lachip flat"><span class="lachip-i" aria-hidden="true">→</span>Stalls</span><span class="lachip down"><span class="lachip-i" aria-hidden="true">↘</span>Drops</span></div>
+        <p class="keys"><span class="kk">Start at</span><a href="log-atlas.html#sequence">Weekly states</a><a href="log-atlas.html#process">Edit–run–error loop</a><a href="log-atlas.html#psychometrics">Where it gets hard</a><a href="log-atlas.html#theory">Behaviour and self-efficacy</a></p>
+      </article>
+      <article class="cc">
+        <span class="cn">Chapter 4</span>
+        <h4><a href="te22-te23-activity-trajectories.html">Activity across the units</a></h4>
+        <p class="q">Who keeps up from unit to unit, who drops, and who comes back?</p>
+        <p class="r">Follows students unit by unit. Relative activity is fairly stable from unit to unit (ICC&nbsp;.50), a middle group moves between neighbouring states, and the least active group drops after unit 3 and partly recovers for the final project in 13 of 14 state definitions.</p>
+        <div class="chips"><span class="lachip up"><span class="lachip-i" aria-hidden="true">↗</span>Improves</span><span class="lachip flat"><span class="lachip-i" aria-hidden="true">→</span>Stalls</span><span class="lachip down"><span class="lachip-i" aria-hidden="true">↘</span>Drops</span></div>
+        <p class="keys"><span class="kk">Start at</span><a href="te22-te23-activity-trajectories.html#findings">Findings</a><a href="te22-te23-activity-trajectories.html#explorer">Trajectory explorer</a><a href="te22-te23-activity-trajectories.html#robust">Sensitivity</a></p>
+      </article>
+      <article class="cc">
+        <span class="cn">Chapter 5</span>
+        <h4><a href="error-escape-curves.html">Inside the run–error loop</a></h4>
+        <p class="q">Which errors do students learn to get past, and which keep stopping them?</p>
+        <p class="r">The smallest mastery experience: an error met and escaped. When the message names the fix, students get faster with every encounter; when the error is about meaning, they do not, and trial-and-error debugging never declines. The page reads this behaviourally; the story reads it as the raw material of self-efficacy.</p>
+        <div class="chips"><span class="lachip up"><span class="lachip-i" aria-hidden="true">↗</span>Improves</span><span class="lachip flat"><span class="lachip-i" aria-hidden="true">→</span>Stalls</span></div>
+        <p class="keys"><span class="kk">Start at</span><a href="error-escape-curves.html#findings">Findings</a><a href="error-escape-curves.html#escape">Escape test</a><a href="error-escape-curves.html#mole">Whack-a-mole</a></p>
+      </article>
+    </div>
+  </div>
+
+  <div class="part">
+    <div class="part-h"><span class="pn">Part III · Environment</span><h3>The setting</h3><p>When lessons happen and how much time they leave for practice.</p></div>
+    <div class="chap">
+      <article class="cc">
+        <span class="cn">Chapter 6</span>
+        <h4><a href="te22a-schedule-and-activity.html">One class, in lessons and out</a></h4>
+        <p class="q">When and where does the practice happen?</p>
+        <p class="r">The setting up close, for te22a. A third of active time falls outside lessons, mostly on creative tasks and the final project, and after-school minutes track the final-project grade (ρ&nbsp;.64). The spring is weaker than the autumn.</p>
+        <div class="chips"><span class="lachip up"><span class="lachip-i" aria-hidden="true">↗</span>Improves</span><span class="lachip flat"><span class="lachip-i" aria-hidden="true">→</span>Stalls</span></div>
+        <p class="keys"><span class="kk">Start at</span><a href="te22a-schedule-and-activity.html#lessons">In the lessons</a><a href="te22a-schedule-and-activity.html#grades">Against the grades</a><a href="te22a-schedule-and-activity.html#outside">Outside the lessons</a></p>
+      </article>
+      <article class="cc">
+        <span class="cn">Chapter 7</span>
+        <h4><a href="how-often-and-how-long-classes-meet.html">How timetables shape practice time</a></h4>
+        <p class="q">Does how often and how long a class meets change how far it gets?</p>
+        <p class="r">The setting at scale: 734 US classes, a different population with no self-efficacy measure. Progress follows total weekly class time rather than how it is split, and classes that meet more often keep slightly more students up with the class.</p>
+        <div class="chips"><span class="lachip flat"><span class="lachip-i" aria-hidden="true">→</span>Stalls</span><span class="lachip down"><span class="lachip-i" aria-hidden="true">↘</span>Drops</span></div>
+        <p class="keys"><span class="kk">Start at</span><a href="how-often-and-how-long-classes-meet.html#results">Results</a><a href="how-often-and-how-long-classes-meet.html#keeping-up">Keeping up</a><a href="how-often-and-how-long-classes-meet.html#discussion">Discussion</a></p>
+      </article>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ============================================================ 5 -->
+<section class="band" id="open">
+<div class="wrap">
+  <div class="col">
+    <p class="eyebrow">5 · Open threads</p>
+    <h2>What the story cannot say yet</h2>
+    <p>Where the chapters disagree, where the theory asks for data the course does not record, and what would close the gaps.</p>
+  </div>
+  <ol class="open">
+    <li><p><b>Whether self-efficacy actually rose.</b> With one survey wave, improvement is read from its sources rather than observed. A second wave for the same students (the TE23 students who registered again as “te4” in August 2026) would turn the story’s inferences into measured change, and the climbers and slippers are the first students to check.</p>
+      <div class="refs"><a class="ref" href="report.html#self-efficacy"><span class="rn">Ch 1</span><span class="rt">Self-efficacy and the SCT survey</span></a></div></li>
+    <li><p><b>Finishing, or succeeding first time?</b> The atlas found the pass rate of graded submissions unrelated to self-efficacy and proposed controlling for exercise difficulty with the catalogue’s points. The granularity study’s strongest correlate is close to that test: the points-weighted share of attempted exercises completed (ρ&nbsp;.41). Together they suggest that what goes with self-efficacy is eventually succeeding rather than succeeding first time, which fits Bandura’s point that success won through effort builds the sturdiest belief. A model with both measures and exercise difficulty would test it directly.</p>
+      <div class="refs"><a class="ref" href="log-atlas.html#theory"><span class="rn">Ch 3</span><span class="rt">Behaviour and self-efficacy</span></a><a class="ref" href="self-efficacy-granularity-study.html#drivers"><span class="rn">Ch 2</span><span class="rt">Strongest features</span></a></div></li>
+    <li><p><b>Do the error profiles differ in self-efficacy?</b> Chapter 5’s five error-solving profiles, from fluent fixers to often stuck, have not been linked to the survey. If the story holds, the often-stuck and whack-a-mole profiles should report the lowest persistence self-efficacy.</p>
+      <div class="refs"><a class="ref" href="error-escape-curves.html#clusters"><span class="rn">Ch 5</span><span class="rt">Five error-solving profiles</span></a><a class="ref" href="report.html#self-efficacy"><span class="rn">Ch 1</span><span class="rt">Persistence subscale</span></a></div></li>
+    <li><p><b>Bursty or regular?</b> High self-efficacy goes with short gaps between active days in chapter 2 and with high day-to-day variability in chapter 3. Both can hold if confident students come back often and sometimes work in long bursts outside lessons, but one model with both measures should check it.</p>
+      <div class="refs"><a class="ref" href="self-efficacy-granularity-study.html#drivers"><span class="rn">Ch 2</span><span class="rt">Active-day regularity</span></a><a class="ref" href="log-atlas.html#theory"><span class="rn">Ch 3</span><span class="rt">Day-to-day variability</span></a></div></li>
+    <li><p><b>The sources the logs cannot see.</b> Seeing peers succeed and being encouraged leave no trace in the platform. The help-seeking items are the nearest proxy: climbers asked others for help the most, slippers the least.</p>
+      <div class="refs"><a class="ref" href="report.html#goals"><span class="rn">Ch 1</span><span class="rt">Goals, help-seeking and habits</span></a></div></li>
+    <li><p><b>Who is missing.</b> 57 logged students, 36% of the total, have no class label or survey response, so they are invisible to every behaviour-to-self-efficacy result. Their activity looks like everyone else’s.</p>
+      <div class="refs"><a class="ref" href="log-atlas.html#data"><span class="rn">Ch 3</span><span class="rt">The files</span></a></div></li>
+    <li><p><b>Student or setting?</b> Class membership shapes the trajectories (2 of 27 te22a students are in the most active trajectory, against 21 of 32 in te22b), and the timetable sets how much practice fits in a week. Standardising within class and modelling the timetable would separate the student from the setting.</p>
+      <div class="refs"><a class="ref" href="te22-te23-activity-trajectories.html#findings"><span class="rn">Ch 4</span><span class="rt">Part of it is a class effect</span></a><a class="ref" href="te22a-schedule-and-activity.html#timetable"><span class="rn">Ch 6</span><span class="rt">The timetable</span></a><a class="ref" href="how-often-and-how-long-classes-meet.html#discussion"><span class="rn">Ch 7</span><span class="rt">Teachers set the pace</span></a></div></li>
+  </ol>
+
+  <footer class="foot">
+    <p>Theory: Bandura, A. (1986). <i>Social foundations of thought and action</i>; Bandura, A. (1997). <i>Self-efficacy: The exercise of control</i>. Self-efficacy instrument: Steinhorst et al. (2020). Methods: Saqr &amp; López-Pernas (eds., 2024), <i>Learning Analytics Methods and Tutorials</i>. Each chapter carries its own methods, uncertainty and data notes.</p>
+  </footer>
+</div>
+</section>
+</main>
+</body>
+</html>
