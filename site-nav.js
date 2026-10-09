@@ -16,7 +16,8 @@
   var PARTS = [
     { n: "I", name: "The yardstick" },
     { n: "II", name: "The course year" },
-    { n: "III", name: "The setting" }
+    { n: "III", name: "The setting" },
+    { n: "IV", name: "The check" }
   ];
 
   // states: which of the story's three questions the chapter informs (up = improves, flat = stalls, down = drops)
@@ -69,6 +70,20 @@
       question: "Does how often and how long a class meets change how far it gets?",
       role: "The setting at scale: 734 US classes, a different population with no self-efficacy measure. Progress follows total weekly class time rather than how it is split, and classes that meet more often keep slightly more students up with the class.",
       states: ["flat", "down"]
+    },
+    {
+      file: "programmering-1-te24c.html", part: 3, nav: "te24c up close",
+      title: "One class, surveyed before and after",
+      question: "Which ways of working go with a higher grade and a rise in self-efficacy?",
+      role: "The newest class (2025/26, 32 students) and the only one here surveyed both before and after the course. Self-efficacy already correlates ρ 0.56 with the final grade five months before the course and 0.81 by August, and students who earned more points and worked ahead gained the most. What students built (final-project decisions, ρ 0.74) and how efficiently they worked track the grade; time away from the platform in lessons goes with lower grades (ρ −0.44). Error, reading and focus measures cover units 1–4.",
+      states: ["up", "flat", "down"]
+    },
+    {
+      file: "te22-vs-te23.html", part: 3, nav: "TE22 vs TE23",
+      title: "The te24c findings in two full years",
+      question: "Do the te24c findings hold in TE22 and TE23, and how do the two cohorts differ?",
+      role: "Reruns the te24c analysis on TE22 (2023/24) and TE23 (2024/25), with te24c as a reference. The grade ladder repeats: students who solve more, work ahead, take on harder exercises, finish what they start and build more decisions into the final project get higher grades. Specific syntax messages get faster to fix in both cohorts; 'invalid syntax' and NameError do not. Self-efficacy tracks the grade in TE22 but barely in TE23 (32 answers). TE22 spent more time; TE23 worked faster, made more errors and guessed more.",
+      states: ["up", "flat"]
     }
   ];
 
