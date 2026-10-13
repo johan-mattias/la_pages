@@ -80,10 +80,17 @@
     },
     {
       file: "te22-vs-te23.html", part: 3, nav: "TE22 vs TE23",
-      title: "The te24c findings in two full years",
-      question: "Do the te24c findings hold in TE22 and TE23, and how do the two cohorts differ?",
-      role: "Reruns the te24c analysis on TE22 (2023/24) and TE23 (2024/25), with te24c as a reference. The grade ladder repeats: students who solve more, work ahead, take on harder exercises, finish what they start and build more decisions into the final project get higher grades. Specific syntax messages get faster to fix in both cohorts; 'invalid syntax' and NameError do not. Self-efficacy tracks the grade in TE22 but barely in TE23 (32 answers). TE22 spent more time; TE23 worked faster, made more errors and guessed more.",
+      title: "Two full years, two teachers",
+      question: "Which findings hold in both cohorts, and which follow the teacher or the year?",
+      role: "The same measures for TE22 (2023/24) and TE23 (2024/25), using the scripts from the te24c analysis. Most findings hold in both cohorts and the same grade ladder appears in each; the decisions students build into their creative programs are one of the strongest grade links. Specific syntax messages get faster to fix in both; 'invalid syntax' and NameError do not. Self-efficacy tracks the grade in TE22 and te23b (ρ 0.64) but not in te23c (0.09). Teacher style shows in pace and project size, while TE23's extra errors and guessing follow the year.",
       states: ["up", "flat"]
+    },
+    {
+      file: "te23-grade-trajectories.html", part: 3, nav: "Grade trajectories",
+      title: "Grades across the TE23 year",
+      question: "Do students' grades hold steady from the first estimate to the final grade?",
+      role: "Follows te23b and te23c from the February 2025 estimate through the unit 10 grade and the June estimate to the final grade. The estimates are steady (February to June ρ 0.86 in te23b, 0.75 in te23c), and most students who move go up: 29 improved, 23 stayed and 9 went down. Unit 10 is a single, noisy assignment, and te23c's final is the project grade, so it moves more. Every drop of two or more steps ends in F.",
+      states: ["up", "flat", "down"]
     }
   ];
 

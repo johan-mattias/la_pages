@@ -197,7 +197,7 @@ pre.code { background: var(--code-bg); border-radius: 8px; padding: 14px 16px; o
       <h2>Every event gets a unit from its exercise, its notes page, or the page the student was on</h2>
     </div>
     <div class="prose">
-      <p>TE22 events come from <span class="mono">te22.csv.gz</span> (Aug 2023–Jun 2024). TE23 events come from <span class="mono">te23.csv.gz</span> between 1 Aug 2024 and 31 Jul 2025. I dropped 4,128 events: TE22 students' activity in the 2024/25 file, and TE23 activity after July 2025. Student and class come from <span class="mono">cs_anon_to_SCT.csv</span>. One te23b student in that file (10005914) has no events.</p>
+      <p>TE22 events come from <span class="mono">te22.csv.gz</span> (Aug 2023–Jun 2024). TE23 events come from <span class="mono">te23.csv.gz</span> between 1 Aug 2024 and 31 Jul 2025. I dropped 4,128 events: TE22 students' activity in the 2024/25 file, and TE23 activity after July 2025. Student and class come from <span class="mono">cs_anon_to_SCT.csv</span>. One te23b student in that file has no events.</p>
       <ul>
         <li><strong>Exercises.</strong> The ID in <code>/exercise/&lt;id&gt;</code> or in <code>exercise_id</code> on autograde events is looked up in the exercise info. The unit is the first number of the name for course cs1-22: 515 exercises, units 1–12, with unit 12 holding the final project. Exercises from cs0 and cs2-22 count as another course.</li>
         <li><strong>Lesson notes.</strong> Notes IDs 2695–2945 are split into units by ID range. The ranges contain the collection IDs of every cs1-22 exercise in the matching unit. On <code>notes_*</code> events, <code>exercise_id</code> is the question number inside the page, not an exercise.</li>
@@ -354,7 +354,7 @@ mclust::adjustedRandIndex(m$yours, m$lpa_k3_traj3)</pre>
     </div>
     <div class="prose small">
       <ul>
-        <li><strong>Classes</strong> come from <span class="mono">cs_anon_to_SCT.csv</span>: te22b = user IDs 10003959–10003990, te22c = 10003926–10003958. The earlier activity-cluster analysis had these two labels the other way round, though its group memberships were the same.</li>
+        <li><strong>Classes</strong> come from <span class="mono">cs_anon_to_SCT.csv</span>: te22b and te22c each have their own range of user IDs in that file. The earlier activity-cluster analysis had these two labels the other way round, though its group memberships were the same.</li>
         <li><strong>States</strong> are numbered from lowest to highest mean activity and named by rank: Low, Medium, High (Very low and Very high for 4 and 5 states). The Low state of model 1 is almost all zero-activity units; the names describe rank, not size.</li>
         <li><strong>Consensus trajectories:</strong> Ward was run on 500 random row orders. For each pair of students I counted how often they shared a cluster, and cut an average-linkage tree on 1 minus that share. Membership confidence is a student's mean co-assignment with the rest of their trajectory.</li>
         <li><strong>Quality statistics</strong> (PBC, HG, HGSD, ASW, ASWw, CH, R2, CHsq, R2sq, HC) follow WeightedCluster and come from the port in the Python package sequenzo 0.1.42. ASW, CH and R2 match my own implementation exactly.</li>
