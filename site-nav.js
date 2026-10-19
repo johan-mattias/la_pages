@@ -26,7 +26,7 @@
       file: "report.html", part: 0, nav: "Start & finish",
       title: "Where students start and finish",
       question: "Who climbs, who slips, and does self-efficacy follow?",
-      role: "Sets the yardstick. Entry score, grade and self-efficacy form a chain, and self-efficacy follows the grade (ρ\u00a0.60) more than the starting point (ρ\u00a0.36). About a third of students change lanes: climbers hand everything in and work outside class; slippers leave work missing.",
+      role: "Sets the yardstick. Entry score, grade and self-efficacy form a chain, and self-efficacy follows the grade (ρ\u00a0.55) more than the starting point (ρ\u00a0.36). About a third of students change lanes: climbers hand everything in and work outside class; slippers leave work missing.",
       states: ["up", "down"]
     },
     {
@@ -82,7 +82,7 @@
       file: "te22-vs-te23.html", part: 3, nav: "TE22 vs TE23",
       title: "Two full years, two teachers",
       question: "Which findings hold in both cohorts, and which follow the teacher or the year?",
-      role: "The same measures for TE22 (2023/24) and TE23 (2024/25), using the scripts from the te24c analysis. Most findings hold in both cohorts and the same grade ladder appears in each; the decisions students build into their creative programs are one of the strongest grade links. Specific syntax messages get faster to fix in both; 'invalid syntax' and NameError do not. Self-efficacy tracks the grade in TE22 and te23b (ρ 0.64) but not in te23c (0.09). Teacher style shows in pace and project size, while TE23's extra errors and guessing follow the year.",
+      role: "The same measures for TE22 (2023/24) and TE23 (2024/25), using the scripts from the te24c analysis. Most findings hold in both cohorts and the same grade ladder appears in each; the decisions students build into their creative programs are one of the strongest grade links. Specific syntax messages get faster to fix in both; 'invalid syntax' and NameError do not. Self-efficacy tracks the grade in TE22 and te23b (ρ 0.64) but not in te23c (0.00 with its final-project grade). Teacher style shows in pace and project size, while TE23's extra errors and guessing follow the year.",
       states: ["up", "flat"]
     },
     {
@@ -91,6 +91,13 @@
       question: "Do students' grades hold steady from the first estimate to the final grade?",
       role: "Follows te23b and te23c from the February 2025 estimate through the unit 10 grade and the June estimate to the final grade. The estimates are steady (February to June ρ 0.86 in te23b, 0.75 in te23c), and most students who move go up: 29 improved, 23 stayed and 9 went down. Unit 10 is a single, noisy assignment, and te23c's final is the project grade, so it moves more. Every drop of two or more steps ends in F.",
       states: ["up", "flat", "down"]
+    },
+    {
+      file: "TE22-TE23_SCT_replication.html", part: 3, nav: "SCT replication",
+      title: "Self-efficacy, checked in two cohorts",
+      question: "Does the self-efficacy scale hold in TE22 and TE23, and what goes with it?",
+      role: "Repeats the self-efficacy analysis in the five TE22 and TE23 classes, with the consent rules applied. The 15 core items form one general factor and the cohorts score the same; self-efficacy goes with the final grade clearly in TE22 (ρ\u00a00.54) and less certainly in TE23 (0.38). Enjoyment and trying it yourself first go with self-efficacy, asking AI goes with nothing, and the Year 1 block/text test predicts the final grade (ρ\u00a00.37). The final project carries most of the final grade (65% of the explained variance in TE23).",
+      states: ["up", "flat"]
     }
   ];
 
