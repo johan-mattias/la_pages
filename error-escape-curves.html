@@ -197,7 +197,7 @@ footer { padding-block: 36px 60px; border-top: 1px solid var(--rule); color: var
     <nav class="index" aria-label="Sections">
       <a href="#findings">Findings</a><a href="#framing">Behaviourist reading</a><a href="#frequency">Errors across units</a>
       <a href="#escape">Escape latency</a><a href="#students">Individual students</a><a href="#colon">Colon → indentation</a>
-      <a href="#mole">Whack-a-mole</a><a href="#classes">Classes</a><a href="#clusters">Clusters</a><a href="#methods">Methods</a>
+      <a href="#mole">Whack-a-mole</a><a href="#classes">Classes</a><a href="#clusters">Clusters</a><a href="#grades">Grades</a><a href="#methods">Methods</a>
     </nav>
   </header>
 
@@ -402,8 +402,28 @@ footer { padding-block: 36px 60px; border-top: 1px solid var(--rule); color: var
         <div class="tbl-wrap" id="tbl-class-cluster"></div>
       </figure>
     </div>
-    <div class="lathread flush" role="note"><span class="lathread-k">Story thread · Open thread</span><p>These profiles have not been linked to the survey yet. If the story holds, the often-stuck and whack-a-mole profiles should report the lowest persistence self-efficacy (<a href="index.html#open">open threads</a>).</p></div>
+    <div class="lathread flush" role="note"><span class="lathread-k">Story thread · Stalls</span><p>The profiles are now linked to grades and the survey (<a href="#grades">Grades and self-efficacy</a>). The often-stuck and whack-a-mole profiles have the lowest grades, and more whack-a-mole debugging goes with lower persistence self-efficacy, as the story expected. Too few students in those two profiles answered the survey to compare the profiles themselves.</p></div>
   </section>
+
+  <!-- section:grades:start -->
+<section id="grades">
+    <div class="sec-head"><div class="eyebrow">Grades and self-efficacy</div><h2>Fixing errors goes with the grade; getting faster at it does not</h2></div>
+    <div class="prose">
+      <p>Students who fix more of their errors at the first retry get higher grades (ρ .48) and report higher self-efficacy (.28). More runs that end in an error, more errors left unresolved and more whack-a-mole episodes go the other way, for the grade and for self-efficacy. Every one of these links points the same way in both cohorts.</p>
+      <p>What does not matter is improvement. A student's syntax learning slope, how much faster they fix the same message with practice, is unrelated to the grade (ρ −.08) and to self-efficacy (.00). The level of fluency counts, not how fast it grows. The error profiles follow the same order: fluent fixers and fast improvers average a grade of 3.1 and 3.2, whack-a-mole debuggers 1.8 and the often stuck 1.5 (Kruskal–Wallis on ranks within class, p = .002).</p>
+      <p>Persistence self-efficacy, the subscale on debugging and problem solving, is lower for students with more whack-a-mole debugging (ρ −.30) and more errors per run (−.29). The profiles themselves cannot be compared on the survey, because only 4 students in the two weakest profiles answered it.</p>
+      <p>Grades are left out for students who declined StudyBee data, survey answers without consent, and error measures for the 6 students who declined CS Academy data. Self-efficacy was measured after the course, a year after it for TE22, so these are associations.</p>
+    </div>
+    <figure>
+      <figcaption><span class="t">Error measures against the final grade and self-efficacy</span><span class="s">Spearman ρ on percentile ranks within class, pooled over the five classes, with 95% bootstrap intervals; TE22 · TE23 underneath. Bold = the interval excludes zero in the expected direction, which was set before looking. n = 138 with a grade, 92 with a survey.</span></figcaption>
+      <div class="tbl-wrap"><table><thead><tr><th>Error measure</th><th class="r">Expected</th><th class="r">Final grade</th><th class="r">Self-efficacy (core)</th><th class="r">Persistence self-efficacy</th></tr></thead><tbody><tr><td>Errors fixed at the first retry</td><td class="r">+</td><td class="r"><b>0.48 [0.33, 0.61]</b><br><span style="color: var(--ink-2); font-size: 0.78rem">0.45 · 0.51</span></td><td class="r"><b>0.28 [0.07, 0.47]</b><br><span style="color: var(--ink-2); font-size: 0.78rem">0.18 · 0.47</span></td><td class="r">0.21 [0.00, 0.41]<br><span style="color: var(--ink-2); font-size: 0.78rem">0.15 · 0.34</span></td></tr><tr><td>Runs that end in an error</td><td class="r">−</td><td class="r"><b>−0.34 [−0.49, −0.17]</b><br><span style="color: var(--ink-2); font-size: 0.78rem">−0.31 · −0.37</span></td><td class="r"><b>−0.30 [−0.47, −0.10]</b><br><span style="color: var(--ink-2); font-size: 0.78rem">−0.32 · −0.26</span></td><td class="r"><b>−0.29 [−0.47, −0.10]</b><br><span style="color: var(--ink-2); font-size: 0.78rem">−0.36 · −0.17</span></td></tr><tr><td>Errors left unresolved</td><td class="r">−</td><td class="r"><b>−0.30 [−0.45, −0.13]</b><br><span style="color: var(--ink-2); font-size: 0.78rem">−0.33 · −0.26</span></td><td class="r"><b>−0.27 [−0.44, −0.08]</b><br><span style="color: var(--ink-2); font-size: 0.78rem">−0.32 · −0.16</span></td><td class="r"><b>−0.20 [−0.39, −0.01]</b><br><span style="color: var(--ink-2); font-size: 0.78rem">−0.30 · −0.02</span></td></tr><tr><td>Whack-a-mole episodes (3+ errors)</td><td class="r">−</td><td class="r"><b>−0.25 [−0.40, −0.07]</b><br><span style="color: var(--ink-2); font-size: 0.78rem">−0.27 · −0.23</span></td><td class="r"><b>−0.37 [−0.53, −0.19]</b><br><span style="color: var(--ink-2); font-size: 0.78rem">−0.35 · −0.42</span></td><td class="r"><b>−0.30 [−0.49, −0.09]</b><br><span style="color: var(--ink-2); font-size: 0.78rem">−0.37 · −0.19</span></td></tr><tr><td>Fix time vs. typical for the error type</td><td class="r">−</td><td class="r"><b>−0.22 [−0.37, −0.05]</b><br><span style="color: var(--ink-2); font-size: 0.78rem">−0.17 · −0.26</span></td><td class="r">−0.09 [−0.30, 0.12]<br><span style="color: var(--ink-2); font-size: 0.78rem">−0.04 · −0.18</span></td><td class="r">−0.05 [−0.25, 0.16]<br><span style="color: var(--ink-2); font-size: 0.78rem">−0.09 · 0.03</span></td></tr><tr><td>Syntax learning slope (lower = speeds up more)</td><td class="r">−</td><td class="r">−0.08 [−0.23, 0.08]<br><span style="color: var(--ink-2); font-size: 0.78rem">−0.01 · −0.18</span></td><td class="r">0.00 [−0.19, 0.19]<br><span style="color: var(--ink-2); font-size: 0.78rem">0.02 · −0.06</span></td><td class="r">0.07 [−0.14, 0.29]<br><span style="color: var(--ink-2); font-size: 0.78rem">0.05 · 0.11</span></td></tr></tbody></table></div>
+    </figure>
+    <figure>
+      <figcaption><span class="t">Grade and self-efficacy by error profile</span><span class="s">Mean final grade (A = 5 … F = 0) and mean core self-efficacy (1–7). Self-efficacy does not differ between the profiles (p = .424), but the two weakest profiles have only 4 survey answers.</span></figcaption>
+      <div class="tbl-wrap"><table><thead><tr><th>Profile</th><th class="r">Students</th><th class="r">Mean grade</th><th class="r">With survey</th><th class="r">Mean self-efficacy</th></tr></thead><tbody><tr><td>Fluent fixers</td><td class="r">48</td><td class="r">3.1</td><td class="r">38</td><td class="r">5.2</td></tr><tr><td>Fast improvers</td><td class="r">42</td><td class="r">3.2</td><td class="r">27</td><td class="r">5.3</td></tr><tr><td>Slower fixers</td><td class="r">40</td><td class="r">2.6</td><td class="r">23</td><td class="r">4.8</td></tr><tr><td>Whack-a-mole debuggers</td><td class="r">7</td><td class="r">1.8</td><td class="r">1</td><td class="r">3.4</td></tr><tr><td>Often stuck</td><td class="r">13</td><td class="r">1.5</td><td class="r">3</td><td class="r">5.1</td></tr></tbody></table></div>
+    </figure>
+  </section>
+<!-- section:grades:end -->
 
   <section id="methods">
     <div class="sec-head"><div class="eyebrow">Methods</div><h2>How the measures were built</h2></div>
@@ -418,7 +438,7 @@ footer { padding-block: 36px 60px; border-top: 1px solid var(--rule); color: var
     </figure>
     <div class="prose" id="limits-text"></div>
   </section>
-  <footer>Analysis scripts: <span class="mono">errors_build.py → errors_episodes.py → errors_analysis.py → errors_clusters.py → errors_report_data.py</span>, saved in the project under <span class="mono">claude/errors/</span>.</footer>
+  <footer>Analysis scripts: <span class="mono">errors_build.py → errors_episodes.py → errors_analysis.py → errors_clusters.py → errors_report_data.py</span>, then <span class="mono">errors_grades.py → errors_grades_section.py</span> for the grades section (added 19 Oct 2026), in <span class="mono">analyses/errors/</span> of the analysis repository (<span class="mono">run_all.sh</span>).</footer>
 </div>
 <div id="tip" role="tooltip" hidden></div>
 

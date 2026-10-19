@@ -1,0 +1,356 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<script src="site-nav.js"></script>
+<title>Pace in Six Classes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..700&family=IBM+Plex+Sans:wght@400;500;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400..600;1,8..60,400&display=swap">
+<style>
+
+/* Layout: one reading column for prose (~68ch) inside a 1120px frame; figures use the full frame width. */
+:root {
+  --bg: #f4f5f7;
+  --surface: #ffffff;
+  --surface-2: #eceef2;
+  --ink: #14171c;
+  --ink-2: #454c57;
+  --muted: #6f7783;
+  --hair: #e0e3e8;
+  --axis: #c3c8d0;
+  --link: #1d5fae;
+  --accent: #2a78d6;
+  --series-2: #eb6834;
+  --cp: #eb6834;
+  --cr: #1baf7a;
+  --ex: #cfd4db;
+  --st0: #eceef2;
+  --st1: #86b6ef;
+  --st2: #3987e5;
+  --st3: #184f95;
+  --ga: #0d366b;
+  --gb: #1c5cab;
+  --gc: #3987e5;
+  --gde: #86b6ef;
+  --band: #edf2f9;
+  --note-bg: #fbf3ec;
+  --note-rule: #eb6834;
+  --font-display: "Bricolage Grotesque", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  --font-text: "Source Serif 4", "Iowan Old Style", Georgia, "Times New Roman", serif;
+  --font-ui: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --step--1: 0.8125rem;
+  --step-0: 1.0625rem;
+  --step-1: 1.25rem;
+  --step-2: 1.625rem;
+  --step-3: 2.5rem;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0e1014; --surface: #171a20; --surface-2: #20242b; --ink: #f1f3f6; --ink-2: #b9c0cb;
+    --muted: #8b939f; --hair: #2a2f37; --axis: #3d434c; --link: #86b6ef; --accent: #3987e5;
+    --series-2: #d95926; --cp: #d95926; --cr: #199e70; --ex: #3d434c;
+    --st0: #20242b; --st1: #1c5cab; --st2: #3987e5; --st3: #9ec5f4;
+    --ga: #cde2fb; --gb: #86b6ef; --gc: #3987e5; --gde: #184f95;
+    --band: #1a2130; --note-bg: #2a1d16; --note-rule: #d95926;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0e1014; --surface: #171a20; --surface-2: #20242b; --ink: #f1f3f6; --ink-2: #b9c0cb;
+  --muted: #8b939f; --hair: #2a2f37; --axis: #3d434c; --link: #86b6ef; --accent: #3987e5;
+  --series-2: #d95926; --cp: #d95926; --cr: #199e70; --ex: #3d434c;
+  --st0: #20242b; --st1: #1c5cab; --st2: #3987e5; --st3: #9ec5f4;
+  --ga: #cde2fb; --gb: #86b6ef; --gc: #3987e5; --gde: #184f95;
+  --band: #1a2130; --note-bg: #2a1d16; --note-rule: #d95926;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font-family: var(--font-text); font-size: var(--step-0); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+.page { max-width: 1120px; margin: 0 auto; padding-inline: clamp(16px, 4vw, 40px); padding-block: 40px 80px; }
+.prose { max-width: 68ch; }
+p { margin: 0; }
+.prose > * + * { margin-top: 0.9em; }
+a { color: var(--link); text-underline-offset: 2px; }
+a:focus-visible, button:focus-visible, [tabindex]:focus-visible, summary:focus-visible, input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 3px; }
+code, .mono { font-family: var(--font-mono); font-size: 0.84em; background: var(--surface-2); padding: 0.08em 0.35em; border-radius: 4px; color: var(--ink); white-space: nowrap; }
+strong { font-weight: 600; }
+
+/* header */
+.masthead { display: grid; gap: 14px; padding-bottom: 28px; border-bottom: 1px solid var(--hair); }
+.eyebrow { font-family: var(--font-ui); font-size: var(--step--1); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); font-weight: 500; }
+h1 { font-family: var(--font-display); font-weight: 650; font-size: clamp(2rem, 5vw, var(--step-3)); line-height: 1.08; letter-spacing: -0.015em; margin: 0; text-wrap: balance; max-width: 22ch; font-variation-settings: "opsz" 96; }
+.lede { font-size: var(--step-1); line-height: 1.5; color: var(--ink-2); max-width: 60ch; }
+.meta { display: flex; flex-wrap: wrap; gap: 6px 18px; font-family: var(--font-ui); font-size: var(--step--1); color: var(--muted); }
+.meta span { white-space: nowrap; }
+
+/* in brief */
+.brief { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 0 36px; margin-top: 28px; }
+.brief > div { padding-block: 16px 18px; border-top: 1px solid var(--hair); min-width: 0; }
+.brief .k { font-family: var(--font-ui); font-size: var(--step--1); font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-2); margin-bottom: 6px; }
+.brief p { font-size: 1rem; line-height: 1.55; }
+
+nav.toc { margin-top: 26px; display: flex; flex-wrap: wrap; gap: 8px; font-family: var(--font-ui); font-size: 0.875rem; }
+nav.toc a { text-decoration: none; color: var(--ink-2); border: 1px solid var(--hair); background: var(--surface); padding: 4px 11px; border-radius: 999px; }
+nav.toc a:hover { color: var(--ink); border-color: var(--axis); }
+
+/* sections */
+section { padding-top: 56px; }
+h2 { font-family: var(--font-display); font-weight: 650; font-size: var(--step-2); line-height: 1.2; letter-spacing: -0.01em; margin: 0 0 14px; text-wrap: balance; font-variation-settings: "opsz" 48; }
+h3 { font-family: var(--font-ui); font-weight: 600; font-size: 1.0625rem; margin: 30px 0 8px; letter-spacing: 0; }
+.qtag { font-family: var(--font-ui); font-size: var(--step--1); color: var(--muted); font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase; display: block; margin-bottom: 2px; }
+
+/* figures */
+figure { margin: 22px 0 0; background: var(--surface); border: 1px solid var(--hair); border-radius: 10px; padding: 18px 18px 14px; min-width: 0; }
+figcaption.title { font-family: var(--font-ui); font-weight: 600; font-size: 0.95rem; color: var(--ink); margin-bottom: 2px; }
+figcaption.sub { font-family: var(--font-ui); font-size: var(--step--1); color: var(--muted); margin-bottom: 12px; line-height: 1.45; }
+.fig-note { font-family: var(--font-ui); font-size: var(--step--1); color: var(--muted); margin-top: 10px; line-height: 1.5; }
+.chart { width: 100%; position: relative; }
+.chart svg { display: block; overflow: visible; }
+svg text { font-family: var(--font-ui); }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 16px; font-family: var(--font-ui); font-size: var(--step--1); color: var(--ink-2); margin-bottom: 10px; }
+.legend span { display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
+.sw { width: 11px; height: 11px; border-radius: 3px; display: inline-block; }
+.lk { width: 16px; height: 0; border-top: 2.5px solid; display: inline-block; border-radius: 2px; }
+.legend .gap { width: 10px; }
+
+/* heatmap */
+.hm-scroll { overflow-x: auto; position: relative; }
+.hm-wrap { position: relative; }
+.hm-wrap canvas { display: block; }
+.hm-row-hi, .hm-col-hi { position: absolute; pointer-events: none; border: 1.5px solid var(--ink); border-radius: 2px; }
+.hm-col-hi { border-width: 0 1.5px; border-radius: 0; }
+
+/* tooltip */
+#tip { position: fixed; z-index: 20; pointer-events: none; background: var(--surface); color: var(--ink); border: 1px solid var(--hair); box-shadow: 0 6px 24px rgba(0,0,0,0.14); border-radius: 8px; padding: 9px 11px; font-family: var(--font-ui); font-size: 0.8125rem; line-height: 1.45; max-width: 300px; }
+#tip .t-strong { font-weight: 600; font-size: 0.9rem; font-variant-numeric: tabular-nums; }
+#tip .t-sub { color: var(--muted); }
+#tip .t-row { display: flex; align-items: center; gap: 8px; }
+#tip .t-row b { font-weight: 600; font-variant-numeric: tabular-nums; min-width: 34px; }
+
+/* forest */
+.controls { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 18px; margin-bottom: 14px; font-family: var(--font-ui); font-size: 0.875rem; }
+.seg { display: inline-flex; border: 1px solid var(--axis); border-radius: 8px; overflow: hidden; }
+.seg button { font: inherit; font-size: 0.8125rem; background: transparent; color: var(--ink-2); border: 0; padding: 6px 12px; cursor: pointer; }
+.seg button + button { border-left: 1px solid var(--axis); }
+.seg button[aria-pressed="true"] { background: var(--ink); color: var(--surface); }
+.check { display: inline-flex; align-items: center; gap: 7px; color: var(--ink-2); cursor: pointer; }
+.check input { width: 16px; height: 16px; accent-color: var(--accent); margin: 0; }
+.forest { display: grid; grid-template-columns: minmax(150px, 250px) minmax(0, 1fr) 164px; font-family: var(--font-ui); font-size: 0.8125rem; }
+.forest .f-row, .forest .f-fam, .forest .f-head { display: contents; }
+.forest .f-label { padding: 4px 12px 4px 0; color: var(--ink); line-height: 1.3; display: flex; align-items: center; min-width: 0; }
+.forest .f-strip { position: relative; min-height: 26px; }
+.forest .f-strip svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.forest .f-val { padding: 4px 0 4px 12px; color: var(--ink-2); font-variant-numeric: tabular-nums; display: flex; align-items: center; white-space: nowrap; }
+.forest .f-val b { color: var(--ink); font-weight: 600; margin-right: 6px; }
+.forest .f-fam > div { padding: 14px 0 4px; font-weight: 600; font-size: 0.75rem; letter-spacing: 0.07em; text-transform: uppercase; color: var(--muted); border-bottom: 1px solid var(--hair); }
+.forest .f-head .f-strip { min-height: 22px; }
+.forest .f-head .f-label, .forest .f-head .f-val { color: var(--muted); font-size: 0.75rem; }
+.forest .f-row:hover .f-label, .forest .f-row:focus-within .f-label { color: var(--link); }
+.forest .f-row > * { cursor: default; }
+
+@media (max-width: 620px) {
+  .forest { grid-template-columns: minmax(0, 1fr) 96px; }
+  .forest .f-val { flex-direction: column; align-items: flex-end; justify-content: center; padding-left: 8px; font-size: 0.75rem; line-height: 1.25; }
+  .forest .f-val b { margin-right: 0; font-size: 0.8125rem; }
+  .forest .f-label { grid-column: 1 / -1; padding: 8px 0 0; }
+  .forest .f-head .f-label { display: none; }
+  .forest .f-fam > div { grid-column: 1 / -1; }
+}
+
+/* small multiples */
+.multiples { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 14px; margin-top: 22px; }
+.multiples figure { margin: 0; padding: 14px 14px 10px; }
+.panel-head { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; }
+.panel-head .rho { font-family: var(--font-ui); font-size: var(--step--1); color: var(--ink-2); white-space: nowrap; font-variant-numeric: tabular-nums; }
+
+/* tables */
+.tbl-wrap { overflow-x: auto; margin-top: 18px; border: 1px solid var(--hair); border-radius: 10px; background: var(--surface); }
+table { border-collapse: collapse; width: 100%; font-family: var(--font-ui); font-size: 0.84rem; line-height: 1.45; }
+th, td { text-align: left; padding: 9px 12px; vertical-align: top; border-bottom: 1px solid var(--hair); }
+tr:last-child td { border-bottom: 0; }
+th { font-weight: 600; font-size: 0.78rem; letter-spacing: 0.01em; color: var(--muted); background: var(--surface); }
+td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+td .mono { font-size: 0.8rem; }
+table.compact td, table.compact th { padding: 6px 10px; }
+.xt td.cell { text-align: center; font-variant-numeric: tabular-nums; min-width: 42px; }
+.muted { color: var(--muted); }
+.neg { font-variant-numeric: tabular-nums; }
+
+@media (max-width: 620px) {
+  table.stack thead { display: none; }
+  table.stack, table.stack tbody, table.stack tr, table.stack td { display: block; width: 100%; }
+  table.stack tr { padding: 10px 14px; border-bottom: 1px solid var(--hair); }
+  table.stack tr:last-child { border-bottom: 0; }
+  table.stack td { border: 0; padding: 1px 0; text-align: left; white-space: normal; }
+  table.stack td:empty { display: none; }
+  table.stack td[data-label]::before { content: attr(data-label); display: block; font-size: 0.72rem; color: var(--muted); font-weight: 600; margin-top: 6px; }
+  table.stack td.lead { font-weight: 600; font-size: 0.9rem; }
+  .hide-sm { display: none; }
+}
+
+/* callout */
+.note { margin-top: 18px; background: var(--note-bg); border-left: 3px solid var(--note-rule); border-radius: 0 8px 8px 0; padding: 12px 16px; font-family: var(--font-ui); font-size: 0.9rem; line-height: 1.5; color: var(--ink); max-width: 80ch; }
+.note .nk { font-weight: 600; display: block; margin-bottom: 2px; }
+
+/* lists */
+ol.steps, ul.plain { padding-left: 1.3em; margin: 0; }
+ol.steps > li, ul.plain > li { margin-top: 0.55em; padding-left: 0.2em; }
+ol.steps > li::marker { font-family: var(--font-ui); font-weight: 600; color: var(--muted); }
+.two-col { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 12px 40px; margin-top: 10px; }
+.two-col > div { min-width: 0; }
+.two-col h3 { margin-top: 12px; }
+
+details { margin-top: 12px; font-family: var(--font-ui); font-size: 0.875rem; }
+details > summary { cursor: pointer; color: var(--link); font-weight: 500; list-style-position: inside; }
+details[open] > summary { margin-bottom: 8px; }
+dl.defs { display: grid; grid-template-columns: minmax(160px, 260px) minmax(0, 1fr); gap: 8px 20px; margin: 12px 0 0; font-family: var(--font-ui); font-size: 0.875rem; line-height: 1.5; }
+dl.defs dt { font-weight: 600; color: var(--ink); }
+dl.defs dd { margin: 0; color: var(--ink-2); }
+@media (max-width: 620px) { dl.defs { grid-template-columns: 1fr; } dl.defs dd { margin-bottom: 8px; } }
+
+footer { margin-top: 64px; padding-top: 18px; border-top: 1px solid var(--hair); font-family: var(--font-ui); font-size: var(--step--1); color: var(--muted); }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+
+:root { --c1: #2a78d6; --c2: #eb6834; --c3: #1baf7a; --c4: #eda100; --c5: #e87ba4; --c6: #008300; --brk: #eceef2; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --c1: #3987e5; --c2: #d95926; --c3: #199e70; --c4: #c98500; --c5: #d55181; --c6: #008300; --brk: #1f232a; } }
+:root[data-theme="dark"] { --c1: #3987e5; --c2: #d95926; --c3: #199e70; --c4: #c98500; --c5: #d55181; --c6: #008300; --brk: #1f232a; }
+.slots { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; margin-top: 18px; }
+.slot { background: var(--surface); border: 1px solid var(--hair); border-radius: 10px; padding: 16px 18px; font-family: var(--font-ui); min-width: 0; }
+.slot .d { font-size: 0.8rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+.slot .t { font-family: var(--font-display); font-size: 2rem; font-weight: 650; line-height: 1.15; margin-top: 4px; font-variation-settings: "opsz" 48; }
+.slot .s { font-size: 0.85rem; color: var(--ink-2); margin-top: 4px; line-height: 1.45; }
+table.sched td { vertical-align: middle; }
+table.sched td.wk { font-variant-numeric: tabular-nums; color: var(--muted); white-space: nowrap; }
+table.sched .cell { display: inline-flex; align-items: center; gap: 8px; }
+table.sched .dot { width: 9px; height: 9px; border-radius: 50%; flex: none; }
+table.sched .dot.prog { background: var(--accent); }
+table.sched .dot.low { background: transparent; box-shadow: inset 0 0 0 2px var(--accent); }
+table.sched .dot.none { background: var(--axis); }
+table.sched .time { font-variant-numeric: tabular-nums; font-weight: 500; }
+table.sched .snote { color: var(--muted); }
+table.sched tr.break td { background: var(--brk); }
+table.sched td.day { min-width: 180px; }
+.sched-wrap { max-height: 720px; overflow: auto; }
+.sched-wrap thead th { position: sticky; top: 0; z-index: 1; }
+.hm-grid-wrap { overflow-x: auto; }
+</style>
+<style>
+/* pace page: stacked pace-group bars and the grade dot plot */
+.pbar { display: flex; height: 12px; min-width: 140px; border-radius: 3px; overflow: hidden; margin-top: 4px; background: var(--surface-2); }
+.pbar span { display: block; height: 100%; }
+.pbar span + span { border-left: 1px solid var(--surface); }
+.dp { display: grid; grid-template-columns: 76px minmax(0, 1fr); font-family: var(--font-ui); font-size: 0.8125rem; margin-top: 6px; }
+.dp-row { display: contents; }
+.dp-lab { padding: 0 10px 0 0; color: var(--ink); display: flex; align-items: center; white-space: nowrap; }
+.dp-strip { position: relative; height: 30px; margin: 0 10px; }
+.dp-row.pool .dp-lab { font-weight: 600; }
+.dp-row.sep > div { margin-top: 8px; border-top: 1px solid var(--hair); }
+.dp-grid { position: absolute; top: 0; bottom: 0; border-left: 1px dashed var(--hair); }
+.dp-rng { position: absolute; top: calc(50% - 1px); height: 2px; background: var(--axis); }
+.dp-dot { position: absolute; top: 50%; width: 13px; height: 13px; border-radius: 50%; transform: translate(-50%, -50%); border: 1.5px solid var(--surface); box-shadow: 0 0 0 1px var(--axis); }
+.dp-axis .dp-strip { height: 22px; }
+.dp-axis .dp-strip span:not(.dp-grid) { position: absolute; top: 4px; transform: translateX(-50%); color: var(--muted); font-size: 0.75rem; }
+</style>
+<div class="page">
+  <header class="masthead">
+    <div class="eyebrow">CMU CS Academy CS1 · Programmering 1 · six classes · 2023/24 to 2025/26 · platform exports</div>
+    <h1>Keeping up with the class, in all six classes</h1>
+    <p class="lede">On each class day, how far is a student ahead of or behind the class median in lesson pages and checkpoints? Measured the same way in the five TE22 and TE23 classes and in te24c, this lead goes with the final grade in every class. How far the students spread out depends on the class: in one teacher's two classes most students moved with the median, in the other four fewer than half did.</p>
+    <div class="meta"><span>188 students in 6 classes</span><span>3 teachers</span><span>61 lesson items from unit 2 on</span><span>173 with a final grade, 118 with a survey</span><span>Prepared 19 Oct 2026</span></div>
+  </header>
+
+  <div class="brief" aria-label="In brief">
+    <div><div class="k">The spread follows the class</div><p>In teacher 1's two classes 75% of students stayed around the class median; in teacher 2's three classes 33% and in te24c 28%. The middle half of a class spans about 2.1 lesson items in teacher 1's classes, 4.5 in teacher 2's and 7.1 in te24c.</p></div>
+    <div><div class="k">Ahead goes with the grade</div><p>In every class, students further ahead of the median got higher final grades (ρ .39 to .77; all six pooled .60 [.49, .69]). Students usually ahead average 4.1, those around the median 2.9 and those usually behind 1.9 (A = 5, F = 0).</p></div>
+    <div><div class="k">Self-efficacy, less clearly</div><p>Pooled, the lead goes with self-efficacy after the course too (ρ .43 [.27, .57]), but within a single class the interval excludes zero only in te22c and te23c.</p></div>
+    <div><div class="k">Few catch up</div><p>28 students fell further behind in the second half of the course, 21 of them already usually behind. Only 5 caught up or pulled ahead, all in te23b and te24c.</p></div>
+    <div><div class="k">Read with care</div><p>Six classes cannot separate teacher, school year and class. The links are associations: being ahead may reflect prior experience as much as work.</p></div>
+  </div>
+
+  <nav class="toc" aria-label="Sections">
+    <a href="#spread">The spread</a><a href="#grades">Pace and the grade</a><a href="#self-efficacy">Pace and self-efficacy</a><a href="#behind">Falling behind</a><a href="#earlier">Against earlier chapters</a><a href="#method">Method</a>
+  </nav>
+
+  <section id="spread">
+    <h2>How far apart the classes spread</h2>
+    <div class="prose">
+      <p>On each class day, every student's count of completed lesson pages and checkpoints is compared with the class median that day. A student above the median on at least two thirds of the days is <em>usually ahead</em>, one below it on at least two thirds is <em>usually behind</em>, and everyone else is <em>around the median</em>.</p>
+      <p>Teacher 1's two classes moved in step: 78% and 72% of the students stayed around the median, and the middle half of each class was spread over about two items (interquartile range 2.2 and 1.9). In teacher 2's classes fewer than half stayed around the median in both years, fewest in te23b, where only 19% stayed around the median and the rest split almost evenly into 14 ahead and 15 behind. te24c spread the most (interquartile range 7.1 items) over 19 class days, against 43–50 in the other classes.</p>
+      <p>This repeats the teacher pattern of <a href="te22-vs-te23.html#pace">Chapter 10</a> and adds te24c. Whether it is the teacher's way of running the lessons, the year or the students cannot be told apart with six classes.</p>
+    </div>
+    <figure>
+      <figcaption class="title">Pace groups and spread in each class</figcaption>
+      <figcaption class="sub">Students with log data, after the consent rules. Spread: interquartile range of the mean lead, in lesson items.</figcaption>
+      <div class="legend"><span><i class="sw" style="background: var(--accent)"></i>Usually ahead</span><span><i class="sw" style="background: var(--ex); box-shadow: 0 0 0 1px var(--axis)"></i>Around the median</span><span><i class="sw" style="background: var(--series-2)"></i>Usually behind</span></div>
+      <div class="tbl-wrap"><table class="compact"><thead><tr><th>Class</th><th>Teacher</th><th>Year</th><th class="num">Students</th><th>Pace groups</th><th class="num">Ahead</th><th class="num">Around</th><th class="num">Behind</th><th class="num">Share around</th><th class="num">Spread</th></tr></thead><tbody><tr><td><b>te22a</b></td><td>Teacher 2</td><td>2023/24</td><td class="num">25</td><td><div class="pbar" aria-hidden="true"><span style="width:28.0%;background:var(--accent)" title="7 usually ahead"></span><span style="width:36.0%;background:var(--ex)" title="9 around the median"></span><span style="width:36.0%;background:var(--series-2)" title="9 usually behind"></span></div></td><td class="num">7</td><td class="num">9</td><td class="num">9</td><td class="num">36%</td><td class="num">5.3</td></tr><tr><td><b>te22b</b></td><td>Teacher 1</td><td>2023/24</td><td class="num">32</td><td><div class="pbar" aria-hidden="true"><span style="width:12.5%;background:var(--accent)" title="4 usually ahead"></span><span style="width:78.1%;background:var(--ex)" title="25 around the median"></span><span style="width:9.4%;background:var(--series-2)" title="3 usually behind"></span></div></td><td class="num">4</td><td class="num">25</td><td class="num">3</td><td class="num">78%</td><td class="num">2.2</td></tr><tr><td><b>te22c</b></td><td>Teacher 1</td><td>2023/24</td><td class="num">32</td><td><div class="pbar" aria-hidden="true"><span style="width:12.5%;background:var(--accent)" title="4 usually ahead"></span><span style="width:71.9%;background:var(--ex)" title="23 around the median"></span><span style="width:15.6%;background:var(--series-2)" title="5 usually behind"></span></div></td><td class="num">4</td><td class="num">23</td><td class="num">5</td><td class="num">72%</td><td class="num">1.9</td></tr><tr><td><b>te23b</b></td><td>Teacher 2</td><td>2024/25</td><td class="num">36</td><td><div class="pbar" aria-hidden="true"><span style="width:38.9%;background:var(--accent)" title="14 usually ahead"></span><span style="width:19.4%;background:var(--ex)" title="7 around the median"></span><span style="width:41.7%;background:var(--series-2)" title="15 usually behind"></span></div></td><td class="num">14</td><td class="num">7</td><td class="num">15</td><td class="num">19%</td><td class="num">5.7</td></tr><tr><td><b>te23c</b></td><td>Teacher 2</td><td>2024/25</td><td class="num">31</td><td><div class="pbar" aria-hidden="true"><span style="width:22.6%;background:var(--accent)" title="7 usually ahead"></span><span style="width:45.2%;background:var(--ex)" title="14 around the median"></span><span style="width:32.3%;background:var(--series-2)" title="10 usually behind"></span></div></td><td class="num">7</td><td class="num">14</td><td class="num">10</td><td class="num">45%</td><td class="num">2.6</td></tr><tr><td><b>te24c</b></td><td>Teacher 3</td><td>2025/26</td><td class="num">32</td><td><div class="pbar" aria-hidden="true"><span style="width:34.4%;background:var(--accent)" title="11 usually ahead"></span><span style="width:28.1%;background:var(--ex)" title="9 around the median"></span><span style="width:37.5%;background:var(--series-2)" title="12 usually behind"></span></div></td><td class="num">11</td><td class="num">9</td><td class="num">12</td><td class="num">28%</td><td class="num">7.1</td></tr></tbody></table></div>
+      <div class="tbl-wrap"><table class="compact"><thead><tr><th>Teacher</th><th>Classes</th><th class="num">Students</th><th class="num">Share around</th><th class="num">Spread (mean of classes)</th></tr></thead><tbody><tr><td>Teacher 1</td><td>te22b, te22c (2023/24)</td><td class="num">64</td><td class="num">75%</td><td class="num">2.1</td></tr><tr><td>Teacher 2</td><td>te22a (2023/24), te23b, te23c (2024/25)</td><td class="num">92</td><td class="num">33%</td><td class="num">4.5</td></tr><tr><td>Teacher 3</td><td>te24c (2025/26)</td><td class="num">32</td><td class="num">28%</td><td class="num">7.1</td></tr></tbody></table></div>
+    </figure>
+  </section>
+
+  <section id="grades">
+    <h2>Being ahead goes with the grade, in every class</h2>
+    <div class="prose">
+      <p>In all six classes, students further ahead of the median got higher final grades. The correlation ranges from .39 in te23c, whose final grade is the final-project grade, to .77 in te22c. Pooled over the six classes it is .60 [.49, .69], and every interval is above zero.</p>
+      <p>The pace groups show the same ladder: students usually ahead average a grade of 4.1, those around the median 2.9 and those usually behind 1.9. The groups differ in every class (Kruskal–Wallis p &lt; .05), and the usually-behind group has the lowest mean grade everywhere. The one break in the order is te23b, where the 5 students around the median average 4.2 against 4.0 for those ahead.</p>
+    </div>
+    <figure>
+      <figcaption class="title">Mean final grade by pace group</figcaption>
+      <figcaption class="sub">A = 5 … F = 0; te23c: final-project grade. Hover a dot for the number of students; the table below has every value.</figcaption>
+      <div class="legend"><span><i class="sw" style="background: var(--accent)"></i>Usually ahead</span><span><i class="sw" style="background: var(--ex); box-shadow: 0 0 0 1px var(--axis)"></i>Around the median</span><span><i class="sw" style="background: var(--series-2)"></i>Usually behind</span></div>
+      <div class="dp" role="img" aria-label="Mean final grade of the usually ahead, around the median and usually behind groups in each class and pooled"><div class="dp-row"><div class="dp-lab">te22a</div><div class="dp-strip"><span class="dp-grid" style="left:0%"></span><span class="dp-grid" style="left:20%"></span><span class="dp-grid" style="left:40%"></span><span class="dp-grid" style="left:60%"></span><span class="dp-grid" style="left:80%"></span><span class="dp-grid" style="left:100%"></span><span class="dp-rng" style="left:52.5%;width:30.4%"></span><span class="dp-dot" style="left:75.0%;background:var(--ex)" title="te22a, around the median: mean grade 3.8 (8 students)"></span><span class="dp-dot" style="left:52.5%;background:var(--series-2)" title="te22a, usually behind: mean grade 2.6 (8 students)"></span><span class="dp-dot" style="left:82.9%;background:var(--accent)" title="te22a, usually ahead: mean grade 4.1 (7 students)"></span></div></div><div class="dp-row"><div class="dp-lab">te22b</div><div class="dp-strip"><span class="dp-grid" style="left:0%"></span><span class="dp-grid" style="left:20%"></span><span class="dp-grid" style="left:40%"></span><span class="dp-grid" style="left:60%"></span><span class="dp-grid" style="left:80%"></span><span class="dp-grid" style="left:100%"></span><span class="dp-rng" style="left:0.0%;width:73.3%"></span><span class="dp-dot" style="left:40.9%;background:var(--ex)" title="te22b, around the median: mean grade 2.0 (23 students)"></span><span class="dp-dot" style="left:0.0%;background:var(--series-2)" title="te22b, usually behind: mean grade 0.0 (2 students)"></span><span class="dp-dot" style="left:73.3%;background:var(--accent)" title="te22b, usually ahead: mean grade 3.7 (3 students)"></span></div></div><div class="dp-row"><div class="dp-lab">te22c</div><div class="dp-strip"><span class="dp-grid" style="left:0%"></span><span class="dp-grid" style="left:20%"></span><span class="dp-grid" style="left:40%"></span><span class="dp-grid" style="left:60%"></span><span class="dp-grid" style="left:80%"></span><span class="dp-grid" style="left:100%"></span><span class="dp-rng" style="left:20.0%;width:80.0%"></span><span class="dp-dot" style="left:60.0%;background:var(--ex)" title="te22c, around the median: mean grade 3.0 (22 students)"></span><span class="dp-dot" style="left:20.0%;background:var(--series-2)" title="te22c, usually behind: mean grade 1.0 (4 students)"></span><span class="dp-dot" style="left:100.0%;background:var(--accent)" title="te22c, usually ahead: mean grade 5.0 (2 students)"></span></div></div><div class="dp-row"><div class="dp-lab">te23b</div><div class="dp-strip"><span class="dp-grid" style="left:0%"></span><span class="dp-grid" style="left:20%"></span><span class="dp-grid" style="left:40%"></span><span class="dp-grid" style="left:60%"></span><span class="dp-grid" style="left:80%"></span><span class="dp-grid" style="left:100%"></span><span class="dp-rng" style="left:33.3%;width:50.7%"></span><span class="dp-dot" style="left:84.0%;background:var(--ex)" title="te23b, around the median: mean grade 4.2 (5 students)"></span><span class="dp-dot" style="left:33.3%;background:var(--series-2)" title="te23b, usually behind: mean grade 1.7 (15 students)"></span><span class="dp-dot" style="left:80.0%;background:var(--accent)" title="te23b, usually ahead: mean grade 4.0 (14 students)"></span></div></div><div class="dp-row"><div class="dp-lab">te23c</div><div class="dp-strip"><span class="dp-grid" style="left:0%"></span><span class="dp-grid" style="left:20%"></span><span class="dp-grid" style="left:40%"></span><span class="dp-grid" style="left:60%"></span><span class="dp-grid" style="left:80%"></span><span class="dp-grid" style="left:100%"></span><span class="dp-rng" style="left:31.1%;width:40.3%"></span><span class="dp-dot" style="left:61.5%;background:var(--ex)" title="te23c, around the median: mean grade 3.1 (13 students)"></span><span class="dp-dot" style="left:31.1%;background:var(--series-2)" title="te23c, usually behind: mean grade 1.6 (9 students)"></span><span class="dp-dot" style="left:71.4%;background:var(--accent)" title="te23c, usually ahead: mean grade 3.6 (7 students)"></span></div></div><div class="dp-row"><div class="dp-lab">te24c</div><div class="dp-strip"><span class="dp-grid" style="left:0%"></span><span class="dp-grid" style="left:20%"></span><span class="dp-grid" style="left:40%"></span><span class="dp-grid" style="left:60%"></span><span class="dp-grid" style="left:80%"></span><span class="dp-grid" style="left:100%"></span><span class="dp-rng" style="left:54.5%;width:34.5%"></span><span class="dp-dot" style="left:68.9%;background:var(--ex)" title="te24c, around the median: mean grade 3.4 (9 students)"></span><span class="dp-dot" style="left:54.5%;background:var(--series-2)" title="te24c, usually behind: mean grade 2.7 (11 students)"></span><span class="dp-dot" style="left:89.1%;background:var(--accent)" title="te24c, usually ahead: mean grade 4.5 (11 students)"></span></div></div><div class="dp-row pool sep"><div class="dp-lab">TE22</div><div class="dp-strip"><span class="dp-grid" style="left:0%"></span><span class="dp-grid" style="left:20%"></span><span class="dp-grid" style="left:40%"></span><span class="dp-grid" style="left:60%"></span><span class="dp-grid" style="left:80%"></span><span class="dp-grid" style="left:100%"></span><span class="dp-rng" style="left:35.7%;width:47.6%"></span><span class="dp-dot" style="left:54.0%;background:var(--ex)" title="TE22, around the median: mean grade 2.7 (53 students)"></span><span class="dp-dot" style="left:35.7%;background:var(--series-2)" title="TE22, usually behind: mean grade 1.8 (14 students)"></span><span class="dp-dot" style="left:83.3%;background:var(--accent)" title="TE22, usually ahead: mean grade 4.2 (12 students)"></span></div></div><div class="dp-row pool"><div class="dp-lab">TE23</div><div class="dp-strip"><span class="dp-grid" style="left:0%"></span><span class="dp-grid" style="left:20%"></span><span class="dp-grid" style="left:40%"></span><span class="dp-grid" style="left:60%"></span><span class="dp-grid" style="left:80%"></span><span class="dp-grid" style="left:100%"></span><span class="dp-rng" style="left:32.5%;width:44.6%"></span><span class="dp-dot" style="left:67.8%;background:var(--ex)" title="TE23, around the median: mean grade 3.4 (18 students)"></span><span class="dp-dot" style="left:32.5%;background:var(--series-2)" title="TE23, usually behind: mean grade 1.6 (24 students)"></span><span class="dp-dot" style="left:77.1%;background:var(--accent)" title="TE23, usually ahead: mean grade 3.9 (21 students)"></span></div></div><div class="dp-row pool"><div class="dp-lab">All six</div><div class="dp-strip"><span class="dp-grid" style="left:0%"></span><span class="dp-grid" style="left:20%"></span><span class="dp-grid" style="left:40%"></span><span class="dp-grid" style="left:60%"></span><span class="dp-grid" style="left:80%"></span><span class="dp-grid" style="left:100%"></span><span class="dp-rng" style="left:38.4%;width:43.5%"></span><span class="dp-dot" style="left:58.8%;background:var(--ex)" title="All six, around the median: mean grade 2.9 (80 students)"></span><span class="dp-dot" style="left:38.4%;background:var(--series-2)" title="All six, usually behind: mean grade 1.9 (49 students)"></span><span class="dp-dot" style="left:81.8%;background:var(--accent)" title="All six, usually ahead: mean grade 4.1 (44 students)"></span></div></div><div class="dp-row dp-axis"><div class="dp-lab"></div><div class="dp-strip"><span class="dp-grid" style="left:0%"></span><span class="dp-grid" style="left:20%"></span><span class="dp-grid" style="left:40%"></span><span class="dp-grid" style="left:60%"></span><span class="dp-grid" style="left:80%"></span><span class="dp-grid" style="left:100%"></span><span style="left:0%">F</span><span style="left:20%">E</span><span style="left:40%">D</span><span style="left:60%">C</span><span style="left:80%">B</span><span style="left:100%">A</span></div></div></div>
+      <details><summary>Show as table</summary><div class="tbl-wrap"><table class="compact"><thead><tr><th>Class</th><th class="num">Usually ahead</th><th class="num">Around the median</th><th class="num">Usually behind</th><th class="num">Kruskal–Wallis p</th></tr></thead><tbody><tr><td><b>te22a</b></td><td class="num">4.1 <span class="muted">(7)</span></td><td class="num">3.8 <span class="muted">(8)</span></td><td class="num">2.6 <span class="muted">(8)</span></td><td class="num">.04</td></tr><tr><td><b>te22b</b></td><td class="num">3.7 <span class="muted">(3)</span></td><td class="num">2.0 <span class="muted">(23)</span></td><td class="num">0.0 <span class="muted">(2)</span></td><td class="num">.03</td></tr><tr><td><b>te22c</b></td><td class="num">5.0 <span class="muted">(2)</span></td><td class="num">3.0 <span class="muted">(22)</span></td><td class="num">1.0 <span class="muted">(4)</span></td><td class="num">.02</td></tr><tr><td><b>te23b</b></td><td class="num">4.0 <span class="muted">(14)</span></td><td class="num">4.2 <span class="muted">(5)</span></td><td class="num">1.7 <span class="muted">(15)</span></td><td class="num">&lt; .001</td></tr><tr><td><b>te23c</b></td><td class="num">3.6 <span class="muted">(7)</span></td><td class="num">3.1 <span class="muted">(13)</span></td><td class="num">1.6 <span class="muted">(9)</span></td><td class="num">.04</td></tr><tr><td><b>te24c</b></td><td class="num">4.5 <span class="muted">(11)</span></td><td class="num">3.4 <span class="muted">(9)</span></td><td class="num">2.7 <span class="muted">(11)</span></td><td class="num">.01</td></tr><tr><td>TE22</td><td class="num">4.2 <span class="muted">(12)</span></td><td class="num">2.7 <span class="muted">(53)</span></td><td class="num">1.8 <span class="muted">(14)</span></td><td class="num"></td></tr><tr><td>TE23</td><td class="num">3.9 <span class="muted">(21)</span></td><td class="num">3.4 <span class="muted">(18)</span></td><td class="num">1.6 <span class="muted">(24)</span></td><td class="num"></td></tr><tr><td>all six</td><td class="num">4.1 <span class="muted">(44)</span></td><td class="num">2.9 <span class="muted">(80)</span></td><td class="num">1.9 <span class="muted">(49)</span></td><td class="num"></td></tr></tbody></table></div><p class="fig-note">Mean grade (students with a grade). p: Kruskal–Wallis test on grade ranks within the class.</p></details>
+    </figure>
+    <figure>
+      <figcaption class="title">Lead over the class median against the grade and self-efficacy</figcaption>
+      <figcaption class="sub">Spearman ρ with 95% bootstrap intervals; bold = the interval is above zero. Pooled rows use ranks within each class.</figcaption>
+      <div class="tbl-wrap"><table class="compact"><thead><tr><th></th><th class="num">Final grade</th><th class="num">n</th><th class="num">Self-efficacy</th><th class="num">n</th></tr></thead><tbody><tr><td><b>te22a</b></td><td class="num"><b>.58 [.22, .81]</b></td><td class="num muted">23</td><td class="num">.27 [−.19, .63]</td><td class="num muted">22</td></tr><tr><td><b>te22b</b></td><td class="num"><b>.72 [.46, .88]</b></td><td class="num muted">28</td><td class="num">.30 [−.22, .74]</td><td class="num muted">18</td></tr><tr><td><b>te22c</b></td><td class="num"><b>.77 [.58, .87]</b></td><td class="num muted">28</td><td class="num"><b>.71 [.38, .86]</b></td><td class="num muted">23</td></tr><tr><td><b>te23b</b></td><td class="num"><b>.73 [.51, .87]</b></td><td class="num muted">34</td><td class="num">.35 [−.21, .80]</td><td class="num muted">16</td></tr><tr><td><b>te23c</b></td><td class="num"><b>.39 [.01, .69]</b></td><td class="num muted">29</td><td class="num"><b>.59 [.09, .82]</b></td><td class="num muted">15</td></tr><tr><td><b>te24c</b></td><td class="num"><b>.45 [.10, .73]</b></td><td class="num muted">31</td><td class="num">.35 [−.09, .72]</td><td class="num muted">24</td></tr><tr><td>TE22</td><td class="num"><b>.70 [.56, .80]</b></td><td class="num muted">79</td><td class="num"><b>.45 [.21, .65]</b></td><td class="num muted">63</td></tr><tr><td>TE23</td><td class="num"><b>.57 [.35, .73]</b></td><td class="num muted">63</td><td class="num"><b>.45 [.10, .71]</b></td><td class="num muted">31</td></tr><tr><td>TE22+TE23</td><td class="num"><b>.63 [.52, .73]</b></td><td class="num muted">142</td><td class="num"><b>.45 [.27, .61]</b></td><td class="num muted">94</td></tr><tr><td>all six</td><td class="num"><b>.60 [.49, .69]</b></td><td class="num muted">173</td><td class="num"><b>.43 [.27, .57]</b></td><td class="num muted">118</td></tr></tbody></table></div>
+    </figure>
+  </section>
+
+  <section id="self-efficacy">
+    <h2>Self-efficacy follows less clearly</h2>
+    <div class="prose">
+      <p>Students further ahead also reported higher self-efficacy after the course (pooled ρ .43 [.27, .57]), but less clearly than the grade. Within a single class the interval excludes zero only in te22c (.71) and te23c (.59); with 15–24 survey answers per class the other intervals are wide. In te24c, surveyed in August 2026, it is .35 [−.09, .72]. The te24c chapter adds that students usually ahead gained the most self-efficacy over the course (<a href="programmering-1-te24c.html#pace">Chapter 9</a>).</p>
+      <p>As with errors (<a href="error-escape-curves.html#grades">Chapter 6</a>) and unit trajectories (<a href="te22-te23-activity-trajectories.html#grades">Chapter 4</a>), the log goes with the grade more than with how capable students feel. TE22 answered the survey a year after its course, and all of these are associations, not effects.</p>
+    </div>
+  </section>
+
+  <section id="behind">
+    <h2>Falling behind, and the few who catch up</h2>
+    <div class="prose">
+      <p>Comparing each student's mean lead in the second half of the course with the first, 28 students fell behind by more than 4.7 items, and 21 of them were already usually behind. Only 5 caught up or pulled ahead, 3 in te23b and 2 in te24c. Falling behind was most common in te23b (9), te24c (8) and te22a (5), the three classes with the fewest students around the median.</p>
+      <p>Students who fell behind ended lower in their class's grade order than those who held their position (mean grade percentile .41 against .53; .76 for the 5 who caught up). te24c is the exception: its 8 students who fell behind averaged a grade of 3.7, against 3.5 for those who held their position.</p>
+    </div>
+    <figure>
+      <figcaption class="title">Change between the two halves of the course</figcaption>
+      <figcaption class="sub">Fell behind / caught up: mean lead in the second half more than 4.7 items below / above the first. Halves split on 1 January (TE22, TE23) and 1 March 2026 (te24c). Grade percentile: mean rank of the final grade within the class (0–1).</figcaption>
+      <div class="tbl-wrap"><table class="compact"><thead><tr><th>Class</th><th class="num">Fell behind</th><th class="num">of them usually behind</th><th class="num">Caught up or pulled ahead</th><th class="num">Steady</th><th class="num">Grade percentile, fell behind</th><th class="num">Grade percentile, steady</th></tr></thead><tbody><tr><td><b>te22a</b></td><td class="num">5</td><td class="num">5</td><td class="num">0</td><td class="num">20</td><td class="num">.37</td><td class="num">.56</td></tr><tr><td><b>te22b</b></td><td class="num">3</td><td class="num">2</td><td class="num">0</td><td class="num">29</td><td class="num">.41</td><td class="num">.53</td></tr><tr><td><b>te22c</b></td><td class="num">2</td><td class="num">1</td><td class="num">0</td><td class="num">30</td><td class="num">.09</td><td class="num">.53</td></tr><tr><td><b>te23b</b></td><td class="num">9</td><td class="num">7</td><td class="num">3</td><td class="num">24</td><td class="num">.35</td><td class="num">.53</td></tr><tr><td><b>te23c</b></td><td class="num">1</td><td class="num">0</td><td class="num">0</td><td class="num">30</td><td class="num">–</td><td class="num">.52</td></tr><tr><td><b>te24c</b></td><td class="num">8</td><td class="num">6</td><td class="num">2</td><td class="num">22</td><td class="num">.56</td><td class="num">.50</td></tr><tr><td>All six</td><td class="num">28</td><td class="num">21</td><td class="num">5</td><td class="num">155</td><td class="num">.41</td><td class="num">.53</td></tr></tbody></table></div>
+    </figure>
+  </section>
+
+  <section id="earlier">
+    <h2>Against the earlier chapters</h2>
+    <div class="prose">
+      <p><a href="programmering-1-te24c.html#pace">Chapter 9</a> and <a href="te22-vs-te23.html#pace">Chapter 10</a> measured pace with the te24c analysis scripts, one class at a time. This chapter applies the same rules to all six classes from the current exports. The results agree with the saved per-student tables behind those chapters: every student's lead is within 1.1 items of the saved value, 193 of 194 students keep their pace group and 186 their change between the halves. The lesson items differ: 61 in every class here, 39 (units 2–7) in the te24c chapter, which is why te24c's counts of students falling behind differ slightly.</p>
+      <p>Chapter 10 reports ρ .65 for TE22 and .54 for TE23 between the lead and the final grade. Those values come from the per-class grade tables of the TE22/TE23 analysis, with 91 and 67 students. After the consent rules used here, 79 and 63 remain, and the values are .70 and .57.</p>
+    </div>
+  </section>
+
+  <section id="method">
+    <h2>Method</h2>
+    <dl class="defs">
+      <dt>Lesson items</dt><dd>Lesson pages and checkpoints (notes exercises) from unit 2 on that at least 5 students in the class completed: 61 items in every class. Completion times come from each class's platform export; TE23's are shifted back one hour to Swedish time.</dd>
+      <dt>Class day</dt><dd>A day on which at least 10 students of the class completed something, counted from the start of the course: 20 August 2023 (TE22), 19 August 2024 (TE23) and 13 January 2026 (te24c, after two introductory lessons in November). 43–50 days in TE22 and TE23, 19 in te24c.</dd>
+      <dt>Lead over the class median</dt><dd>On each class day, the number of lesson items the student had completed minus the class median that day, averaged over the class days.</dd>
+      <dt>Pace group</dt><dd>Usually ahead: above the median on at least two thirds of the class days. Usually behind: below it on at least two thirds. Around the median: everyone else.</dd>
+      <dt>Spread</dt><dd>Interquartile range of the lead within the class: how many items separate the student a quarter of the way from the top and the one a quarter of the way from the bottom.</dd>
+      <dt>Fell behind, caught up</dt><dd>Mean lead in the second half of the course minus the first, beyond ±4.7 items (the te24c rule of 3 items out of 39, scaled to 61).</dd>
+      <dt>Grades</dt><dd>StudyBee final grade, A = 5 … F = 0. te23c's final grade is its final-project grade, as in the other chapters.</dd>
+      <dt>Self-efficacy</dt><dd>Mean of the 15 core items (1–7). TE22 and TE23 answered in May–June 2025, a year after TE22's course and at the end of TE23's; te24c answered in August 2026.</dd>
+      <dt>Consent</dt><dd>Grades are left out for students who declined StudyBee data, and pace for the 6 who declined CS Academy data. te24c's survey did not ask either question; its data are used as in Chapter 9.</dd>
+      <dt>Statistics</dt><dd>Spearman ρ with 2000-resample bootstrap 95% intervals; pooled values use percentile ranks within each class. Pace groups are compared with Kruskal–Wallis tests on grade ranks within the class.</dd>
+    </dl>
+  </section>
+
+  <footer>Built from the platform exports with <span class="mono">analyses/pace/pace_all.py</span>, <span class="mono">pace_grades.py</span> and <span class="mono">pace_page.py</span> (cs-academy-analysis), using the grades and survey table of the SCT replication (Chapter 12).</footer>
+</div>

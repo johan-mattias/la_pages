@@ -47,21 +47,28 @@
       file: "te22-te23-activity-trajectories.html", part: 1, nav: "Unit trajectories",
       title: "Activity across the units",
       question: "Who keeps up from unit to unit, who drops, and who comes back?",
-      role: "Follows students unit by unit. Relative activity is fairly stable from unit to unit (ICC\u00a0.50), a middle group moves between neighbouring states, and the least active group drops after unit 3 and partly recovers for the final project in 13 of 14 state definitions.",
+      role: "Follows students unit by unit. Relative activity is fairly stable from unit to unit (ICC\u00a0.50), a middle group moves between neighbouring states, and the least active group drops after unit 3 and partly recovers for the final project in 13 of 14 state definitions. Students on more active trajectories get higher grades in all 14 definitions (ρ\u00a0.21–.48); self-efficacy follows in only 3.",
       states: ["up", "flat", "down"]
+    },
+    {
+      file: "how-many-student-clusters.html", part: 1, nav: "Student clusters",
+      title: "One population, not groups",
+      question: "Do students form distinct groups, or one continuous population?",
+      role: "Asks directly whether students fall into groups. Clustering 159 TE22 and TE23 students on log-derived factor scores (sessions, mastery, regularity, error proneness), over the full course and from week 8/9, finds one continuous population: silhouettes stay at 0.10–0.15, the gap statistic picks one cluster, and the two-component mixture that BIC prefers has a single peak. Its smaller component is a wider tail of sparse, error-prone activity, not a second type of student.",
+      states: ["flat", "down"]
     },
     {
       file: "error-escape-curves.html", part: 1, nav: "Error escape",
       title: "Inside the run–error loop",
       question: "Which errors do students learn to get past, and which keep stopping them?",
-      role: "The smallest mastery experience: an error met and escaped. When the message names the fix, students get faster with every encounter; when the error is about meaning, they do not, and trial-and-error debugging never declines. The page reads this behaviourally; the story reads it as the raw material of self-efficacy.",
+      role: "The smallest mastery experience: an error met and escaped. When the message names the fix, students get faster with every encounter; when the error is about meaning, they do not, and trial-and-error debugging never declines. Students who fix more errors at the first retry get higher grades (ρ\u00a0.48) and report higher self-efficacy (.28); how fast they improve with practice does not matter. The page reads this behaviourally; the story reads it as the raw material of self-efficacy.",
       states: ["up", "flat"]
     },
     {
       file: "te22a-schedule-and-activity.html", part: 2, nav: "One class's year",
       title: "One class, in lessons and out",
       question: "When and where does the practice happen?",
-      role: "The setting up close, for te22a. A third of active time falls outside lessons, mostly on creative tasks and the final project, and after-school minutes track the final-project grade (ρ\u00a0.64). The spring is weaker than the autumn.",
+      role: "The setting up close, for te22a. A third of active time falls outside lessons, mostly on creative tasks and the final project, and after-school minutes track the final-project grade (ρ\u00a0.64). The spring is weaker than the autumn. In all five classes, attending more lessons and working more minutes in and outside lessons go with higher grades (pooled ρ\u00a0.34, .46 and .43).",
       states: ["up", "flat"]
     },
     {
@@ -87,9 +94,9 @@
     },
     {
       file: "te23-grade-trajectories.html", part: 3, nav: "Grade trajectories",
-      title: "Grades across the TE23 year",
+      title: "Grades across the year",
       question: "Do students' grades hold steady from the first estimate to the final grade?",
-      role: "Follows te23b and te23c from the February 2025 estimate through the unit 10 grade and the June estimate to the final grade. The estimates are steady (February to June ρ 0.86 in te23b, 0.75 in te23c), and most students who move go up: 29 improved, 23 stayed and 9 went down. Unit 10 is a single, noisy assignment, and te23c's final is the project grade, so it moves more. Every drop of two or more steps ends in F.",
+      role: "Follows te23b and te23c from the February 2025 estimate through the unit 10 grade and the June estimate to the final grade. The estimates are steady (February to June ρ 0.86 in te23b, 0.75 in te23c), and most students who move go up: 29 improved, 23 stayed and 9 went down. Unit 10 is a single, noisy assignment, and te23c's final is the project grade, so it moves more. Every drop of two or more steps ends in F. TE22 and te24c (added 19 Oct): the course grade follows the final project (ρ\u00a0.98 in te22b, .93 in te22c), early task grades predict it less, and in te24c nobody's final grade fell below their Creative task 3 grade.",
       states: ["up", "flat", "down"]
     },
     {
@@ -98,6 +105,13 @@
       question: "Does the self-efficacy scale hold in TE22 and TE23, and what goes with it?",
       role: "Repeats the self-efficacy analysis in the five TE22 and TE23 classes, with the consent rules applied. The 15 core items form one general factor and the cohorts score the same; self-efficacy goes with the final grade clearly in TE22 (ρ\u00a00.54) and less certainly in TE23 (0.38). Enjoyment and trying it yourself first go with self-efficacy, asking AI goes with nothing, and the Year 1 block/text test predicts the final grade (ρ\u00a00.37). The final project carries most of the final grade (65% of the explained variance in TE23).",
       states: ["up", "flat"]
+    },
+    {
+      file: "pace-in-six-classes.html", part: 3, nav: "Pace",
+      title: "Keeping up with the class",
+      question: "Does working ahead of the class go with the grade in every class, and what sets the spread?",
+      role: "Measures pace the same way in all six classes, as each day's lead over the class median in lesson pages and checkpoints. Being ahead goes with the final grade in every class (pooled ρ\u00a0.60): students usually ahead average 4.1, those usually behind 1.9. How far a class spreads out follows the class: in teacher 1's two classes 75% of students stayed around the median, in teacher 2's 33% and in te24c 28%. Self-efficacy follows less clearly (ρ\u00a0.43), and 28 students fell further behind in the second half against 5 who caught up.",
+      states: ["up", "down"]
     }
   ];
 

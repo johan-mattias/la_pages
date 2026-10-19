@@ -253,7 +253,7 @@ table.sched td.day { min-width: 180px; }
   </div>
 
   <nav class="toc" aria-label="Sections">
-    <a href="#timetable">The timetable</a><a href="#year">Week by week</a><a href="#lessons">In the lessons</a><a href="#grades">Against the grades</a><a href="#outside">Outside the lessons</a><a href="#what">What they work on</a><a href="#notes">Data notes</a><a href="#defs">Definitions</a>
+    <a href="#timetable">The timetable</a><a href="#year">Week by week</a><a href="#lessons">In the lessons</a><a href="#grades">Against the grades</a><a href="#five-classes">All five classes</a><a href="#outside">Outside the lessons</a><a href="#what">What they work on</a><a href="#notes">Data notes</a><a href="#defs">Definitions</a>
   </nav>
 
   <!-- ============================== TIMETABLE -->
@@ -332,6 +332,22 @@ table.sched td.day { min-width: 180px; }
       <div class="forest" id="forest" role="table" aria-label="Spearman correlations with 95% intervals"></div>
     </figure>
   </section>
+
+  <!-- section:five-classes:start -->
+<section id="five-classes">
+  <h2>The same links in all five classes</h2>
+  <div class="prose">
+    <p>Does what te22a shows hold in the other four classes? The per-student measures of the SCT replication (<a href="TE22-TE23_SCT_replication.html#grades">Chapter 12</a>) cover all five. With ranks taken within each class and pooled, attending more lessons (ρ .34), more active minutes in lessons (.46) and more active minutes outside lessons (.43) all go with a higher final grade. The same three go with the final-project grade (.28, .36, .41). Every interval is above zero.</p>
+    <p>The classes differ. Outside minutes track the grade strongly in te22b (.68) and te23b (.71) but weakly in te22c and te23c (.24 and .24), and attendance matters least in te22b and te23c. On these measures te22a comes out close to the figure above (attendance and the final-project grade ρ .62).</p>
+    <p>These measures use the SCT analysis's lesson rule and count all time outside lessons together, so school hours, evenings and weekends cannot be told apart here. They measure how much students worked outside lessons. <a href="te22-vs-te23.html#replication">Chapter 10</a> measures which share of the completions happened outside lessons, and finds that link only in TE23.</p>
+  </div>
+  <figure>
+    <figcaption class="title">Lessons and outside work against the grades, five classes</figcaption>
+    <figcaption class="sub">Spearman ρ on ranks within each class, pooled, with 95% bootstrap intervals; bold = the interval is above zero. Underneath, each class: te22a · te22b · te22c · te23b · te23c. Grades as in the other chapters (te23c: final-project grade); grades are left out for students who declined StudyBee data and platform data for those who declined CS Academy data. n = 140 with a final grade, 127 with a final-project grade.</figcaption>
+    <div class="tbl-wrap"><table class="compact"><thead><tr><th>Measure</th><th class="num">Final grade</th><th class="num">Final-project grade</th></tr></thead><tbody><tr><td>Lessons attended (any activity)</td><td class="num"><b>0.34 [0.17, 0.49]</b><br><span style="color: var(--muted); font-size: 0.74rem">0.42 · 0.13 · 0.64 · 0.40 · 0.16</span></td><td class="num"><b>0.28 [0.12, 0.43]</b><br><span style="color: var(--muted); font-size: 0.74rem">0.62 · −0.10 · 0.45 · 0.37 · 0.16</span></td></tr><tr><td>Active minutes in lessons</td><td class="num"><b>0.46 [0.33, 0.58]</b><br><span style="color: var(--muted); font-size: 0.74rem">0.53 · 0.35 · 0.68 · 0.57 · 0.22</span></td><td class="num"><b>0.36 [0.20, 0.51]</b><br><span style="color: var(--muted); font-size: 0.74rem">0.68 · 0.09 · 0.50 · 0.43 · 0.22</span></td></tr><tr><td>Active minutes outside lessons</td><td class="num"><b>0.43 [0.27, 0.57]</b><br><span style="color: var(--muted); font-size: 0.74rem">0.20 · 0.68 · 0.24 · 0.71 · 0.24</span></td><td class="num"><b>0.41 [0.25, 0.55]</b><br><span style="color: var(--muted); font-size: 0.74rem">0.54 · 0.39 · 0.23 · 0.60 · 0.24</span></td></tr><tr><td>Share of activity outside lessons</td><td class="num"><b>0.32 [0.15, 0.47]</b><br><span style="color: var(--muted); font-size: 0.74rem">0.09 · 0.68 · 0.07 · 0.48 · 0.23</span></td><td class="num"><b>0.30 [0.13, 0.45]</b><br><span style="color: var(--muted); font-size: 0.74rem">0.25 · 0.40 · 0.10 · 0.45 · 0.23</span></td></tr></tbody></table></div>
+  </figure>
+</section>
+<!-- section:five-classes:end -->
 
   <!-- ============================== OUTSIDE -->
   <section id="outside">
