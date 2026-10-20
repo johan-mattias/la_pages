@@ -251,7 +251,7 @@ svg .leader{stroke:var(--muted);stroke-width:0.8;fill:none}
   <p class="dek">The same learning-analytics measures for the two full-year cohorts: TE22 (te22a, te22b, te22c; 2023/24) and TE23 (te23b, te23c; 2024/25). Each finding is checked in both cohorts; the ones that hold in both are the robust ones. Some are new, found in the full-year data. Two teachers taught these classes, both new to the platform in 2023/24, so the comparison also separates teacher and year where the classes allow it.</p>
   <div class="caveats">
     <div class="caveat"><b>Two teachers, two years</b>Teacher 1 taught te22b and te22c. Teacher 2 taught te22a in 2023/24, and te23b and te23c in 2024/25, a second year with the platform. te22a against te22b and te22c compares teachers; te22a against TE23 compares the same teacher a year later.</div>
-    <div class="caveat"><b>TE23 grades corrected</b>te23b's final grade comes from the corrected grade file (10 A's with the consent rules). te23c's "final" column turned out to be the grade from 9 May 2025, set before the final projects were handed in (27–28 May), so te23c's final grade is its final-project grade.</div>
+    <div class="caveat"><b>TE23 grades corrected</b>te23b's final grade comes from the corrected grade file. te23c's "final" column turned out to be the grade from 9 May 2025, set before the final projects were handed in (27–28 May), so te23c's final grade is its final-project grade.</div>
     <div class="caveat"><b>No leave events in 2023/24</b>The TE22 log records when a student returns to the tab, not when they leave. Time away for TE22 is estimated from those return events. It ranks students well (ρ 0.76–0.85 with the real measure), but its level is not comparable.</div>
     <div class="caveat"><b>Self-efficacy at different times</b>TE22 answered in May 2025, a year after its course. TE23 answered in June 2025, at the end of its course (31 of 67). In every class mostly the stronger students answered.</div>
     <div class="caveat"><b>Consent rules applied (20 Oct 2026)</b>Students who declined CS Academy data (6) are left out entirely, grades are not used for the 14 who declined StudyBee data, and survey answers only with consent to the survey. Earlier versions of this page included them. Every number here is recomputed.</div>
@@ -533,7 +533,7 @@ const hrs = m => n0(m / 60) + ' h';
     B.only23 + ' hold only in TE23' + (B.only22 ? ' and ' + B.only22 + ' only in TE22' : '') + '. ' + B.new + ' are new from the full-year data; ' + B.new_both + ' of them hold in both.';
   const cd = gmap.creative_decisions_total, sd = gmap.sem_decisions;
   document.getElementById('g-new').textContent = 'Students who build more decisions into their creative programs get higher grades: ρ ' + sg(cd.TE22.rho) + ' in TE22 and ' + sg(cd.TE23.rho) +
-    ' in TE23 for all creative programs together. The same holds for the semester project (' + sg(sd.TE22.rho) + ', ' + sg(sd.TE23.rho) + '), the graded unit task and the final project.';
+    ' in TE23 for all creative programs together. The same holds for the semester project (' + sg(sd.TE22.rho) + ', ' + sg(sd.TE23.rho) + ') and the final project, and in TE23 the graded unit task.';
   const e = tyr.err_rate_u14, m = tyr.mcq_first_correct;
   document.getElementById('g-errors').textContent = 'In units 1–4, ' + pct(lv.err_rate_u14.TE23) + ' of TE23 runs ended in an error vs ' + pct(lv.err_rate_u14.TE22) + ' in TE22, and TE23 got fewer lesson questions right first try (' +
     pct(lv.mcq_first_correct.TE23) + ' vs ' + pct(lv.mcq_first_correct.TE22) + ') with twice as many very fast answers. te22a, teacher 2’s first class, was close to teacher 1’s classes (' + pct(e['T2 2023/24']) + ' errors, ' +
@@ -544,7 +544,7 @@ const hrs = m => n0(m / 60) + ' h';
     ' (teacher 1) to ' + hrs(h['T2 2023/24']) + ' and then ' + hrs(h['T2 2024/25']) + ' (teacher 2, first and second year).';
   const s = CH.se.find(r => r.key === 'final_num');
   document.getElementById('g-se').textContent = 'With the corrected grades, self-efficacy correlates ' + sg(s.TE22.rho) + ' with the course grade in TE22 (n ' + s.TE22.n + ') and ' + sg(s.te23b.rho) + ' in te23b, but only ' +
-    sg(s.te23c.rho) + ' in te23c (16 answers each in TE23). In both cohorts it also goes with practice volume and lesson-question accuracy.';
+    sg(s.te23c.rho) + ' in te23c (' + s.te23b.n + ' and ' + s.te23c.n + ' answers with a grade). In both cohorts it also goes with practice volume and lesson-question accuracy.';
   const r = CH.gaming_pooled.TE23;
   document.getElementById('g-games').textContent = 'Across TE23 the students with the most time away guess more on lesson questions (ρ ' + sg(r.mcq_very_fast_share.rho) + '), make more errors (' + sg(r.err_rate.rho) +
     '), fall behind (' + sg(r.lead_items_mean.rho) + ') and get lower grades (' + sg(r.final_num.rho) + '). In te23c four of them left the platform together, as the four observed in te24c did.';
