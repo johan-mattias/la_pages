@@ -89,7 +89,7 @@
       file: "te22-vs-te23.html", part: 3, nav: "TE22 vs TE23",
       title: "Two full years, two teachers",
       question: "Which findings hold in both cohorts, and which follow the teacher or the year?",
-      role: "The same measures for TE22 (2023/24) and TE23 (2024/25), using the scripts from the te24c analysis. Most findings hold in both cohorts and the same grade ladder appears in each; the decisions students build into their creative programs are one of the strongest grade links. Specific syntax messages get faster to fix in both; 'invalid syntax' and NameError do not. Self-efficacy tracks the grade in TE22 and te23b (ρ 0.64) but not in te23c (0.00 with its final-project grade). Teacher style shows in pace and project size, while TE23's extra errors and guessing follow the year.",
+      role: "The same measures for TE22 (2023/24) and TE23 (2024/25), using the scripts from the te24c analysis. Most findings hold in both cohorts and the same grade ladder appears in each; the decisions students build into their creative programs are one of the strongest grade links. Specific syntax messages get faster to fix in both; 'invalid syntax' and NameError do not. Self-efficacy tracks the grade in TE22 and te23b (ρ 0.62) and less clearly in te23c (0.22 with its final-project grade). Rebuilt on 20 Oct 2026 with the consent rules applied. Teacher style shows in pace and project size, while TE23's extra errors and guessing follow the year.",
       states: ["up", "flat"]
     },
     {
