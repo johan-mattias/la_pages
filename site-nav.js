@@ -112,6 +112,13 @@
       question: "Does working ahead of the class go with the grade in every class, and what sets the spread?",
       role: "Measures pace the same way in all six classes, as each day's lead over the class median in lesson pages and checkpoints. Being ahead goes with the final grade in every class (pooled ρ\u00a0.60): students usually ahead average 4.1, those usually behind 1.9. How far a class spreads out follows the class: in teacher 1's two classes 75% of students stayed around the median, in teacher 2's 33% and in te24c 28%. Self-efficacy follows less clearly (ρ\u00a0.43), and 28 students fell further behind in the second half against 5 who caught up.",
       states: ["up", "down"]
+    },
+    {
+      file: "us-replication.html", part: 3, nav: "US replication",
+      title: "The cohort findings at US scale",
+      question: "Which cohort findings hold for 16,909 US students on the same course?",
+      role: "Tests the cohort findings again on 16,909 US students in 871 classes who took the same course, with the rule for each test fixed before it ran. 27 of 42 findings hold: how students program (the transition matrix correlates .98 with the cohorts’), fix errors and fall behind is the same at scale, and the three unit trajectories recur. The student profiles reappear but not as stable groups, one population as in Chapter 5, and the teacher effect is teacher plus school. Leaving the platform together and the TE23-only grade links stay local.",
+      states: ["up", "flat", "down"]
     }
   ];
 
