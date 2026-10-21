@@ -1,6 +1,6 @@
 <!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
 <script src="site-nav.js"></script>
-<title>Error Escape Curves</title>
+<title>Inside the run–error loop</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Condensed:wght@500;600&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap">
@@ -191,7 +191,7 @@ footer { padding-block: 36px 60px; border-top: 1px solid var(--rule); color: var
 <div class="frame">
   <header class="masthead">
     <div class="eyebrow">CMU CS Academy · CS1 · two cohorts, five classes · exploratory analysis of error logs</div>
-    <h1>Do students learn to solve errors faster?</h1>
+    <h1>Inside the run–error loop</h1>
     <p class="lede">Programming errors never go away in this course. About one run in five ends in an error, in every unit. What changes is how quickly students get rid of them, and only for some kinds of error. When the message names the fix, students get faster with every encounter. When it does not, or when the error is about meaning rather than form, they do not.</p>
     <div class="facts" id="facts"></div>
     <nav class="index" aria-label="Sections">
@@ -212,7 +212,7 @@ footer { padding-block: 36px 60px; border-top: 1px solid var(--rule); color: var
       <p>Each run of the code is a response, and the interpreter answers immediately. Seen through operant conditioning, the error message can do two different jobs. As an aversive consequence of running flawed code it is <strong>positive punishment</strong>: if it works that way, students should produce fewer errors over time (avoidance). Its <em>removal</em> is the consequence of the corrective edit, so the fix is strengthened by <strong>negative reinforcement</strong>: if that works, the time to escape the message should shrink with repeated trials. That is Thorndike's puzzle-box curve, with the error message as the box.</p>
       <p>The logs only contain observable behaviour (runs, messages, edits and timestamps), which suits this framing. The measures below are built so that each prediction can fail.</p>
     </div>
-    <div class="lathread flush" role="note"><span class="lathread-k">Story thread · Improves and stalls</span><p>The story reads the same loop through social cognitive theory. An error met and escaped is the smallest mastery experience the logs record, and the measures below say which ones add up: escapes from errors whose message names the fix get faster, escapes from errors about meaning do not. Getting past an error on the next run goes with higher end-of-course self-efficacy (ρ&nbsp;.33, <a href="self-efficacy-granularity-study.html#drivers">Chapter 2</a>). See <a href="index.html#defined">the mastery loop</a>.</p></div>
+    <div class="lathread flush" role="note"><span class="lathread-k">Story thread · Improves and stalls</span><p>The story reads the same loop through social cognitive theory. An error met and escaped is the smallest mastery experience the logs record, and the measures below say which ones add up: escapes from errors whose message names the fix get faster, escapes from errors about meaning do not. Recovering from an error on the next run goes with higher end-of-course self-efficacy (ρ&nbsp;.33, <a href="self-efficacy-granularity-study.html#drivers">Chapter 2</a>). See <a href="index.html#defined">the mastery loop</a>.</p></div>
     <figure class="loop">
       <figcaption><span class="t">The run–error loop as an escape trial</span><span class="s">One “spell” is timed from the error message to the first later run that no longer shows it.</span></figcaption>
       <svg class="chart" viewBox="0 0 760 150" role="img" aria-label="Diagram: run code, error message, edit, run again, error gone or replaced">
@@ -594,7 +594,7 @@ const O = D.overview;
 // facts strip
 [[N(O.students), 'students in 5 classes, two cohorts'], [(O.attempts / 1000).toFixed(0) + 'K', 'code runs (attempts)'],
  [(O.errors / 1000).toFixed(0) + 'K', 'errors: ' + (O.syntax_errors / 1000).toFixed(0) + 'K syntax, ' + (O.runtime_errors / 1000).toFixed(0) + 'K runtime'],
- [P(O.err_share), 'of runs end in an error'], [sec(O.latency_q['0.5']), 'median time to fix an error'],
+ [sec(O.latency_q['0.5']), 'median time to fix an error'],
  [P(O.one_shot), 'of errors gone at the next run']].forEach(([b, s]) => { const f = h('div', { cls: 'fact' }, $('#facts')); h('b', { text: b }, f); h('span', { text: s }, f); });
 
 const L = Object.fromEntries(D.learning.map(r => [r.cat, r]));
@@ -608,7 +608,7 @@ const findings = [
   ['Escape gets faster, for errors with a specific local fix.', `Each doubling of encounters cuts fix time by ${Math.abs(L.indent_block.pct)}% for a missing indented block, ${Math.abs(L.bracket.pct)}% for brackets, ${Math.abs(L.eq_assign.pct)}% for <code>=</code>/<code>==</code>, ${Math.abs(L.colon.pct)}% for the missing colon and ${Math.abs(L.comma.pct)}% for commas. The median colon fix falls from ${sec(L.colon.bins[0].med)} at the first encounter to ${sec(L.colon.bins[L.colon.bins.length - 1].med)} after 33+. The unspecific <code>invalid syntax</code> does not improve (${S(L.invalid_syntax.pct)}%).`],
   ['Errors about meaning do not get faster.', `NameError (${S(L.name.pct)}%), AttributeError (${S(L.attribute.pct)}%) and type/value errors (${S(L.type_value.pct)}%) get slightly slower as programs grow, and are flat once unit and page type are held constant. A hint in the message (“Did you mean …”) makes a NameError quicker to fix (${sec(D.name_hint['1'].med)} vs ${sec(D.name_hint['0'].med)}) but does not make students faster over time.`],
   ['The learning is retained, with some forgetting.', `The speed-up holds for the first such error of each day (colon ${S(FOD.colon.pct)}%, indentation ${S(FOD.indent_block.pct)}% per doubling of days). After a longer gap, fixes are slower again (colon ${S(FOD.colon.gap_pct)}% per doubling of days since last met).`],
-  ['Missing colon → indentation is a real chain.', `${P(C.window[0]['Missing colon'], 0)} of missing-colon errors are followed by an indentation error within 30 seconds, against ${P(C.window[0]['Other syntax errors'], 1)} after other syntax errors. The reverse order occurs in ${P(C.window[0]['Indentation then colon'], 1)}. The chain fades from ${P(C.by_unit[0].p)} of colon errors in unit 2 to ${P(C.by_unit[C.by_unit.length - 1].p)} in unit 12, but it never disappears. When it happens, the colon episode takes ${sec(C.episode_latency['with indentation step'].med)} instead of ${sec(C.episode_latency['colon only'].med)}.`],
+  ['Missing colon → indentation is a real chain.', `${P(C.window[0]['Missing colon'], 0)} of missing-colon errors are followed by an indentation error within 30 seconds, against ${P(C.window[0]['Other syntax errors'], 1)} after other syntax errors. The reverse order occurs in ${P(C.window[0]['Indentation then colon'], 1)}. Counted as fixes that turn straight into an indentation error, the chain fades from ${P(C.by_unit[0].p)} of colon errors in unit 2 to ${P(C.by_unit[C.by_unit.length - 1].p)} in unit 12, but it never disappears. When it happens, the colon episode takes ${sec(C.episode_latency['with indentation step'].med)} instead of ${sec(C.episode_latency['colon only'].med)}.`],
   ['Whack-a-mole persists.', `${P(W.share.multi)} of debugging episodes pass through two or more different errors, and ${P(W.share.wam)} through three or more. That share does not fall with experience (${S(W.within_adj.pp)} percentage points per doubling of episodes, holding unit) and rises with harder units. Each extra error adds about a minute.`],
   ['Classes look alike; students differ.', `All five classes show the same split: syntax escapes speed up (${D.classes.map(c => S(D.pooled[c.group].syntax.pct) + '%').join(', ')}) and runtime escapes do not. An estimated ${P(CL.slopes.syntax.share_faster)} of students speed up on syntax errors, against ${P(CL.slopes.runtime.share_faster)} on runtime errors. Clustering finds five overlapping profiles. The two cohorts differ (TE23 has more students in the “often stuck” and “whack-a-mole” profiles).`],
 ];
