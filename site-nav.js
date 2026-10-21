@@ -47,14 +47,14 @@
       file: "te22-te23-activity-trajectories.html", part: 1, nav: "Unit trajectories",
       title: "Activity across the units",
       question: "Who keeps up from unit to unit, who drops, and who comes back?",
-      role: "Follows students unit by unit. Relative activity is fairly stable from unit to unit (ICC\u00a0.50), a middle group moves between neighbouring states, and the least active group drops after unit 3 and partly recovers for the final project in 13 of 14 state definitions. Students on more active trajectories get higher grades in all 14 definitions (ρ\u00a0.21–.48); self-efficacy follows in only 3.",
+      role: "Follows students unit by unit. Relative activity is fairly stable from unit to unit (ICC\u00a0.50), a middle group moves between neighbouring states, and the least active group drops after unit 3 in all 14 state definitions and partly recovers for the final project in 11. Students on more active trajectories get higher grades in all 14 definitions (ρ\u00a0.26–.48); self-efficacy follows in only 4.",
       states: ["up", "flat", "down"]
     },
     {
       file: "how-many-student-clusters.html", part: 1, nav: "Student clusters",
       title: "One population, not groups",
       question: "Do students form distinct groups, or one continuous population?",
-      role: "Asks directly whether students fall into groups. Clustering 159 TE22 and TE23 students on log-derived factor scores (sessions, mastery, regularity, error proneness), over the full course and from week 8/9, finds one continuous population: silhouettes stay at 0.10–0.15, the gap statistic picks one cluster, and the two-component mixture that BIC prefers has a single peak. Its smaller component is a wider tail of sparse, error-prone activity, not a second type of student.",
+      role: "Asks directly whether students fall into groups. Clustering 153 TE22 and TE23 students on log-derived factor scores (sessions, mastery, regularity, error proneness), over the full course and from week 8/9, finds one continuous population: silhouettes stay at 0.10–0.15 and the gap statistic picks one cluster. Over the full course the two-component mixture that BIC prefers has a single peak: a core and a wider tail of sparse, error-prone activity, not a second type of student. From week 8/9 BIC prefers three components with three peaks, but that fit returns in only one refit in nine when six random students are left out.",
       states: ["flat", "down"]
     },
     {
@@ -68,7 +68,7 @@
       file: "te22a-schedule-and-activity.html", part: 2, nav: "One class's year",
       title: "One class, in lessons and out",
       question: "When and where does the practice happen?",
-      role: "The setting up close, for te22a. A third of active time falls outside lessons, mostly on creative tasks and the final project, and after-school minutes track the final-project grade (ρ\u00a0.64). The spring is weaker than the autumn. In all five classes, attending more lessons and working more minutes in and outside lessons go with higher grades (pooled ρ\u00a0.34, .46 and .43).",
+      role: "The setting up close, for te22a. A third of active time falls outside lessons, mostly on creative tasks and the final project, and after-school minutes track the final-project grade (ρ\u00a0.61). The spring is weaker than the autumn. In all five classes, attending more lessons and working more minutes in and outside lessons go with higher grades (pooled ρ\u00a0.34, .46 and .43).",
       states: ["up", "flat"]
     },
     {
@@ -82,21 +82,21 @@
       file: "programmering-1-te24c.html", part: 3, nav: "te24c up close",
       title: "One class, surveyed before and after",
       question: "Which ways of working go with a higher grade and a rise in self-efficacy?",
-      role: "The newest class (2025/26, 32 students) and the only one here surveyed both before and after the course. Self-efficacy already correlates ρ 0.56 with the final grade five months before the course and 0.81 by August, and students who earned more points and worked ahead gained the most. What students built (final-project decisions, ρ 0.74) and how efficiently they worked track the grade; time away from the platform in lessons goes with lower grades (ρ −0.44). Error, reading and focus measures cover units 1–4.",
+      role: "The newest class (2025/26, 27 students whose data may be used, 18 of them with grades) and the only one here surveyed both before and after the course. Self-efficacy already correlates ρ 0.73 with the final grade five months before the course and 0.80 by August; the gains go with points earned and working ahead, but not clearly. What students built (final-project decisions, ρ 0.74) and how efficiently they worked track the grade; time away from the platform in lessons points the same way, less clearly (ρ −0.39). Error, reading and focus measures cover units 1–4.",
       states: ["up", "flat", "down"]
     },
     {
       file: "te22-vs-te23.html", part: 3, nav: "TE22 vs TE23",
       title: "Two full years, two teachers",
       question: "Which findings hold in both cohorts, and which follow the teacher or the year?",
-      role: "The same measures for TE22 (2023/24) and TE23 (2024/25), using the scripts from the te24c analysis. Most findings hold in both cohorts and the same grade ladder appears in each; the decisions students build into their creative programs are one of the strongest grade links. Specific syntax messages get faster to fix in both; 'invalid syntax' and NameError do not. Self-efficacy tracks the grade in TE22 and te23b (ρ 0.62) and less clearly in te23c (0.22 with its final-project grade). Rebuilt on 20 Oct 2026 with the consent rules applied. Teacher style shows in pace and project size, while TE23's extra errors and guessing follow the year.",
+      role: "The same measures for TE22 (2023/24) and TE23 (2024/25), using the scripts from the te24c analysis. Most findings hold in both cohorts and the same grade ladder appears in each; the decisions students build into their creative programs are one of the strongest grade links. Specific syntax messages get faster to fix in both; 'invalid syntax' and NameError do not. Self-efficacy tracks the grade in TE22 (ρ 0.58) and te23b (0.62) and less clearly in te23c (0.22 with its final-project grade). Teacher style shows in pace and project size, while TE23's extra errors and guessing follow the year.",
       states: ["up", "flat"]
     },
     {
       file: "te23-grade-trajectories.html", part: 3, nav: "Grade trajectories",
       title: "Grades across the year",
       question: "Do students' grades hold steady from the first estimate to the final grade?",
-      role: "Follows te23b and te23c from the February 2025 estimate through the unit 10 grade and the June estimate to the final grade. The estimates are steady (February to June ρ 0.86 in te23b, 0.75 in te23c), and most students who move go up: 29 improved, 23 stayed and 9 went down. Unit 10 is a single, noisy assignment, and te23c's final is the project grade, so it moves more. Every drop of two or more steps ends in F. TE22 and te24c (added 19 Oct): the course grade follows the final project (ρ\u00a0.98 in te22b, .93 in te22c), early task grades predict it less, and in te24c nobody's final grade fell below their Creative task 3 grade.",
+      role: "Follows te23b and te23c from the February 2025 estimate through the unit 10 grade and the June estimate to the final grade. The estimates are steady (February to June ρ 0.86 in te23b, 0.75 in te23c), and most students who move go up: 29 improved, 23 stayed and 9 went down. Unit 10 is a single, noisy assignment, and te23c's final is the project grade, so it moves more. Every drop of two or more steps ends in F. TE22 and te24c: the course grade follows the final project (ρ\u00a0.98 in te22b, .93 in te22c), early task grades predict it less, and in te24c nobody's final grade fell below their Creative task 3 grade.",
       states: ["up", "flat", "down"]
     },
     {
@@ -110,7 +110,7 @@
       file: "pace-in-six-classes.html", part: 3, nav: "Pace",
       title: "Keeping up with the class",
       question: "Does working ahead of the class go with the grade in every class, and what sets the spread?",
-      role: "Measures pace the same way in all six classes, as each day's lead over the class median in lesson pages and checkpoints. Being ahead goes with the final grade in every class (pooled ρ\u00a0.60): students usually ahead average 4.1, those usually behind 1.9. How far a class spreads out follows the class: in teacher 1's two classes 75% of students stayed around the median, in teacher 2's 33% and in te24c 28%. Self-efficacy follows less clearly (ρ\u00a0.43), and 28 students fell further behind in the second half against 5 who caught up.",
+      role: "Measures pace the same way in all six classes, as each day's lead over the class median in lesson pages and checkpoints. In each of the five TE22 and TE23 classes, being ahead goes with the final grade (pooled ρ\u00a0.63): students usually ahead average 4.0, those usually behind 1.7. In te24c (18 graded students) the link points the same way but is unclear. How far a class spreads out follows the class: in teacher 1's two classes 75% of students stayed around the median, in teacher 2's 36% and in te24c 22%. Self-efficacy follows less clearly (ρ\u00a0.45), and in the five classes 20 students fell further behind in the second half against 4 who caught up.",
       states: ["up", "down"]
     },
     {
