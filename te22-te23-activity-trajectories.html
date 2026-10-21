@@ -1,6 +1,6 @@
 <!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
 <script src="site-nav.js"></script>
-<title>TE22–TE23 Activity Trajectories</title>
+<title>Activity across the units</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Condensed:wght@500;600&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap">
@@ -162,7 +162,7 @@ pre.code { background: var(--code-bg); border-radius: 8px; padding: 14px 16px; o
 <main class="page">
   <header class="top">
     <div class="eyebrow">VaSSTra re-analysis · CMU CS Academy event logs · 2023/24 and 2024/25</div>
-    <h1>Activity states, sequences and trajectories across units 1–12</h1>
+    <h1>Activity across the units</h1>
     <p class="lede measure">The VaSSTra steps (variables → states → sequences → trajectories) applied to the TE22 and TE23 logs: each student's activity in a unit becomes a state, the states over the units a sequence, and the sequences are grouped into trajectories. Every number on this page comes from the event counts per student and unit.</p>
     <div class="meta">
       <span><b>153</b> students</span><span><b>5</b> classes (te22a/b/c, te23b/c)</span><span><b>12</b> units</span><span><b id="m-events"></b> events</span><span><b id="m-inunit"></b> in a unit</span><span><b>14</b> state definitions compared</span>
@@ -248,7 +248,7 @@ pre.code { background: var(--code-bg); border-radius: 8px; padding: 14px 16px; o
     <div class="sec-head">
       <div class="eyebrow">Steps 2 and 3 · States → sequences → trajectories</div>
       <h2>Trajectory explorer</h2>
-      <p class="measure" style="margin:0">Each student's 12 states form one sequence in curriculum order. Every class worked through the units in order, from August to May. Distances are LCS, as in the chapter: TraMineR's <code>seqdist(method = "LCS")</code>, which is |x| + |y| − 2·LCS. Trajectories are Ward clusters (<code>hclust(…, "ward.D2")</code> in R), pooled over 500 random row orders. T1 is always the most active trajectory.</p>
+      <p class="measure" style="margin:0">Each student's 12 states form one sequence in curriculum order. Every class worked through the units in order, from August to May. Distances are LCS, as in the book chapter: TraMineR's <code>seqdist(method = "LCS")</code>, which is |x| + |y| − 2·LCS. Trajectories are Ward clusters (<code>hclust(…, "ward.D2")</code> in R), pooled over 500 random row orders. T1 is always the most active trajectory.</p>
     </div>
     <div class="controls" role="group" aria-label="Explorer settings">
       <div class="ctl"><label for="sel-sol">State definition</label><select id="sel-sol"></select></div>
