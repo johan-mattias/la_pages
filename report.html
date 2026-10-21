@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Block, Text & Self-Efficacy Overview</title>
+<title>Where students start and finish</title>
 <style>
 :root {
   color-scheme: light;
@@ -155,9 +155,9 @@ svg text { font-family: system-ui, -apple-system, "Segoe UI", sans-serif; }
 <main>
 <header class="top">
   <div>
-    <h1>Block, text, grades & self-efficacy</h1>
-    <p class="lede">Exploratory overview of the TE22 and TE23 cohorts at NTI Uppsala</p>
-    <p class="meta">Built <span data-v="built"></span> from <code>organized/</code> · the page shows groups and anonymous points, never single students · exploratory, not confirmatory</p>
+    <h1>Where students start and finish</h1>
+    <p class="lede">Block and text entry scores, grades and self-efficacy in the TE22 and TE23 cohorts at NTI Uppsala: an exploratory overview</p>
+    <p class="meta">the page shows groups and anonymous points, never single students · exploratory, not confirmatory</p>
   </div>
   <button class="theme" id="themeBtn" type="button">Theme: auto</button>
 </header>
@@ -166,9 +166,9 @@ svg text { font-family: system-ui, -apple-system, "Segoe UI", sans-serif; }
   <h3 style="margin-top:0">What stands out</h3>
   <ol class="findings">
     <li><strong>The answer key can be recovered from the forms.</strong> One key reproduces every student's total score exactly in all three administrations, so per-question correctness is reliable without a separate key.</li>
-    <li><strong>Block is slightly easier than text, and the gap is in the second half of each section.</strong> Text matches or beats block on questions 3–8 but falls 14–40 points behind on every question from 9 to 14 (the loop questions, if the ordering in your description holds).</li>
+    <li><strong>Block is slightly easier than text, and the gap is in the second half of each section.</strong> Text matches or beats block on questions 3–8 but falls 14–40 points behind on every question from 9 to 14 (most likely the loop questions).</li>
     <li><strong>Programming in free time matters most, and matters more for text.</strong> Each step up in free-time hours is worth ≈<span data-v="experience_ols.per_step_free|1"></span> points out of 28, about twice the effect of hours in compulsory school. Whether school was mostly block or mostly text shows no relationship with either score.</li>
-    <li><strong>On average, the chain you expected holds:</strong> experience → entry score → grade → self-efficacy, with ρ ≈ 0.4–0.55 at each link. The direct links that skip a step are weaker (ρ ≈ 0.2–0.35), which looks like a sequence rather than one underlying trait.</li>
+    <li><strong>On average, the expected chain holds:</strong> experience → entry score → grade → self-efficacy, with ρ ≈ 0.4–0.55 at each link. The direct links that skip a step are weaker (ρ ≈ 0.2–0.35), which looks like a sequence rather than one underlying trait.</li>
     <li><strong>About a third of students change lanes.</strong> Of <span data-v="n_profiles"></span> students with both an entry score and a final grade, <span data-v="profiles.1.n"></span> climbed (bottom half at entry → C or above) and <span data-v="profiles.2.n"></span> slipped (top half at entry → D or below).</li>
     <li><strong>Climbers and slippers differ in what they do, not what they knew.</strong> Climbers had little prior experience, but they handed everything in, worked outside class as much as the strongest group, and report higher self-efficacy than either group that finished low. Slippers had more to start with but more missing work and the lowest self-efficacy of the four groups.</li>
     <li><strong>Self-efficacy follows the grade more closely than the starting point</strong> (ρ <span data-v="chain.grade→SE.all.rho|2"></span> vs <span data-v="chain.entry→SE.all.rho|2"></span>). Asking AI for help is unrelated to grades and to self-efficacy, so it is not a marker of struggling.</li>
@@ -187,55 +187,15 @@ svg text { font-family: system-ui, -apple-system, "Segoe UI", sans-serif; }
   <div class="tile"><div class="label">Near ceiling on block (≥13)</div><div class="value" data-v="block_ceiling_pct"></div><div class="sub">vs <span data-v="text_ceiling_pct"></span> on text</div></div>
 </div>
 
-<div class="card">
-  <h3 style="margin-top:0">Can the right answers be read from the survey?</h3>
-  <p>Yes. Google Forms exports each student's total <em>Score</em> but not which questions were right. With 150 + 83 + 27 students there is only one answer key that reproduces every total, and searching for it gives the same key in all three forms, with zero mismatches. The two example questions are not scored, which leaves <strong>28 scored questions: 14 block and 14 text</strong>.</p>
-  <p class="callout"><strong>Please check:</strong> your description adds up to 12 per section (2 assignment, 4 conditionals, 2 for, 2 while, 2 loop+conditional), but each section has 14. One reading that fits 14 is assignment 1–2, conditionals 3–8, for 9–10, while 11–12, loop+conditional 13–14. Under your 12-question description, positions 13–14 would be unlabelled. The overall findings don't depend on this mapping, but the per-concept conclusions do. If you tell me the order, I'll add concept labels.</p>
-  <p class="small">A naive "most common answer" key would be wrong on question 26 (answer 6, most beginners say 4), question 29 (answer 1, most say 0) and, in 2023, question 15. The reconstructed key with % correct per question is in <code>analysis/answer_key.csv</code>.</p>
-</div>
-
-<figure class="card">
-  <figcaption>Where text falls behind block</figcaption>
-  <div class="sub">% correct per question position, both entry cohorts pooled (n = <span data-v="entry_n"></span>). The shaded rows are where text trails block by 10+ points.</div>
-  <div class="legend"><span><i class="sw" style="background:var(--series-1)"></i>Block</span><span><i class="sw" style="background:var(--series-2)"></i>Text</span></div>
-  <div class="chart" id="c-items"></div>
-  <details><summary>Show table</summary><div class="tablewrap" id="t-items"></div></details>
-</figure>
-<p>Text questions 3–8 are answered as well as block, sometimes better: position 5 is 85% in text vs 52% in block. Text questions 9–14 are where students struggle (24–47%). Question 2 is the one early exception, where text trails block by 19 points. Question 13 is the hardest in both sections and still the hardest for TE22 two years later (68% block, 44% text). This pattern fits the literature on loop semantics in text (range bounds, update of the loop variable) being harder than block <em>repeat</em>. The block section also has a ceiling problem: <span data-v="block_ceiling_pct"></span> score 13–14, which compresses differences at the top.</p>
+<p>Block is slightly easier than text, and the gap sits in the second half of each section: text matches block on questions 3–8 and falls behind on questions 9–14, most likely the loop questions. The block section also has a ceiling problem. The answer key was recovered from the forms' total scores and reproduces every recorded total. <a href="TE22-TE23_SCT_replication.html#test-scores">Chapter 12</a> has the full analysis for the five study classes: the scores, the twin items that pose the same task in block and in text, and every item.</p>
 
 <!-- ============================================================ 2 -->
 <h2 id="experience">2 · Prior experience and the entry scores</h2>
-<div class="grid2">
-  <figure class="card">
-    <figcaption>Programming in free time</figcaption>
-    <div class="sub">Mean score (of 14) by self-reported hours before upper secondary</div>
-    <div class="legend"><span><i class="sw sq" style="background:var(--series-1)"></i>Block</span><span><i class="sw sq" style="background:var(--series-2)"></i>Text</span></div>
-    <div class="chart" id="c-free"></div>
-  </figure>
-  <figure class="card">
-    <figcaption>Programming in compulsory school</figcaption>
-    <div class="sub">Mean score (of 14) by hours of programming in lessons</div>
-    <div class="legend"><span><i class="sw sq" style="background:var(--series-1)"></i>Block</span><span><i class="sw sq" style="background:var(--series-2)"></i>Text</span></div>
-    <div class="chart" id="c-school"></div>
-  </figure>
-</div>
-<div class="card">
-  <h3 style="margin-top:0">Rank correlations with the entry scores</h3>
-  <div class="tablewrap" id="t-exp"></div>
-  <p class="small">Spearman ρ; ** p &lt; .01, * p &lt; .05. In a regression with both, each step of free-time hours adds ≈<span data-v="experience_ols.per_step_free|1"></span> points (of 28) and each step of school hours ≈<span data-v="experience_ols.per_step_school|1"></span>.</p>
-</div>
-<p>Three things are worth noting. First, <strong>free-time programming is the strongest predictor, and more so for text</strong> (ρ ≈ .45) than block (ρ ≈ .37), in both cohorts. Students who code on their own seem to bring the text-specific knowledge the block items don't need. Second, <strong>having done block programming at all</strong> (Scratch etc.) goes with higher scores in <em>both</em> sections, while having done text in school adds little. Third, <strong>whether school was mostly block or mostly text makes no difference</strong>, so the amount of exposure matters more than the modality. The few 15+ hour students dip slightly on block (n = 14), which looks like noise or ceiling effects.</p>
+<p><strong>Programming in free time is the strongest predictor of the entry scores, and more so for text</strong> (ρ ≈ .45) than for block (ρ ≈ .37), in both cohorts. In a regression with both, each step of free-time hours adds ≈<span data-v="experience_ols.per_step_free|1"></span> points (of 28) and each step of school hours ≈<span data-v="experience_ols.per_step_school|1"></span>. Whether school was mostly block or mostly text makes no difference, so the amount of exposure matters more than the modality. <a href="TE22-TE23_SCT_replication.html#test-experience">Chapter 12</a> has the analysis for the study classes.</p>
 
 <!-- ============================================================ 3 -->
 <h2 id="retest">3 · TE22 two years later (same test, Jan 2025)</h2>
-<figure class="card">
-  <figcaption>Everyone improves, and most reach the ceiling</figcaption>
-  <div class="sub">Total score (of 28) in Sept 2022 → Jan 2025, one row per student (n = <span data-v="followup.n"></span>), sorted by 2022 score</div>
-  <div class="legend"><span><i class="sw" style="background:var(--series-1-soft)"></i>2022</span><span><i class="sw" style="background:var(--series-1)"></i>2025</span><span><i class="sw sq" style="background:var(--ceiling);border:1px solid var(--grid)"></i>26–28 (ceiling)</span></div>
-  <div class="chart" id="c-fu"></div>
-  <details><summary>Show table</summary><div class="tablewrap" id="t-fu"></div></details>
-</figure>
-<p>The mean rose from <span data-v="followup.mean_22|1"></span> to <span data-v="followup.mean_25|1"></span>, and <span data-v="followup.at_ceiling_25"></span> of <span data-v="followup.n"></span> students now score 26–28. The students who started lowest gained the most (ρ start vs gain = <span data-v="followup.gain_vs_start.rho"></span>), but that is largely forced by the ceiling, so the test can no longer tell the stronger third-year students apart. If you reuse it, it needs harder items (nested loops, functions, lists) to measure growth past year 1.</p>
+<p>Everyone improves, and most reach the ceiling. The mean rose from <span data-v="followup.mean_22|1"></span> to <span data-v="followup.mean_25|1"></span> (of 28), and <span data-v="followup.at_ceiling_25"></span> of <span data-v="followup.n"></span> students now score 26–28, so the test can no longer tell the stronger third-year students apart. Measuring growth past year 1 would need harder items (nested loops, functions, lists). <a href="TE22-TE23_SCT_replication.html#test-followup">Chapter 12</a> has the follow-up for the study classes.</p>
 
 <!-- ============================================================ 4 -->
 <h2 id="pathways">4 · Grade pathways</h2>
@@ -246,7 +206,7 @@ svg text { font-family: system-ui, -apple-system, "Segoe UI", sans-serif; }
     <div class="chart" id="c-te23tr"></div>
   </figure>
   <figure class="card">
-    <figcaption>TE22b/c: first unit → final grade</figcaption>
+    <figcaption>te22b and te22c: first unit → final grade</figcaption>
     <div class="sub">Unit 4 grade vs course grade. te22a is left out because its first unit is graded only E/F.</div>
     <div class="chart" id="c-te22tr"></div>
   </figure>
@@ -299,7 +259,7 @@ svg text { font-family: system-ui, -apple-system, "Segoe UI", sans-serif; }
 
 <div class="card">
   <h3 style="margin-top:0">"Who improved most in self-efficacy?" — not answerable yet</h3>
-  <p>The SCT was given once (2025), so there is no individual change to measure. The earlier forms used different scales: attitudes in 2022, and a general self-efficacy scale in 2023/2025 whose answer options changed between rounds. The survey code list shows te23 students registering again in August 2026 as "te4". <strong>If a 2026 SCT round exists, that gives a true second wave</strong> for these students.</p>
+  <p>The SCT was given once (2025), so there is no individual change to measure. The earlier forms used different scales: attitudes in 2022, and a general self-efficacy scale in 2023/2025 whose answer options changed between rounds. A later SCT round would give these students a true second wave; <a href="programmering-1-te24c.html">Chapter 9</a> follows one class, te24c, surveyed before and after its course.</p>
   <p>The closest thing available now is <strong>calibration</strong>: self-efficacy compared with the grade the student actually received (ranks within cohort). Students fall on both sides: some rate themselves well above their grade, and some capable students rate themselves well below it. The second kind may matter most for who continues with programming.</p>
 </div>
 <div class="lathread" role="note"><span class="lathread-k">Story thread · Improvement, defined</span><p>Until a second wave exists, the story reads improvement through its main source instead: the mastery experiences recorded in the logs, such as finishing what you attempt and getting past errors (<a href="self-efficacy-granularity-study.html#drivers">Chapter 2</a>), and the grades that self-efficacy tracks. See <a href="index.html#defined">how the story defines improvement</a>.</p></div>
@@ -312,7 +272,7 @@ svg text { font-family: system-ui, -apple-system, "Segoe UI", sans-serif; }
   <div class="chart" id="c-chain"></div>
   <details><summary>Show all correlations by cohort</summary><div class="tablewrap" id="t-chain"></div></details>
 </figure>
-<p>Your basic model holds <em>on average</em>, and each link is roughly as strong as the next. But the links that skip a step are clearly weaker: free-time experience → grade is only ρ <span data-v="chain.hrs_free→grade.all.rho"></span>. That points to a <strong>chain of stages</strong>, where each stage opens a new chance to diverge, rather than one stable "programming ability" running through everything. The self-efficacy link is also cross-sectional: the SCT was collected near the end of the course, so it more likely reflects the grade (mastery experience, in Bandura's terms) than causes it.</p>
+<p>The expected chain holds <em>on average</em>, and each link is roughly as strong as the next. But the links that skip a step are clearly weaker: free-time experience → grade is only ρ <span data-v="chain.hrs_free→grade.all.rho"></span>. That points to a <strong>chain of stages</strong>, where each stage opens a new chance to diverge, rather than one stable "programming ability" running through everything. The self-efficacy link is also cross-sectional: the SCT was collected near the end of the course, so it more likely reflects the grade (mastery experience, in Bandura's terms) than causes it.</p>
 
 <figure class="card">
   <figcaption>Where students started vs where they finished</figcaption>
@@ -334,41 +294,13 @@ svg text { font-family: system-ui, -apple-system, "Segoe UI", sans-serif; }
 <div class="lathread" role="note"><span class="lathread-k">Story thread · Improves and drops</span><p>What separates climbers from slippers is visible in the logs too. Finishing the exercises you attempt is the strongest log correlate of self-efficacy (ρ&nbsp;.41, <a href="self-efficacy-granularity-study.html#drivers">Chapter 2</a>), and in te22a after-school minutes track the final-project grade (ρ&nbsp;.64, <a href="te22a-schedule-and-activity.html#grades">Chapter 7</a>). Missing work is the grade-book side of missed weeks: after an absent week, the next week is absent 41% of the time (<a href="log-atlas.html#sequence">Chapter 3</a>).</p></div>
 
 <h3>So is behaviour static?</h3>
-<p>Mostly, with important exceptions. Grades within a course are sticky (the Feb estimate predicts the final grade at ρ <span data-v="grades.te23_rho_first_final.rho"></span>), and entry score predicts the final grade at ρ <span data-v="chain.entry.all.rho|2"></span>. Still, <strong>about 3 in 10 students end up somewhere their starting point wouldn't predict</strong>, and the variables that separate them (handing work in, working outside class, enjoyment, self-efficacy) are things a teacher can actually influence. Prior experience is not. For a paper, the profile split is a good motivation for a person-centred analysis (latent profile or latent transition analysis) once more cohorts are added. With <span data-v="n_profiles"></span> students, the four groups here should be read as descriptive.</p>
+<p>Mostly, with important exceptions. Grades within a course are sticky (the Feb estimate predicts the final grade at ρ <span data-v="grades.te23_rho_first_final.rho"></span>), and entry score predicts the final grade at ρ <span data-v="chain.entry.all.rho|2"></span>. Still, <strong>about 3 in 10 students end up somewhere their starting point wouldn't predict</strong>, and the variables that separate them (handing work in, working outside class, enjoyment, self-efficacy) are things a teacher can actually influence. Prior experience is not. The profile split motivates a person-centred analysis (latent profile or latent transition analysis) once more cohorts are added. With <span data-v="n_profiles"></span> students, the four groups here are descriptive, and <a href="how-many-student-clusters.html">Chapter 5</a> finds that the log data form one continuous population, so read them as regions of it rather than as types.</p>
 
 <!-- ============================================================ 7 -->
 <h2 id="goals">7 · Goals, help-seeking and habits: what goes together?</h2>
 <p class="muted">Exploratory factor analysis of the 16 items at the end of the SCT survey: 8 goal items, 4 help-seeking items and 4 habit items, with TE22 and TE23 pooled (n = <span data-v="fa.n"></span> complete answers out of <span data-v="fa.n_consenting"></span>). The emotion items are left out because only 4 students answered them.</p>
 
-<div class="tiles">
-  <div class="tile"><div class="label">Sampling adequacy (KMO)</div><div class="value" data-v="fa.kmo|2"></div><div class="sub">Bartlett's test p &lt; .001: suitable for FA</div></div>
-  <div class="tile"><div class="label">Factors suggested</div><div class="value">2–4</div><div class="sub">2 = robust, 4 = refined (see below)</div></div>
-  <div class="tile"><div class="label">Survey sections as scales (α)</div><div class="value" data-v="fa_sections"></div><div class="sub">goals · help · habits: too low to sum</div></div>
-  <div class="tile"><div class="label">Same structure with Spearman ρ</div><div class="value">≥ <span data-v="fa_min_cong"></span></div><div class="sub">Tucker congruence, 4-factor solution</div></div>
-</div>
-
-<div class="grid2">
-  <figure class="card">
-    <figcaption>How many factors?</figcaption>
-    <div class="sub">Eigenvalues of the correlation matrix vs what random data of the same size produces (95th percentile, 1,000 simulations)</div>
-    <div class="legend"><span><i class="sw" style="background:var(--series-1)"></i>Observed</span><span><i class="sw" style="background:var(--deemph)"></i>Random (parallel analysis)</span></div>
-    <div class="chart" id="c-scree"></div>
-  </figure>
-  <div class="card">
-    <h3 style="margin-top:0">Model fit by number of factors</h3>
-    <div class="tablewrap" id="t-fit"></div>
-    <p class="small">ML estimation. RMSEA ≤ .06 and TLI ≥ .90–.95 are the usual targets; lower BIC is better. Parallel analysis (components) says <span data-v="fa.pa.retain_pc"></span>, parallel analysis (factors) says <span data-v="fa.pa.retain_fa"></span>, and Velicer's MAP says <span data-v="fa.map_k"></span>–2. Fit becomes acceptable at 4.</p>
-  </div>
-</div>
-
-<p>The tests disagree, as they often do with about 90 students. The honest reading has two levels. <strong>Two factors</strong> are very stable (median bootstrap congruence <span data-v="fa.solutions.2.bootstrap.median_congruence.Engagement|2"></span> and <span data-v="fa.solutions.2.bootstrap.median_congruence.Help from others|2"></span>). Separately, <strong>four factors</strong> fit acceptably (RMSEA <span data-v="fa_fit4_rmsea"></span>, TLI <span data-v="fa_fit4_tli"></span>) and split the first factor into interpretable parts, but they are less stable (bootstrap congruence .84–.93). A three-factor solution is the least stable of all and isn't shown.</p>
-
-<figure class="card">
-  <figcaption>Four-factor solution</figcaption>
-  <div class="sub">Pattern loadings (minres, oblimin). Blue = positive, red = negative; loadings below .30 are faded. h² = communality; "stable" = share of 300 bootstrap samples in which the item had the same main factor.</div>
-  <div class="tablewrap" id="t-load4"></div>
-  <details><summary>Show the two-factor solution</summary><div class="tablewrap" id="t-load2"></div></details>
-</figure>
+<p>Two factors are very stable, and four fit acceptably and split the first into interpretable parts; the survey sections themselves are too unreliable to sum. <a href="TE22-TE23_SCT_replication.html#sct-structure">Chapter 12</a> has the factor analysis for the consented study classes, with model fit and loadings. The four factors:</p>
 
 <div class="callout">
   <p><strong>Future &amp; utility:</strong> learning to prepare for university, get a job, make projects and understand the digital world, plus doing schoolwork outside class.</p>
@@ -378,27 +310,6 @@ svg text { font-family: system-ui, -apple-system, "Segoe UI", sans-serif; }
   <p>In the two-factor view the first two merge into one <strong>Engagement</strong> factor, and the course-bound items drop out.</p>
 </div>
 
-<p>Several details are worth noting for the genAI and help-seeking part of your work:</p>
-<ul>
-  <li><strong>AI help behaves like asking a classmate, not like asking the teacher.</strong> AI–peers r = <span data-v="fa_r_ai_peers"></span> vs AI–teacher r = <span data-v="fa_r_ai_teacher"></span>. AI loads weakest on the help factor (h² ≈ .20), so it is partly its own behavior.</li>
-  <li><strong>Solving it yourself is not the opposite of asking for help.</strong> Self vs classmates r = <span data-v="fa_r_self_peers"></span>. Self-reliance goes with <em>enjoyment</em> instead (r = <span data-v="fa_r_self_fun"></span>), so it reads more as intrinsic motivation than as a help-seeking style.</li>
-  <li><strong>The habits don't form an in-school vs out-of-school dimension</strong> (habits as a scale: α = <span data-v="fa_alpha_habits"></span>). Each habit attaches to a type of motivation: working outside class goes with future/utility, finishing in class and own projects with enjoyment, and working only before deadlines with course-bound.</li>
-  <li><strong>"My parents expect it" doesn't fit well.</strong> It cross-loads (future .49, course-bound .33) but has a low communality (.21). 67% answered 1, and it has the lowest sampling adequacy (MSA .36), so I left it out of the scales.</li>
-</ul>
-
-<div class="grid2">
-  <div class="card">
-    <h3 style="margin-top:0">Scales (mean of the items)</h3>
-    <div class="tablewrap" id="t-scales"></div>
-    <p class="small">The two 3-item scales are only modestly reliable, so treat them as provisional.</p>
-  </div>
-  <div class="card">
-    <h3 style="margin-top:0">How the scales relate to outcomes</h3>
-    <div class="tablewrap" id="t-links"></div>
-    <p class="small">Spearman ρ; ** p &lt; .01, * p &lt; .05. Blue = positive, red = negative.</p>
-  </div>
-</div>
-
 <figure class="card">
   <figcaption>Scale means by profile (section 6)</figcaption>
   <div class="sub">Mean of 1–7 items; stronger blue = higher within each column. Profile groups are small (n shown).</div>
@@ -406,12 +317,11 @@ svg text { font-family: system-ui, -apple-system, "Segoe UI", sans-serif; }
 </figure>
 
 <p><strong>What this adds to the profiles:</strong> enjoyment and self-reliance is the scale most tied to grades (ρ <span data-v="fa.links.Enjoyment & self-reliance.grade_final.rho|2"></span>) and self-efficacy (ρ <span data-v="fa.links.Enjoyment & self-reliance.se_core.rho|2"></span>). Help from others is unrelated to grades, but it is <strong>highest among climbers</strong>; the other three groups are about the same. Climbers are close to the steady-strong group on enjoyment and future goals <em>and</em> ask for help more. Slippers are as low on future goals as the struggling group and in between on enjoyment. Climbers and steady-struggling students are the most course-bound, and steady-struggling students enjoy programming least. With 11–12 students in each small group these differences are suggestive, but they fit the climber story: <em>motivated students who also ask for help move up.</em> TE22 and TE23 do not differ significantly on any scale.</p>
-<p class="callout"><strong>Next step for a paper:</strong> this structure was found and scored in the same sample, so it needs confirming. Your old codebook lists about 200 TE24/TE25 students who registered SCT IDs. If their SCT responses exist, they are an independent sample for a <strong>confirmatory factor analysis</strong> of the 2- and 4-factor models. Polychoric correlations would be the more rigorous choice there; Spearman gave the same structure here.</p>
 
 <h2 id="caveats">Caveats</h2>
 <ul>
   <li><strong>Consent:</strong> assessment and survey answers are used only with a “Ja” to their own consent question, and grades are left out for students who said “Nej” to StudyBee data (<span data-v="consent_text"></span>). Grades of students who never answered the survey, and so never answered the consent question, are included, as in the other chapters.</li>
-  <li><strong>Missing identities:</strong> 6 TE22 students can't be linked to assessment answers: 5 don't appear in any TE22 form, and 1 is missing from the login lists. One link was made from a near-identical spelling and is flagged in <code>code_book.csv</code>.</li>
+  <li><strong>Missing identities:</strong> 6 TE22 students can't be linked to assessment answers: 5 don't appear in any TE22 form, and 1 is missing from the login lists. One link was made from a near-identical spelling.</li>
   <li><strong>Small groups:</strong> the class-level and profile-level numbers rest on 10–50 students each. Treat differences as hypotheses.</li>
   <li><strong>Grades are on a 0–5 scale</strong> (F = 0 … A = 5) for correlations; te22 and te23 grading structures differ (units vs repeated overall estimates).</li>
   <li><strong>Timing:</strong> the SCT (2025) was collected after or near the end of the course, so it can't be read as a predictor of those grades.</li>
@@ -871,11 +781,12 @@ function faTables() {
 }
 
 function renderAll() {
-  screeChart();
-  itemsChart();
-  groupedBars("c-free", D.experience_means.hrs_free);
-  groupedBars("c-school", D.experience_means.hrs_school);
-  followupChart();
+  const has = id => !!document.getElementById(id);   // sections 1-3 and 7 link to chapter 12 since 21 Oct 2026
+  if (has("c-scree")) screeChart();
+  if (has("c-items")) itemsChart();
+  if (has("c-free")) groupedBars("c-free", D.experience_means.hrs_free);
+  if (has("c-school")) groupedBars("c-school", D.experience_means.hrs_school);
+  if (has("c-fu")) followupChart();
   heatmap("c-te23tr", D.grades.te23_transition_first_final, "Feb 2025", "Final grade");
   heatmap("c-te22tr", D.grades.te22_transition_first_final.map(r => r), "Unit 4", "Final grade");
   missingChart();
