@@ -214,7 +214,8 @@ ol.open li p{grid-column:2;margin:0;color:var(--ink2)}
 ol.open li p b{color:var(--fg)}
 ol.open li .refs{grid-column:2;margin-top:.15rem}
 
-footer.foot{padding-block:2.4rem 1rem;color:var(--muted);font-size:.86rem;line-height:1.55}
+footer.key{display:grid;grid-template-columns:minmax(9rem,13rem) minmax(0,1fr);gap:.55rem 1.2rem;margin:1.4rem 0 0;max-width:52rem}.key dt{font-weight:700}.key dd{margin:0;color:var(--ink,inherit)}@media (max-width:640px){.key{grid-template-columns:1fr}.key dd{margin-bottom:.5rem}}.key-h{margin-top:2rem}.changes{margin:.6rem 0 0;padding-left:1.1rem;display:grid;gap:.55rem;max-width:52rem}
+.foot{padding-block:2.4rem 1rem;color:var(--muted);font-size:.86rem;line-height:1.55}
 footer.foot p{max-width:48rem}
 @media (max-width:560px){body{font-size:16.5px}.lede{font-size:1.1rem}}
 @media print{nav.rail{display:none}section.band{break-inside:auto}.card,.cc,.state,.tl-i{break-inside:avoid}}
@@ -598,7 +599,7 @@ footer.foot p{max-width:48rem}
         <span class="cn">Chapter 2</span>
         <h4><a href="self-efficacy-granularity-study.html">Mastery experience in the logs</a></h4>
         <p class="q">Which traces of practice go with high self-efficacy, and when do they show?</p>
-        <p class="r">Turns mastery experience into log measures. Finishing what you attempt (ρ&nbsp;.41), getting past an error on the next run (ρ&nbsp;.33) and coming back regularly go with higher end-of-course self-efficacy. The signal is invisible in the first month and appears around week 12.</p>
+        <p class="r">Turns mastery experience into log measures. Finishing what you attempt (ρ&nbsp;.41), recovering from an error on the next run (ρ&nbsp;.33) and coming back regularly go with higher end-of-course self-efficacy. The signal is invisible in the first month and appears around week 12.</p>
         <div class="chips"><span class="lachip up"><span class="lachip-i" aria-hidden="true">↗</span>Improves</span><span class="lachip flat"><span class="lachip-i" aria-hidden="true">→</span>Stalls</span></div>
         <p class="keys"><span class="kk">Start at</span><a href="self-efficacy-granularity-study.html#summary">What the analysis found</a><a href="self-efficacy-granularity-study.html#forward">Forward windows</a><a href="self-efficacy-granularity-study.html#drivers">What goes with high self-efficacy</a></p>
       </article>
@@ -740,11 +741,38 @@ footer.foot p{max-width:48rem}
       <div class="refs"><a class="ref" href="self-efficacy-granularity-study.html#drivers"><span class="rn">Ch 2</span><span class="rt">Active-day regularity</span></a><a class="ref" href="log-atlas.html#theory"><span class="rn">Ch 3</span><span class="rt">Day-to-day variability</span></a></div></li>
     <li><p><b>The sources the logs cannot see.</b> Seeing peers succeed and being encouraged leave no trace in the platform. The help-seeking items are the nearest proxy: climbers asked others for help the most, slippers the least.</p>
       <div class="refs"><a class="ref" href="report.html#goals"><span class="rn">Ch 1</span><span class="rt">Goals, help-seeking and habits</span></a></div></li>
-    <li><p><b>Who is missing.</b> 57 logged students, 36% of the total, have no class label or survey response, so they are invisible to every behaviour-to-self-efficacy result. Their activity looks like everyone else’s.</p>
+    <li><p><b>Who is missing.</b> 57 of the 159 logged students did not answer the 2025 survey. Their classes are known and their activity looks like everyone else’s, but every behaviour-to-self-efficacy result rests on the 102 who did.</p>
       <div class="refs"><a class="ref" href="log-atlas.html#data"><span class="rn">Ch 3</span><span class="rt">The files</span></a></div></li>
     <li><p><b>Student or setting?</b> Class membership shapes the trajectories (2 of 25 te22a students are in the most active trajectory, against 18 of 30 in te22b), and the timetable sets how much practice fits in a week. Pace adds a third sign: in one teacher’s two classes three quarters of the students stayed around the class median, in the other four classes 19–52%. Standardising within class and modelling the timetable would separate the student from the setting.</p>
       <div class="refs"><a class="ref" href="te22-te23-activity-trajectories.html#findings"><span class="rn">Ch 4</span><span class="rt">Part of it is a class effect</span></a><a class="ref" href="te22a-schedule-and-activity.html#timetable"><span class="rn">Ch 7</span><span class="rt">The timetable</span></a><a class="ref" href="how-often-and-how-long-classes-meet.html#discussion"><span class="rn">Ch 8</span><span class="rt">Teachers set the pace</span></a><a class="ref" href="pace-in-six-classes.html#spread"><span class="rn">Ch 13</span><span class="rt">The spread follows the class</span></a></div></li>
   </ol>
+
+</div>
+</section>
+<section class="band" id="key">
+<div class="wrap">
+  <div class="col">
+    <p class="eyebrow">6 · Reading the site</p>
+    <h2>Key, and what changed</h2>
+    <p>The names and counts the chapters share, and the corrections made since the site went up. Last updated 21 Oct 2026.</p>
+  </div>
+  <dl class="key">
+    <dt>Cohorts and classes</dt><dd>TE22 took the course in 2023/24 (classes te22a, te22b and te22c) and TE23 in 2024/25 (te23b and te23c); te24c took it in 2025/26 and is reported on its own. Teacher 1 taught te22b and te22c, teacher 2 te22a, te23b and te23c; chapter 13 calls te24c’s teacher teacher 3.</dd>
+    <dt>Units</dt><dd>CMU CS Academy’s CS1 course has 12 units, and unit 12 is the final project. The site counts in units, not in the platform’s chapters.</dd>
+    <dt>Grades</dt><dd>The final grade is the course grade, A–F, coded A&nbsp;=&nbsp;5 to F&nbsp;=&nbsp;0. The final-project grade is the grade on the unit 12 project; te23c’s final grade is its final-project grade. Estimates are the teachers’ interim grades.</dd>
+    <dt>Students</dt><dd>The TE22 and TE23 class lists hold 165 students. 159 of them have events in the logs, and 153 remain once the 6 who declined the use of their CS Academy data are left out (chapters 4–7). Chapter 12 counts the platform exports instead: 159 of the 165 after the same rule.</dd>
+    <dt>Survey answers</dt><dd>The 2025 self-efficacy survey has 103 answers (70 from TE22, 33 from TE23), 102 of them linked to log data. Chapters that apply the survey’s consent question use 98 (chapter 12) to 100 (chapter 1) of them; chapter 2 models the 99 students with log data and at least 12 of the 15 core items answered.</dd>
+    <dt>Course years</dt><dd>TE22’s course ran from August 2023 to June 2024 and TE23’s from August 2024 to June 2025. Chapters end TE23’s year at slightly different points (at the survey in chapter 2, on 31 July 2025 in chapter 4) and say which. te24c’s log ends on 31 January 2026, so its log analyses cover units 1–4.</dd>
+    <dt>Fixed at the next run · clean run</dt><dd>An error is fixed at the next run when the next run no longer shows that message, even if it shows another. A clean run shows no error at all.</dd>
+    <dt>Around the class median</dt><dd>Chapter 13 compares each student’s completed lesson pages and checkpoints with the class median on every class day: above it on at least two thirds of the days is usually ahead, below it usually behind, and everyone else around the median. Chapter 10 uses the te24c analysis’s whole-course version of the measure, so its shares differ.</dd>
+  </dl>
+
+  <h3 class="key-h">What changed</h3>
+  <ul class="changes">
+    <li><b>21 Oct 2026.</b> Chapters 4–7, 9, 11 and 13 rebuilt with the consent rules: students who declined the use of their CS Academy data are left out, and te24c’s own consent answers apply. Chapter 5 reports a three-peak mixture from week 8/9 and why it does not hold up. Corrections from a proofread on every page: counts, wording for readers, no file names. Chapter 8’s project list is cut to a list of questions, chapter 1 points to chapter 12 for the block/text test and the goals factors, and chapter 2’s data tables are one CSV file. This key and the chapters’ “Last updated” lines replace dates in the text.</li>
+    <li><b>20 Oct 2026.</b> Chapters 1, 7, 9 and 10 no longer show per-student rows, and summarise grades and self-efficacy only for groups of five or more. Chapter 10 rebuilt with the consent rules. Chapter 14, the US replication, added.</li>
+    <li><b>19 Oct 2026.</b> te23c’s final grade is its final-project grade on every page that uses grades. Chapters 5, 12 and 13 added.</li>
+  </ul>
 
   <footer class="foot">
     <p>Theory: Bandura, A. (1986). <i>Social foundations of thought and action</i>; Bandura, A. (1997). <i>Self-efficacy: The exercise of control</i>. Self-efficacy instrument: Steinhorst et al. (2020). Methods: Saqr &amp; López-Pernas (eds., 2024), <i>Learning Analytics Methods and Tutorials</i>. Each chapter carries its own methods, uncertainty and data notes.</p>

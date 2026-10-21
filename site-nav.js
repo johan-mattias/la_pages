@@ -23,98 +23,98 @@
   // states: which of the story's three questions the chapter informs (up = improves, flat = stalls, down = drops)
   var CHAPTERS = [
     {
-      file: "report.html", part: 0, nav: "Start & finish",
+      file: "report.html", part: 0, nav: "Start & finish", updated: "21 Oct 2026",
       title: "Where students start and finish",
       question: "Who climbs, who slips, and does self-efficacy follow?",
       role: "Sets the yardstick. Entry score, grade and self-efficacy form a chain, and self-efficacy follows the grade (ρ\u00a0.55) more than the starting point (ρ\u00a0.36). About a third of students change lanes: climbers hand everything in and work outside class; slippers leave work missing.",
       states: ["up", "down"]
     },
     {
-      file: "self-efficacy-granularity-study.html", part: 0, nav: "Mastery & self-efficacy",
+      file: "self-efficacy-granularity-study.html", part: 0, nav: "Mastery & self-efficacy", updated: "21 Oct 2026",
       title: "Mastery experience in the logs",
       question: "Which traces of practice go with high self-efficacy, and when do they show?",
-      role: "Turns mastery experience into log measures. Finishing what you attempt (ρ\u00a0.41), getting past an error on the next run (ρ\u00a0.33) and coming back regularly go with higher end-of-course self-efficacy. The signal is invisible in the first month and appears around week 12.",
+      role: "Turns mastery experience into log measures. Finishing what you attempt (ρ\u00a0.41), recovering from an error on the next run (ρ\u00a0.33) and coming back regularly go with higher end-of-course self-efficacy. The signal is invisible in the first month and appears around week 12.",
       states: ["up", "flat"]
     },
     {
-      file: "log-atlas.html", part: 1, nav: "Log atlas",
+      file: "log-atlas.html", part: 1, nav: "Log atlas", updated: "21 Oct 2026",
       title: "Two school years in the logs",
       question: "What does practice look like across 2.6 million events?",
       role: "The wide view of practice. Weekly engagement settles into a lower gear by week 20, a missed week is hard to come back from, students rerun code after an error instead of editing it, and the hardest exercises and the lowest self-ratings point to the same wall.",
       states: ["flat", "down"]
     },
     {
-      file: "te22-te23-activity-trajectories.html", part: 1, nav: "Unit trajectories",
+      file: "te22-te23-activity-trajectories.html", part: 1, nav: "Unit trajectories", updated: "21 Oct 2026",
       title: "Activity across the units",
       question: "Who keeps up from unit to unit, who drops, and who comes back?",
       role: "Follows students unit by unit. Relative activity is fairly stable from unit to unit (ICC\u00a0.50), a middle group moves between neighbouring states, and the least active group drops after unit 3 in all 14 state definitions and partly recovers for the final project in 11. Students on more active trajectories get higher grades in all 14 definitions (ρ\u00a0.26–.48); self-efficacy follows in only 4.",
       states: ["up", "flat", "down"]
     },
     {
-      file: "how-many-student-clusters.html", part: 1, nav: "Student clusters",
+      file: "how-many-student-clusters.html", part: 1, nav: "Student clusters", updated: "21 Oct 2026",
       title: "One population, not groups",
       question: "Do students form distinct groups, or one continuous population?",
       role: "Asks directly whether students fall into groups. Clustering 153 TE22 and TE23 students on log-derived factor scores (sessions, mastery, regularity, error proneness), over the full course and from week 8/9, finds one continuous population: silhouettes stay at 0.10–0.15 and the gap statistic picks one cluster. Over the full course the two-component mixture that BIC prefers has a single peak: a core and a wider tail of sparse, error-prone activity, not a second type of student. From week 8/9 BIC prefers three components with three peaks, but that fit returns in only one refit in nine when six random students are left out.",
       states: ["flat", "down"]
     },
     {
-      file: "error-escape-curves.html", part: 1, nav: "Error escape",
+      file: "error-escape-curves.html", part: 1, nav: "Error escape", updated: "21 Oct 2026",
       title: "Inside the run–error loop",
       question: "Which errors do students learn to get past, and which keep stopping them?",
       role: "The smallest mastery experience: an error met and escaped. When the message names the fix, students get faster with every encounter; when the error is about meaning, they do not, and trial-and-error debugging never declines. Students who fix more errors at the first retry get higher grades (ρ\u00a0.48) and report higher self-efficacy (.28); how fast they improve with practice does not matter. The page reads this behaviourally; the story reads it as the raw material of self-efficacy.",
       states: ["up", "flat"]
     },
     {
-      file: "te22a-schedule-and-activity.html", part: 2, nav: "One class's year",
+      file: "te22a-schedule-and-activity.html", part: 2, nav: "One class's year", updated: "21 Oct 2026",
       title: "One class, in lessons and out",
       question: "When and where does the practice happen?",
       role: "The setting up close, for te22a. A third of active time falls outside lessons, mostly on creative tasks and the final project, and after-school minutes track the final-project grade (ρ\u00a0.61). The spring is weaker than the autumn. In all five classes, attending more lessons and working more minutes in and outside lessons go with higher grades (pooled ρ\u00a0.34, .46 and .43).",
       states: ["up", "flat"]
     },
     {
-      file: "how-often-and-how-long-classes-meet.html", part: 2, nav: "Timetables",
+      file: "how-often-and-how-long-classes-meet.html", part: 2, nav: "Timetables", updated: "21 Oct 2026",
       title: "How timetables shape practice time",
       question: "Does how often and how long a class meets change how far it gets?",
       role: "The setting at scale: 734 US classes, a different population with no self-efficacy measure. Progress follows total weekly class time rather than how it is split, and classes that meet more often keep slightly more students up with the class.",
       states: ["flat", "down"]
     },
     {
-      file: "programmering-1-te24c.html", part: 3, nav: "te24c up close",
+      file: "programmering-1-te24c.html", part: 3, nav: "te24c up close", updated: "21 Oct 2026",
       title: "One class, surveyed before and after",
       question: "Which ways of working go with a higher grade and a rise in self-efficacy?",
       role: "The newest class (2025/26, 27 students whose data may be used, 18 of them with grades) and the only one here surveyed both before and after the course. Self-efficacy already correlates ρ 0.73 with the final grade five months before the course and 0.80 by August; the gains go with points earned and working ahead, but not clearly. What students built (final-project decisions, ρ 0.74) and how efficiently they worked track the grade; time away from the platform in lessons points the same way, less clearly (ρ −0.39). Error, reading and focus measures cover units 1–4.",
       states: ["up", "flat", "down"]
     },
     {
-      file: "te22-vs-te23.html", part: 3, nav: "TE22 vs TE23",
+      file: "te22-vs-te23.html", part: 3, nav: "TE22 vs TE23", updated: "21 Oct 2026",
       title: "Two full years, two teachers",
       question: "Which findings hold in both cohorts, and which follow the teacher or the year?",
       role: "The same measures for TE22 (2023/24) and TE23 (2024/25), using the scripts from the te24c analysis. Most findings hold in both cohorts and the same grade ladder appears in each; the decisions students build into their creative programs are one of the strongest grade links. Specific syntax messages get faster to fix in both; 'invalid syntax' and NameError do not. Self-efficacy tracks the grade in TE22 (ρ 0.58) and te23b (0.62) and less clearly in te23c (0.22 with its final-project grade). Teacher style shows in pace and project size, while TE23's extra errors and guessing follow the year.",
       states: ["up", "flat"]
     },
     {
-      file: "te23-grade-trajectories.html", part: 3, nav: "Grade trajectories",
+      file: "te23-grade-trajectories.html", part: 3, nav: "Grade trajectories", updated: "21 Oct 2026",
       title: "Grades across the year",
       question: "Do students' grades hold steady from the first estimate to the final grade?",
       role: "Follows te23b and te23c from the February 2025 estimate through the unit 10 grade and the June estimate to the final grade. The estimates are steady (February to June ρ 0.86 in te23b, 0.75 in te23c), and most students who move go up: 29 improved, 23 stayed and 9 went down. Unit 10 is a single, noisy assignment, and te23c's final is the project grade, so it moves more. Every drop of two or more steps ends in F. TE22 and te24c: the course grade follows the final project (ρ\u00a0.98 in te22b, .93 in te22c), early task grades predict it less, and in te24c nobody's final grade fell below their Creative task 3 grade.",
       states: ["up", "flat", "down"]
     },
     {
-      file: "TE22-TE23_SCT_replication.html", part: 3, nav: "SCT replication",
+      file: "TE22-TE23_SCT_replication.html", part: 3, nav: "SCT replication", updated: "21 Oct 2026",
       title: "Self-efficacy, checked in two cohorts",
       question: "Does the self-efficacy scale hold in TE22 and TE23, and what goes with it?",
       role: "Repeats the self-efficacy analysis in the five TE22 and TE23 classes, with the consent rules applied. The 15 core items form one general factor and the cohorts score the same; self-efficacy goes with the final grade clearly in TE22 (ρ\u00a00.54) and less certainly in TE23 (0.38). Enjoyment and trying it yourself first go with self-efficacy, asking AI goes with nothing, and the Year 1 block/text test predicts the final grade (ρ\u00a00.37). The final project carries most of the final grade (65% of the explained variance in TE23).",
       states: ["up", "flat"]
     },
     {
-      file: "pace-in-six-classes.html", part: 3, nav: "Pace",
+      file: "pace-in-six-classes.html", part: 3, nav: "Pace", updated: "21 Oct 2026",
       title: "Keeping up with the class",
       question: "Does working ahead of the class go with the grade in every class, and what sets the spread?",
       role: "Measures pace the same way in all six classes, as each day's lead over the class median in lesson pages and checkpoints. In each of the five TE22 and TE23 classes, being ahead goes with the final grade (pooled ρ\u00a0.63): students usually ahead average 4.0, those usually behind 1.7. In te24c (18 graded students) the link points the same way but is unclear. How far a class spreads out follows the class: in teacher 1's two classes 75% of students stayed around the median, in teacher 2's 36% and in te24c 22%. Self-efficacy follows less clearly (ρ\u00a0.45), and in the five classes 20 students fell further behind in the second half against 4 who caught up.",
       states: ["up", "down"]
     },
     {
-      file: "us-replication.html", part: 3, nav: "US replication",
+      file: "us-replication.html", part: 3, nav: "US replication", updated: "21 Oct 2026",
       title: "The cohort findings at US scale",
       question: "Which cohort findings hold for 16,909 US students on the same course?",
       role: "Tests the cohort findings again on 16,909 US students in 871 classes who took the same course, with the rule for each test fixed before it ran. 27 of 42 findings hold: how students program (the transition matrix correlates .98 with the cohorts’), fix errors and fall behind is the same at scale, and the three unit trajectories recur. The student profiles reappear but not as stable groups, one population as in Chapter 5, and the teacher effect is teacher plus school. Leaving the platform together and the TE23-only grade links stay local.",
@@ -277,7 +277,8 @@
     var sin = el("div", "lastrip-in");
     var top = el("div", "lastrip-top");
     top.appendChild(el("span", "lastrip-k",
-      "Chapter " + (idx + 1) + " of " + CHAPTERS.length + " · Part " + PARTS[chapter.part].n + ": " + PARTS[chapter.part].name));
+      "Chapter " + (idx + 1) + " of " + CHAPTERS.length + " · Part " + PARTS[chapter.part].n + ": " + PARTS[chapter.part].name +
+      (chapter.updated ? " · Last updated " + chapter.updated : "")));   // dates live here, not in the page text (21 Oct 2026)
     var back = el("a", "lastrip-home", "Read the whole story");
     back.href = link(STORY.file) + "#chapters";
     top.appendChild(back);
@@ -348,4 +349,65 @@
   }
   reveal();
   window.addEventListener("load", reveal);
+
+  // One typographic style on every page (21 Oct 2026): a minus sign, not a hyphen, before a number; no leading zero
+  // in the correlations that follow a ρ; curly apostrophes. The pages are built by many scripts and write much of
+  // their text at load time, so the style is applied here to the visible text, again whenever a chart redraws.
+  // Code, scripts and data blocks are never touched; apostrophes are left alone in monospaced text.
+  var SKIP = { CODE: 1, PRE: 1, KBD: 1, SAMP: 1, SCRIPT: 1, STYLE: 1, TEXTAREA: 1, NOSCRIPT: 1 };
+  function kind(node) {   // 0: leave alone, 1: numbers only, 2: numbers and apostrophes
+    var k = 2;
+    for (var e = node.parentNode; e && e.nodeType === 1; e = e.parentNode) {
+      if (SKIP[e.tagName]) return 0;
+      if (k === 2 && e.classList && e.classList.contains("mono")) k = 1;
+    }
+    return k;
+  }
+  function typeset(s, k) {
+    var t = s.replace(/(^|[\s(\[=:,;\/±~≈<>])-(?=\.?\d)/g, "$1−");
+    t = t.replace(/ρ(?:[^.]|\.(?=\d))*/g, function (run) { return run.replace(/(^|[^\d.])0\.(\d)/g, "$1.$2"); });
+    if (k === 2) t = t.replace(/([A-Za-zÀ-ɏ])'(?=[A-Za-zÀ-ɏ])/g, "$1’").replace(/([sS])'(?=[\s,.;:)]|$)/g, "$1’");
+    return t;
+  }
+  // A number that a page writes into its own span (ρ <span>0.55</span>) belongs to the ρ before it when the text in
+  // between, within the same paragraph or cell, has no sentence end.
+  var BLOCK = { P: 1, LI: 1, TD: 1, TH: 1, DIV: 1, DD: 1, DT: 1, FIGCAPTION: 1, SUMMARY: 1, H1: 1, H2: 1, H3: 1, H4: 1, text: 1 };
+  function afterRho(node) {
+    var block = node.parentNode;
+    while (block && block !== document.body && !BLOCK[block.tagName]) block = block.parentNode;
+    if (!block) return false;
+    var w = document.createTreeWalker(block, NodeFilter.SHOW_TEXT, null), n, before = "";
+    while ((n = w.nextNode()) && n !== node) before += n.nodeValue;
+    var i = before.lastIndexOf("ρ");
+    return i >= 0 && !/\.(?!\d)/.test(before.slice(i));
+  }
+  function fix(node) {
+    var k = kind(node);
+    if (!k) return;
+    var v = node.nodeValue, t = typeset(v, k);
+    if (/(^|[^\d.])0\.\d/.test(t) && t.indexOf("ρ") < 0 && afterRho(node)) {
+      var head = t.match(/^(?:[^.]|\.(?=\d))*/)[0];   // up to the first sentence end
+      t = head.replace(/(^|[^\d.])0\.(\d)/g, "$1.$2") + t.slice(head.length);
+    }
+    if (t !== v) node.nodeValue = t;
+  }
+  function fixAll(root) {
+    if (root.nodeType === 3) { fix(root); return; }
+    if (root.nodeType !== 1 || SKIP[root.tagName]) return;
+    var w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, null), n, list = [];
+    while ((n = w.nextNode())) list.push(n);
+    list.forEach(fix);
+  }
+  function startTypography() {
+    fixAll(document.body);
+    if (!window.MutationObserver) return;
+    new MutationObserver(function (records) {
+      records.forEach(function (r) {
+        if (r.type === "characterData") fix(r.target);
+        else r.addedNodes.forEach(fixAll);
+      });
+    }).observe(document.body, { childList: true, subtree: true, characterData: true });
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", startTypography);
+  else startTypography();
 })();
