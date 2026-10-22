@@ -23,7 +23,7 @@
   // states: which of the story's three questions the chapter informs (up = improves, flat = stalls, down = drops)
   var CHAPTERS = [
     {
-      file: "report.html", part: 0, nav: "Start & finish", updated: "21 Oct 2026",
+      file: "report.html", part: 0, nav: "Start & finish", updated: "22 Oct 2026",
       title: "Where students start and finish",
       question: "Who climbs, who slips, and does self-efficacy follow?",
       role: "Sets the yardstick. Entry score, grade and self-efficacy form a chain, and self-efficacy follows the grade (ρ\u00a0.55) more than the starting point (ρ\u00a0.36). About a third of students change lanes: climbers hand everything in and work outside class; slippers leave work missing.",
@@ -33,7 +33,7 @@
       file: "self-efficacy-granularity-study.html", part: 0, nav: "Mastery & self-efficacy", updated: "22 Oct 2026",
       title: "Mastery experience in the logs",
       question: "Which traces of practice go with high self-efficacy, and when do they show?",
-      role: "Turns mastery experience into log measures. Finishing what you attempt (ρ\u00a0.38), recovering from an error on the next run (ρ\u00a0.37) and coming back regularly go with higher end-of-course self-efficacy. The signal is almost invisible in the first month and appears around week 10.",
+      role: "Turns mastery experience into log measures placed in social cognitive theory. Finishing what you attempt (ρ\u00a0.46), getting past errors (error quotient ρ\u00a0−.45) and coming back between lessons (sessions ρ\u00a0.44) go with higher end-of-course self-efficacy; presence in lessons does not. Unit 1 says nothing, the signal is there by units 1–5, and it carries over to a new class (te24c, ρ\u00a0.41).",
       states: ["up", "flat"]
     },
     {
@@ -58,7 +58,7 @@
       states: ["flat", "down"]
     },
     {
-      file: "error-escape-curves.html", part: 1, nav: "Error escape", updated: "21 Oct 2026",
+      file: "error-escape-curves.html", part: 1, nav: "Error escape", updated: "22 Oct 2026",
       title: "Inside the run–error loop",
       question: "Which errors do students learn to get past, and which keep stopping them?",
       role: "The smallest mastery experience: an error met and escaped. When the message names the fix, students get faster with every encounter; when the error is about meaning, they do not, and trial-and-error debugging never declines. Students who fix more errors at the first retry get higher grades (ρ\u00a0.48) and report higher self-efficacy (.28); how fast they improve with practice does not matter. The page reads this behaviourally; the story reads it as the raw material of self-efficacy.",
