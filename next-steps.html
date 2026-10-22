@@ -244,14 +244,14 @@ table.sched td.day { min-width: 180px; }
 
   <div class="brief" aria-label="In brief">
     <div><div class="k">Choosing harder exercises</div><p>Students who take on more 2- and 3-point exercises report higher self-efficacy (ρ .39 [.18, .55]), also with the amount of work and the Year 1 test held constant (.30).</p></div>
-    <div><div class="k">How, not only how much</div><p>Effort and the grade go together (ρ .54), but beyond effort, working ahead, fixing errors at the first retry and choosing harder exercises still go with the grade.</p></div>
+    <div><div class="k">How, not only how much</div><p>Effort and the grade go together (ρ .54). In one model, working ahead and fixing errors at the first retry add to it (R² .31 → .49); for self-efficacy the amount of practice carries most.</p></div>
     <div><div class="k">Persistence at the wall</div><p>In units 8–10, students with higher self-efficacy attempt more and try longer before leaving an exercise unsolved, but they do not clearly solve more of the ones they struggle with.</p></div>
     <div><div class="k">Concept checkpoints</div><p>Long on the checkpoint that introduces events, nested conditionals or step events goes with lower self-efficacy and a lower grade. These short checkpoints, done by nearly everyone, mark where a new concept is hard.</p></div>
     <div><div class="k">Read with care</div><p>Exploratory, many tests, five classes, one survey after the course. The same students chose Chapter 2’s features, so these checks are not independent of it.</p></div>
   </div>
 
   <nav class="toc" aria-label="Sections">
-    <a href="#d1">Harder exercises</a><a href="#d2">Effort and results</a><a href="#d5">At the wall</a><a href="#d6">Concept checkpoints</a><a href="#elsewhere">In other chapters</a><a href="#next">Next steps</a><a href="#method">Method</a>
+    <a href="#d1">Harder exercises</a><a href="#d2">Effort and results</a><a href="#d7">One model</a><a href="#d5">At the wall</a><a href="#d6">Concept checkpoints</a><a href="#elsewhere">In other chapters</a><a href="#next">Next steps</a><a href="#method">Method</a>
   </nav>
 
   <section id="d1">
@@ -277,6 +277,25 @@ table.sched td.day { min-width: 180px; }
       <figcaption class="title">What goes with the final grade beyond effort</figcaption>
       <figcaption class="sub">Partial rank correlation with the final grade, active minutes in the log held constant; ranks within each class, 95% bootstrap intervals. The platform’s own time on task gives the same picture.</figcaption>
       <div class="tbl-wrap"><table class="compact"><thead><tr><th></th><th class="num">Final grade, effort held constant</th></tr></thead><tbody><tr><td>working ahead of the class median</td><td class="num">.45 [.30, .59], n&nbsp;=&nbsp;140</td></tr><tr><td>fixing errors at the first retry</td><td class="num">.40 [.25, .54], n&nbsp;=&nbsp;138</td></tr><tr><td>choosing harder exercises (D1)</td><td class="num">.35 [.19, .49], n&nbsp;=&nbsp;140</td></tr><tr><td>self-efficacy</td><td class="num">.35 [.15, .53], n&nbsp;=&nbsp;85</td></tr><tr><td>leaving attempted exercises unsolved</td><td class="num">−.33 [−.49, −.16], n&nbsp;=&nbsp;140</td></tr><tr><td>giving up on errors</td><td class="num">−.30 [−.47, −.12], n&nbsp;=&nbsp;138</td></tr><tr><td>runs ending in an error</td><td class="num">−.26 [−.43, −.08], n&nbsp;=&nbsp;138</td></tr><tr><td>lessons attended</td><td class="num">.08 [−.09, .24], n&nbsp;=&nbsp;140</td></tr><tr><td>share of work outside lessons</td><td class="num">−.05 [−.23, .12], n&nbsp;=&nbsp;140</td></tr><tr><td>programming outside school before</td><td class="num">.04 [−.14, .22], n&nbsp;=&nbsp;109</td></tr></tbody></table></div>
+    </figure>
+  </section>
+
+  <section id="d7">
+    <h2>One model: effort and how students work</h2>
+    <div class="prose">
+      <p>The partial correlations above take each measure on its own, and the measures overlap: working ahead goes with choosing harder exercises, fixing errors at the first retry with leaving fewer exercises unsolved. One model with effort and the four measures together, with the class as a factor, shows which carry weight beyond the others, for the final grade and for core self-efficacy.</p>
+      <p><b>The grade.</b> How students work adds more than half again to what effort explains: R² .31 with effort alone, .49 with the four measures (.40 cross-validated). Two of them carry it, each beyond the others: working ahead of the class and fixing errors at the first retry. Choosing harder exercises and leaving exercises unsolved add nothing once those are in, and neither do giving up on errors or runs ending in an error. An ordinal model and the platform’s own time on task give the same picture.</p>
+      <p><b>Self-efficacy.</b> The four measures add as a block (R² .23 → .37), but no single one is clear, and the amount of practice keeps the largest weight. With the grade in the model as well, the four no longer clearly add (R² .32 → .39), while effort keeps a weight beyond the grade (.29 [.02, .55]): among students with the same grade, the ones who practised more report higher self-efficacy. That fits mastery experience building up with practice more than with any single habit. With 83 students the cross-validated R² is low (.15), so read this as a direction.</p>
+    </div>
+    <figure>
+      <figcaption class="title">How much the model explains</figcaption>
+      <figcaption class="sub">R² in the sample and, in brackets, cross-validated (20 × 10-fold). All variables are ranks within the class; the class is a factor. Grade: n&nbsp;=&nbsp;138; self-efficacy: n&nbsp;=&nbsp;83, students with both a grade and self-efficacy.</figcaption>
+      <div class="tbl-wrap"><table class="compact"><thead><tr><th></th><th class="num">Final grade</th><th class="num">Self-efficacy</th></tr></thead><tbody><tr><td>Effort alone</td><td class="num">.31 (.24)</td><td class="num">.23 (.10)</td></tr><tr><td>+ the four measures of how students work</td><td class="num">.49 (.40)</td><td class="num">.37 (.15)</td></tr><tr><td>+ giving up on errors and runs ending in an error</td><td class="num">.49 (.38)</td><td class="num">.38 (.10)</td></tr></tbody></table></div>
+    </figure>
+    <figure>
+      <figcaption class="title">Weights in the model with effort and the four measures</figcaption>
+      <figcaption class="sub">Standardised weights with 2000-resample bootstrap 95% intervals; bold: the interval excludes zero.</figcaption>
+      <div class="tbl-wrap"><table class="compact"><thead><tr><th></th><th class="num">Final grade</th><th class="num">Self-efficacy</th></tr></thead><tbody><tr><td>Effort (active minutes)</td><td class="num"><b>.35 [.20, .50]</b></td><td class="num"><b>.35 [.09, .59]</b></td></tr><tr><td>Working ahead of the class median</td><td class="num"><b>.21 [.01, .42]</b></td><td class="num">.22 [−.03, .49]</td></tr><tr><td>Fixing errors at the first retry</td><td class="num"><b>.21 [.06, .35]</b></td><td class="num">.13 [−.10, .35]</td></tr><tr><td>Choosing harder exercises</td><td class="num">.10 [−.06, .26]</td><td class="num">.13 [−.12, .36]</td></tr><tr><td>Leaving attempted exercises unsolved</td><td class="num">−.06 [−.25, .14]</td><td class="num">−.03 [−.31, .23]</td></tr></tbody></table></div>
     </figure>
   </section>
 
@@ -325,8 +344,7 @@ table.sched td.day { min-width: 180px; }
       <ol>
         <li><b>Measure the change.</b> Self-efficacy was asked once. A second survey of the same students would turn the story’s inferences about improvement into measured change; te24c, surveyed before and after, is the first small test (<a href="self-efficacy-granularity-study.html#te24c">Chapter 2</a>).</li>
         <li><b>Mastery experience as a process.</b> Abstract each exercise and lesson page into states (selecting it, programming with or without a known error, a correct or incorrect check, a break, the documentation, finishing or leaving; reading, trying code and answering questions on lesson pages) and compare the sequences of students whose practice goes with self-efficacy with those whose practice does not. It would show what mastery experience is in the logs, beyond the edit–run–error transitions of Chapter 3.</li>
-        <li><b>The checks above on te24c</b>, the class surveyed before and after: choosing harder exercises and persistence at the wall, with change as the outcome.</li>
-        <li><b>One model for the grade</b>: effort plus how students work (working ahead, fixing at the first retry, harder exercises, unsolved exercises), with the classes as a factor.</li>
+        <li><b>The checks above on te24c</b>, the class surveyed before and after: choosing harder exercises, persistence at the wall and the effort model, with change as the outcome.</li>
         <li><b>Prior experience</b>: how the Year 1 block/text test and programming before the course relate to self-efficacy and the grade, and whether students who arrive behind catch up (<a href="report.html">Chapter 1</a>, <a href="TE22-TE23_SCT_replication.html">Chapter 12</a>).</li>
         <li><b>Unit trajectories against the survey</b>: whether the activity trajectories of <a href="te22-te23-activity-trajectories.html">Chapter 4</a> differ in goals, help seeking and habits.</li>
         <li><b>The rest of te24c’s year</b>: its log ends in unit 4; a later export would cover the whole course.</li>
@@ -341,6 +359,7 @@ table.sched td.day { min-width: 180px; }
       <dt>Students</dt><dd>The five TE22 and TE23 classes, each cohort’s own course year. Students who declined the use of their CS Academy data are left out, grades of those who declined StudyBee data, and survey answers are used only with consent.</dd>
       <dt>Self-efficacy</dt><dd>Mean of the 15 core items (1–7), answered in May–June 2025: at the end of TE23’s course and about eleven months after TE22’s. Every link with it is an association with a later self-report.</dd>
       <dt>Correlations</dt><dd>Spearman ρ on percentile ranks within each class, pooled over the classes, with 2000-resample bootstrap 95% intervals. “Held constant”: partial rank correlations. Benjamini–Hochberg false-discovery correction within each question.</dd>
+      <dt>One model</dt><dd>Ordinary least squares on within-class percentile ranks, z-scored, with class dummies; effort entered first, then the four measures. An ordinal logit on the grade as a check.</dd>
       <dt>Harder exercises</dt><dd>Exercises with any check result, worth 2 or more points, as a share of all attempted exercises (class medians 27–38%).</dd>
       <dt>Struggled, tries before quitting</dt><dd>Struggled: at least one incorrect check on the exercise. Tries before quitting: incorrect checks on exercises never solved, median per student.</dd>
       <dt>Checkpoint measures</dt><dd>Minutes from the platform export; runs, the share of runs ending in an error and incorrect checks from the log.</dd>
