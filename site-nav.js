@@ -17,7 +17,8 @@
     { n: "I", name: "The yardstick" },
     { n: "II", name: "The course year" },
     { n: "III", name: "The setting" },
-    { n: "IV", name: "The check" }
+    { n: "IV", name: "The check" },
+    { n: "V", name: "What comes next" }
   ];
 
   // states: which of the story's three questions the chapter informs (up = improves, flat = stalls, down = drops)
@@ -119,6 +120,13 @@
       question: "Which cohort findings hold for 16,909 US students on the same course?",
       role: "Tests the cohort findings again on 16,909 US students in 871 classes who took the same course, with the rule for each test fixed before it ran. 27 of 42 findings hold: how students program (the transition matrix correlates .98 with the cohorts’), fix errors and fall behind is the same at scale, and the three unit trajectories recur. The student profiles reappear but not as stable groups, one population as in Chapter 5, and the teacher effect is teacher plus school. Leaving the platform together and the TE23-only grade links stay local.",
       states: ["up", "flat", "down"]
+    },
+    {
+      file: "next-steps.html", part: 4, nav: "Next steps", updated: "22 Oct 2026",
+      title: "Exploratory checks and next steps",
+      question: "What do the closer looks at the story find, and what would close its gaps?",
+      role: "Collects four exploratory checks on the same five classes and the work they point to. Students who take on harder exercises report higher self-efficacy beyond how much they do (ρ\u00a0.30); beyond effort, working ahead and fixing errors at the first retry go with the grade; at the wall, confident students try longer but do not solve more; and the checkpoint that introduces a new concept marks where students struggle. Then the next steps: a second survey, mastery experience as a process, and the checks on te24c and at US scale.",
+      states: ["up", "flat"]
     }
   ];
 
