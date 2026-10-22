@@ -103,10 +103,10 @@ footer{padding-block:2.4rem 3.4rem;color:var(--faint);font-size:.84rem}
   <h1>Two school years in the logs</h1>
   <p class="lede">A tour of the log, survey and catalogue files behind this thesis, and five worked learning-analytics methods applied to them. Every number on this page was computed from the files themselves, not borrowed from the literature.</p>
   <div class="statrow">
-    <div class="stat"><b>2,638,783</b><span>events</span></div>
-    <div class="stat"><b>159</b><span>students</span></div>
-    <div class="stat"><b>103</b><span>survey responses</span></div>
-    <div class="stat"><b>27,126</b><span>sessions</span></div>
+    <div class="stat"><b>2,538,342</b><span>events</span></div>
+    <div class="stat"><b>153</b><span>students</span></div>
+    <div class="stat"><b>96</b><span>survey responses</span></div>
+    <div class="stat"><b>25,860</b><span>sessions</span></div>
     <div class="stat"><b>86&nbsp;h</b><span>median per student</span></div>
   </div>
 </div>
@@ -130,27 +130,27 @@ footer{padding-block:2.4rem 3.4rem;color:var(--faint);font-size:.84rem}
 <div class="col">
 <p class="eyebrow">Source material</p>
 <h2>Six files behind the page</h2>
-<p>Two event logs, an account map that links each platform account to its survey answers and class, the exercise catalogue, and the two survey exports. 102 of the 103 survey respondents link to an account with log data.</p>
+<p>Two event logs, an account map that links each platform account to its survey answers and class, the exercise catalogue, and the two survey exports. Students who declined the use of their CS Academy data are left out of the logs and the map, and survey answers are used only with the student’s consent. All 96 survey answers used link to an account with log data.</p>
 </div>
 
 <figure><div class="scroller"><table>
-<thead><tr><th>Source</th><th>Rows</th><th>Grain</th><th>Carries</th></tr></thead>
+<thead><tr><th>Source</th><th>Rows used</th><th>Grain</th><th>Carries</th></tr></thead>
 <tbody>
-<tr><td>Event log, 2023/24</td><td class="num">1,519,976</td><td>one event</td><td>Aug 2023 – Jun 2024 course instance</td></tr>
-<tr><td>Event log, 2024/25</td><td class="num">1,149,665</td><td>one event</td><td>Jul 2024 – Jun 2025 course instance (0.2% of events fall later, up to Jan 2026)</td></tr>
-<tr><td>Account map</td><td class="num">164</td><td>one account</td><td>survey id ↔ user_id ↔ class group</td></tr>
+<tr><td>Event log, 2023/24</td><td class="num">1,411,634</td><td>one event</td><td>Aug 2023 – Jun 2024 course instance</td></tr>
+<tr><td>Event log, 2024/25</td><td class="num">1,126,708</td><td>one event</td><td>Jul 2024 – Jun 2025 course instance (0.2% of events fall later, up to Jan 2026)</td></tr>
+<tr><td>Account map</td><td class="num">158</td><td>one account</td><td>survey id ↔ user_id ↔ class group</td></tr>
 <tr><td>Exercise catalogue</td><td class="num">7,186</td><td>one exercise</td><td>name, points, course</td></tr>
-<tr><td>Survey, TE22</td><td class="num">70</td><td>one student</td><td>20 self-efficacy items, 15 May 2025</td></tr>
-<tr><td>Survey, TE23</td><td class="num">33</td><td>one student</td><td>same instrument, 4 Jun 2025</td></tr>
+<tr><td>Survey, TE22</td><td class="num">64</td><td>one student</td><td>20 self-efficacy items, 15 May 2025</td></tr>
+<tr><td>Survey, TE23</td><td class="num">32</td><td>one student</td><td>same instrument, 4 Jun 2025</td></tr>
 </tbody></table></div>
-<figcaption>Only three courses appear in the logs: CS1 (~45k exercise events), CS0 (~27k) and a trace of CS2. 83% of logged exercise ids resolve against the catalogue.</figcaption></figure>
+<figcaption>Only three courses appear in the logs: CS1 (~42k exercise events), CS0 (~25k) and a trace of CS2. 83% of logged exercise ids resolve against the catalogue.</figcaption></figure>
 
 <div class="col">
 
 
-<p>The two logs do not share events. 40 students appear in both because they continued across course instances, but their events are distinct.</p>
+<p>The two logs do not share events. 38 students appear in both because they continued across course instances, but their events are distinct.</p>
 
-<div class="note"><b>57 of the 159 logged students did not answer the survey.</b> Their classes are known from the platform exports, and their median activity (14,500 events) matches the respondents'. Every behaviour-to-self-efficacy result on this page therefore rests on the 102 students with both, about two thirds of the logged population.</div>
+<div class="note"><b>57 of the 153 logged students have no survey answer that may be used.</b> Their classes are known from the platform exports, and their median activity (13,500 events, against 15,500 for the respondents) is similar. Every behaviour-to-self-efficacy result on this page therefore rests on the 96 students with both, about two thirds of the logged population.</div>
 </div>
 </section>
 
@@ -167,12 +167,12 @@ footer{padding-block:2.4rem 3.4rem;color:var(--faint);font-size:.84rem}
 </figure>
 <div class="col">
 <div class="grid2">
-  <div class="kv"><b>19.5 min</b><span>median session (30-min inactivity gap)</span></div>
+  <div class="kv"><b>19.9 min</b><span>median session (30-min inactivity gap)</span></div>
   <div class="kv"><b>154</b><span>median sessions per student</span></div>
   <div class="kv"><b>8%</b><span>of events on weekends</span></div>
-  <div class="kv"><b>47.5%</b><span>graded submissions passing</span></div>
+  <div class="kv"><b>47.4%</b><span>graded submissions passing</span></div>
 </div>
-<p style="margin-top:1.4rem">Within the week, TE22 concentrates on Wednesday (26.5% of events) and TE23 on Friday (36.3%) — timetable signatures. Hour-of-day shows a sharp lesson block (TE22 at 11:00–13:00 UTC, TE23 at 08:00–09:00) plus a flat evening tail from 16:00 to 21:00 that is almost certainly homework.</p>
+<p style="margin-top:1.4rem">Within the week, TE22 concentrates on Wednesday (27.2% of events) and TE23 on Friday (36.3%) — timetable signatures. Hour-of-day shows a sharp lesson block (TE22 at 11:00–13:00 UTC, TE23 at 08:00–09:00) plus a flat evening tail from 16:00 to 21:00 that is almost certainly homework.</p>
 </div>
 </section>
 
@@ -180,7 +180,7 @@ footer{padding-block:2.4rem 3.4rem;color:var(--faint);font-size:.84rem}
 <span class="chapter">Book ch. 7 · Predictive modelling</span>
 <div class="col">
 <h2>How early can you see it coming?</h2>
-<p>The question an early-warning system has to answer: using only what a student did in their first <em>n</em> days, can you tell who ends the year in the upper half for exercises passed? Features are computed inside the window only; the outcome is the full-year count. Five-fold stratified cross-validation, 159 students, base rate 49.7%.</p>
+<p>The question an early-warning system has to answer: using only what a student did in their first <em>n</em> days, can you tell who ends the year in the upper half for exercises passed? Features are computed inside the window only; the outcome is the full-year count. Five-fold stratified cross-validation, 153 students, base rate 49.0%.</p>
 </div>
 <figure>
   <div class="ctl">
@@ -192,7 +192,7 @@ footer{padding-block:2.4rem 3.4rem;color:var(--faint);font-size:.84rem}
   <figcaption id="cap-pred"></figcaption>
 </figure>
 <div class="col">
-<p>Two weeks of data already reach AUC 0.83 with a linear model. The curve then climbs slowly — the extra ten weeks between day 14 and day 84 buy about 0.08 AUC. For an intervention that has to happen while there is still time to act, the information is almost all present by the end of the first month.</p>
+<p>Two weeks of data already reach AUC 0.82 with a linear model. The curve then climbs slowly — the extra ten weeks between day 14 and day 84 buy about 0.1 AUC. For an intervention that has to happen while there is still time to act, the information is almost all present by the end of the first month.</p>
 </div>
 <figure>
   <div class="ctl">
@@ -204,8 +204,8 @@ footer{padding-block:2.4rem 3.4rem;color:var(--faint);font-size:.84rem}
 </figure>
 <div class="col">
 <div class="note"><b>Watch the target definition.</b> The same model with whole-course features predicting the whole-course outcome scores AUC 0.92, almost entirely because the number of submissions and the number of exercises passed are the same construct measured twice. Restricting features to an early window is what makes the number mean something. Leakage in log data usually looks like a feature that is a component of the outcome rather than a cause of it.</div>
-<p>Two process features survive alongside the volume measures. <strong>Errors per run</strong> correlates <span class="mono">−0.35</span> with final exercises passed: students who trigger a compile or runtime error on a larger share of their executions finish behind. <strong>Runs per edit</strong> is similar at <span class="mono">−0.29</span> — running repeatedly without editing in between is the behavioural signature of guessing. Neither is a volume measure, and both are actionable in a way that "total events" is not.</p>
-<div class="lathread" role="note"><span class="lathread-k">Story thread · When it shows</span><p><a href="self-efficacy-granularity-study.html#forward">Chapter 2</a> asks the same early-window question about self-efficacy and gets a different answer: nothing in the first month, a usable signal from about week 12. The volume of work is visible early; what goes with the end-of-course belief separates later.</p></div>
+<p>Two process features survive alongside the volume measures. <strong>Errors per run</strong> correlates <span class="mono">−0.35</span> with final exercises passed: students who trigger a compile or runtime error on a larger share of their executions finish behind. <strong>Runs per edit</strong> is similar at <span class="mono">−0.29</span>. Edits are logged coarsely (see the transitions below), so read it as how often students re-run between logged edits rather than as unchanged code. Neither is a volume measure, and both are actionable in a way that "total events" is not.</p>
+<div class="lathread" role="note"><span class="lathread-k">Story thread · When it shows</span><p><a href="self-efficacy-granularity-study.html#forward">Chapter 2</a> asks the same early-window question about self-efficacy and gets a different answer: nothing in the first month, a usable signal from about week 10. The volume of work is visible early; what goes with the end-of-course belief separates later.</p></div>
 </div>
 </section>
 
@@ -221,9 +221,9 @@ footer{padding-block:2.4rem 3.4rem;color:var(--faint);font-size:.84rem}
   <figcaption id="cap-clust"></figcaption>
 </figure>
 <div class="col">
-<p>The four profiles differ on when and how students work rather than how much, and they separate on outcomes: median exercises passed runs from 92 to 122 (Kruskal–Wallis H = 10.87, p = 0.012), and mean self-efficacy from 4.22 to 5.36 on the seven-point scale.</p>
-<p>The group that stands out is the <strong>evening irregulars</strong>: 30% of its activity in the evening, 15% at weekends, the most irregular day-to-day rhythm, the longest total hours — and the highest self-efficacy of the four. The contrast with the <strong>long-session regulars</strong> is the interesting one. They work in the longest sessions (median 49 minutes), almost entirely inside school hours, very regularly, and reports the <em>lowest</em> self-efficacy. Same institution, similar exercise counts, opposite confidence.</p>
-<div class="note"><b>Report the silhouette honestly.</b> Silhouette width peaks at k=2 (0.23) and sits at 0.15 for k=4. These are weak-to-moderate separations — the structure is real enough to predict outcomes but the clusters are not discrete types. Model-based clustering (book ch. 9) puts a likelihood on that question instead of leaving it to a heuristic index. <a href="how-many-student-clusters.html">Chapter 5</a> takes that step: the students form one continuous population, so read these four styles as regions of it, not as types.</div>
+<p>The four profiles differ on when and how students work rather than how much. They do not separate clearly on exercises passed: medians run from 95 to 122 (Kruskal–Wallis H = 5.56, p = 0.14). Mean self-efficacy runs from 4.04 to 5.51 on the seven-point scale.</p>
+<p>The group that stands out is the <strong>evening irregulars</strong>: 31% of its activity in the evening, 15% at weekends, the most irregular day-to-day rhythm, the longest total hours — and the highest self-efficacy of the four. The contrast with the <strong>long-session regulars</strong> is the interesting one. They work in the longest sessions (median 50 minutes), mostly inside school hours, very regularly, and report the <em>lowest</em> self-efficacy. Same institution, similar exercise counts, opposite confidence.</p>
+<div class="note"><b>Report the silhouette honestly.</b> Silhouette width peaks at k=2 (0.23) and sits at 0.15 for k=4. These are weak separations: the profiles describe how students work, but they do not separate clearly on outcomes, and the clusters are not discrete types. Model-based clustering (book ch. 9) puts a likelihood on that question instead of leaving it to a heuristic index. <a href="how-many-student-clusters.html">Chapter 5</a> takes that step: the students form one continuous population, so read these four styles as regions of it, not as types.</div>
 </div>
 </section>
 
@@ -231,7 +231,7 @@ footer{padding-block:2.4rem 3.4rem;color:var(--faint);font-size:.84rem}
 <span class="chapter">Book ch. 10 &amp; 11 · Sequence analysis &amp; VaSSTra</span>
 <div class="col">
 <h2>Engagement as a sequence of weekly states</h2>
-<p>Each student-week is coded into one of four states by event volume, using tertiles of the non-zero distribution as cuts: <strong>Absent</strong> (no events), <strong>Low</strong> (&lt;229), <strong>Moderate</strong> (229–473), <strong>Intense</strong> (&gt;473). That turns 159 students into 159 sequences of 36 symbols — the VaSSTra move of going from variables to states to trajectories.</p>
+<p>Each student-week is coded into one of four states by event volume, using tertiles of the non-zero distribution as cuts: <strong>Absent</strong> (no events), <strong>Low</strong> (&lt;232), <strong>Moderate</strong> (232–479), <strong>Intense</strong> (&gt;479). That turns 153 students into 153 sequences of 36 symbols — the VaSSTra move of going from variables to states to trajectories.</p>
 </div>
 <figure>
   <div class="fbody"><div class="scroller" id="c-seq"></div></div>
@@ -239,14 +239,14 @@ footer{padding-block:2.4rem 3.4rem;color:var(--faint);font-size:.84rem}
   <figcaption>Week 0 is each student's own first week, not a calendar date. The three near-total collapses are school holidays; the course calendar has to be modelled or those weeks will dominate any distance measure.</figcaption>
 </figure>
 <div class="col">
-<p>The shape is a steady drain from the top state. In week 0, 119 of 159 students are Intense and none are Absent. By week 20, that is 23 Intense and 92 Low. Students are not dropping out — Absent stays low outside holidays — they are settling into a lower gear.</p>
+<p>The shape is a steady drain from the top state. In week 0, 113 of 153 students are Intense and none are Absent. By week 20, that is 21 Intense and 91 Low. Students are not dropping out — Absent stays low outside holidays — they are settling into a lower gear.</p>
 </div>
 <figure>
   <div class="fbody"><div class="scroller" id="c-wtr"></div></div>
   <figcaption>Week-to-week transition probabilities. Rows are the current state, columns the next week. Hover or tap a cell for the exact value.</figcaption>
 </figure>
 <div class="col">
-<p>Every state is self-sustaining: the diagonal is the largest entry in each row (0.41 to 0.48). The asymmetry is at the edges. From Intense, the chance of being Absent next week is 0.06; from Absent, the chance of returning to Intense is 0.09 while the chance of staying Absent is 0.41. Disengagement is stickier than engagement, which is the quantitative case for intervening on a <em>first</em> missed week rather than a pattern of them.</p>
+<p>Every state is self-sustaining: the diagonal is the largest entry in each row (0.38 to 0.47). The asymmetry is at the edges. From Intense, the chance of being Absent next week is 0.06; from Absent, the chance of returning to Intense is 0.09 while the chance of staying Absent is 0.41. Disengagement is stickier than engagement, which is the quantitative case for intervening on a <em>first</em> missed week rather than a pattern of them.</p>
 <div class="lathread" role="note"><span class="lathread-k">Story thread · Stalls and drops</span><p><a href="te22-te23-activity-trajectories.html#findings">Chapter 4</a> follows the same idea by curriculum unit instead of calendar week: the least active students drop after unit 3 and partly recover for the final project, and a Low unit is followed by another Low unit 58% of the time. In the story, the lower gear is a stall, and a first missed week is where a drop begins.</p></div>
 </div>
 </section>
@@ -259,17 +259,17 @@ footer{padding-block:2.4rem 3.4rem;color:var(--faint);font-size:.84rem}
 </div>
 <figure>
   <div class="fbody"><div class="scroller" id="c-mtr"></div></div>
-  <figcaption>Row-normalised first-order transition probabilities across 2.6M events. Hover or tap a cell for the probability and the underlying count.</figcaption>
+  <figcaption>Row-normalised first-order transition probabilities across 2.5M events. Hover or tap a cell for the probability and the underlying count.</figcaption>
 </figure>
 <div class="col">
 <p>Three rows tell most of the story.</p>
 <ul class="tight">
-<li><strong>After a failed submission</strong>, the most likely next action is re-running the code (0.69) — not editing it (0.20). Students re-execute before they revise.</li>
-<li><strong>After a compile error</strong>, the same pattern, harder: run again 0.60, edit 0.30. Running the identical program after a compile error cannot change the result, so this is a genuine misconception about what the run button does, visible 21,000 times.</li>
-<li><strong>After a correct submission</strong>, 0.85 go straight to a pageview — they move on immediately. Almost nobody revisits working code.</li>
+<li><strong>After a failed submission</strong>, the most likely next logged action is a run (0.70), not an edit (0.20).</li>
+<li><strong>After a compile error</strong>, the same pattern: run 0.59, edit 0.30. But edits are logged coarsely. After a syntax error, a next run with no logged edit in between comes back clean 35% of the time, which unchanged code cannot do, so many of these runs follow edits the log does not record. Timing the same logs gives a cleaner measure: a rerun within 3 seconds, too fast for an edit, follows 15% of syntax errors and shows the same message again 91% of the time.</li>
+<li><strong>After a correct submission</strong>, 0.84 go straight to a pageview — they move on immediately. Almost nobody revisits working code.</li>
 </ul>
-<p>This is the kind of finding that only a transition model surfaces. Aggregate counts show that students make errors; the transition matrix shows what they <em>do</em> about them, and the answer is "press run again". Process mining (book ch. 14) would turn this into a discovered model with the loops made explicit; mixture Markov models (book ch. 12) would ask whether the run-first pattern belongs to a subgroup rather than to everyone.</p>
-<div class="lathread" role="note"><span class="lathread-k">Story thread · Stalls</span><p>Rerunning unchanged code is practice that produces no mastery experience: a stall, in the story’s terms. <a href="error-escape-curves.html#escape">Chapter 6</a> times what happens next, and shows which errors students learn to escape faster with each encounter and which they do not.</p></div>
+<p>This is the kind of finding that only a transition model surfaces. Aggregate counts show that students make errors; the transition matrix shows what they <em>do</em> about them: mostly run again, often after an edit the log does not show. Process mining (book ch. 14) would turn this into a discovered model with the loops made explicit; mixture Markov models (book ch. 12) would ask whether the run-first pattern belongs to a subgroup rather than to everyone.</p>
+<div class="lathread" role="note"><span class="lathread-k">Story thread · Stalls</span><p>A quick rerun of the same error is a reflex rather than a strategy, and a run that shows the same message again is practice without a new mastery experience: a stall, in the story’s terms. <a href="error-escape-curves.html#escape">Chapter 6</a> times what happens next, and shows which errors students learn to escape faster with each encounter and which they do not.</p></div>
 </div>
 </section>
 
@@ -277,7 +277,7 @@ footer{padding-block:2.4rem 3.4rem;color:var(--faint);font-size:.84rem}
 <span class="chapter">Book ch. 19–21 · Psychological networks, factor analysis, SEM</span>
 <div class="col">
 <h2>Twenty items, one strong factor and a telling second</h2>
-<p>The instrument holds up: Cronbach's α = 0.958 across 20 items, mean inter-item r = 0.56, first eigenvalue 11.74 of 20. Students do discriminate between topics rather than flat-lining — the median within-student spread across items is 1.15 scale points.</p>
+<p>The instrument holds up: Cronbach's α = 0.954 across 20 items, mean inter-item r = 0.54, first eigenvalue 11.35 of 20. Students do discriminate between topics rather than flat-lining — the median within-student spread across items is 1.19 scale points.</p>
 </div>
 <figure>
   <div class="ctl">
@@ -289,9 +289,9 @@ footer{padding-block:2.4rem 3.4rem;color:var(--faint);font-size:.84rem}
   <figcaption id="cap-psy"></figcaption>
 </figure>
 <div class="col">
-<p>The first component is general programming self-efficacy, loading 0.61–0.88 on everything. The second (eigenvalue 2.44) is bipolar and unambiguous: tracing and control-flow items load positively (+0.08 to +0.35), while every object-orientation and recursion item loads negatively (−0.49 to −0.68). The instrument is measuring a basics dimension and an advanced-topics dimension, and that is a factor structure worth reporting rather than averaging away.</p>
-<div class="note"><b>The two data sources agree on where the course gets hard.</b> The five lowest-rated items are inheritance, recursive patterns, class-vs-instance, overload resolution and tracing recursion. Independently, the log data puts the lowest exercise pass rates in units 8 and 9 of the course — <em>9.2.2 Flying letters</em> at 4.2% across 665 attempts, <em>8.2.2 Sunny meadow</em> at 9.6%, <em>9.3.2 Character rain</em> at 9.8% — and most students never pass anything in unit 10. Self-report and behaviour locate the same wall.</div>
-<p>Item non-response points the same way. The recursion and OOP items have 11–15 missing answers each against 0–6 elsewhere: students who never reached that material declined to rate themselves on it. That missingness is informative, not random, and listwise deletion would quietly drop the students the finding is about.</p>
+<p>The first component is general programming self-efficacy, loading 0.59–0.86 on everything. The second (eigenvalue 2.55) is bipolar and unambiguous: tracing and control-flow items load positively (+0.03 to +0.37), while every object-orientation and recursion item loads negatively (−0.49 to −0.70). The instrument is measuring a basics dimension and an advanced-topics dimension, and that is a factor structure worth reporting rather than averaging away.</p>
+<div class="note"><b>The two data sources agree on where the course gets hard.</b> The five lowest-rated items are inheritance, class-vs-instance, recursive patterns, overload resolution and tracing recursion. Independently, the log data puts the lowest exercise pass rates in units 8 and 9 of the course — <em>9.2.2 Flying letters</em> at 4.1% across 663 attempts, <em>8.2.2 Sunny meadow</em> at 9.5%, <em>9.3.2 Character rain</em> at 10.0% — and only 49 of the 153 students pass anything in unit 11. Self-report and behaviour locate the same wall.</div>
+<p>Item non-response points the same way. The recursion and OOP items have 10–14 missing answers each against 0–6 elsewhere: students who never reached that material declined to rate themselves on it. That missingness is informative, not random, and listwise deletion would quietly drop the students the finding is about.</p>
 <div class="lathread" role="note"><span class="lathread-k">Story thread · Drops</span><p><a href="report.html#self-efficacy">Chapter 1</a> breaks the same survey into subscales by class: persistence and debugging is the lowest core subscale in every class, and classes and recursion is lowest of all. <a href="self-efficacy-granularity-study.html#setup">Chapter 2</a> leaves those five advanced items out of its 15-item score.</p></div>
 </div>
 </section>
@@ -300,21 +300,21 @@ footer{padding-block:2.4rem 3.4rem;color:var(--faint);font-size:.84rem}
 <div class="col">
 <p class="eyebrow">Triadic reciprocal causation</p>
 <h2>Where behaviour and self-efficacy actually meet</h2>
-<p>Linking the two halves directly: 102 students with both a survey response and log data. A ridge regression predicting mean self-efficacy from twelve behavioural features reaches a cross-validated R² of 0.10. Behaviour explains a tenth of the variance in confidence — real, and modest. <a href="self-efficacy-granularity-study.html">Chapter 2</a> reaches R² .14–.24 with 119 log features (raw or as family factor scores), random forests and the 15-item core score as the outcome, against twelve features, a ridge regression and the 20-item mean here; both say the logs carry a modest part of self-efficacy.</p>
+<p>Linking the two halves directly: 96 students with both a survey response and log data. A ridge regression predicting mean self-efficacy from twelve behavioural features reaches a cross-validated R² of 0.15 (averaged over 50 five-fold splits). Behaviour explains about a seventh of the variance in confidence — real, and modest. <a href="self-efficacy-granularity-study.html">Chapter 2</a> reaches R² .14–.29 with 118 log features (raw or as family factor scores), random forests and the 15-item core score as the outcome, against twelve features, a ridge regression and the 20-item mean here; both say the logs carry a modest part of self-efficacy.</p>
 </div>
 <figure>
   <div class="fbody"><div class="scroller" id="c-se"></div></div>
-  <figcaption>Spearman correlation between each behavioural feature and mean self-efficacy, n = 102. Filled bars are significant at p &lt; 0.05.</figcaption>
+  <figcaption>Spearman correlation between each behavioural feature and mean self-efficacy, n = 96. Filled bars are significant at p &lt; 0.05.</figcaption>
 </figure>
 <div class="col">
-<p>The pattern is not "students who do more feel more capable". Three of the strongest associations are about <em>rhythm</em>:</p>
+<p>Volume and rhythm both count. Total hours is the strongest correlate (ρ = +0.35), with active days (+0.33) close behind. Three others are about <em>how</em> students work:</p>
 <ul class="tight">
-<li><strong>Day-to-day variability</strong> is the single strongest correlate (ρ = +0.33). Bursty workers report higher self-efficacy than metronomic ones.</li>
+<li><strong>Day-to-day variability</strong> goes with higher self-efficacy (ρ = +0.32). Bursty workers report higher self-efficacy than metronomic ones.</li>
 <li><strong>Median session length</strong> runs the other way (ρ = −0.28). Students who sit in long sessions report <em>lower</em> confidence — consistent with long sessions being a symptom of struggle rather than a sign of investment.</li>
-<li><strong>Errors per run</strong> is negative (ρ = −0.22), while raw error counts are not significant. The rate matters; the volume does not.</li>
+<li><strong>Errors per run</strong> is negative (ρ = −0.26), while raw error counts are not significant (ρ = +0.13, p = 0.20). The rate matters; the volume does not.</li>
 </ul>
-<p>Submission pass rate is flatly unrelated to self-efficacy (ρ = +0.04, p = 0.67). That is the result most in tension with a simple mastery-experience account, where success should feed confidence most directly. The likely confound is that pass rate is driven by which exercises a student chose to attempt, so it mixes difficulty selection with ability. Controlling for exercise difficulty — the catalogue carries <code>points</code> — is the test that would separate them.</p>
-<div class="lathread" role="note"><span class="lathread-k">Story thread · Improves</span><p>The test proposed here comes close to being run in <a href="self-efficacy-granularity-study.html#drivers">Chapter 2</a>: the points-weighted completion rate of attempted exercises is the strongest log correlate of self-efficacy (ρ&nbsp;.41), with recovering from an error on the next run close behind (ρ&nbsp;.33). What goes with confidence is finishing, not first-time success.</p></div>
+<p>Submission pass rate is flatly unrelated to self-efficacy (ρ = +0.03, p = 0.81). That is the result most in tension with a simple mastery-experience account, where success should feed confidence most directly. The likely confound is that pass rate is driven by which exercises a student chose to attempt, so it mixes difficulty selection with ability. Controlling for exercise difficulty — the catalogue carries <code>points</code> — is the test that would separate them.</p>
+<div class="lathread" role="note"><span class="lathread-k">Story thread · Improves</span><p>The test proposed here comes close to being run in <a href="self-efficacy-granularity-study.html#drivers">Chapter 2</a>: the completion rate of attempted exercises goes with self-efficacy (ρ&nbsp;.38), and so does recovering from an error on the next run (ρ&nbsp;.37). What goes with confidence is finishing, not first-time success.</p></div>
 <p>Read through the triadic frame, the environmental vertex is doing visible work here: cohort timetables set the weekday and hour signatures, the course calendar produces the three collapsed weeks, and the unit-8 wall is a property of the curriculum rather than of any student. A model that treats behavioural features as purely personal will attribute curriculum effects to students.</p>
 <div class="lathread" role="note"><span class="lathread-k">Story thread · The setting</span><p>Part III of the story takes up the environmental vertex: one class’s timetable rebuilt from its activity (<a href="te22a-schedule-and-activity.html">Chapter 7</a>) and the timetables of 734 US classes (<a href="how-often-and-how-long-classes-meet.html">Chapter 8</a>).</p></div>
 </div>
@@ -334,21 +334,21 @@ footer{padding-block:2.4rem 3.4rem;color:var(--faint);font-size:.84rem}
 <tr><td class="mono">Ch 13</td><td>Multi-channel sequences</td><td>Open. A second channel alongside engagement, such as the error state or the unit, modelled jointly; the log carries both.</td></tr>
 <tr><td class="mono">Ch 14</td><td>Process mining</td><td>Open. The event log is already in the right shape (case = student-session, activity = event type, timestamp present).</td></tr>
 <tr><td class="mono">Ch 15–17</td><td>Network analysis</td><td>Open. These files hold no interaction data; a co-activity network (students on the same exercise in the same window) would be a proxy, and a different construct.</td></tr>
-<tr><td class="mono">Ch 19</td><td>Psychological networks</td><td>Open. 20 items, n = 103: estimable but thin.</td></tr>
+<tr><td class="mono">Ch 19</td><td>Psychological networks</td><td>Open. 20 items, n = 96: estimable but thin.</td></tr>
 <tr><td class="mono">Ch 20</td><td>Factor analysis</td><td><a href="TE22-TE23_SCT_replication.html">Chapter 12</a>: one factor for the core items and a second for the advanced Structures items, the basics/advanced split seen here.</td></tr>
-<tr><td class="mono">Ch 21</td><td>SEM</td><td>Open. The triadic model, behaviour → attainment → self-efficacy with cohort as a grouping variable; n = 102 allows only a few paths.</td></tr>
+<tr><td class="mono">Ch 21</td><td>SEM</td><td>Open. The triadic model, behaviour → attainment → self-efficacy with cohort as a grouping variable; n = 96 allows only a few paths.</td></tr>
 </tbody></table></div>
 <figcaption>Source: Saqr &amp; López-Pernas (eds.), <em>Learning Analytics Methods and Tutorials: A Practical Guide Using R</em>, Springer 2024.</figcaption></figure>
 </section>
 
 <footer class="col">
-<p>All figures were computed from the two event logs, the account map, the exercise catalogue and the two survey exports. Models use scikit-learn with five-fold cross-validation and a fixed seed. Notes on the files are in the project's analysis repository (private; available on request).</p>
+<p>All figures were computed from the two event logs, the account map, the exercise catalogue and the two survey exports, without the students who declined the use of their CS Academy data and with survey answers only where the student consented. Times are in UTC. Models use scikit-learn with five-fold cross-validation and a fixed seed. Notes on the files are in the project's analysis repository (private; available on request).</p>
 </footer>
 </div>
 <div class="tip" id="tip"></div>
 
 <script>
-const D = {"months": {"labels": ["2023-08", "2023-09", "2023-10", "2023-11", "2023-12", "2024-01", "2024-02", "2024-03", "2024-04", "2024-05", "2024-06", "2024-08", "2024-09", "2024-10", "2024-11", "2024-12", "2025-01", "2025-02", "2025-03", "2025-04", "2025-05", "2025-06", "2025-08", "2025-09"], "series": {"TE22": [67982, 159867, 153673, 130214, 119830, 78990, 92794, 79403, 104251, 149274, 13952, 58, 169, 321, 75, 55, 160, 102, 48, 153, 106, 7, 0, 0], "TE23": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 35225, 79371, 78214, 70318, 82268, 62147, 50675, 58614, 41012, 51814, 863, 238, 173], "Unassigned": [24063, 59105, 40105, 42397, 42298, 21339, 21082, 21152, 32913, 36363, 14073, 46798, 72751, 74283, 49347, 50140, 43662, 31794, 45017, 48743, 55845, 1051, 294, 656]}}, "pred": {"curve": {"7": {"auc_rf": 0.7518229166666666, "auc_lr": 0.7828125, "acc": 0.6665322580645161}, "14": {"auc_rf": 0.8155729166666668, "auc_lr": 0.8328645833333332, "acc": 0.7233870967741935}, "21": {"auc_rf": 0.8111458333333333, "auc_lr": 0.8046875, "acc": 0.7290322580645161}, "28": {"auc_rf": 0.8271354166666667, "auc_lr": 0.8656770833333333, "acc": 0.7794354838709678}, "42": {"auc_rf": 0.8586458333333333, "auc_lr": 0.8403645833333334, "acc": 0.7290322580645161}, "56": {"auc_rf": 0.8778645833333334, "auc_lr": 0.88515625, "acc": 0.7981854838709678}, "84": {"auc_rf": 0.9139583333333334, "auc_lr": 0.9140104166666667, "acc": 0.8175403225806452}}, "imp": {"solved": 0.2409, "evening": 0.0233, "err_per_run": 0.0231, "edits": 0.02, "events": 0.0164, "span_h": 0.0135, "active_days": 0.0134, "pass_rate": 0.0126, "runs": 0.0124, "daily_cv": 0.0121, "runs_per_edit": 0.0108, "weekend": 0.0057, "errors": 0.0036}, "sp": {"events": 0.488, "runs": 0.491, "edits": 0.605, "active_days": 0.313, "errors": 0.156, "solved": 0.814, "pass_rate": -0.029, "err_per_run": -0.351, "runs_per_edit": -0.291, "evening": 0.088, "weekend": 0.062, "daily_cv": -0.001, "span_h": 0.075}, "base": 0.497}, "se": {"n": 102, "cv_r2_ridge": 0.097, "spearman": {"events": [0.234, 0.018], "active_days": [0.299, 0.0023], "hours": [0.304, 0.0019], "med_sess_min": [-0.275, 0.0051], "solved": [0.204, 0.0393], "pass_rate": [0.043, 0.6707], "err_per_run": [-0.217, 0.0282], "runs_per_edit": [-0.1, 0.3169], "evening": [0.268, 0.0064], "weekend": [0.044, 0.6599], "day_entropy": [0.222, 0.0248], "daily_cv": [0.325, 0.0009]}}, "clust": {"k": 4, "feat": ["pass_rate", "err_per_run", "runs_per_edit", "med_sess_min", "evening", "weekend", "daily_cv", "day_entropy", "events_per_day", "solve_per_hour"], "sizes": {"0": 43, "1": 29, "2": 38, "3": 49}, "cent": {"0": [-0.42, 0.04, 0.28, 1.0, -0.22, -0.19, -0.77, -0.13, 0.49, -0.27], "1": [0.84, -0.1, -0.5, 0.37, -0.76, -0.7, -0.67, -0.93, -0.16, 1.48], "2": [-0.03, -0.38, 0.14, -0.4, 1.37, 1.31, 0.96, 1.26, 0.42, -0.68], "3": [-0.1, 0.32, -0.05, -0.79, -0.42, -0.44, 0.33, -0.31, -0.66, -0.11]}, "outcome": {"solved": {"0": 96.0, "1": 122.0, "2": 109.0, "3": 92.0}, "events": {"0": 16720.0, "1": 10841.0, "2": 23795.5, "3": 12570.0}, "hours": {"0": 87.3, "1": 59.3, "2": 151.8, "3": 75.1}}, "se": {"0": 4.22, "1": 5.0, "2": 5.36, "3": 4.88}, "sil": {"2": 0.229, "3": 0.168, "4": 0.153, "5": 0.145, "6": 0.154, "7": 0.144}, "kruskal": {"H": 10.87, "p": 0.0124}, "raw": {"pass_rate": {"0": 0.48, "1": 0.64, "2": 0.51, "3": 0.52}, "err_per_run": {"0": 0.21, "1": 0.21, "2": 0.18, "3": 0.23}, "runs_per_edit": {"0": 1.46, "1": 1.07, "2": 1.24, "3": 1.2}, "med_sess_min": {"0": 49.03, "1": 38.51, "2": 16.29, "3": 9.98}, "evening": {"0": 0.11, "1": 0.03, "2": 0.3, "3": 0.07}, "weekend": {"0": 0.04, "1": 0.0, "2": 0.15, "3": 0.02}, "daily_cv": {"0": 0.88, "1": 0.91, "2": 1.33, "3": 1.18}, "day_entropy": {"0": 1.22, "1": 1.0, "2": 1.67, "3": 1.19}, "events_per_day": {"0": 186.57, "1": 144.95, "2": 186.43, "3": 120.13}, "solve_per_hour": {"0": 1.19, "1": 2.05, "2": 0.88, "3": 1.3}}}, "seq": {"labels": ["file_edit", "run_code_exercise", "compile_error", "runtime_error", "autograde_correct", "autograde_incorrect", "pageview"], "matrix": [[0.599, 0.356, 0.005, 0.011, 0.003, 0.003, 0.023], [0.25, 0.477, 0.087, 0.113, 0.024, 0.025, 0.024], [0.295, 0.599, 0.054, 0.009, 0.0, 0.0, 0.043], [0.322, 0.548, 0.004, 0.061, 0.0, 0.001, 0.065], [0.104, 0.043, 0.0, 0.0, 0.006, 0.0, 0.846], [0.198, 0.694, 0.0, 0.001, 0.0, 0.089, 0.017], [0.141, 0.108, 0.02, 0.024, 0.002, 0.002, 0.703]], "counts": [[393993, 233936, 3246, 6995, 2198, 2015, 15353], [174995, 334286, 60873, 79267, 17074, 17642, 16814], [21372, 43392, 3883, 635, 2, 3, 3112], [31270, 53271, 366, 5890, 15, 57, 6273], [2071, 848, 0, 9, 128, 2, 16775], [4378, 15317, 4, 17, 10, 1959, 374], [31036, 23808, 4497, 5232, 447, 469, 155119]], "weekly": {"labels": ["Absent", "Low", "Moderate", "Intense"], "matrix": [[0.408, 0.343, 0.159, 0.09], [0.149, 0.421, 0.259, 0.171], [0.08, 0.264, 0.379, 0.277], [0.059, 0.178, 0.285, 0.478]], "cuts": [229.0, 473.0], "dist": [[0, 6, 34, 119], [3, 16, 51, 89], [8, 15, 47, 89], [3, 27, 66, 63], [3, 26, 68, 62], [1, 22, 60, 76], [2, 27, 69, 61], [6, 26, 63, 64], [3, 39, 46, 71], [12, 29, 50, 68], [55, 71, 12, 21], [7, 32, 53, 67], [23, 54, 53, 29], [7, 27, 71, 54], [7, 25, 65, 62], [8, 21, 45, 85], [4, 33, 37, 85], [37, 67, 32, 23], [128, 26, 2, 3], [126, 25, 6, 2], [12, 92, 32, 23], [9, 57, 64, 29], [6, 47, 74, 32], [9, 57, 63, 30], [7, 44, 58, 50], [14, 66, 60, 19], [86, 56, 10, 7], [15, 47, 65, 32], [12, 73, 48, 26], [13, 63, 49, 34], [12, 76, 43, 28], [38, 52, 26, 43], [18, 90, 25, 26], [26, 43, 30, 60], [21, 76, 28, 34], [18, 82, 32, 27]]}}, "psy": [{"label": "Trace a program", "mean": 5.44, "sd": 1.52, "n": 103, "l1": 0.75, "l2": 0.2}, {"label": "Trace nested conditionals", "mean": 5.79, "sd": 1.32, "n": 102, "l1": 0.82, "l2": 0.23}, {"label": "Trace list / array", "mean": 5.36, "sd": 1.42, "n": 101, "l1": 0.88, "l2": 0.08}, {"label": "Trace nested structures", "mean": 4.8, "sd": 1.53, "n": 99, "l1": 0.82, "l2": 0.02}, {"label": "Trace calls & returns", "mean": 5.29, "sd": 1.5, "n": 99, "l1": 0.82, "l2": 0.18}, {"label": "Trace reused var names", "mean": 5.71, "sd": 1.37, "n": 101, "l1": 0.75, "l2": 0.35}, {"label": "Decompose a problem", "mean": 5.03, "sd": 1.29, "n": 101, "l1": 0.69, "l2": 0.21}, {"label": "Analyse, design, implement", "mean": 4.72, "sd": 1.38, "n": 101, "l1": 0.86, "l2": 0.15}, {"label": "Locate the bug", "mean": 4.7, "sd": 1.49, "n": 98, "l1": 0.74, "l2": -0.13}, {"label": "Design tests", "mean": 4.37, "sd": 1.58, "n": 101, "l1": 0.79, "l2": -0.06}, {"label": "Retrace after failing", "mean": 4.3, "sd": 1.41, "n": 97, "l1": 0.78, "l2": 0.08}, {"label": "Persist after hours of bugs", "mean": 4.68, "sd": 1.63, "n": 99, "l1": 0.72, "l2": 0.32}, {"label": "Write functions", "mean": 5.68, "sd": 1.5, "n": 101, "l1": 0.84, "l2": 0.31}, {"label": "Evaluate boolean", "mean": 5.52, "sd": 1.79, "n": 99, "l1": 0.81, "l2": 0.28}, {"label": "Construct boolean", "mean": 5.39, "sd": 1.88, "n": 99, "l1": 0.78, "l2": 0.28}, {"label": "Class vs instance", "mean": 3.54, "sd": 2.27, "n": 92, "l1": 0.64, "l2": -0.64}, {"label": "Design with inheritance", "mean": 3.39, "sd": 2.22, "n": 92, "l1": 0.61, "l2": -0.68}, {"label": "Resolve overloads", "mean": 3.59, "sd": 2.07, "n": 91, "l1": 0.65, "l2": -0.6}, {"label": "Trace recursion", "mean": 3.7, "sd": 2.2, "n": 88, "l1": 0.74, "l2": -0.49}, {"label": "Find recursive patterns", "mean": 3.54, "sd": 1.9, "n": 89, "l1": 0.76, "l2": -0.51}], "eigen": [11.74, 2.44, 0.89, 0.8, 0.6, 0.49]};
+const D = {"months":{"labels":["2023-08","2023-09","2023-10","2023-11","2023-12","2024-01","2024-02","2024-03","2024-04","2024-05","2024-06","2024-08","2024-09","2024-10","2024-11","2024-12","2025-01","2025-02","2025-03","2025-04","2025-05","2025-06","2025-08","2025-09"],"series":{"TE22":[63594,150235,142005,121897,111608,72795,85639,72788,91709,131024,13341,55,165,310,67,55,153,101,48,152,105,6,0,0],"TE23":[0,0,0,0,0,0,0,0,0,0,0,34462,77463,76967,69729,81957,61601,50123,58117,40965,51345,863,238,173],"Unassigned":[24648,56780,40241,42708,40939,20380,21298,21450,35045,36942,14568,46800,72751,74292,49347,50140,43662,31794,45017,48743,55845,1051,294,656]}},"pred":{"curve":{"7":{"auc_rf":0.7641880341880342,"auc_lr":0.7747008547008547,"acc":0.6928104575163399},"14":{"auc_rf":0.7992307692307693,"auc_lr":0.8184615384615385,"acc":0.7450980392156863},"21":{"auc_rf":0.7941880341880343,"auc_lr":0.8124786324786325,"acc":0.738562091503268},"28":{"auc_rf":0.831880341880342,"auc_lr":0.8615384615384617,"acc":0.7516339869281046},"42":{"auc_rf":0.8595726495726496,"auc_lr":0.8531623931623931,"acc":0.7712418300653595},"56":{"auc_rf":0.8817094017094017,"auc_lr":0.8844444444444445,"acc":0.7973856209150327},"84":{"auc_rf":0.9118803418803418,"auc_lr":0.9135042735042735,"acc":0.8300653594771242}},"imp":{"events":0.0,"runs":0.0,"edits":0.002,"active_days":0.001,"errors":0.0,"solved":0.1944,"pass_rate":0.0078,"err_per_run":0.0147,"runs_per_edit":0.001,"evening":0.001,"weekend":0.0,"daily_cv":0.0,"span_h":0.0046},"sp":{"events":0.489,"runs":0.489,"edits":0.605,"active_days":0.315,"errors":0.143,"solved":0.82,"pass_rate":-0.034,"err_per_run":-0.352,"runs_per_edit":-0.287,"evening":0.078,"weekend":0.074,"daily_cv":-0.0,"span_h":0.103},"base":0.49019607843137253},"se":{"n":96,"cv_r2_ridge":0.15,"spearman":{"events":[0.297,0.0033],"active_days":[0.33,0.001],"hours":[0.348,0.0005],"med_sess_min":[-0.279,0.0058],"solved":[0.271,0.0076],"pass_rate":[0.025,0.8126],"err_per_run":[-0.26,0.0106],"runs_per_edit":[-0.145,0.16],"evening":[0.281,0.0055],"weekend":[0.039,0.7044],"day_entropy":[0.224,0.0284],"daily_cv":[0.317,0.0017]}},"clust":{"k":4,"feat":["pass_rate","err_per_run","runs_per_edit","med_sess_min","evening","weekend","daily_cv","day_entropy","events_per_day","solve_per_hour"],"sizes":{"0":40,"1":27,"2":33,"3":53},"cent":{"0":[-0.41,0.1,0.32,1.04,-0.2,-0.21,-0.79,-0.18,0.49,-0.31],"1":[0.8,-0.05,-0.53,0.42,-0.76,-0.71,-0.71,-0.94,-0.13,1.49],"2":[0.01,-0.43,0.21,-0.34,1.44,1.38,1.04,1.31,0.5,-0.72],"3":[-0.1,0.21,-0.11,-0.79,-0.36,-0.34,0.3,-0.2,-0.62,-0.08]},"outcome":{"solved":{"0":95.0,"1":122.0,"2":109.0,"3":98.0},"events":{"0":16533.0,"1":10841.0,"2":23965.0,"3":12720.0},"hours":{"0":86.5,"1":59.2,"2":155.0,"3":84.2}},"se":{"0":4.04,"1":4.97,"2":5.51,"3":4.8},"sil":{"2":0.232,"3":0.165,"4":0.153,"5":0.144,"6":0.151,"7":0.144},"kruskal":{"H":5.5569,"p":0.1353},"raw":{"pass_rate":{"0":0.48,"1":0.63,"2":0.52,"3":0.52},"err_per_run":{"0":0.21,"1":0.21,"2":0.18,"3":0.22},"runs_per_edit":{"0":1.48,"1":1.06,"2":1.29,"3":1.16},"med_sess_min":{"0":49.5,"1":39.44,"2":20.08,"3":12.04},"evening":{"0":0.12,"1":0.03,"2":0.31,"3":0.07},"weekend":{"0":0.04,"1":0.0,"2":0.15,"3":0.03},"daily_cv":{"0":0.86,"1":0.9,"2":1.35,"3":1.17},"day_entropy":{"0":1.21,"1":1.0,"2":1.68,"3":1.23},"events_per_day":{"0":187.09,"1":151.44,"2":195.31,"3":121.88},"solve_per_hour":{"0":1.19,"1":2.09,"2":0.85,"3":1.37}}},"seq":{"weekly":{"labels":["Absent","Low","Moderate","Intense"],"matrix":[[0.411,0.339,0.161,0.088],[0.148,0.421,0.264,0.167],[0.081,0.267,0.381,0.271],[0.06,0.182,0.286,0.472]],"cuts":[232.0,479.33333333333303],"dist":[[0,6,34,113],[3,16,51,83],[8,15,46,84],[3,28,64,58],[3,25,67,58],[1,22,56,74],[2,27,69,55],[6,27,61,59],[3,38,44,68],[11,28,49,65],[53,70,11,19],[7,29,54,63],[23,53,50,27],[7,26,67,53],[7,23,64,59],[8,20,42,83],[4,32,36,81],[35,64,33,21],[124,24,2,3],[125,20,6,2],[11,91,30,21],[9,58,61,25],[6,45,74,28],[9,56,59,29],[7,43,56,47],[14,60,62,17],[83,54,10,6],[15,46,64,28],[12,71,46,24],[12,62,46,33],[12,72,44,25],[38,48,25,42],[18,88,22,25],[26,42,28,57],[20,75,27,31],[17,83,30,23]]},"labels":["file_edit","run_code_exercise","compile_error","runtime_error","autograde_correct","autograde_incorrect","pageview"],"counts":[[380120,225015,3092,6454,2130,1952,14853],[168490,321388,57146,75633,16604,17075,16216],[20470,40413,3754,597,2,3,3001],[29682,50727,346,5488,15,57,6072],[2017,843,0,8,127,2,16290],[4163,14902,4,17,10,1946,358],[29981,23038,4343,5056,440,446,150079]],"matrix":[[0.6,0.355,0.005,0.01,0.003,0.003,0.023],[0.251,0.478,0.085,0.112,0.025,0.025,0.024],[0.3,0.592,0.055,0.009,0.0,0.0,0.044],[0.321,0.549,0.004,0.059,0.0,0.001,0.066],[0.105,0.044,0.0,0.0,0.007,0.0,0.845],[0.195,0.696,0.0,0.001,0.0,0.091,0.017],[0.141,0.108,0.02,0.024,0.002,0.002,0.703]]},"psy":[{"label":"Trace a program","mean":5.44,"sd":1.48,"n":96,"l1":0.74,"l2":0.19},{"label":"Trace nested conditionals","mean":5.79,"sd":1.25,"n":95,"l1":0.8,"l2":0.23},{"label":"Trace list / array","mean":5.33,"sd":1.36,"n":94,"l1":0.86,"l2":0.09},{"label":"Trace nested structures","mean":4.8,"sd":1.52,"n":92,"l1":0.81,"l2":0.03},{"label":"Trace calls & returns","mean":5.29,"sd":1.46,"n":92,"l1":0.81,"l2":0.17},{"label":"Trace reused var names","mean":5.71,"sd":1.31,"n":94,"l1":0.72,"l2":0.37},{"label":"Decompose a problem","mean":4.98,"sd":1.3,"n":94,"l1":0.69,"l2":0.24},{"label":"Analyse, design, implement","mean":4.69,"sd":1.34,"n":94,"l1":0.84,"l2":0.15},{"label":"Locate the bug","mean":4.68,"sd":1.47,"n":92,"l1":0.72,"l2":-0.15},{"label":"Design tests","mean":4.38,"sd":1.59,"n":94,"l1":0.78,"l2":-0.08},{"label":"Retrace after failing","mean":4.27,"sd":1.36,"n":90,"l1":0.76,"l2":0.07},{"label":"Persist after hours of bugs","mean":4.66,"sd":1.62,"n":92,"l1":0.69,"l2":0.33},{"label":"Write functions","mean":5.69,"sd":1.45,"n":94,"l1":0.83,"l2":0.32},{"label":"Evaluate boolean","mean":5.52,"sd":1.78,"n":92,"l1":0.81,"l2":0.29},{"label":"Construct boolean","mean":5.4,"sd":1.87,"n":92,"l1":0.78,"l2":0.3},{"label":"Class vs instance","mean":3.43,"sd":2.25,"n":86,"l1":0.63,"l2":-0.66},{"label":"Design with inheritance","mean":3.28,"sd":2.19,"n":86,"l1":0.59,"l2":-0.7},{"label":"Resolve overloads","mean":3.54,"sd":2.07,"n":85,"l1":0.63,"l2":-0.61},{"label":"Trace recursion","mean":3.7,"sd":2.23,"n":82,"l1":0.74,"l2":-0.49},{"label":"Find recursive patterns","mean":3.52,"sd":1.93,"n":83,"l1":0.76,"l2":-0.51}],"eigen":[11.35,2.55,0.95,0.85,0.63,0.53]};
 
 const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
 const SV = (w,h,inner) => `<svg viewBox="0 0 ${w} ${h}" width="${w}" height="${h}" role="img">${inner}</svg>`;
@@ -422,14 +422,14 @@ function pred(sel){
   const c=D.pred.curve[w];
   document.getElementById('pwinlab').textContent=w+' days';
   document.getElementById('cap-pred').innerHTML=
-    `At <b>${w} days</b>: random forest AUC <span class="mono">${c.auc_rf.toFixed(3)}</span>, logistic regression AUC <span class="mono">${c.auc_lr.toFixed(3)}</span>, accuracy <span class="mono">${(c.acc*100).toFixed(1)}%</span> against a 49.7% base rate.`;
+    `At <b>${w} days</b>: random forest AUC <span class="mono">${c.auc_rf.toFixed(3)}</span>, logistic regression AUC <span class="mono">${c.auc_lr.toFixed(3)}</span>, accuracy <span class="mono">${(c.acc*100).toFixed(1)}%</span> against a 49.0% base rate.`;
 }
 
 /* ---------- importance bars ---------- */
 const FLAB={active_days:'Active days',daily_cv:'Day-to-day variability',day_entropy:'Weekday spread',edits:'Edits',err_per_run:'Errors per run',errors:'Errors',evening:'Evening share',events:'Events',events_per_day:'Events per active day',hours:'Hours on platform',med_sess_min:'Median session (min)',pass_rate:'Submission pass rate',runs:'Runs',runs_per_edit:'Runs per edit',solve_per_hour:'Exercises solved per hour',solved:'Exercises passed',span_h:'Activity span (h)',weekend:'Weekend share'};
 const fl=k=>FLAB[k]||k;   // readable labels (21 Oct 2026)
 const IMPTXT={imp:'Permutation importance of each first-28-day feature, measured as the drop in accuracy when that feature is shuffled. One feature dominates: exercises already passed inside the window.',
-  sp:'Spearman correlation between each first-28-day feature and the final full-year count of exercises passed. Negative bars are the process signals — error rate and run-without-editing both predict finishing behind.'};
+  sp:'Spearman correlation between each first-28-day feature and the final full-year count of exercises passed. Negative bars are the process signals — error rate and runs per logged edit both predict finishing behind.'};
 function imps(which){
   const obj=D.pred[which];
   const ks=Object.keys(obj).sort((a,b)=>Math.abs(obj[b])-Math.abs(obj[a]));
@@ -454,10 +454,10 @@ function imps(which){
 /* ---------- cluster explorer ---------- */
 const CNAME=['Long-session regulars','Efficient finishers','Evening irregulars','Short-burst workers'];
 const CDESC=[
- 'Longest sessions of the four (median 49 minutes), almost entirely in school hours, the most regular day-to-day rhythm, and the highest runs-per-edit ratio. Lowest self-efficacy despite solid attendance.',
- 'Highest submission pass rate (0.64) and by far the most exercises solved per hour. Lowest total hours of any group, almost no evening or weekend work, and the narrowest weekday spread — they do it in class and leave.',
- 'Thirty percent of activity in the evening and 15% at weekends, the widest weekday spread, the most irregular day-to-day pattern, and the longest total hours. Highest self-efficacy.',
- 'Shortest sessions (median 10 minutes) and the fewest events per active day. Highest error rate per run. Lowest median exercises passed.'];
+ 'Longest sessions of the four (median 50 minutes), mostly in school hours, the most regular day-to-day rhythm, and the highest runs-per-edit ratio. Lowest self-efficacy and the lowest median exercises passed, despite solid attendance.',
+ 'Highest submission pass rate (0.63) and by far the most exercises solved per hour. Lowest total hours of any group, almost no evening or weekend work, and the narrowest weekday spread — they do it in class and leave.',
+ '31% of activity in the evening and 15% at weekends, the widest weekday spread, the most irregular day-to-day pattern, and the longest total hours. Highest self-efficacy.',
+ 'Shortest sessions (median 12 minutes) and the fewest events per active day. Highest error rate per run.'];
 function clusters(sel){
   const F=D.clust.feat, cent=D.clust.cent[sel], raw=D.clust.raw;
   const W=860,rowH=27,P={t:10,r:16,b:28,l:184};
@@ -532,8 +532,8 @@ function heat(elId, labels, M, counts, cell, lmar){
 
 /* ---------- psychometrics ---------- */
 const PTXT={mean:'Mean rating per item on the 1–7 scale. The five lowest are object-orientation and recursion; the five highest are tracing and control flow.',
- l2:'Loading on the second principal component (eigenvalue 2.44). The sign split is clean: tracing and control-flow items positive, every OOP and recursion item negative.',
- n:'Number of students who answered each item, out of 103. The recursion and OOP items lose 11–15 responses — students who never reached the material declined to rate themselves.'};
+ l2:'Loading on the second principal component (eigenvalue 2.55). The sign split is clean: tracing and control-flow items positive, every OOP and recursion item negative.',
+ n:'Number of students who answered each item, out of 96. The recursion and OOP items lose 10–14 responses — students who never reached the material declined to rate themselves.'};
 function psy(mode){
   const items=[...D.psy].sort((a,b)=> mode==='mean'? a.mean-b.mean : mode==='l2'? a.l2-b.l2 : a.n-b.n);
   const W=860,rowH=25,P={t:8,r:18,b:26,l:178};
@@ -555,8 +555,8 @@ function psy(mode){
       g+=`<line x1="${zero}" y1="${P.t}" x2="${zero}" y2="${P.t+items.length*rowH}" stroke="${css('--rule')}"/>`;
       g+=`<rect x="${v<0?zero-w:zero}" y="${yy}" width="${Math.max(w,1.5)}" height="${bh}" rx="2" fill="${c}" data-tip="${it.label} · PC2 ${v} · PC1 ${it.l1}"/>`;
       x0=v<0?zero-w:zero+w; g+=`<text x="${v<0?x0-6:x0+6}" y="${yy+bh-1}" text-anchor="${v<0?'end':'start'}" font-size="10.5" font-family="${css('--m')}" fill="${css('--faint')}">${lab}</text>`;
-    } else { v=it.n; w=(v-80)/23*iw; x0=P.l; c=v<93?css('--rose'):css('--accent'); lab=String(v);
-      g+=`<rect x="${x0}" y="${yy}" width="${Math.max(w,2)}" height="${bh}" rx="2" fill="${c}" data-tip="${it.label} · ${v} of 103 answered"/>`;
+    } else { v=it.n; w=(v-73)/23*iw; x0=P.l; c=v<86?css('--rose'):css('--accent'); lab=String(v);
+      g+=`<rect x="${x0}" y="${yy}" width="${Math.max(w,2)}" height="${bh}" rx="2" fill="${c}" data-tip="${it.label} · ${v} of 96 answered"/>`;
       g+=`<text x="${x0+w+6}" y="${yy+bh-1}" font-size="10.5" font-family="${css('--m')}" fill="${css('--faint')}">${lab}</text>`;
     }
     if(mode==='mean') g+=`<text x="${P.l+w+7}" y="${yy+bh-1}" font-size="10.5" font-family="${css('--m')}" fill="${css('--faint')}">${lab}</text>`;

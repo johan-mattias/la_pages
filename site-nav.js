@@ -30,17 +30,17 @@
       states: ["up", "down"]
     },
     {
-      file: "self-efficacy-granularity-study.html", part: 0, nav: "Mastery & self-efficacy", updated: "21 Oct 2026",
+      file: "self-efficacy-granularity-study.html", part: 0, nav: "Mastery & self-efficacy", updated: "22 Oct 2026",
       title: "Mastery experience in the logs",
       question: "Which traces of practice go with high self-efficacy, and when do they show?",
-      role: "Turns mastery experience into log measures. Finishing what you attempt (ρ\u00a0.41), recovering from an error on the next run (ρ\u00a0.33) and coming back regularly go with higher end-of-course self-efficacy. The signal is invisible in the first month and appears around week 12.",
+      role: "Turns mastery experience into log measures. Finishing what you attempt (ρ\u00a0.38), recovering from an error on the next run (ρ\u00a0.37) and coming back regularly go with higher end-of-course self-efficacy. The signal is almost invisible in the first month and appears around week 10.",
       states: ["up", "flat"]
     },
     {
-      file: "log-atlas.html", part: 1, nav: "Log atlas", updated: "21 Oct 2026",
+      file: "log-atlas.html", part: 1, nav: "Log atlas", updated: "22 Oct 2026",
       title: "Two school years in the logs",
-      question: "What does practice look like across 2.6 million events?",
-      role: "The wide view of practice. Weekly engagement settles into a lower gear by week 20, a missed week is hard to come back from, students rerun code after an error instead of editing it, and the hardest exercises and the lowest self-ratings point to the same wall.",
+      question: "What does practice look like across 2.5 million events?",
+      role: "The wide view of practice. Weekly engagement settles into a lower gear by week 20, a missed week is hard to come back from, a quick rerun of the same error is a reflex rather than a strategy, and the hardest exercises and the lowest self-ratings point to the same wall.",
       states: ["flat", "down"]
     },
     {
@@ -51,7 +51,7 @@
       states: ["up", "flat", "down"]
     },
     {
-      file: "how-many-student-clusters.html", part: 1, nav: "Student clusters", updated: "21 Oct 2026",
+      file: "how-many-student-clusters.html", part: 1, nav: "Student clusters", updated: "22 Oct 2026",
       title: "One population, not groups",
       question: "Do students form distinct groups, or one continuous population?",
       role: "Asks directly whether students fall into groups. Clustering 153 TE22 and TE23 students on log-derived factor scores (sessions, mastery, regularity, error proneness), over the full course and from week 8/9, finds one continuous population: silhouettes stay at 0.10–0.15 and the gap statistic picks one cluster. Over the full course the two-component mixture that BIC prefers has a single peak: a core and a wider tail of sparse, error-prone activity, not a second type of student. From week 8/9 BIC prefers three components with three peaks, but that fit returns in only one refit in nine when six random students are left out.",
@@ -86,10 +86,10 @@
       states: ["up", "flat", "down"]
     },
     {
-      file: "te22-vs-te23.html", part: 3, nav: "TE22 vs TE23", updated: "21 Oct 2026",
+      file: "te22-vs-te23.html", part: 3, nav: "TE22 vs TE23", updated: "22 Oct 2026",
       title: "Two full years, two teachers",
       question: "Which findings hold in both cohorts, and which follow the teacher or the year?",
-      role: "The same measures for TE22 (2023/24) and TE23 (2024/25), using the scripts from the te24c analysis. Most findings hold in both cohorts and the same grade ladder appears in each; the decisions students build into their creative programs are one of the strongest grade links. Specific syntax messages get faster to fix in both; 'invalid syntax' and NameError do not. Self-efficacy tracks the grade in TE22 (ρ 0.58) and te23b (0.62) and less clearly in te23c (0.22 with its final-project grade). Teacher style shows in pace and project size, while TE23's extra errors and guessing follow the year.",
+      role: "The same measures for TE22 (2023/24) and TE23 (2024/25), using the scripts from the te24c analysis. Most findings hold in both cohorts (32 of 45); the decisions students build into their creative programs are one of the strongest grade links. Specific syntax messages get faster to fix in both; 'invalid syntax' and NameError do not. Self-efficacy tracks the grade in TE22 (ρ 0.58) and te23b (0.62) and less clearly in te23c (0.22 with its final-project grade). Teacher style shows in pace and project size, while TE23's extra errors and guessing follow the year.",
       states: ["up", "flat"]
     },
     {
