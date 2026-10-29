@@ -307,6 +307,32 @@ pre.code { background: var(--code-bg); border-radius: 8px; padding: 14px 16px; o
     </div>
   </section>
 
+  <!-- section:activity-filtered:start -->
+<section id="activity-filtered">
+    <div class="sec-head">
+      <div class="eyebrow">Sensitivity run · units 1–10 · inactive students excluded</div>
+      <h2>Activity trajectories after the low-activity exclusion</h2>
+    </div>
+    <div class="prose">
+      <p>As a sensitivity check, the activity VaSSTra was rerun on units 1–10 after excluding the three students with fewer than 20 active days in those units, the same fixed rule used by the SCT-feature analysis. The four activity indicators are code runs, file edits, page views and lesson work, log-transformed and standardized within unit and class. The run has 150 students.</p>
+      <p>The quality indices do not select one trajectory count: they split between two and three trajectories. Both solutions are therefore shown. The activity-based order is more positive for core self-efficacy than the original analysis (two trajectories ρ .19; three trajectories ρ .21), but both intervals include zero. Treat this as a sensitivity analysis, not a replacement of the pre-specified result.</p>
+    </div>
+    <div class="fig">
+      <div class="fig-head"><div class="fig-title">Activity states</div><div class="small muted">Mean standardized activity indicators among student-units.</div></div>
+      <div class="scroll"><table class="tbl"><thead><tr><th>State</th><th>Student-units</th><th>Runs</th><th>Edits</th><th>Page views</th><th>Lesson work</th></tr></thead><tbody><tr><td>1</td><td>29</td><td>-3.06</td><td>-3.20</td><td>-3.27</td><td>-3.59</td></tr><tr><td>2</td><td>404</td><td>−.99</td><td>−.96</td><td>−.74</td><td>−.26</td></tr><tr><td>3</td><td>1067</td><td>.46</td><td>.45</td><td>.37</td><td>.20</td></tr></tbody></table></div>
+    </div>
+    <div class="fig">
+      <div class="fig-head"><div class="fig-title">Survey links under both trajectory counts</div><div class="small muted">Pooled within-class Spearman ρ with 95% bootstrap intervals; n varies by measure.</div></div>
+      <div class="scroll"><table class="tbl"><thead><tr><th>Survey measure</th><th>Two trajectories</th><th>Three trajectories</th></tr></thead><tbody><tr><td>Core self-efficacy</td><td>.19 [−.03, .39]</td><td>.21 [−.02, .41]</td></tr><tr><td>Interest and future goals</td><td>.09 [−.13, .31]</td><td>.10 [−.12, .30]</td></tr><tr><td>Try to solve it myself first</td><td>.18 [−.03, .38]</td><td>.21 [−.01, .41]</td></tr><tr><td>Help from others</td><td>−.03 [−.24, .17]</td><td>−.05 [−.25, .15]</td></tr><tr><td>Own projects in free time</td><td>.07 [−.17, .28]</td><td>.10 [−.12, .32]</td></tr></tbody></table></div>
+    </div>
+    <div class="fig">
+      <div class="fig-head"><div class="fig-title">Trajectory solutions</div><div class="small muted">Sizes are ordered from lower to higher activity; votes are the number of quality indices selecting each solution.</div></div>
+      <div class="scroll"><table class="tbl"><thead><tr><th>Trajectories</th><th>Students</th><th>Quality votes</th></tr></thead><tbody><tr><td>2</td><td>62 / 88</td><td>4</td></tr><tr><td>3</td><td>32 / 30 / 88</td><td>4</td></tr></tbody></table></div>
+    </div>
+    <p class="note">The original activity analysis remains above; this section changes the student filter and unit range together.</p>
+  </section>
+<!-- section:activity-filtered:end -->
+
   <!-- section:sct:start -->
 <section id="sct">
     <div class="sec-head">
