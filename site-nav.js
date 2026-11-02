@@ -48,7 +48,7 @@
       file: "te22-te23-activity-trajectories.html", part: 1, nav: "Unit trajectories", updated: "2 Nov 2026",
       title: "Activity across the units",
       question: "Who keeps up from unit to unit, who drops, and who comes back?",
-      role: "Follows 150 consented students unit by unit over units 1–10 using raw event counts standardised within unit × class. The explorer compares 15 state definitions, shows sequence-index plots and trajectory metrics, and adds consented SCT survey summaries as mean markers with Q1–Q3 bands.",
+      role: "Follows 150 consented students unit by unit over units 1–10 using raw event counts standardised within unit × class. The explorer compares eight definitions: models 1 and 2, each with 2–5 states, and adds consented SCT survey summaries as mean markers with Q1–Q3 bands.",
       states: ["up", "flat", "down"]
     },
     {
