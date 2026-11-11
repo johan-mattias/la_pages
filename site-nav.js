@@ -12,6 +12,7 @@
    Nothing is sticky, so the pages' own sticky section rails and control rows keep working. */
 (function () {
   var STORY = { file: "index.html", nav: "The story", title: "The story: when students improve, stall and drop" };
+  var FEATURE_EXPLORER = { file: "te22-te23-sct-feature-trajectories.html", nav: "SCT feature explorer" };
 
   var PARTS = [
     { n: "I", name: "The yardstick" },
@@ -260,6 +261,16 @@
     a.appendChild(document.createTextNode(c.nav));
     if (i === idx) { a.setAttribute("aria-current", "page"); current = a; }
     inner.appendChild(a);
+    if (c.file === "te22-te23-activity-trajectories.html") {
+      var explorer = el("a", "", FEATURE_EXPLORER.nav);
+      explorer.href = link(FEATURE_EXPLORER.file);
+      explorer.title = "Supplementary explorer · Compare SCT feature combinations";
+      if (here === stem(FEATURE_EXPLORER.file)) {
+        explorer.setAttribute("aria-current", "page");
+        current = explorer;
+      }
+      inner.appendChild(explorer);
+    }
   });
   nav.appendChild(inner);
 

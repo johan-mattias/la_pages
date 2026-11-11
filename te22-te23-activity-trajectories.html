@@ -258,6 +258,7 @@ pre.code { background: var(--code-bg); border-radius: 8px; padding: 14px 16px; o
     <div class="sec-head">
       <div class="eyebrow">Steps 2 and 3 · States → sequences → trajectories</div>
       <h2>Trajectory explorer</h2>
+      <p class="measure">Compare SCT feature combinations in the <a href="te22-te23-sct-feature-trajectories.html">SCT feature explorer</a>.</p>
       <p class="measure" style="margin:0">Each student's 10 states form one sequence in curriculum order. Every class worked through these units in order. Distances are LCS, as in the book chapter: TraMineR's <code>seqdist(method = "LCS")</code>, which is |x| + |y| − 2·LCS. Trajectories are Ward clusters (<code>hclust(…, "ward.D2")</code> in R), pooled over 500 random row orders. T1 is always the most active trajectory.</p>
     </div>
     <div class="controls" role="group" aria-label="Explorer settings">
